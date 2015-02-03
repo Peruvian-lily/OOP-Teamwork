@@ -3,7 +3,7 @@ using RPG_GameLogic.Interfaces;
 
 namespace RPG_GameLogic
 {
-    public class Currency
+    public class Currency : IComparable
     {
         // Fields :
         private int gold;
@@ -20,7 +20,7 @@ namespace RPG_GameLogic
             this.Silver = silver;
             this.Cooper = cooper;
         }
-        public Currency(Currency curr) 
+        public Currency(Currency curr)
         {
             this.Gold = curr.Gold;
             this.Silver = curr.Silver;
@@ -32,7 +32,7 @@ namespace RPG_GameLogic
         public int Gold
         {
             get { return this.gold; }
-            private set 
+            private set
             {
                 if (value < 0)
                 {
@@ -85,11 +85,11 @@ namespace RPG_GameLogic
                     return true;
                 }
             }
-            
+
             return false;
         }
 
-        public Currency Add(Currency curr) 
+        public Currency Add(Currency curr)
         {
             int cooperSum = this.Cooper + curr.Cooper;
             int silverSum = this.Silver + curr.Silver;
@@ -149,7 +149,7 @@ namespace RPG_GameLogic
                         cooperDiff = MAX_COOPER - Math.Abs(cooperDiff);
                     }
                 }
-                else 
+                else
                 {
                     silverDiff--;
                     cooperDiff = MAX_COOPER - Math.Abs(cooperDiff);
@@ -157,6 +157,53 @@ namespace RPG_GameLogic
             }
 
             return new Currency(goldDiff, silverDiff, cooperDiff);
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Currency)
+            {
+                Currency other = (Currency)obj;
+
+                if (this.Gold > other.Gold)
+                {
+                    return 1;
+                }
+                else if (this.Gold == other.Gold)
+                {
+                    if (this.Silver > other.Silver)
+                    {
+                        return 1;
+                    }
+                    else if (this.Silver == other.Silver)
+                    {
+                        if (this.Cooper > other.Cooper)
+                        {
+                            return 1;
+                        }
+                        else if (this.Cooper == other.Cooper)
+                        {
+                            return 0;
+                        }
+                        else
+                        {
+                            return -1;
+                        }
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Only Currency objects can be compared to other Currency objects.");
+            }
         }
 
         public static Currency operator +(Currency lhs, Currency rhs)
@@ -168,7 +215,7 @@ namespace RPG_GameLogic
             return lhs.Subtract(rhs);
         }
 
-        public static bool operator ==(Currency lhs, Currency rhs) 
+        public static bool operator ==(Currency lhs, Currency rhs)
         {
             return lhs.Equals(rhs);
         }
@@ -176,6 +223,26 @@ namespace RPG_GameLogic
         public static bool operator !=(Currency lhs, Currency rhs)
         {
             return !lhs.Equals(rhs);
+        }
+
+        public static bool operator >(Currency lhs, Currency rhs)
+        {
+            return lhs.CompareTo(rhs) > 0;
+        }
+
+        public static bool operator <(Currency lhs, Currency rhs)
+        {
+            return lhs.CompareTo(rhs) < 0;
+        }
+
+        public static bool operator >=(Currency lhs, Currency rhs)
+        {
+            return lhs.CompareTo(rhs) >= 0;
+        }
+
+        public static bool operator <=(Currency lhs, Currency rhs)
+        {
+            return lhs.CompareTo(rhs) <= 0;
         }
 
         public override int GetHashCode()

@@ -14,8 +14,10 @@ namespace RPG_GameLogic
     {
         static void Main(string[] args)
         {
-            Weapon item = ItemFactory.CreateWearableItemWithDefaultValues<Weapon>();
-            Console.WriteLine(item);
+            Currency currOne = new Currency(1, 0, 1);
+            Currency currTwo = new Currency(0, 0, 1);
+
+            Console.WriteLine(currOne > currTwo);
         }
     }
 }
