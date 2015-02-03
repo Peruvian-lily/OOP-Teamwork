@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RPG_GameLogic.Items.Armor" Collapsed="true">
+    <Position X="6.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Armor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG_GameLogic.Items.Boots" Collapsed="true">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Boots.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG_GameLogic.Items.Consumable" Collapsed="true">
+    <Position X="15.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Consumable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG_GameLogic.Items.Gloves" Collapsed="true">
+    <Position X="13.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Gloves.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG_GameLogic.Items.HealthPotion" Collapsed="true">
+    <Position X="15.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAgQAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Items\HealthPotion.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RPG_GameLogic.Items.Helmet" Collapsed="true">
+    <Position X="12" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Helmet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG_GameLogic.Items.Item" Collapsed="true">
+    <Position X="12.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAQBAAAAAQAAAAAAAAAAAAAAAAACAAAAAgAAAA=</HashCode>
+      <FileName>Items\Item.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RPG_GameLogic.Items.ManaPotion" Collapsed="true">
+    <Position X="17.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgQAAAAAAACAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ManaPotion.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RPG_GameLogic.Items.Weapon" Collapsed="true">
+    <Position X="8.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Weapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG_GameLogic.Items.WearableItem" Collapsed="true">
+    <Position X="10.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\WearableItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPG_GameLogic.GameObject" Collapsed="true">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>GameObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="RPG_GameLogic.Interfaces.IGameObject" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IGameObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RPG_GameLogic.Interfaces.IPotion" Collapsed="true">
+    <Position X="18" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IPotion.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RPG_GameLogic.Interfaces.IStatistics" Collapsed="true">
+    <Position X="14.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IStatistics.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
