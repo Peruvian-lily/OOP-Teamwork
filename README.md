@@ -6,6 +6,7 @@ OOP -Teamwork
 ###General Instructions
 1. Clone the GitHub repository locally
 2. Download and install Monogame - [Monogame Homepage](http://www.monogame.net/)
+3. Monogame tutorials - [Wiki] (http://rbwhitaker.wikidot.com/monogame-2d-tutorials)
 
 ###Project description 
 1. Tools
@@ -44,6 +45,11 @@ OOP -Teamwork
 				- Consumable (abstract)
 					- HealthPotion
 					- ManaPotion
+3. Generic RPG -Steps
+	1. map / level
+		- map generator
+	2. One Player
+	3. Sprite
 
 *notes : 
 	1. Every class that we might want to serialize needs to have an empty constructor.
@@ -51,8 +57,8 @@ OOP -Teamwork
 		It has overriden operators for addision and subtraction which are tested and work.
 	
 3. Content Ideas - deadline: **06.02.2015**
-			Idea - 
-			Details:
+			Idea - Generic RPG
+			Details - Player is randomly posinioned on a 2D map. Enemies are alspo positioned on the same map. Open world style. When enemy and player radiuses intersect they battle. Battle is in a new screen. Image of player vs Image of Enemy - attacked class shakes on attack.
 
 					
 ###Project realisation					
