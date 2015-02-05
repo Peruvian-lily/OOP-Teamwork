@@ -57,7 +57,18 @@ OOP -Teamwork
 		It has overriden operators for addision and subtraction which are tested and work.
 	
 3. Content Ideas - deadline: **06.02.2015**
-			Idea - Generic RPG
+			Idea - 
+				Slay em all
+				One man army
+				Walk N Spank
+				Walking simulator
+				Bread simulator
+				I am bread
+				Bi3m se s lo6ite
+				I am Tomato
+				Shopska salata
+				Troika s garnitura
+				
 			Details - Player is randomly posinioned on a 2D map. Enemies are alspo positioned on the same map. Open world style. When enemy and player radiuses intersect they battle. Battle is in a new screen. Image of player vs Image of Enemy - attacked class shakes on attack.
 
 					
