@@ -50,7 +50,20 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\" />
+    <Folder Include="Content\Backgrounds\" />
+    <Folder Include="Content\Fonts\" />
+    <Folder Include="Content\Levels\" />
+    <Folder Include="Content\Overlays\" />
+    <Folder Include="Content\Sounds\" />
+    <Folder Include="Content\Sprites\Monster\" />
+    <Folder Include="Content\Sprites\Player\" />
+    <Folder Include="Content\Tiles\" />
+    <Folder Include="Game\Creatures\" />
+    <Folder Include="Game\Enums\" />
+    <Folder Include="Game\Factories\" />
+    <Folder Include="Game\Interfaces\" />
+    <Folder Include="Game\Items\" />
+    <Folder Include="Game\Stats\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
