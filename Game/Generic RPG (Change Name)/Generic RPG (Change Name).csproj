@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{15924513-FC31-4DAA-848F-D6EA5C972A56}</ProjectGuid>
+    <ProjectGuid>{55CD0B64-D019-4363-B9D4-E195DDC005B4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GenericRPG</RootNamespace>
-    <AssemblyName>GenericRPG</AssemblyName>
+    <RootNamespace>Generic_RPG__Change_Name_</RootNamespace>
+    <AssemblyName>Generic RPG %28Change Name%29</AssemblyName>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -50,20 +50,7 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Backgrounds\" />
-    <Folder Include="Content\Fonts\" />
-    <Folder Include="Content\Levels\" />
-    <Folder Include="Content\Overlays\" />
-    <Folder Include="Content\Sounds\" />
-    <Folder Include="Content\Sprites\Monster\" />
-    <Folder Include="Content\Sprites\Player\" />
-    <Folder Include="Content\Tiles\" />
-    <Folder Include="Game\Creatures\" />
-    <Folder Include="Game\Enums\" />
-    <Folder Include="Game\Factories\" />
-    <Folder Include="Game\Interfaces\" />
-    <Folder Include="Game\Items\" />
-    <Folder Include="Game\Stats\" />
+    <Folder Include="Content\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

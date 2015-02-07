@@ -1,0 +1,108 @@
+//Everything from here on out written with indentation after a point means it's a child of that point.
+Legend: 
+For classes:
+	* - Abstract class
+	? - Not needed complete later
+For us:
+	Number. #/!/+ (Name) ClassName
+	(Name) - Your name o.O
+	# - Finished
+	! - Pushed and taking a break.
+	+ - Working on it.
+
+	
+//Class Hierarchy 
+
+//Game Models
+1. #(Emo) *Game Object. - Contains ID
+	1.1	*NPC - Generic class for all characters 
+		- Contains 3 things 
+			- Name
+			- Health(Sub class of Stats)
+			- Coordinates
+		1. Player 
+			 - Implements IMove(), IFight(),IPlayer()
+		2. Enemy	
+			- Inherits NPC 
+			- Implements IRoam(), IFight(), IEnemy()
+		?. Princess 
+			- Implements NPC. Touch princess win life. //No idea what she will do. Could be end game goal.
+		?. Critter 
+			- Implements IRoam() //Runs around being cute
+		?. Helpless (Insert name here)
+			- Gives player things in exchange for stuff.
+	2.2 *PickUp - Contains Name
+		1. Item //Permanent pick up goes in inventory. 
+			- Can be made abstracts if we want a set number of items. Or keep like this for random generation.
+			- Inherits PickUp. 
+			- Implements IItem();
+			- Contains amount of uses.
+		2. Bonus //Effects player for 1 battle
+			- Inherits PickUp, 
+			- Implements ITimeout //Duration in turns.
+			- Contains list of effects.
+	2.3 Battle
+		- Contains List<IFight> Participants
+		- Contains Round counter
+			- After all participants have participated counter goes up.
+		
+2. *Stats - Stats creation system 
+	- Holds Name and Value //Subject to change.
+	1. Each subclass implements above constructor without Name. ex. For Health stat
+		- ctor(int value) :this("Health", value){}
+		
+3. *Effects - Effect creation system. 
+	- Holds single Stat //Subject to change
+	- Implements ITimeout(); //Lasts X turns.
+	- Has method Target(Npc target) //Target of effect
+		ex. Healing(); //On event changes stats of target 
+		
+4. Inventory
+	- Holds list of Items.
+	- AddItem() and RemoveItem() methods.
+		-Can add Equip() at a later date.
+	- Has capacity. //X items Diablo stype or Y weight fallout style. If second add Weight property to Item.
+	
+//Game Logic
+1. Engine
+	- Holds an instance of each manger class.
+2. *Manager
+	- Requires an object
+	- Implements game logic for that object.
+	- Example.
+		- ItemManager
+			- Generate()
+				- Generate random name
+				? Select type //Armor, Weapon, Potato, Car, Airplane
+					- Generate random stats
+					- Have chance to generate random effect
+					
+//Interfaces
+	- IDraw();
+		- void Draw() method.
+	- IMove();
+		- void Move() method.
+	- IRoam();
+		- Roam(); //Change coordinates by a random small number every X seconds.
+	- IFight(); 
+		- Attack(Stat) property
+		- Attack(Npc target) method
+		? int ActionPoints property //If spells are implemented.
+	- IPlayer(); Extends IMove, IFight
+		- Inventory Inventory property.
+		- List<Stat> Stats.
+	- IEnemy(); Extends IRoam(), IFight()
+		? Type Type property //Healer, Fighter
+		- List<Stat> Stats.
+		? Item Loot property //If loot drop.
+		
+	- IItem(); 
+		- List<Stat> Stats property
+		- List<Effect> Effects property.
+	- ITimeout;
+		- int Duration //Duration in turns.
+		
+//Structures
+1. Coordinates
+	-Holds X and Y
+//Enumerables

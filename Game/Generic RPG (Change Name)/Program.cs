@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 #endregion
 
-namespace GenericRPG
+namespace Generic_RPG__Change_Name_
 {
 #if WINDOWS || LINUX
     /// <summary>
