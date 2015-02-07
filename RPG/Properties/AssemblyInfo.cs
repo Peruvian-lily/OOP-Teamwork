@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Generic RPG (Change Name)")]
-[assembly: AssemblyProduct("Generic RPG (Change Name)")]
+[assembly: AssemblyTitle("RPG")]
+[assembly: AssemblyProduct("RPG")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("Microsoft")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1cb2ef0c-7ea7-485c-a0d0-64d3375420c0")]
+[assembly: Guid("58ede8a2-b2e6-44b3-9c1c-73d5575fa945")]
 
 // Version information for an assembly consists of the following four values:
 //

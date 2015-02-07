@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 #endregion
 
-namespace Generic_RPG__Change_Name_
+namespace RPG
 {
     /// <summary>
     /// This is the main type for your game

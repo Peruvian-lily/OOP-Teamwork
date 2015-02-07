@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{55CD0B64-D019-4363-B9D4-E195DDC005B4}</ProjectGuid>
+    <ProjectGuid>{99672685-A79A-47AA-97A5-222C8622946D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Generic_RPG__Change_Name_</RootNamespace>
-    <AssemblyName>Generic RPG %28Change Name%29</AssemblyName>
+    <RootNamespace>RPG</RootNamespace>
+    <AssemblyName>RPG</AssemblyName>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -35,14 +35,6 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Game Logic\GameObject.cs" />
-    <Compile Include="Game Logic\Interface\IDraw.cs" />
-    <Compile Include="Game Logic\Interface\IFight.cs" />
-    <Compile Include="Game Logic\Interface\IMove.cs" />
-    <Compile Include="Game Logic\Interface\IRoam.cs" />
-    <Compile Include="Game Logic\Models\Npc\Base\Npc.cs" />
-    <Compile Include="Game Logic\Models\Npc\Player.cs" />
-    <Compile Include="Game Logic\Models\Stats\Base\Stats.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,14 +50,16 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Game Content\Backgrounds\" />
-    <Folder Include="Game Content\Fonts\" />
-    <Folder Include="Game Content\Levels\" />
-    <Folder Include="Game Content\Overlays\" />
-    <Folder Include="Game Content\Sounds\" />
-    <Folder Include="Game Content\Sprites\Monster\" />
-    <Folder Include="Game Content\Sprites\Player\" />
-    <Folder Include="Game Content\Tiles\" />
+    <Folder Include="Content\Backgrounds\" />
+    <Folder Include="Content\Fonts\" />
+    <Folder Include="Content\Levels\" />
+    <Folder Include="Content\Overlays\" />
+    <Folder Include="Content\Sounds\" />
+    <Folder Include="Content\Sprites\Monster\" />
+    <Folder Include="Content\Sprites\Player\" />
+    <Folder Include="Content\Tiles\" />
+    <Folder Include="Game\Game Logic\Interface\" />
+    <Folder Include="Game\Game Logic\Models\NPC\Base\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
