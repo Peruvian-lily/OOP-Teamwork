@@ -20,35 +20,35 @@ For us:
 			- Name
 			- Health(Sub class of Stats)
 			- Coordinates
-		1. Player 
+		1.1.1. Player 
 			 - Implements IMove(), IFight(),IPlayer()
-		2. Enemy	
+		1.1.2. Enemy	
 			- Inherits NPC 
 			- Implements IRoam(), IFight(), IEnemy()
-		?. Princess 
+		1.1.?. Princess 
 			- Implements NPC. Touch princess win life. //No idea what she will do. Could be end game goal.
-		?. Critter 
+		1.1.?. Critter 
 			- Implements IRoam() //Runs around being cute
-		?. Helpless (Insert name here)
+		1.1.?. Helpless (Insert name here)
 			- Gives player things in exchange for stuff.
-	2.2 *PickUp - Contains Name
-		1. Item //Permanent pick up goes in inventory. 
+	1.2 *PickUp - Contains Name
+		1.2.1 Item //Permanent pick up goes in inventory. 
 			- Can be made abstracts if we want a set number of items. Or keep like this for random generation.
 			- Inherits PickUp. 
 			- Implements IItem();
 			- Contains amount of uses.
-		2. Bonus //Effects player for 1 battle
+		1.2.2. Bonus //Effects player for 1 battle
 			- Inherits PickUp, 
 			- Implements ITimeout //Duration in turns.
 			- Contains list of effects.
-	2.3 Battle
+	1.3 Battle
 		- Contains List<IFight> Participants
 		- Contains Round counter
 			- After all participants have participated counter goes up.
 		
 2. *Stats - Stats creation system 
 	- Holds Name and Value //Subject to change.
-	1. Each subclass implements above constructor without Name. ex. For Health stat
+	2.1 Each subclass implements above constructor without Name. ex. For Health stat
 		- ctor(int value) :this("Health", value){}
 		
 3. *Effects - Effect creation system. 
