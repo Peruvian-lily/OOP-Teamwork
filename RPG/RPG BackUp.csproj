@@ -46,8 +46,8 @@
     <Compile Include="GameLogic\Interface\ITimeout.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\Effects.cs" />
     <Compile Include="GameLogic\Models\Inventory\Base\Inventory.cs" />
+    <Compile Include="GameLogic\Models\Inventory\Bonus.cs" />
     <Compile Include="GameLogic\Models\Items\Base\PickUp.cs" />
-    <Compile Include="GameLogic\Models\Items\Bonus.cs" />
     <Compile Include="GameLogic\Models\Items\Item.cs" />
     <Compile Include="GameLogic\Models\NPC\Base\Npc.cs" />
     <Compile Include="GameLogic\Models\NPC\Player.cs" />

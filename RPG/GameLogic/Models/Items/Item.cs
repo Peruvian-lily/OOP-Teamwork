@@ -19,9 +19,9 @@
         }
 
         public Item(string id, string name, List<Stat> stats)
-            : this(id, name,stats,null)
+            : this(id, name, stats, null)
         {
-            
+
         }
 
         public List<Stat> Stats
@@ -36,6 +36,7 @@
                 this._stats = value;
             }
         }
+
         public List<Effects> Effects { get; private set; }
     }
 }

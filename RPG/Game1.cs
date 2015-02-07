@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using RPG.GameLogic.Models.NPC;
 using RPG.GameLogic.Models.NPC.Base;
 
 #endregion
@@ -45,7 +46,7 @@ namespace RPG
             ScreenWidth = GraphicsDevice.Viewport.Width;
             ScreenHeight = GraphicsDevice.Viewport.Height;
 
-            player = new Player();
+            player = new Player("placeholder", "placeholder",100,100,100,5);
 
             base.Initialize();
         }

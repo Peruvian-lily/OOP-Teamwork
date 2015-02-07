@@ -27,7 +27,7 @@ namespace RPG.GameLogic.Models.Stats.Base
         public int Value
         {
             get { return this._value; }
-            private set
+            set
             {
                 if (value <= 0)
                 {
@@ -35,6 +35,15 @@ namespace RPG.GameLogic.Models.Stats.Base
                 }
                 this._value = value;
             }
+        }
+
+        public void Reduce(int amount)
+        {
+            this.Value -= amount;
+        }
+        public void Increase(int amount)
+        {
+            this.Value += amount;
         }
     }
 }
