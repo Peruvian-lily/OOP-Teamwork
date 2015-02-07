@@ -32,7 +32,7 @@ namespace RPG.GameLogic.Models.Stats.Base
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException("Stats value cannot be negative");
+                    throw new ArgumentOutOfRangeException("Stats value cannot be negative or zero");
                 }
                 this._value = value;
             }
