@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using RPG.GameLogic.Models.NPC.Base;
+
 #endregion
 
 namespace RPG
@@ -21,6 +23,8 @@ namespace RPG
 
         public static int ScreenWidth;
         public static int ScreenHeight;
+
+        private Player player;
 
         public Game1()
             : base()
@@ -40,6 +44,8 @@ namespace RPG
             // TODO: Add your initialization logic here
             ScreenWidth = GraphicsDevice.Viewport.Width;
             ScreenHeight = GraphicsDevice.Viewport.Height;
+
+            player = new Player();
 
             base.Initialize();
         }
