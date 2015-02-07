@@ -35,6 +35,14 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Game Logic\GameObject.cs" />
+    <Compile Include="Game Logic\Interface\IDraw.cs" />
+    <Compile Include="Game Logic\Interface\IFight.cs" />
+    <Compile Include="Game Logic\Interface\IMove.cs" />
+    <Compile Include="Game Logic\Interface\IRoam.cs" />
+    <Compile Include="Game Logic\Models\Npc\Base\Npc.cs" />
+    <Compile Include="Game Logic\Models\Npc\Player.cs" />
+    <Compile Include="Game Logic\Models\Stats\Base\Stats.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -50,14 +58,14 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Backgrounds\" />
-    <Folder Include="Content\Fonts\" />
-    <Folder Include="Content\Levels\" />
-    <Folder Include="Content\Overlays\" />
-    <Folder Include="Content\Sounds\" />
-    <Folder Include="Content\Sprites\Monster\" />
-    <Folder Include="Content\Sprites\Player\" />
-    <Folder Include="Content\Tiles\" />
+    <Folder Include="Game Content\Backgrounds\" />
+    <Folder Include="Game Content\Fonts\" />
+    <Folder Include="Game Content\Levels\" />
+    <Folder Include="Game Content\Overlays\" />
+    <Folder Include="Game Content\Sounds\" />
+    <Folder Include="Game Content\Sprites\Monster\" />
+    <Folder Include="Game Content\Sprites\Player\" />
+    <Folder Include="Game Content\Tiles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
