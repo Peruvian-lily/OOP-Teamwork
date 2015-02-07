@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    class GameObject
+    abstract class GameObject
     {
         private string _id;
         public string Id
@@ -16,6 +16,10 @@ namespace Game
                 }
                 this._id = value;
             }
+        }
+        protected GameObject(string id)
+        {
+            this.Id = id;
         }
     }
 }
