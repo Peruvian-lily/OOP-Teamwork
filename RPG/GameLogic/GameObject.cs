@@ -1,10 +1,16 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace RPG.GameLogic
 {
     public abstract class GameObject
     {
         private string _id;
+
+        public Vector2 Position;
+        public Texture2D Texture;
+
         public string Id
         {
             get { return this._id; }
@@ -20,6 +26,10 @@ namespace RPG.GameLogic
         protected GameObject(string id)
         {
             this.Id = id;
+        }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Texture, Position, Color.White);
         }
     }
 }

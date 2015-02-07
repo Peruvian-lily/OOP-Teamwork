@@ -19,6 +19,9 @@ namespace RPG
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        public static int ScreenWidth;
+        public static int ScreenHeight;
+
         public Game1()
             : base()
         {
@@ -35,6 +38,8 @@ namespace RPG
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            ScreenWidth = GraphicsDevice.Viewport.Width;
+            ScreenHeight = GraphicsDevice.Viewport.Height;
 
             base.Initialize();
         }
@@ -71,6 +76,9 @@ namespace RPG
                 Exit();
 
             // TODO: Add your update logic here
+
+            ScreenWidth = GraphicsDevice.Viewport.Width;
+            ScreenHeight = GraphicsDevice.Viewport.Height;
 
             base.Update(gameTime);
         }
