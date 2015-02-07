@@ -24,7 +24,6 @@ namespace RPG.GameLogic.Models.Stats.Base
                 }
             }
         }
-
         public int Value
         {
             get { return this._value; }
