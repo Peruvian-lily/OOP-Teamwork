@@ -32,48 +32,14 @@ namespace RPG.GameLogic.Models.NPC
             target.TakeDamage(damage);
         }
 
+        public Npc GetTarget()
+        {
+            return null;
+        }
+
         public void Roam()
         {
             throw new System.NotImplementedException();
-        }
-
-        public override void Modify(Stat stat, bool remove = false)
-        {
-            
-            if (remove == true)
-            {
-                #region RemoveStats
-                if (stat.GetType() == typeof (Attack))
-                {
-                    this.AttackPower.Value -= stat.Value;
-                }
-                else if (stat.GetType() == typeof (Defense))
-                {
-                    this.Defense.Value -= stat.Value;
-                }
-                else
-                {
-                    this.Stats.Find(entry => entry == stat).Value -= stat.Value;
-                }
-                #endregion
-            }
-            else
-            {
-                #region AddStats
-                if (stat.GetType() == typeof(Attack))
-                {
-                    this.AttackPower.Value += stat.Value;
-                }
-                else if (stat.GetType() == typeof(Defense))
-                {
-                    this.Defense.Value += stat.Value;
-                }
-                else
-                {
-                    this.Stats.Find(entry => entry == stat).Value -= stat.Value;
-                }
-                #endregion
-            }
         }
     }
 }

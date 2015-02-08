@@ -1,9 +1,6 @@
-﻿
-
-namespace RPG.GameLogic.Models.NPC
+﻿namespace RPG.GameLogic.Models.NPC
 {
     using System.Collections.Generic;
-
     using Interface;
     using Base;
     using Inventory;
@@ -43,6 +40,11 @@ namespace RPG.GameLogic.Models.NPC
             target.TakeDamage(damage);
         }
 
+        public Npc GetTarget()
+        {
+            return null;
+        }
+
         public void Move()
         {
             throw new System.NotImplementedException();
@@ -60,45 +62,6 @@ namespace RPG.GameLogic.Models.NPC
                 case "bonus":
                     ((Bonus)item).Apply(this);
                     break;
-            }
-        }
-
-        public override void Modify(Stat stat, bool remove = false)
-        {
-            
-            if (remove == true)
-            {
-                #region RemoveStats
-                if (stat.GetType() == typeof (Attack))
-                {
-                    this.AttackPower.Value -= stat.Value;
-                }
-                else if (stat.GetType() == typeof (Defense))
-                {
-                    this.Defense.Value -= stat.Value;
-                }
-                else
-                {
-                    this.OtherStats.Find(entry => entry == stat).Value -= stat.Value;
-                }
-                #endregion
-            }
-            else
-            {
-                #region AddStats
-                if (stat.GetType() == typeof(Attack))
-                {
-                    this.AttackPower.Value += stat.Value;
-                }
-                else if (stat.GetType() == typeof(Defense))
-                {
-                    this.Defense.Value += stat.Value;
-                }
-                else
-                {
-                    this.OtherStats.Find(entry => entry == stat).Value -= stat.Value;
-                }
-                #endregion
             }
         }
     }

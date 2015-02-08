@@ -1,6 +1,6 @@
 ﻿namespace RPG.GameLogic.Models.Effects
 {
-    public enum EffectType
+    public enum EffectTarget
     {
         Self,
         Others

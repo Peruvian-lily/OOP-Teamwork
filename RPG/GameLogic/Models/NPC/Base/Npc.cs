@@ -44,12 +44,5 @@
                 this.Health.Reduce(damage);
             }
         }
-
-        /// <summary>
-        /// Changes given stat value to current object stats.
-        /// </summary>
-        /// <param name="stat">Stat</param>
-        /// <param name="remove">Defaul false</param>
-        public abstract void Modify(Stat stat, bool remove = false);
     }
 }

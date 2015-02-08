@@ -2,7 +2,7 @@
 {
     public enum ItemType
     {
-        Offensive = 0,
-        Deffensive = 1
+        Offensive,
+        Deffensive
     }
 }
