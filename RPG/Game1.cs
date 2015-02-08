@@ -13,6 +13,7 @@ using RPG.GameLogic.Core.Items;
 using RPG.GameLogic.Models.NPC;
 using RPG.GameLogic.Models.NPC.Base;
 using RPG.GameLogic.Core;
+using RPG.GameLogic.Models;
 using RPG.Helpers;
 using RPG.Helpers.CustomShapes;
 
@@ -24,7 +25,7 @@ namespace RPG
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        private GUIElement menu;
+        private MainMenu mainMenu;
         private KeyboardState currentKeyboardState;
 
         public static int ScreenWidth;
@@ -58,9 +59,8 @@ namespace RPG
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             defaultFont = Content.Load<SpriteFont>("Fonts/Arial");
-            menu = new GUIElement("Overlays\\MainMenu\\main_menu_background_under_buttons");
-            menu.LoadContent(Content);
-            menu.CenterElement(ScreenHeight,ScreenWidth);
+            mainMenu.LoadContent(Content);
+
 
             // This is the place to initialize all variables depending on external resources.
             textDrawer = new TextDrawer(defaultFont);
@@ -80,7 +80,7 @@ namespace RPG
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            menu.Draw(spriteBatch);
+            mainMenu.Draw(spriteBatch);
             spriteBatch.End();
         }
     }
