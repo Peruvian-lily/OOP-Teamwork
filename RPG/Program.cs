@@ -1,8 +1,7 @@
 ﻿#region Using Statements
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using RPG.GameLogic.Core.Items;
+using RPG.GameLogic.Models.Items;
 
 #endregion
 

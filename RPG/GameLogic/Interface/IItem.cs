@@ -7,6 +7,6 @@ namespace RPG.GameLogic.Interface
     public interface IItem
     {
         List<Stat> Stats { get; }
-        List<Effects> Effects { get; }
+        Effects Effect { get; }
     }
 }

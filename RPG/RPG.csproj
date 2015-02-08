@@ -51,6 +51,7 @@
     <Compile Include="GameLogic\Models\Effects\Base\Effects.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\EffectType.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\EffectTarget.cs" />
+    <Compile Include="GameLogic\Models\Effects\Burning.cs" />
     <Compile Include="GameLogic\Models\Effects\Healing.cs" />
     <Compile Include="GameLogic\Models\Inventory\Base\Inventory.cs" />
     <Compile Include="GameLogic\Models\Items\Base\PickUp.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="GameLogic\Models\Stats\Base\Stat.cs" />
     <Compile Include="GameLogic\Models\Stats\Base\StatType.cs" />
     <Compile Include="GameLogic\Models\Stats\Defense.cs" />
+    <Compile Include="GameLogic\Models\Stats\FireAttack.cs" />
     <Compile Include="GameLogic\Models\Stats\Health.cs" />
     <Compile Include="GameLogic\GameObject.cs" />
     <Compile Include="Program.cs" />
