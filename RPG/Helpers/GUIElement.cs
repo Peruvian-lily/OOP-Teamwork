@@ -30,5 +30,10 @@ namespace RPG.Helpers
         {
             spriteBatch.Draw(GUITextue, GUIRectangle, Color.White);
         }
+
+        public void CenterElement(int height, int width)
+        {
+            GUIRectangle = new Rectangle((width/2) - this.GUITextue.Width/2,(height/2)-this.GUITextue.Height/2,this.GUITextue.Width,this.GUITextue.Height);
+        }
     }
 }

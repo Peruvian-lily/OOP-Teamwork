@@ -58,8 +58,9 @@ namespace RPG
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             defaultFont = Content.Load<SpriteFont>("Fonts/Arial");
-            menu = new GUIElement("Overlays\\MainMenu\\main_menu_background_under_buttons.png");
+            menu = new GUIElement("Overlays\\MainMenu\\main_menu_background_under_buttons");
             menu.LoadContent(Content);
+            menu.CenterElement(ScreenHeight,ScreenWidth);
 
             // This is the place to initialize all variables depending on external resources.
             textDrawer = new TextDrawer(defaultFont);
