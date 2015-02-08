@@ -1,6 +1,8 @@
 ﻿#region Using Statements
+
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,23 +11,26 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using RPG.GameLogic.Models.NPC;
 using RPG.GameLogic.Models.NPC.Base;
+using RPG.GameLogic.Core;
+using RPG.Helpers;
 
 #endregion
 
 namespace RPG
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+        private KeyboardState currentKeyboardState;
 
         public static int ScreenWidth;
         public static int ScreenHeight;
 
+        private Engine engine;
         private Player player;
+        private SpriteFont defaultFont;
+        private TextDrawer textDrawer;
 
         public Game1()
             : base()
@@ -34,71 +39,42 @@ namespace RPG
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             ScreenWidth = GraphicsDevice.Viewport.Width;
             ScreenHeight = GraphicsDevice.Viewport.Height;
 
+            engine = Engine.GetInstance;
             player = new Player("placeholder", "placeholder",100,100,100,5);
 
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            defaultFont = Content.Load<SpriteFont>("Fonts/Arial");
 
-            // TODO: use this.Content to load your game content here
+            // This is the place to initialize all variables depending on external resources.
+            textDrawer = new TextDrawer(defaultFont);
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            // TODO: Add your update logic here
-
-            ScreenWidth = GraphicsDevice.Viewport.Width;
-            ScreenHeight = GraphicsDevice.Viewport.Height;
-
+            textDrawer = new TextDrawer(defaultFont);
+            currentKeyboardState =  Keyboard.GetState();
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
+            textDrawer.DrawString(spriteBatch, "Drawing text in Arial", new Vector2(10, 10), Color.Black);
+            textDrawer.DrawString(spriteBatch, "More text in Arial with scale 2", new Vector2(30, 30), Color.Black, new Vector2(2, 2));
 
             base.Draw(gameTime);
         }
