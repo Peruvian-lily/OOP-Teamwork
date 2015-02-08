@@ -67,6 +67,7 @@
     <Compile Include="GameLogic\Models\Stats\FireAttack.cs" />
     <Compile Include="GameLogic\Models\Stats\Health.cs" />
     <Compile Include="GameLogic\GameObject.cs" />
+    <Compile Include="Helpers\TextDrawer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,13 +83,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Backgrounds\" />
-    <Folder Include="Content\Fonts\" />
     <Folder Include="Content\Levels\" />
     <Folder Include="Content\Overlays\" />
     <Folder Include="Content\Sounds\" />
     <Folder Include="Content\Sprites\Monster\" />
     <Folder Include="Content\Sprites\Player\" />
     <Folder Include="Content\Tiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Fonts\Arial.xnb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
