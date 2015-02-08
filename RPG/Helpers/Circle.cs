@@ -11,118 +11,123 @@ using Microsoft.Xna.Framework.GamerServices;
 
 namespace RPG.Helpers
 {
-    public class Circle
-    {
-        private GraphicsDeviceManager _graphics;
-        private VertexPositionColor[] _vertices;
-        private BasicEffect _effect;
-        private float _x;
-        private float _y;
-        private float _radius;
-        private Color _color;
-        
+	public class Circle
+	{
+		private GraphicsDeviceManager _graphics;
+		private VertexPositionColor[] _vertices;
+		private BasicEffect _effect;
+		private Vector2 _position;
+		private float _radius;
+		private Color _color;
 
-        public Circle(float x, float y, int radius,
-            Color color, GraphicsDeviceManager graphics)
-        {
-            this._x = x;
-            this._y = y;
-            this._radius = radius;
-            this._color = color;
-            this._graphics = graphics;
 
-            Initialize();
-        }
-        public Circle(float x, float y, int radius,
-            GraphicsDeviceManager graphics)
-            : this(x, y, radius, Color.White, graphics) 
-        {
-        }
+		public Circle(Vector2 position, int radius,
+			Color color, GraphicsDeviceManager graphics)
+		{
+			this._position = position;
+			this._radius = radius;
+			this._color = color;
+			this._graphics = graphics;
 
-        public float X
-        {
-            get { return this._x; }
-            set 
-            {
-                this._x = value; 
-                InitializeVertices(); 
-            }
-        }
-        public float Y
-        {
-            get { return this._y; }
-            set 
-            {
-                this._y = value;
-                InitializeVertices();
-            }
-        }
-        public float Radius
-        {
-            get { return this._radius; }
-            set 
-            {
-                this._radius = (value < 1) ? 1 : value; 
-                InitializeVertices();
-            }
-        }
-        public Color Color
-        {
-            get 
-            { 
-                return this._color; 
-            }
-            set 
-            {
-                this._color = value; 
-                InitializeVertices(); 
-            }
-        }
-        public int Points
-        {
-            get { return this.CalculatePointCount(); }
-        }
+			Initialize();
+		}
+		public Circle(Vector2 position, int radius,
+			GraphicsDeviceManager graphics)
+			: this(position, radius, Color.White, graphics) 
+		{
+		}
 
-        public void Draw()
+		#region Properties
+		 
+		public Vector2 Position
+		{
+			get { return this._position; }
+			set 
+			{
+				this._position = value; 
+				InitializeVertices(); 
+			}
+		}
+	   
+		public float Radius
+		{
+			get { return this._radius; }
+			set 
+			{
+				this._radius = (value < 1) ? 1 : value; 
+				InitializeVertices();
+			}
+		}
+
+		public Color Color
+		{
+			get { return this._color; }
+			set 
+			{
+				this._color = value; 
+				InitializeVertices(); 
+			}
+		}
+
+		public int Points
+		{
+			get { return this.CalculatePointCount(); }
+		}
+
+		#endregion
+
+		public bool IsPointInCirlce(Vector2 point)
         {
-            this._effect.CurrentTechnique.Passes[0].Apply();
-            this._graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.LineStrip,
-                this._vertices, 0, this._vertices.Length - 1);
+            //(x - center_x)^2 + (y - center_y)^2 < radius^2
+            double lhs = Math.Pow(this.Position.X - point.X, 2) + Math.Pow(this.Position.Y - point.Y, 2);
+            double rhs = Math.Pow(this.Radius, 2);
+            return lhs < rhs;
         }
 
-        private void Initialize()
-        {
-            InitializeBasicEffect();
-            InitializeVertices();
-        }
+		public void Draw()
+		{
+			this._effect.CurrentTechnique.Passes[0].Apply();
+			this._graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.LineStrip,
+				this._vertices, 0, this._vertices.Length - 1);
+		}
 
-        private void InitializeBasicEffect()
-        {
-           this._effect = new BasicEffect(_graphics.GraphicsDevice);
-           this._effect.VertexColorEnabled = true;
-           this._effect.Projection = Matrix.CreateOrthographicOffCenter(0, this._graphics.GraphicsDevice.Viewport.Width,
-                this._graphics.GraphicsDevice.Viewport.Height, 0, 0, 1);
-        }
+		#region Initializations
+		
+		private void Initialize()
+		{
+			InitializeBasicEffect();
+			InitializeVertices();
+		}
 
-        private void InitializeVertices()
-        {
-            this._vertices = new VertexPositionColor[CalculatePointCount()];
-            var pointTheta = ((float)Math.PI * 2) / (this._vertices.Length - 1);
-            for (int i = 0; i < this._vertices.Length; i++)
-            {
-                var theta = pointTheta * i;
-                var x = X + ((float)Math.Sin(theta) * Radius);
-                var y = Y + ((float)Math.Cos(theta) * Radius);
-                this._vertices[i].Position = new Vector3(x, y, 0);
-                this._vertices[i].Color = Color;
-            }
+		private void InitializeBasicEffect()
+		{
+		   this._effect = new BasicEffect(_graphics.GraphicsDevice);
+		   this._effect.VertexColorEnabled = true;
+		   this._effect.Projection = Matrix.CreateOrthographicOffCenter(0, this._graphics.GraphicsDevice.Viewport.Width,
+				this._graphics.GraphicsDevice.Viewport.Height, 0, 0, 1);
+		}
 
-            this._vertices[this._vertices.Length - 1] = this._vertices[0];
-        }
+		private void InitializeVertices()
+		{
+			this._vertices = new VertexPositionColor[CalculatePointCount()];
+			var pointTheta = ((float)Math.PI * 2) / (this._vertices.Length - 1);
+			for (int i = 0; i < this._vertices.Length; i++)
+			{
+				var theta = pointTheta * i;
+				var x = this.Position.X + ((float)Math.Sin(theta) * Radius);
+				var y = this.Position.Y + ((float)Math.Cos(theta) * Radius);
+				this._vertices[i].Position = new Vector3(x, y, 0);
+				this._vertices[i].Color = Color;
+			}
 
-        private int CalculatePointCount()
-        {
-            return (int)Math.Ceiling(Radius * Math.PI);
-        }
-    }
+			this._vertices[this._vertices.Length - 1] = this._vertices[0];
+		}
+
+		#endregion
+
+		private int CalculatePointCount()
+		{
+			return (int)Math.Ceiling(Radius * Math.PI);
+		}
+	}
 }

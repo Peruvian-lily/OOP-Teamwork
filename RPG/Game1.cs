@@ -75,9 +75,7 @@ namespace RPG
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            Circle cirlce = new Circle(100, 100, 100, Color.Black, graphics);
-
+            Circle cirlce = new Circle(new Vector2(100, 100), 100, Color.Black, graphics);
             cirlce.Draw();
 
             base.Draw(gameTime);
