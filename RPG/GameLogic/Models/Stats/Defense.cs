@@ -5,8 +5,8 @@ namespace RPG.GameLogic.Models.Stats
 
     public class Defense : Stat
     {
-        public Defense(int value) : 
-            base("Defense", value)
+        public Defense(int value) 
+            : base("Defense", value)
         {
         }
     }

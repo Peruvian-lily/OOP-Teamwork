@@ -5,8 +5,8 @@ namespace RPG.GameLogic.Models.Stats
 {
     public class Health : Stat
     {
-        public Health(int value) : 
-            base("Health", value)
+        public Health(int value) 
+            : base("Health", value)
         {
         }
     }

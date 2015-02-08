@@ -31,7 +31,7 @@ namespace RPG.GameLogic.Models.NPC
         {
         }
 
-        public Attack AttackPower { get; set; }
+        public Attack AttackPower { get; private set; }
 
         public Inventory Inventory { get; private set; }
 
@@ -55,10 +55,10 @@ namespace RPG.GameLogic.Models.NPC
             switch (itemType)
             {
                 case "item":
-                    this.Inventory.Add((Item) item);
+                    this.Inventory.Add((Item)item);
                     break;
                 case "bonus":
-                    ((Bonus) item).Apply(this);
+                    ((Bonus)item).Apply(this);
                     break;
             }
         }
