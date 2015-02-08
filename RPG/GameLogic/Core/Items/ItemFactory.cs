@@ -88,7 +88,7 @@ namespace RPG.GameLogic.Core.Items
             //Filthy little effectses. THEY STOLE THE PRECIOUS
             var effectses = new List<Effects>
             {
-                new Healing(power,target,owner)
+                new Healing(power+1,target,owner)
             };
             int randomIndex = _rnd.Next(effectses.Count - 1);
             return effectses[randomIndex];
@@ -97,7 +97,7 @@ namespace RPG.GameLogic.Core.Items
         {
             var effectses = new List<Effects>
             {
-                new Burning(power,target,owner)
+                new Burning(power+1,target,owner)
             };
             int randomIndex = _rnd.Next(effectses.Count - 1);
             return effectses[randomIndex];
