@@ -25,6 +25,7 @@ namespace RPG.GameLogic.Core.Items
             {
                 GenerateEffect();
             }
+            return null;
         }
 
         private static void GenerateEffect()
@@ -94,7 +95,7 @@ namespace RPG.GameLogic.Core.Items
             #region Suffix
             switch (nature)
             {
-                case EffectType.Self:
+                case EffectType.Harmful:
                     suffix = new List<string>
                     {
                         "of Pain",
@@ -102,7 +103,7 @@ namespace RPG.GameLogic.Core.Items
                     };
                     break;
 
-                case EffectType.Others:
+                case EffectType.Helpful:
                     suffix = new List<string>
                     {
                         "of Puppies",
