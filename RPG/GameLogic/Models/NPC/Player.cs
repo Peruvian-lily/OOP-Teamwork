@@ -62,5 +62,44 @@ namespace RPG.GameLogic.Models.NPC
                     break;
             }
         }
+
+        public override void Modify(Stat stat, bool remove = false)
+        {
+            
+            if (remove == true)
+            {
+                #region RemoveStats
+                if (stat.GetType() == typeof (Attack))
+                {
+                    this.AttackPower.Value -= stat.Value;
+                }
+                else if (stat.GetType() == typeof (Defense))
+                {
+                    this.Defense.Value -= stat.Value;
+                }
+                else
+                {
+                    this.OtherStats.Find(entry => entry == stat).Value -= stat.Value;
+                }
+                #endregion
+            }
+            else
+            {
+                #region AddStats
+                if (stat.GetType() == typeof(Attack))
+                {
+                    this.AttackPower.Value += stat.Value;
+                }
+                else if (stat.GetType() == typeof(Defense))
+                {
+                    this.Defense.Value += stat.Value;
+                }
+                else
+                {
+                    this.OtherStats.Find(entry => entry == stat).Value -= stat.Value;
+                }
+                #endregion
+            }
+        }
     }
 }

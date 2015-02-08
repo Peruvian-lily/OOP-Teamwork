@@ -26,7 +26,6 @@ namespace RPG.GameLogic.Models.NPC
 
         public Attack AttackPower { get; private set; }
 
-
         public void Attack(Npc target)
         {
             int damage = this.AttackPower.Value; //Add more values to formula as more stat types get implemented.
@@ -36,6 +35,45 @@ namespace RPG.GameLogic.Models.NPC
         public void Roam()
         {
             throw new System.NotImplementedException();
+        }
+
+        public override void Modify(Stat stat, bool remove = false)
+        {
+            
+            if (remove == true)
+            {
+                #region RemoveStats
+                if (stat.GetType() == typeof (Attack))
+                {
+                    this.AttackPower.Value -= stat.Value;
+                }
+                else if (stat.GetType() == typeof (Defense))
+                {
+                    this.Defense.Value -= stat.Value;
+                }
+                else
+                {
+                    this.Stats.Find(entry => entry == stat).Value -= stat.Value;
+                }
+                #endregion
+            }
+            else
+            {
+                #region AddStats
+                if (stat.GetType() == typeof(Attack))
+                {
+                    this.AttackPower.Value += stat.Value;
+                }
+                else if (stat.GetType() == typeof(Defense))
+                {
+                    this.Defense.Value += stat.Value;
+                }
+                else
+                {
+                    this.Stats.Find(entry => entry == stat).Value -= stat.Value;
+                }
+                #endregion
+            }
         }
     }
 }

@@ -6,7 +6,6 @@ namespace RPG.GameLogic.Models.Inventory.Base
 {
     public class Inventory
     {
-        private List<Item> _content;
         private int _capacity;
         public Inventory(int capacity)
         {
@@ -37,7 +36,7 @@ namespace RPG.GameLogic.Models.Inventory.Base
         }
         public void Remove(Item item)
         {
-            if (_content.Contains(item))
+            if (this.Content.Contains(item))
             {
                 this.Content.Remove(item);
             }
