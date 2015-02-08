@@ -1,7 +1,10 @@
 ﻿
 
 using System.Text;
+using RPG.GameLogic.Interface;
 using RPG.GameLogic.Models.Effects.Base;
+using RPG.GameLogic.Models.NPC.Base;
+using RPG.GameLogic.Models.Stats;
 
 namespace RPG.GameLogic.Core.Items
 {
@@ -23,16 +26,17 @@ namespace RPG.GameLogic.Core.Items
             bool hasEffect = _rnd.Next(5) == 1;
             if (hasEffect)
             {
-                GenerateEffect();
+                
             }
             return null;
         }
 
-        private static void GenerateEffect()
+        private static void AddEffect(int power)
         {
+            EffectTarget target = _rnd.Next(1) == 0 ? EffectTarget.Self : EffectTarget.Others;
             if (_rnd.Next(1) == 0)
             {
-                NewDefensiveEffect();
+                NewDefensiveEffect(power,target);
             }
             else
             {
@@ -40,20 +44,28 @@ namespace RPG.GameLogic.Core.Items
             }
         }
 
-        private static void NewOffensiveItem()
+        private static void NewOffensiveItem(int power)
         {
-            var stats = new List<Stat>();
+            var stats = new List<Stat>
+            {
+                new Attack(power)
+            };
         }
 
-        private static void NewDefensiveEffect()
+        #region Effect Generator
+        private static void NewDefensiveEffect(int power, EffectTarget target)
         {
-          
+            //Filthy little effectses. THEY STOLE THE PRECIOUS
+            List<Effects> effectses = new List<Effects>
+            {
+                new Healing(power,target,null)
+            };
         }
-
         private static void NewOffensiveEffect()
         {
           
         }
+        #endregion
 
         private static string GenerateName(ItemType type, EffectType nature, bool hasEffect)
         {

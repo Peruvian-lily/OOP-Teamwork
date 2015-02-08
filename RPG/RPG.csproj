@@ -61,6 +61,7 @@
     <Compile Include="GameLogic\Models\NPC\Player.cs" />
     <Compile Include="GameLogic\Models\Stats\Attack.cs" />
     <Compile Include="GameLogic\Models\Stats\Base\Stat.cs" />
+    <Compile Include="GameLogic\Models\Stats\Base\StatType.cs" />
     <Compile Include="GameLogic\Models\Stats\Defense.cs" />
     <Compile Include="GameLogic\Models\Stats\Health.cs" />
     <Compile Include="GameLogic\GameObject.cs" />
