@@ -7,10 +7,11 @@ namespace RPG.GameLogic.Models.Stats.Base
         private string _name;
         private int _value;
 
-        protected Stat(string name, int value)
+        protected Stat(string name, int value, StatType type)
         {
             this.Name = name;
             this.Value = value;
+            this.StatType = type;
         }
 
         public string Name
@@ -36,6 +37,8 @@ namespace RPG.GameLogic.Models.Stats.Base
                 this._value = value;
             }
         }
+
+        public StatType StatType { get; set; }
 
         public void Reduce(int amount)
         {

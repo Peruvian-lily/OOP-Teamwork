@@ -4,30 +4,26 @@
     using NPC.Base;
     using Stats.Base;
 
-    public abstract class Effects : ITimeout
+    public abstract class Effects
     {
         /// <summary>
         /// Create new status effect.
         /// </summary>
         /// <param name="stat">Stat it modifies</param>
         /// <param name="target">Target it affects</param>
-        /// <param name="duration">Default value: 1 turn.</param>
         /// <param name="type">Is the effect helpfull or hafmul</param>
-        protected Effects(Stat stat, Npc target, int duration, EffectType type)
+        protected Effects(Stat stat, EffectTarget target, EffectType type, IFight owner)
         {
             this.Stat = stat;
-            this.Target = target;
-            this.Duration = duration;
-        }
-        protected Effects(Stat stat, Npc target, EffectType type)
-            : this(stat, target, 1, type)
-        {
-            
+            this.EffectTarget = target;
+            this.EffectType = type;
+            this.Owner = owner;
         }
 
+        public IFight Owner { get; private set; }
         public Stat Stat { get; private set; }
-        public Npc Target { get; private set; }
-        public int Duration { get; private set; }
+        public EffectType EffectType { get; private set; }
+        public EffectTarget EffectTarget { get; private set; } 
 
         public abstract void Apply();
     }

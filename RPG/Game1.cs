@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using RPG.GameLogic.Core.Items;
 using RPG.GameLogic.Models.NPC;
 using RPG.GameLogic.Models.NPC.Base;
 using RPG.GameLogic.Core;
@@ -46,6 +47,7 @@ namespace RPG
 
             engine = Engine.GetInstance;
             player = new Player("placeholder", "placeholder",100,100,100,5);
+            player.PickUp(ItemFactory.GenerateItem());
 
             base.Initialize();
         }
