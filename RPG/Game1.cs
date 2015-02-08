@@ -23,6 +23,7 @@ namespace RPG
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+        private GUIElement menu;
         private KeyboardState currentKeyboardState;
 
         public static int ScreenWidth;
@@ -56,6 +57,8 @@ namespace RPG
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             defaultFont = Content.Load<SpriteFont>("Fonts/Arial");
+            menu = new GUIElement("Overlays\\MainMenu\\main_menu_background_under_buttons.png");
+            menu.LoadContent(Content);
 
             // This is the place to initialize all variables depending on external resources.
             textDrawer = new TextDrawer(defaultFont);
@@ -74,11 +77,9 @@ namespace RPG
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            Circle cirlce = new Circle(new Vector2(100, 100), 100, Color.Black, graphics);
-            cirlce.Draw();
-
-            base.Draw(gameTime);
+            spriteBatch.Begin();
+            menu.Draw(spriteBatch);
+            spriteBatch.End();
         }
     }
 }
