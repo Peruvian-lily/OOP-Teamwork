@@ -75,7 +75,7 @@ namespace RPG
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            textDrawer.DrawString(spriteBatch, ItemFactory.GenerateItem().Name, new Vector2(10, 10), Color.Black);
+            textDrawer.DrawString(spriteBatch, "Drawing text in Arial", new Vector2(10, 10), Color.Black);
             textDrawer.DrawString(spriteBatch, "More text in Arial with scale 2", new Vector2(30, 30), Color.Black, new Vector2(2, 2));
 
             base.Draw(gameTime);
