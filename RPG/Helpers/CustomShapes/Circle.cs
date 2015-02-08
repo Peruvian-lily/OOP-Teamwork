@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 
-namespace RPG.Helpers
+namespace RPG.Helpers.CustomShapes
 {
 	public class Circle
 	{
@@ -77,12 +77,12 @@ namespace RPG.Helpers
 		#endregion
 
 		public bool IsPointInCirlce(Vector2 point)
-        {
-            //(x - center_x)^2 + (y - center_y)^2 < radius^2
-            double lhs = Math.Pow(this.Position.X - point.X, 2) + Math.Pow(this.Position.Y - point.Y, 2);
-            double rhs = Math.Pow(this.Radius, 2);
-            return lhs < rhs;
-        }
+		{
+			//(x - center_x)^2 + (y - center_y)^2 < radius^2
+			double lhs = Math.Pow(this.Position.X - point.X, 2) + Math.Pow(this.Position.Y - point.Y, 2);
+			double rhs = Math.Pow(this.Radius, 2);
+			return lhs < rhs;
+		}
 
 		public void Draw()
 		{
