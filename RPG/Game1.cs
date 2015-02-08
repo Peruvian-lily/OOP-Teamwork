@@ -74,6 +74,7 @@ namespace RPG
         {
             textDrawer = new TextDrawer(defaultFont);
             currentKeyboardState =  Keyboard.GetState();
+            mainMenu.Update();
             base.Update(gameTime);
         }
 

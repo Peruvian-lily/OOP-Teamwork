@@ -11,7 +11,7 @@ namespace RPG.GameLogic.Models
     class MainMenu
     {
         List<GUIElement> main = new List<GUIElement>();
-
+        GameState gameState = new GameState();
 
         public MainMenu()
         {
@@ -53,6 +53,7 @@ namespace RPG.GameLogic.Models
             if (element == "Overlays\\Menu\\new_game_plain")
             {
                 //Play the Game
+                gameState = GameState.InGame;
             }
         }
     }

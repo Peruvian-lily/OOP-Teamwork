@@ -53,6 +53,7 @@
     <Compile Include="GameLogic\Models\Effects\Base\EffectTarget.cs" />
     <Compile Include="GameLogic\Models\Effects\Burning.cs" />
     <Compile Include="GameLogic\Models\Effects\Healing.cs" />
+    <Compile Include="GameLogic\Models\GameState.cs" />
     <Compile Include="GameLogic\Models\Inventory\Base\Inventory.cs" />
     <Compile Include="GameLogic\Models\Items\Base\PickUp.cs" />
     <Compile Include="GameLogic\Models\Items\Bonus.cs" />
