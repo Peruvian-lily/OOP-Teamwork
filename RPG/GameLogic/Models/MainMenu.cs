@@ -16,7 +16,7 @@ namespace RPG.GameLogic.Models
         public MainMenu()
         {
             main.Add(new GUIElement("Overlays\\Menu\\main_menu_background_under_buttons"));
-            main.Add(new GUIElement("Overlays\\Menu\\new_game_plain"));
+          main.Add(new GUIElement("Overlays\\Menu\\new_game_plain"));
         }
 
         public void LoadContent(ContentManager content)
@@ -26,7 +26,7 @@ namespace RPG.GameLogic.Models
                 element.LoadContent(content);
                 element.CenterElement(Game1.ScreenHeight,Game1.ScreenWidth);
             }
-            main.Find(x => x.AssetName == "Overlays\\Menu\\new_game_plain.png").MoveElement(0,-100);
+           main.Find(x => x.AssetName == "Overlays\\Menu\\new_game_plain").MoveElement(0,-100);
         }
 
         public void Update()

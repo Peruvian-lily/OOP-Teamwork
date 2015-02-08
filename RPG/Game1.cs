@@ -25,7 +25,7 @@ namespace RPG
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        private MainMenu mainMenu;
+        private MainMenu mainMenu = new MainMenu();
         private KeyboardState currentKeyboardState;
 
         public static int ScreenWidth;
