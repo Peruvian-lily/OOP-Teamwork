@@ -36,6 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
+    <Compile Include="GameLogic\Core\Enemies\EnemyFactory.cs" />
+    <Compile Include="GameLogic\Core\Enemies\EnemyType.cs" />
     <Compile Include="GameLogic\Core\Engine.cs" />
     <Compile Include="GameLogic\Core\ItemManager.cs" />
     <Compile Include="GameLogic\Core\Items\ItemFactory.cs" />

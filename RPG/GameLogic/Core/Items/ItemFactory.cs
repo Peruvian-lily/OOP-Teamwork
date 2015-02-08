@@ -1,7 +1,6 @@
-﻿using RPG.GameLogic.Interface;
-
-namespace RPG.GameLogic.Core.Items
+﻿namespace RPG.GameLogic.Core.Items
 {
+    using RPG.GameLogic.Interface;
     using System.Text;
     using Models.Effects.Base;
     using Models.Items;
