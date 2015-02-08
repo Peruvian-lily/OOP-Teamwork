@@ -14,6 +14,7 @@ using RPG.GameLogic.Models.NPC;
 using RPG.GameLogic.Models.NPC.Base;
 using RPG.GameLogic.Core;
 using RPG.Helpers;
+using RPG.Helpers.CustomShapes;
 
 #endregion
 
