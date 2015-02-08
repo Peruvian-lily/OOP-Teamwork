@@ -67,7 +67,7 @@
     <Compile Include="GameLogic\Models\Stats\FireAttack.cs" />
     <Compile Include="GameLogic\Models\Stats\Health.cs" />
     <Compile Include="GameLogic\GameObject.cs" />
-    <Compile Include="Helpers\Circle.cs" />
+    <Compile Include="Helpers\CustomShapes\Circle.cs" />
     <Compile Include="Helpers\GUIElement.cs" />
     <Compile Include="Helpers\TextDrawer.cs" />
     <Compile Include="Program.cs" />
