@@ -16,6 +16,7 @@ using RPG.GameLogic.Core;
 using RPG.GameLogic.Models;
 using RPG.Helpers;
 using RPG.Helpers.CustomShapes;
+using RPG.GameLogic.Core.Enemies;
 
 #endregion
 
@@ -51,7 +52,7 @@ namespace RPG
             engine = Engine.GetInstance;
             player = new Player("placeholder", "placeholder",100,100,100,5);
             player.PickUp(ItemFactory.GenerateItem());
-
+            EnemyFactory.GenerateEnemy(10, 500);
             base.Initialize();
         }
 

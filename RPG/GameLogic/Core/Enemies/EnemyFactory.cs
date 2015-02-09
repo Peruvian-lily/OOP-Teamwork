@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using RPG.GameLogic.Models.NPC;
     using RPG.GameLogic.Models.Stats.Base;
+    using RPG.GameLogic.Models.Stats;
 
     public static class EnemyFactory
     {
@@ -13,7 +14,8 @@
         public static Enemy GenerateEnemy(int minValue, int maxValue)
         {
             string enemyName = GenerateEnemyName();
-            List<Stat> stats = GenerateStats();
+            int power = rnd.Next(minValue, maxValue - minValue);
+            List<Stat> stats = GenerateStats(power);
             int health = rnd.Next(minValue, maxValue - minValue);
             int attack = rnd.Next(minValue, maxValue - minValue);
             int defense = rnd.Next(minValue, maxValue - minValue);
@@ -23,9 +25,30 @@
             return enemy;
         }
 
-        private static List<Stat> GenerateStats()
+        private static List<Stat> GenerateStats(int power)
         {
-            return null;
+            List<Stat> allStats = new List<Stat>
+            {
+                new Attack(rnd.Next(power) + 1),
+                new FireAttack(rnd.Next(power) + 1),
+                new Health(rnd.Next(power) + 1),
+                new Defense(rnd.Next(power) + 1),
+            };
+
+            List<Stat> returnStats = new List<Stat>();
+
+            int randomStatIndex1 = rnd.Next(allStats.Count);
+            int randomStatIndex2 = rnd.Next(allStats.Count);
+
+            while (randomStatIndex2 == randomStatIndex1)
+            {
+                randomStatIndex2 = rnd.Next(allStats.Count);
+            }
+
+            returnStats.Add(allStats[randomStatIndex1]);
+            returnStats.Add(allStats[randomStatIndex2]);
+
+            return returnStats;
         }
 
         private static string GenerateEnemyName()
