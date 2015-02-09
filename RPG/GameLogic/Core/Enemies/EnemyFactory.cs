@@ -1,9 +1,9 @@
 ﻿namespace RPG.GameLogic.Core.Enemies
 {
-    using RPG.GameLogic.Models.NPC;
-    using RPG.GameLogic.Models.Stats.Base;
     using System;
     using System.Collections.Generic;
+    using RPG.GameLogic.Models.NPC;
+    using RPG.GameLogic.Models.Stats.Base;
 
     public static class EnemyFactory
     {
@@ -12,16 +12,18 @@
 
         public static Enemy GenerateEnemy(int minValue, int maxValue)
         {
-            int power = rnd.Next(minValue, maxValue - minValue);
             string enemyName = GenerateEnemyName();
-            List<Stat> stats = GenerateStats(power);
+            List<Stat> stats = GenerateStats();
+            int health = rnd.Next(minValue, maxValue - minValue);
+            int attack = rnd.Next(minValue, maxValue - minValue);
+            int defense = rnd.Next(minValue, maxValue - minValue);
 
-            Console.WriteLine();
-
-            return null;
+            Enemy enemy = new Enemy(id, enemyName, health, attack, defense, stats);
+            
+            return enemy;
         }
 
-        private static List<Stat> GenerateStats(int power)
+        private static List<Stat> GenerateStats()
         {
             return null;
         }
