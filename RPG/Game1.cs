@@ -52,7 +52,7 @@ namespace RPG
             engine = Engine.GetInstance;
             player = new Player("placeholder", "placeholder",100,100,100,5);
             player.PickUp(ItemFactory.GenerateItem());
-            EnemyFactory.GenerateEnemy(10, 500);
+            
             base.Initialize();
         }
 
