@@ -1,4 +1,7 @@
-﻿namespace RPG.GameLogic.Models.NPC
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace RPG.GameLogic.Models.NPC
 {
     using System.Collections.Generic;
     using Interface;
@@ -10,8 +13,10 @@
     using Stats;
     using Stats.Base;
 
-    class Player : Npc, IPlayer
+    class Player : Npc, IPlayer, IDraw
     {
+        private Texture2D player;
+
         public Player(string id, string name, int health,
             int attackPower, int defense, int inventorySize,
             List<Stat> otherStats)
@@ -63,6 +68,21 @@
                     ((Bonus)item).Apply(this);
                     break;
             }
+        }
+
+        public void LoadContent()
+        {
+            
+        }
+
+        public void Updete()
+        {
+            
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            
         }
     }
 }
