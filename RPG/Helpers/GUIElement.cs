@@ -24,7 +24,7 @@ namespace RPG.Helpers
         public Texture2D GUITextue { get; set; }
         public string AssetName { get; set; }
 
-        public void LoadContent(ContentManager content)
+        public virtual void LoadContent(ContentManager content)
         {
             GUITextue = content.Load<Texture2D>(AssetName);
             guiRectangle = new Rectangle(0, 0, GUITextue.Width, GUITextue.Height);
@@ -35,7 +35,7 @@ namespace RPG.Helpers
             spriteBatch.Draw(GUITextue, guiRectangle, Color.White);
         }
 
-        public void Update()
+        public virtual void Update()
         {
             if (guiRectangle.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
@@ -50,7 +50,13 @@ namespace RPG.Helpers
 
         public void MoveElement(int x, int y)
         {
-            guiRectangle = new Rectangle(guiRectangle.X += x, guiRectangle.Y += y,guiRectangle.Width,guiRectangle.Height);
+            guiRectangle = new Rectangle
+                (
+                    guiRectangle.X += x,
+                    guiRectangle.Y += y,
+                    guiRectangle.Width,
+                    guiRectangle.Height
+                );
         }
 
 

@@ -48,6 +48,7 @@ namespace RPG
         {
             ScreenWidth = GraphicsDevice.Viewport.Width;
             ScreenHeight = GraphicsDevice.Viewport.Height;
+            this.IsMouseVisible = true;
 
             engine = Engine.GetInstance;
             player = new Player("placeholder", "placeholder",100,100,100,5);
@@ -81,9 +82,12 @@ namespace RPG
 
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
             spriteBatch.Begin();
             mainMenu.Draw(spriteBatch);
             spriteBatch.End();
+            base.Draw(gameTime);
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using RPG.Helpers;
@@ -11,7 +9,7 @@ namespace RPG.GameLogic.Models
     class MainMenu
     {
         List<GUIElement> main = new List<GUIElement>();
-        GameState gameState = new GameState();
+        private GameState gameState;
 
         public MainMenu()
         {
@@ -34,17 +32,31 @@ namespace RPG.GameLogic.Models
 
         public void Update()
         {
-            foreach (GUIElement element in main)
+            switch (gameState)
             {
-                element.Update();
+                case GameState.MainMenu:
+                    foreach (GUIElement element in main)
+                    {
+                        element.Update();
+                    }
+                    break;
+                case GameState.InGame:
+                    break;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (GUIElement element in main)
+            switch (gameState)
             {
-                element.Draw(spriteBatch);
+                case GameState.MainMenu:
+                    foreach (GUIElement element in main)
+                    {
+                        element.Draw(spriteBatch);
+                    }
+                    break;
+                case GameState.InGame:
+                    break;
             }
         }
 
