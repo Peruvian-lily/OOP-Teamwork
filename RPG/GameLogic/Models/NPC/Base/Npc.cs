@@ -1,4 +1,6 @@
-﻿namespace RPG.GameLogic.Models.NPC.Base
+﻿using RPG.GameLogic.Interface;
+
+namespace RPG.GameLogic.Models.NPC.Base
 {
     using System;
     using Stats;

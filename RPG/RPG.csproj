@@ -42,7 +42,7 @@
     <Compile Include="GameLogic\Core\ItemManager.cs" />
     <Compile Include="GameLogic\Core\Items\ItemFactory.cs" />
     <Compile Include="GameLogic\Core\Items\ItemType.cs" />
-    <Compile Include="GameLogic\Interface\IDraw.cs" />
+    <Compile Include="GameLogic\Interface\IDrawable.cs" />
     <Compile Include="GameLogic\Interface\IEnemy.cs" />
     <Compile Include="GameLogic\Interface\IFight.cs" />
     <Compile Include="GameLogic\Interface\IItem.cs" />
@@ -161,14 +161,18 @@
     <Content Include="Content\Overlays\Menu\options_pressed.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sprites\Monster\enemies.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Player\player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Backgrounds\" />
     <Folder Include="Content\Levels\" />
     <Folder Include="Content\Sounds\" />
-    <Folder Include="Content\Sprites\Monster\" />
-    <Folder Include="Content\Sprites\Player\" />
     <Folder Include="Content\Tiles\" />
   </ItemGroup>
   <ItemGroup>

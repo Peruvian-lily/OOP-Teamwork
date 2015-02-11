@@ -13,7 +13,7 @@ namespace RPG.GameLogic.Models.NPC
     using Stats;
     using Stats.Base;
 
-    class Player : Npc, IPlayer, IDrawable
+    class Player : Npc, IPlayer
     {
         private Texture2D player;
 
