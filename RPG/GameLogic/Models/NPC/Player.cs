@@ -13,7 +13,7 @@ namespace RPG.GameLogic.Models.NPC
     using Stats;
     using Stats.Base;
 
-    class Player : Npc, IPlayer, IDraw
+    class Player : Npc, IPlayer, IDrawable
     {
         private Texture2D player;
 
@@ -75,7 +75,7 @@ namespace RPG.GameLogic.Models.NPC
             
         }
 
-        public void Updete()
+        public void Update()
         {
             
         }
