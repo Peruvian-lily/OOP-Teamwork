@@ -72,7 +72,9 @@
     <Compile Include="GameLogic\Models\Stats\FireAttack.cs" />
     <Compile Include="GameLogic\Models\Stats\Health.cs" />
     <Compile Include="GameLogic\GameObject.cs" />
+    <Compile Include="Helpers\Animation.cs" />
     <Compile Include="Helpers\CustomShapes\Circle.cs" />
+    <Compile Include="Helpers\GamestateManager.cs" />
     <Compile Include="Helpers\GUIElement.cs" />
     <Compile Include="Helpers\TextDrawer.cs" />
     <Compile Include="Program.cs" />
@@ -165,6 +167,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Player\player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Player\test.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />

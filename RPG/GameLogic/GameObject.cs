@@ -27,9 +27,5 @@ namespace RPG.GameLogic
         {
             this.Id = id;
         }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(Texture, Position, Color.White);
-        }
     }
 }

@@ -9,7 +9,6 @@ namespace RPG.GameLogic.Models
     class MainMenu
     {
         List<GUIElement> main = new List<GUIElement>();
-        private GameState gameState;
 
         public MainMenu()
         {
@@ -32,7 +31,7 @@ namespace RPG.GameLogic.Models
 
         public void Update()
         {
-            switch (gameState)
+            switch (Game1.GameState)
             {
                 case GameState.MainMenu:
                     foreach (GUIElement element in main)
@@ -47,7 +46,7 @@ namespace RPG.GameLogic.Models
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            switch (gameState)
+            switch (Game1.GameState)
             {
                 case GameState.MainMenu:
                     foreach (GUIElement element in main)
@@ -65,7 +64,7 @@ namespace RPG.GameLogic.Models
             if (element == "Overlays\\Menu\\new_game_plain")
             {
                 //Play the Game
-                gameState = GameState.InGame;
+                Game1.GameState = GameState.InGame;
             }
         }
     }

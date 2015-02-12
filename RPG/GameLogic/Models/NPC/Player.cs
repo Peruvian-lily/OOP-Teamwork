@@ -13,10 +13,8 @@ namespace RPG.GameLogic.Models.NPC
     using Stats;
     using Stats.Base;
 
-    class Player : Npc, IPlayer
+    class Player : Npc, IPlayer, IDrawable
     {
-        private Texture2D player;
-
         public Player(string id, string name, int health,
             int attackPower, int defense, int inventorySize,
             List<Stat> otherStats)
@@ -31,6 +29,22 @@ namespace RPG.GameLogic.Models.NPC
              int attackPower, int defense, int inventorySize)
             : this(id, name, health, attackPower, defense, inventorySize, null)
         {
+        }
+
+        public Texture2D PlayerTexture { get; set; }
+
+        public Vector2 PlayerPosition { get; set; }
+
+        public bool Active { get; set; }
+
+        public int Width
+        {
+            get { return this.PlayerTexture.Width; }
+        }
+
+        public int Height
+        {
+            get { return this.PlayerTexture.Height; }
         }
 
         public Attack AttackPower { get; private set; }
@@ -70,9 +84,11 @@ namespace RPG.GameLogic.Models.NPC
             }
         }
 
-        public void LoadContent()
+        public void Initialize(Texture2D texture, Vector2 position)
         {
-            
+            PlayerTexture = texture;
+            PlayerPosition = position;
+            Active = true;
         }
 
         public void Update()
@@ -82,7 +98,7 @@ namespace RPG.GameLogic.Models.NPC
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            
-        }
+            spriteBatch.Draw(PlayerTexture, PlayerPosition, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+        } 
     }
 }

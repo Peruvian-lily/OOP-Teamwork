@@ -36,6 +36,8 @@ namespace RPG
         private Player player;
         private SpriteFont defaultFont;
         private TextDrawer textDrawer;
+        public static GameState GameState;
+
 
         public Game1()
             : base()
@@ -63,6 +65,9 @@ namespace RPG
             defaultFont = Content.Load<SpriteFont>("Fonts/Arial");
             mainMenu.LoadContent(Content);
 
+            Vector2 playerPosition = new Vector2(GraphicsDevice.Viewport.X + ScreenWidth/2, GraphicsDevice.Viewport.Y + ScreenHeight / 2);
+            player.Initialize(Content.Load<Texture2D>("Sprites\\Player\\test.png"), playerPosition); 
+
 
             // This is the place to initialize all variables depending on external resources.
             textDrawer = new TextDrawer(defaultFont);
@@ -83,11 +88,15 @@ namespace RPG
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
             spriteBatch.Begin();
-            mainMenu.Draw(spriteBatch);
+            switch (GameState)
+            {
+                case GameState.MainMenu:mainMenu.Draw(spriteBatch);
+                    break;
+                case GameState.InGame: player.Draw(spriteBatch);
+                    break;
+            }
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }
