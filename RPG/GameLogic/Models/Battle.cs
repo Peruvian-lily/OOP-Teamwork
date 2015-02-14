@@ -9,7 +9,7 @@ namespace RPG.GameLogic.Models
     class Battle
     {
         private static Random rnd = new Random();
-        private List<Npc> _participants;
+
         public Battle(IPlayer player, IEnemy trigger)
         {
             this.Enemies = trigger.GetAllies();
@@ -38,7 +38,7 @@ namespace RPG.GameLogic.Models
 
         private void StartFight()
         {
-            var participants = this.Participants.OrderBy(random => rnd.Next()).ToList();
+            var participants = this.Participants.ToList();
             while (CurrentTurn <= TotalTurns)
             {
                 // Fighter represents the current character on turn.
