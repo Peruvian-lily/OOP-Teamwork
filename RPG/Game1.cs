@@ -29,7 +29,6 @@ namespace RPG
 
         static readonly string[] preloadAssets =
         {
-            "gradient",
         };
 
         private SpriteBatch spriteBatch;

@@ -80,6 +80,8 @@
     <Compile Include="Helpers\Screens\MainMenuScreen.cs" />
     <Compile Include="Helpers\Screens\MenuEntry.cs" />
     <Compile Include="Helpers\Screens\MenuScreen.cs" />
+    <Compile Include="Helpers\Screens\MessageBoxScreen.cs" />
+    <Compile Include="Helpers\Screens\PlayerIndexEventArgs.cs" />
     <Compile Include="Helpers\TextDrawer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -69,6 +69,7 @@ namespace RPG.Helpers.Screens
         /// <summary>
         /// Event raised when the menu entry is selected.
         /// </summary>
+        public event EventHandler<PlayerIndexEventArgs> Selected;
 
 
         /// <summary>
@@ -76,6 +77,8 @@ namespace RPG.Helpers.Screens
         /// </summary>
         protected internal virtual void OnSelectEntry(PlayerIndex playerIndex)
         {
+            if (Selected != null)
+                Selected(this, new PlayerIndexEventArgs(playerIndex));
         }
 
 
