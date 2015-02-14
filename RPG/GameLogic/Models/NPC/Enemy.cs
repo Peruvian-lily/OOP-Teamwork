@@ -28,13 +28,20 @@ namespace RPG.GameLogic.Models.NPC
 
         public void Attack(Npc target)
         {
-            int damage = this.AttackPower.Value; //Add more values to formula as more stat types get implemented.
+            //Add more values to formula as more stat types get implemented.
+            int damage = this.AttackPower.Value; 
             target.TakeDamage(damage);
         }
 
         public Npc GetTarget()
         {
-            return null;
+            throw new System.NotImplementedException();
+        }
+
+        public List<IFight> GetAllies()
+        {
+            //Return all allies the unit coldies with.
+            throw new System.NotImplementedException();
         }
 
         public void Roam()

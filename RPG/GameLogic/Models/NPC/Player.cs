@@ -61,7 +61,7 @@ namespace RPG.GameLogic.Models.NPC
 
         public Npc GetTarget()
         {
-            return null;
+            throw new System.NotImplementedException();
         }
 
         public void Move()

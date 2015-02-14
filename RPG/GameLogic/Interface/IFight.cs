@@ -1,5 +1,4 @@
 ﻿
-
 using RPG.GameLogic.Models.NPC.Base;
 using RPG.GameLogic.Models.Stats;
 

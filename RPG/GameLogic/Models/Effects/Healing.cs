@@ -13,15 +13,15 @@
 
         public override void Apply()
         {
-            if (Owner != null)
+            if (this.Owner != null)
             {
                 switch (this.EffectTarget)
                 {
                     case EffectTarget.Self:
-                        Owner.Health.Increase(this.Stat.Value);
+                        this.Owner.Health.Increase(this.Stat.Value);
                         break;
                     case EffectTarget.Others:
-                        Owner.GetTarget().Health.Increase(this.Stat.Value);
+                        this.Owner.GetTarget().Health.Increase(this.Stat.Value);
                         break;
                 }
             }

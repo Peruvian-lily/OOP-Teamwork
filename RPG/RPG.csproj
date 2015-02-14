@@ -39,7 +39,6 @@
     <Compile Include="GameLogic\Core\Enemies\EnemyFactory.cs" />
     <Compile Include="GameLogic\Core\Enemies\EnemyType.cs" />
     <Compile Include="GameLogic\Core\Engine.cs" />
-    <Compile Include="GameLogic\Core\ItemManager.cs" />
     <Compile Include="GameLogic\Core\Items\ItemFactory.cs" />
     <Compile Include="GameLogic\Core\Items\ItemType.cs" />
     <Compile Include="GameLogic\Interface\IDrawable.cs" />
@@ -50,6 +49,7 @@
     <Compile Include="GameLogic\Interface\IRoam.cs" />
     <Compile Include="GameLogic\Interface\IMove.cs" />
     <Compile Include="GameLogic\Interface\ITimeout.cs" />
+    <Compile Include="GameLogic\Models\Battle.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\Effects.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\EffectType.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\EffectTarget.cs" />
@@ -179,6 +179,7 @@
     <Folder Include="Content\Levels\" />
     <Folder Include="Content\Sounds\" />
     <Folder Include="Content\Tiles\" />
+    <Folder Include="GameLogic\Core\Battle\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Fonts\Arial.xnb">
