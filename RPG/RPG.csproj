@@ -55,12 +55,10 @@
     <Compile Include="GameLogic\Models\Effects\Base\EffectTarget.cs" />
     <Compile Include="GameLogic\Models\Effects\Burning.cs" />
     <Compile Include="GameLogic\Models\Effects\Healing.cs" />
-    <Compile Include="GameLogic\Models\GameState.cs" />
     <Compile Include="GameLogic\Models\Inventory\Base\Inventory.cs" />
     <Compile Include="GameLogic\Models\Items\Base\PickUp.cs" />
     <Compile Include="GameLogic\Models\Items\Bonus.cs" />
     <Compile Include="GameLogic\Models\Items\Item.cs" />
-    <Compile Include="GameLogic\Models\MainMenu.cs" />
     <Compile Include="GameLogic\Models\Map.cs" />
     <Compile Include="GameLogic\Models\NPC\Base\Npc.cs" />
     <Compile Include="GameLogic\Models\NPC\Enemy.cs" />
@@ -74,8 +72,14 @@
     <Compile Include="GameLogic\GameObject.cs" />
     <Compile Include="Helpers\Animation.cs" />
     <Compile Include="Helpers\CustomShapes\Circle.cs" />
-    <Compile Include="Helpers\GamestateManager.cs" />
-    <Compile Include="Helpers\GUIElement.cs" />
+    <Compile Include="Helpers\GameScreen.cs" />
+    <Compile Include="Helpers\InputState.cs" />
+    <Compile Include="Helpers\ScreenManager.cs" />
+    <Compile Include="Helpers\ScreenState.cs" />
+    <Compile Include="Helpers\Screens\GameplayScreen.cs" />
+    <Compile Include="Helpers\Screens\MainMenuScreen.cs" />
+    <Compile Include="Helpers\Screens\MenuEntry.cs" />
+    <Compile Include="Helpers\Screens\MenuScreen.cs" />
     <Compile Include="Helpers\TextDrawer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +92,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\blank.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\gradient.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Overlays\Menu\continue_disabled.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -185,6 +198,13 @@
     <Content Include="Content\Fonts\Arial.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Content.contentproj" />
+    <None Include="Content\gamefont.spritefont" />
+    <None Include="Content\menufont.spritefont">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
