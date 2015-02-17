@@ -11,7 +11,6 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using RPG.GameLogic.Core.Items;
 using RPG.GameLogic.Models.NPC;
-using RPG.GameLogic.Models.NPC.Base;
 using RPG.GameLogic.Core;
 using RPG.GameLogic.Models;
 using RPG.Helpers;
