@@ -5,6 +5,8 @@ using RPG.GameLogic.Models.Stats.Base;
 
 namespace RPG.GameLogic.Models.NPC
 {
+
+
     using Base;
     public class Enemy : Npc, IRoam, IEnemy
     {

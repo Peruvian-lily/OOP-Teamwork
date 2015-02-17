@@ -27,8 +27,6 @@ namespace RPG
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private MainMenu mainMenu;
-        private KeyboardState kbd;
-        private KeyboardState prevKbd;
 
         public static int ScreenWidth;
         public static int ScreenHeight;
@@ -37,8 +35,9 @@ namespace RPG
         private Player player;
         private SpriteFont defaultFont;
         private TextDrawer textDrawer;
-        private GameState gameState;
+        public static GameState GameState;
         private Rectangle screen;
+        private Animation animation;
 
 
         public Game1()
@@ -53,8 +52,8 @@ namespace RPG
             screen = new Rectangle(50,50,800,600);
             ScreenWidth = GraphicsDevice.Viewport.Width;
             ScreenHeight = GraphicsDevice.Viewport.Height;
-            gameState = GameState.MainMenu;
-            mainMenu = new MainMenu(gameState);
+            GameState = GameState.MainMenu;
+            mainMenu = new MainMenu();
             this.IsMouseVisible = true;
 
             engine = Engine.GetInstance;
@@ -66,6 +65,7 @@ namespace RPG
 
         protected override void LoadContent()
         {
+            animation = new Animation(Content, "Sprites\\Player\\test.png",50f,3,true);
             spriteBatch = new SpriteBatch(GraphicsDevice);
             defaultFont = Content.Load<SpriteFont>("Fonts\\Arial");
             mainMenu.LoadContent(Content);
@@ -85,8 +85,10 @@ namespace RPG
         protected override void Update(GameTime gameTime)
         {
             textDrawer = new TextDrawer(defaultFont);
-            kbd =  Keyboard.GetState();
             mainMenu.Update();
+
+            animation.PlayAnimation(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -94,11 +96,11 @@ namespace RPG
         {
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            switch (gameState)
+            switch (GameState)
             {
                 case GameState.MainMenu:mainMenu.Draw(spriteBatch);
                     break;
-                case GameState.InGame: player.Draw(spriteBatch);
+                case GameState.InGame: animation.Draw(spriteBatch);
                     break;
             }
             spriteBatch.End();

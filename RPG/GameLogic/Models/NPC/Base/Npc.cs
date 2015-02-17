@@ -1,4 +1,5 @@
-﻿using RPG.GameLogic.Interface;
+﻿using Microsoft.Xna.Framework;
+using RPG.GameLogic.Interface;
 
 namespace RPG.GameLogic.Models.NPC.Base
 {
@@ -8,6 +9,7 @@ namespace RPG.GameLogic.Models.NPC.Base
 
     public abstract class Npc : GameObject
     {
+        private Vector2 position;
         private string _name;
 
         protected Npc(string id, string name, int health, int defense)
