@@ -8,10 +8,12 @@ namespace RPG.GameLogic.Models
 {
     class MainMenu
     {
+        private GameState gameState;
         List<GUIElement> main = new List<GUIElement>();
 
-        public MainMenu()
+        public MainMenu(GameState gameState)
         {
+            this.gameState = gameState;
             main.Add(new GUIElement("Overlays\\Menu\\main_menu_background_under_buttons"));
             main.Add(new GUIElement("Overlays\\Menu\\new_game_plain"));
             main.Add(new GUIElement("Overlays\\Menu\\exit_plain"));
@@ -22,7 +24,7 @@ namespace RPG.GameLogic.Models
             foreach (GUIElement element in main)
             {
                 element.LoadContent(content);
-                element.CenterElement(Game1.ScreenHeight, Game1.ScreenWidth);
+                element.CenterElement(600, 800);
                 element.ClickEvent += OnClick;
             }
             main.Find(x => x.AssetName == "Overlays\\Menu\\new_game_plain").MoveElement(0, -100);
@@ -31,7 +33,7 @@ namespace RPG.GameLogic.Models
 
         public void Update()
         {
-            switch (Game1.GameState)
+            switch (gameState)
             {
                 case GameState.MainMenu:
                     foreach (GUIElement element in main)
@@ -46,7 +48,7 @@ namespace RPG.GameLogic.Models
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            switch (Game1.GameState)
+            switch (gameState)
             {
                 case GameState.MainMenu:
                     foreach (GUIElement element in main)
@@ -64,7 +66,7 @@ namespace RPG.GameLogic.Models
             if (element == "Overlays\\Menu\\new_game_plain")
             {
                 //Play the Game
-                Game1.GameState = GameState.InGame;
+                gameState = GameState.InGame;
             }
         }
     }
