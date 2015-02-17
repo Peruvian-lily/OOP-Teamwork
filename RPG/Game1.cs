@@ -40,8 +40,7 @@ namespace RPG
         private Animation animation;
 
 
-        public Game1()
-            : base()
+        public Game1(): base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -49,7 +48,7 @@ namespace RPG
 
         protected override void Initialize()
         {
-            screen = new Rectangle(50,50,800,600);
+            screen = new Rectangle(50, 50, 800, 600);
             ScreenWidth = GraphicsDevice.Viewport.Width;
             ScreenHeight = GraphicsDevice.Viewport.Height;
             GameState = GameState.MainMenu;
@@ -57,21 +56,19 @@ namespace RPG
             this.IsMouseVisible = true;
 
             engine = Engine.GetInstance;
-            player = new Player("placeholder", "placeholder",100,100,100,5);
+            player = new Player("placeholder", "placeholder", 100, 100, 100, 5);
             player.PickUp(ItemFactory.GenerateItem());
-            
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            animation = new Animation(Content, "Sprites\\Player\\test.png",50f,3,true);
             spriteBatch = new SpriteBatch(GraphicsDevice);
             defaultFont = Content.Load<SpriteFont>("Fonts\\Arial");
             mainMenu.LoadContent(Content);
+            animation = new Animation(Content, "Sprites\\Player\\test.png", 200f, 3, true);
 
-            Vector2 playerPosition = new Vector2(GraphicsDevice.Viewport.X + ScreenWidth/2, GraphicsDevice.Viewport.Y + ScreenHeight / 2);
-            player.Initialize(Content.Load<Texture2D>("Sprites\\Player\\test.png"), playerPosition); 
 
 
             // This is the place to initialize all variables depending on external resources.
@@ -84,10 +81,11 @@ namespace RPG
 
         protected override void Update(GameTime gameTime)
         {
-            textDrawer = new TextDrawer(defaultFont);
-            mainMenu.Update();
-
             animation.PlayAnimation(gameTime);
+/*
+            textDrawer = new TextDrawer(defaultFont);
+*/
+            mainMenu.Update();
 
             base.Update(gameTime);
         }
@@ -98,7 +96,7 @@ namespace RPG
             spriteBatch.Begin();
             switch (GameState)
             {
-                case GameState.MainMenu:mainMenu.Draw(spriteBatch);
+                case GameState.MainMenu: mainMenu.Draw(spriteBatch);
                     break;
                 case GameState.InGame: animation.Draw(spriteBatch);
                     break;

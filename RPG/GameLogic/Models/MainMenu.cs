@@ -22,7 +22,7 @@ namespace RPG.GameLogic.Models
             foreach (GUIElement element in main)
             {
                 element.LoadContent(content);
-                element.CenterElement(600, 800);
+                element.CenterElement(400, 800);
                 element.ClickEvent += OnClick;
             }
             main.Find(x => x.AssetName == "Overlays\\Menu\\new_game_plain").MoveElement(0, -100);

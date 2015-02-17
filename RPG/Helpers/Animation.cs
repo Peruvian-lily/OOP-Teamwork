@@ -12,7 +12,6 @@ namespace RPG.Helpers
     {
         private Texture2D animation;
         private Rectangle sourceRectangle;
-        private Vector2 position;
 
         private float elapsed;
         private float frameTime;
@@ -32,8 +31,10 @@ namespace RPG.Helpers
             this.animation = content.Load<Texture2D>(assetName);
             this.frameWidth = (animation.Width / numOfFrames);
             this.frameHeight = (animation.Height);
-            position = new Vector2(100, 100);
+            this.Position = new Vector2(100, 100);
         }
+
+        public Vector2 Position { get; set; }
 
         public void PlayAnimation(GameTime gameTime)
         {
@@ -41,15 +42,12 @@ namespace RPG.Helpers
             sourceRectangle = new Rectangle(currentFrame * frameWidth, 0, frameWidth, frameHeight);
             if (elapsed >= frameTime)
             {
+                currentFrame++;
                 if (currentFrame >= numOfFrames - 1)
                 {
                     if (looping)
                     {
                         currentFrame = 0;
-                    }
-                    else
-                    {
-                        currentFrame++;
                     }
                     elapsed = 0;
                 }
@@ -58,8 +56,7 @@ namespace RPG.Helpers
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(animation, position, sourceRectangle, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            spriteBatch.Draw(animation, this.Position, sourceRectangle, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
         }
-
     }
 }
