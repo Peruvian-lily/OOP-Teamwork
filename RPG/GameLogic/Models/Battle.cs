@@ -15,8 +15,8 @@ namespace RPG.GameLogic.Models
             this.Enemies = trigger.GetAllies();
             this.Player = player;
             this.TotalTurns = trigger.GetAllies().Count + 1;
-            CurrentTurn = 1;
-            AddParticipants();
+            this.CurrentTurn = 1;
+            this.AddParticipants();
         }
 
         public int Round { get; private set; }
@@ -39,14 +39,14 @@ namespace RPG.GameLogic.Models
         private void StartFight()
         {
             var participants = this.Participants.ToList();
-            while (CurrentTurn <= TotalTurns)
+            while (this.CurrentTurn <= this.TotalTurns)
             {
                 // Fighter represents the current character on turn.
-                var fighter = OnTurn(ref participants);
-                var target = fighter is IPlayer ? SelectTarget() : this.Player;
+                var fighter = this.OnTurn(ref participants);
+                var target = fighter is IPlayer ? this.SelectTarget() : this.Player;
                 this.Fight(fighter, target);
-                ClearBattlefield();
-                CurrentTurn += 1;
+                this.ClearBattlefield();
+                this.CurrentTurn += 1;
             }
             this.CurrentTurn = 1;
             this.Round += 1;

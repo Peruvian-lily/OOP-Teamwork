@@ -29,7 +29,7 @@ namespace RPG.Helpers.CustomShapes
 			this._color = color;
 			this._graphics = graphics;
 
-			Initialize();
+		    this.Initialize();
 		}
 		public Circle(Vector2 position, int radius,
 			GraphicsDeviceManager graphics)
@@ -44,8 +44,8 @@ namespace RPG.Helpers.CustomShapes
 			get { return this._position; }
 			set 
 			{
-				this._position = value; 
-				InitializeVertices(); 
+				this._position = value;
+			    this.InitializeVertices(); 
 			}
 		}
 	   
@@ -54,8 +54,8 @@ namespace RPG.Helpers.CustomShapes
 			get { return this._radius; }
 			set 
 			{
-				this._radius = (value < 1) ? 1 : value; 
-				InitializeVertices();
+				this._radius = (value < 1) ? 1 : value;
+			    this.InitializeVertices();
 			}
 		}
 
@@ -64,8 +64,8 @@ namespace RPG.Helpers.CustomShapes
 			get { return this._color; }
 			set 
 			{
-				this._color = value; 
-				InitializeVertices(); 
+				this._color = value;
+			    this.InitializeVertices(); 
 			}
 		}
 
@@ -95,13 +95,13 @@ namespace RPG.Helpers.CustomShapes
 		
 		private void Initialize()
 		{
-			InitializeBasicEffect();
-			InitializeVertices();
+		    this.InitializeBasicEffect();
+		    this.InitializeVertices();
 		}
 
 		private void InitializeBasicEffect()
 		{
-		   this._effect = new BasicEffect(_graphics.GraphicsDevice);
+		   this._effect = new BasicEffect(this._graphics.GraphicsDevice);
 		   this._effect.VertexColorEnabled = true;
 		   this._effect.Projection = Matrix.CreateOrthographicOffCenter(0, this._graphics.GraphicsDevice.Viewport.Width,
 				this._graphics.GraphicsDevice.Viewport.Height, 0, 0, 1);
@@ -109,15 +109,15 @@ namespace RPG.Helpers.CustomShapes
 
 		private void InitializeVertices()
 		{
-			this._vertices = new VertexPositionColor[CalculatePointCount()];
+			this._vertices = new VertexPositionColor[this.CalculatePointCount()];
 			var pointTheta = ((float)Math.PI * 2) / (this._vertices.Length - 1);
 			for (int i = 0; i < this._vertices.Length; i++)
 			{
 				var theta = pointTheta * i;
-				var x = this.Position.X + ((float)Math.Sin(theta) * Radius);
-				var y = this.Position.Y + ((float)Math.Cos(theta) * Radius);
+				var x = this.Position.X + ((float)Math.Sin(theta) *this.Radius);
+				var y = this.Position.Y + ((float)Math.Cos(theta) *this.Radius);
 				this._vertices[i].Position = new Vector3(x, y, 0);
-				this._vertices[i].Color = Color;
+				this._vertices[i].Color = this.Color;
 			}
 
 			this._vertices[this._vertices.Length - 1] = this._vertices[0];
@@ -127,7 +127,7 @@ namespace RPG.Helpers.CustomShapes
 
 		private int CalculatePointCount()
 		{
-			return (int)Math.Ceiling(Radius * Math.PI);
+			return (int)Math.Ceiling(this.Radius * Math.PI);
 		}
 	}
 }

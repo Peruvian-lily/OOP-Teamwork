@@ -68,8 +68,7 @@ namespace RPG.Helpers
         public void DrawString(SpriteBatch spriteBatch, string text, Vector2 position, Color color, Vector2 scale)
         {
             spriteBatch.Begin();
-            spriteBatch.DrawString(this.Font, text, position, color, this.Rotation, 
-                OriginOfRotation, scale, SpriteEffects.None, 0);
+            spriteBatch.DrawString(this.Font, text, position, color, this.Rotation, this.OriginOfRotation, scale, SpriteEffects.None, 0);
             spriteBatch.End();
         }
     }

@@ -4,8 +4,8 @@ namespace RPG.GameLogic.Models.Stats.Base
 {
     public abstract class Stat
     {
-        private string _name;
-        private int _value;
+        private string name;
+        private int value;
 
         protected Stat(string name, int value, StatType type)
         {
@@ -16,7 +16,7 @@ namespace RPG.GameLogic.Models.Stats.Base
 
         public string Name
         {
-            get { return this._name; }
+            get { return this.name; }
             private set
             {
                 if (String.IsNullOrWhiteSpace(value))
@@ -27,14 +27,14 @@ namespace RPG.GameLogic.Models.Stats.Base
         }
         public int Value
         {
-            get { return this._value; }
+            get { return this.value; }
             set
             {
                 if (value <= 0)
                 {
                     throw new ArgumentOutOfRangeException("Stats value cannot be negative or zero");
                 }
-                this._value = value;
+                this.value = value;
             }
         }
 

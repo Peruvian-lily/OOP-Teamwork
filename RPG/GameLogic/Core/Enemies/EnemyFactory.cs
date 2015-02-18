@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using RPG.GameLogic.Models.NPC;
-    using RPG.GameLogic.Models.Stats.Base;
-    using RPG.GameLogic.Models.Stats;
+    using Models.NPC;
+    using Models.Stats.Base;
+    using Models.Stats;
 
     public static class EnemyFactory
     {

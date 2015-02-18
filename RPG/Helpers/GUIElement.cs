@@ -26,36 +26,32 @@ namespace RPG.Helpers
 
         public virtual void LoadContent(ContentManager content)
         {
-            GUITextue = content.Load<Texture2D>(AssetName);
-            guiRectangle = new Rectangle(0, 0, GUITextue.Width, GUITextue.Height);
+            this.GUITextue = content.Load<Texture2D>(this.AssetName);
+            this.guiRectangle = new Rectangle(0, 0, this.GUITextue.Width, this.GUITextue.Height);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(GUITextue, guiRectangle, Color.White);
+            spriteBatch.Draw(this.GUITextue, this.guiRectangle, Color.White);
         }
 
         public virtual void Update()
         {
-            if (guiRectangle.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (this.guiRectangle.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                ClickEvent(AssetName);
+                this.ClickEvent(this.AssetName);
             }
         }
 
         public void CenterElement(int height, int width)
         {
-            guiRectangle = new Rectangle((width / 2) - this.GUITextue.Width / 2, (height / 2) - this.GUITextue.Height / 2, this.GUITextue.Width, this.GUITextue.Height);
+            this.guiRectangle = new Rectangle((width / 2) - this.GUITextue.Width / 2, (height / 2) - this.GUITextue.Height / 2, this.GUITextue.Width, this.GUITextue.Height);
         }
 
         public void MoveElement(int x, int y)
         {
-            guiRectangle = new Rectangle
-                (
-                    guiRectangle.X += x,
-                    guiRectangle.Y += y,
-                    guiRectangle.Width,
-                    guiRectangle.Height
+            this.guiRectangle = new Rectangle
+                (this.guiRectangle.X += x, this.guiRectangle.Y += y, this.guiRectangle.Width, this.guiRectangle.Height
                 );
         }
 

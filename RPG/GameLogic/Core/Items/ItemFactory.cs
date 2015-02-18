@@ -1,6 +1,6 @@
 ﻿namespace RPG.GameLogic.Core.Items
 {
-    using RPG.GameLogic.Interface;
+    using Interface;
     using System.Text;
     using Models.Effects.Base;
     using Models.Items;

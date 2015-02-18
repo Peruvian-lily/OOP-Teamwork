@@ -23,42 +23,42 @@ namespace RPG.Helpers
         private int frameHeight;
         private bool looping;
 
-        public Animation(string assetName, float frameSpeed, int numOfFrames, bool looping)
+        public Animation(string assetName, float frameSpeed, int numOfFrames, bool looping, int initialX, int initialY)
         {
             this.frameTime = frameSpeed;
             this.numOfFrames = numOfFrames;
             this.looping = looping;
             this.animation = Game1.Content.Load<Texture2D>(assetName);
-            this.frameWidth = (animation.Width / numOfFrames);
-            this.frameHeight = (animation.Height/4+1);
-            this.Position = new Vector2(100, 100);
+            this.frameWidth = (this.animation.Width / numOfFrames);
+            this.frameHeight = (this.animation.Height/4+1);
+            this.Position = new Vector2(initialX, initialY);
         }
 
         public Vector2 Position { get; set; }
 
         public void PlayAnimation(GameTime gameTime)
         {
-            elapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            sourceRectangle = new Rectangle(currentFrame * frameWidth, frameHeight, frameWidth, frameHeight);
-            if (elapsed >= frameTime)
+            this.elapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            this.sourceRectangle = new Rectangle(this.currentFrame *this.frameWidth, this.frameHeight, this.frameWidth, this.frameHeight);
+            if (this.elapsed >= this.frameTime)
             {
-                if (currentFrame >= numOfFrames - 1)
+                if (this.currentFrame >= this.numOfFrames - 1)
                 {
-                    if (looping)
+                    if (this.looping)
                     {
-                        currentFrame = 0;
+                        this.currentFrame = 0;
                     }
                 }
                 else
                 {
-                    currentFrame++;
+                    this.currentFrame++;
                 }
-                elapsed = 0;
+                this.elapsed = 0;
             }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(animation, this.Position, sourceRectangle, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            spriteBatch.Draw(this.animation, this.Position, this.sourceRectangle, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
         }
     }
 }

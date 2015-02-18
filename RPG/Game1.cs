@@ -16,6 +16,7 @@ using RPG.GameLogic.Models;
 using RPG.Helpers;
 using RPG.Helpers.CustomShapes;
 using RPG.GameLogic.Core.Enemies;
+using RPG.GameLogic.Models.Stats.Base;
 
 #endregion
 
@@ -31,6 +32,7 @@ namespace RPG
 
         private Engine engine;
         private Player player;
+        private Enemy enemy;
         private SpriteFont defaultFont;
         private TextDrawer textDrawer;
         public static GameState GameState;
@@ -42,39 +44,39 @@ namespace RPG
 
         public Game1(): base()
         {
-            graphics = new GraphicsDeviceManager(this);
+            this.graphics = new GraphicsDeviceManager(this);
             base.Content.RootDirectory = "Content";
             Content = base.Content;
         }
 
         protected override void Initialize()
         {
-            screen = new Rectangle(50, 50, 800, 600);
-            ScreenWidth = GraphicsDevice.Viewport.Width;
-            ScreenHeight = GraphicsDevice.Viewport.Height;
+            this.screen = new Rectangle(50, 50, 800, 600);
+            ScreenWidth = this.GraphicsDevice.Viewport.Width;
+            ScreenHeight = this.GraphicsDevice.Viewport.Height;
             GameState = GameState.MainMenu;
-            mainMenu = new MainMenu();
+            this.mainMenu = new MainMenu();
             this.IsMouseVisible = true;
             base.Content = Content;
 
-            engine = Engine.GetInstance;
-            player = new Player("placeholder", "placeholder", 100, 100, 100, 5);
-            player.PickUp(ItemFactory.GenerateItem());
+            this.engine = Engine.GetInstance;
+            this.player = new Player("placeholder", "placeholder", 100, 100, 100, 5);
+            this.enemy = new Enemy("placeholder", "placeholder", 100, 100, 100, new List<Stat>(){});
+
+            this.player.PickUp(ItemFactory.GenerateItem());
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            defaultFont = base.Content.Load<SpriteFont>("Fonts\\Arial");
-            mainMenu.LoadContent(base.Content);
-            
-
+            this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
+            this.defaultFont = base.Content.Load<SpriteFont>("Fonts\\Arial");
+            this.mainMenu.LoadContent(base.Content);
 
 
             // This is the place to initialize all variables depending on external resources.
-            textDrawer = new TextDrawer(defaultFont);
+            this.textDrawer = new TextDrawer(this.defaultFont);
         }
 
         protected override void UnloadContent()
@@ -86,23 +88,27 @@ namespace RPG
 /*
             textDrawer = new TextDrawer(defaultFont);
 */
-            mainMenu.Update();
-            player.Update(gameTime);
+            this.mainMenu.Update();
+            this.player.Update(gameTime);
+            this.enemy.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin();
+            this.GraphicsDevice.Clear(Color.White);
+            this.spriteBatch.Begin();
             switch (GameState)
             {
-                case GameState.MainMenu: mainMenu.Draw(spriteBatch);
+                case GameState.MainMenu:
+                    this.mainMenu.Draw(this.spriteBatch);
                     break;
-                case GameState.InGame: player.Draw(spriteBatch);
+                case GameState.InGame:
+                    this.player.Draw(this.spriteBatch);
+                    this.enemy.Draw(this.spriteBatch);
                     break;
             }
-            spriteBatch.End();
+            this.spriteBatch.End();
             base.Draw(gameTime);
         }
     }

@@ -14,9 +14,9 @@ namespace RPG.GameLogic.Models.Effects
 
         public override void Apply()
         {
-            if (Owner != null)
+            if (this.Owner != null)
             {
-                Owner.Health.Reduce(this.Stat.Value);
+                this.Owner.Health.Reduce(this.Stat.Value);
             }
         }
     }

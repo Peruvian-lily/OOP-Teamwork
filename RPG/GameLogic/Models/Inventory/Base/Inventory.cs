@@ -29,7 +29,7 @@ namespace RPG.GameLogic.Models.Inventory.Base
 
         public void Add(Item item)
         {
-            if (Content.Count < _capacity)
+            if (this.Content.Count < this._capacity)
             {
                 this.Content.Add(item);
             }

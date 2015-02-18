@@ -10,7 +10,7 @@ namespace RPG.GameLogic.Models.NPC.Base
     public abstract class Npc : GameObject
     {
         private Vector2 position;
-        private string _name;
+        private string name;
 
         protected Npc(string id, string name, int health, int defense)
             : base(id)
@@ -24,7 +24,7 @@ namespace RPG.GameLogic.Models.NPC.Base
         {
             get
             {
-                return this._name;
+                return this.name;
             }
             private set
             {
@@ -32,7 +32,7 @@ namespace RPG.GameLogic.Models.NPC.Base
                 {
                     throw new ArgumentOutOfRangeException("Name must be 2 or more symbols long.");
                 }
-                this._name = value;
+                this.name = value;
             }
         }
 

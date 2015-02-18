@@ -16,7 +16,10 @@ namespace RPG.GameLogic.Models.NPC
 
     class Player : Npc, IPlayer
     {
-        private Animation animation;
+        private Animation leftAnimation;
+        private Animation rightAnimation;
+        private Animation backAnimation;
+        private Animation frontAnimation;
 
         public Player(string id, string name, int health,
             int attackPower, int defense, int inventorySize,
@@ -26,7 +29,11 @@ namespace RPG.GameLogic.Models.NPC
             this.AttackPower = new Attack(attackPower);
             this.Inventory = new Inventory(inventorySize);
             this.OtherStats = otherStats;
-            animation = new Animation("Sprites\\Player\\character.png", 80f, 3, true);
+            this.leftAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
+            this.rightAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
+            this.backAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
+            this.frontAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
+
         }
 
         public Player(string id, string name, int health,
@@ -90,20 +97,19 @@ namespace RPG.GameLogic.Models.NPC
 
         public void Initialize(Texture2D texture, Vector2 position)
         {
-            PlayerTexture = texture;
-            PlayerPosition = position;
-            Active = true;
+            this.PlayerTexture = texture;
+            this.PlayerPosition = position;
+            this.Active = true;
         }
-
 
         public void Update(GameTime gameTime)
         {
-            animation.PlayAnimation(gameTime);
+            this.leftAnimation.PlayAnimation(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            animation.Draw(spriteBatch);
+            this.leftAnimation.Draw(spriteBatch);
         }
     }
 }

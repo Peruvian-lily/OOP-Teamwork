@@ -12,21 +12,21 @@ namespace RPG.GameLogic.Models
 
         public MainMenu()
         {
-            main.Add(new GUIElement("Overlays\\Menu\\background"));
-            main.Add(new GUIElement("Overlays\\Menu\\new_game_plain"));
-            main.Add(new GUIElement("Overlays\\Menu\\exit_plain"));
+            this.main.Add(new GUIElement("Overlays\\Menu\\background"));
+            this.main.Add(new GUIElement("Overlays\\Menu\\new_game_plain"));
+            this.main.Add(new GUIElement("Overlays\\Menu\\exit_plain"));
         }
 
         public void LoadContent(ContentManager content)
         {
-            foreach (GUIElement element in main)
+            foreach (GUIElement element in this.main)
             {
                 element.LoadContent(content);
                 element.CenterElement(400, 800);
-                element.ClickEvent += OnClick;
+                element.ClickEvent += this.OnClick;
             }
-            main.Find(x => x.AssetName == "Overlays\\Menu\\new_game_plain").MoveElement(0, -100);
-            main.Find(x => x.AssetName == "Overlays\\Menu\\exit_plain").MoveElement(0, 100);
+            this.main.Find(x => x.AssetName == "Overlays\\Menu\\new_game_plain").MoveElement(0, -100);
+            this.main.Find(x => x.AssetName == "Overlays\\Menu\\exit_plain").MoveElement(0, 100);
         }
 
         public void Update()
@@ -34,7 +34,7 @@ namespace RPG.GameLogic.Models
             switch (Game1.GameState)
             {
                 case GameState.MainMenu:
-                    foreach (GUIElement element in main)
+                    foreach (GUIElement element in this.main)
                     {
                         element.Update();
                     }
@@ -49,7 +49,7 @@ namespace RPG.GameLogic.Models
             switch (Game1.GameState)
             {
                 case GameState.MainMenu:
-                    foreach (GUIElement element in main)
+                    foreach (GUIElement element in this.main)
                     {
                         element.Draw(spriteBatch);
                     }
