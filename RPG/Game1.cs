@@ -90,7 +90,6 @@ namespace RPG
 */
             this.mainMenu.Update();
             this.player.Update(gameTime);
-            this.player.KeyListener();
             this.enemy.Update(gameTime);
             base.Update(gameTime);
         }
@@ -105,6 +104,7 @@ namespace RPG
                     this.mainMenu.Draw(this.spriteBatch);
                     break;
                 case GameState.InGame:
+                    Console.WriteLine(player.Position.X);
                     this.player.Draw(this.spriteBatch);
                     this.enemy.Draw(this.spriteBatch);
                     break;

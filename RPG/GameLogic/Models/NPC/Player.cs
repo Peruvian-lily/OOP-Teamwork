@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using RPG.Helpers;
 
 namespace RPG.GameLogic.Models.NPC
@@ -16,6 +17,8 @@ namespace RPG.GameLogic.Models.NPC
 
     class Player : Npc, IPlayer
     {
+        private KeyboardState ks;
+        private Vector2 position;
 
         public Player(string id, string name, int health,
             int attackPower, int defense, int inventorySize,
@@ -105,12 +108,39 @@ namespace RPG.GameLogic.Models.NPC
 
         public void Update(GameTime gameTime)
         {
-            this.leftAnimation.PlayAnimation(gameTime);
+            this.KeyListener();
+            this.Position = new Vector2(200,200);
+            this.LeftAnimation.PlayAnimation(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            this.leftAnimation.Draw(spriteBatch);
+            this.LeftAnimation.Draw(spriteBatch);
+        }
+
+        public void KeyListener()
+        {
+            ks = Keyboard.GetState();
+
+            if (ks.IsKeyDown(Keys.Right))
+            {
+                this.Position.X += 2f;
+            }
+
+            if (ks.IsKeyDown(Keys.Left))
+            {
+                this.Position.X -= 2f;
+            }
+
+            if (ks.IsKeyDown(Keys.Up))
+            {
+                this.Position.Y -= 2f;
+            }
+
+            if (ks.IsKeyDown(Keys.Down))
+            {
+                this.Position.Y += 2f;
+            }
         }
     }
 }
