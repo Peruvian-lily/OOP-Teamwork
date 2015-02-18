@@ -10,12 +10,15 @@ namespace RPG.Helpers
 {
     class Animation
     {
+        private const int numOfRows = 4;
+
         private Texture2D animation;
         private Rectangle sourceRectangle;
 
         private float elapsed;
         private float frameTime;
         private int numOfFrames;
+        private int numOfRowssss;
         private int currentFrame;
         private int width;
         private int height;
@@ -23,23 +26,26 @@ namespace RPG.Helpers
         private int frameHeight;
         private bool looping;
 
-        public Animation(string assetName, float frameSpeed, int numOfFrames, bool looping, float initialX, float initialY)
+        public Animation(string assetName, float frameSpeed, int numOfFrames, int wantedFigure, bool looping, float initialX, float initialY)
         {
             this.frameTime = frameSpeed;
             this.numOfFrames = numOfFrames;
             this.looping = looping;
             this.animation = Game1.Content.Load<Texture2D>(assetName);
             this.frameWidth = (this.animation.Width / numOfFrames);
-            this.frameHeight = (this.animation.Height/4+1);
+            this.frameHeight = (this.animation.Height/ numOfRows + 1);
             this.Position = new Vector2(initialX, initialY);
+            this.WantedFigure = wantedFigure;
         }
-
+        
         public Vector2 Position { get; set; }
 
+        public int WantedFigure { get; set; }          
         public void PlayAnimation(GameTime gameTime)
         {
+            int row = 4 - this.WantedFigure;
             this.elapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            this.sourceRectangle = new Rectangle(this.currentFrame *this.frameWidth, this.frameHeight, this.frameWidth, this.frameHeight);
+            this.sourceRectangle = new Rectangle(this.currentFrame * this.frameWidth, this.frameHeight * row, this.frameWidth, this.frameHeight);
             if (this.elapsed >= this.frameTime)
             {
                 if (this.currentFrame >= this.numOfFrames - 1)

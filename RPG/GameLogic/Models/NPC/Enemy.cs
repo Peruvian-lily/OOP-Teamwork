@@ -21,7 +21,7 @@ namespace RPG.GameLogic.Models.NPC
         {
             this.AttackPower = new Attack(attack);
             this.Stats = otherStats;
-            this.animation = new Animation("Sprites\\Monster\\enemies", 80f, 3, false, 300, 100);
+            this.animation = new Animation("Sprites\\Monster\\enemies", 80f, 3, 3, false, 300, 100);
         }
 
         public Enemy(string id, string name, int health,

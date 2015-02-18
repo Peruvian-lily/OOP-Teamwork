@@ -28,11 +28,11 @@ namespace RPG.GameLogic.Models.NPC
             this.AttackPower = new Attack(attackPower);
             this.Inventory = new Inventory(inventorySize);
             this.OtherStats = otherStats;
-            this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, this.Position.X, this.Position.Y);
-            this.RightAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
-            this.BackAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
-            this.FrontAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
-
+            this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3, 1, true, this.Position.X, this.Position.Y);
+            this.RightAnimation = new Animation("Sprites\\Player\\character", 80f, 3, 3, true, this.Position.X, this.Position.Y);
+            this.BackAnimation = new Animation("Sprites\\Player\\character", 80f, 3, 2, true, this.Position.X, this.Position.Y);
+            this.FrontAnimation = new Animation("Sprites\\Player\\character", 80f, 3, 4,true, this.Position.X, this.Position.Y);
+            this.CurrentAnimation = LeftAnimation;
         }
 
         public Player(string id, string name, int health,
@@ -42,11 +42,16 @@ namespace RPG.GameLogic.Models.NPC
         }
 
         public Texture2D PlayerTexture { get; set; }
-
+        
         public Animation LeftAnimation { get; set; }
+        
         public Animation RightAnimation { get; set; }
+        
         public Animation BackAnimation { get; set; }
+        
         public Animation FrontAnimation { get; set; }
+
+        public Animation CurrentAnimation { get; set; }  
 
         public bool Active { get; set; }
 
@@ -101,12 +106,12 @@ namespace RPG.GameLogic.Models.NPC
         public void Update(GameTime gameTime)
         {
             this.KeyListener();
-            this.LeftAnimation.PlayAnimation(gameTime);
+            this.CurrentAnimation.PlayAnimation(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            this.LeftAnimation.Draw(spriteBatch, this.Position);
+            this.CurrentAnimation.Draw(spriteBatch, this.Position);
         }
 
         public void KeyListener()
@@ -116,21 +121,25 @@ namespace RPG.GameLogic.Models.NPC
             if (ks.IsKeyDown(Keys.Right))
             {
                 this.Position.X += 2f;
+                this.CurrentAnimation = this.RightAnimation;
             }
 
             if (ks.IsKeyDown(Keys.Left))
             {
                 this.Position.X -= 2f;
+                this.CurrentAnimation = this.LeftAnimation;
             }
 
             if (ks.IsKeyDown(Keys.Up))
             {
                 this.Position.Y -= 2f;
+                this.CurrentAnimation = this.FrontAnimation;
             }
 
             if (ks.IsKeyDown(Keys.Down))
             {
                 this.Position.Y += 2f;
+                this.CurrentAnimation = this.BackAnimation;
             }
         }
     }
