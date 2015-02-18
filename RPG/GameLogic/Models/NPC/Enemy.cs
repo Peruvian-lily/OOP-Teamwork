@@ -73,7 +73,7 @@ namespace RPG.GameLogic.Models.NPC
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            this.animation.Draw(spriteBatch);
+            this.animation.Draw(spriteBatch, this.Position);
         }
     }
 }

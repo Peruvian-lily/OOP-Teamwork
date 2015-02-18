@@ -23,7 +23,7 @@ namespace RPG.Helpers
         private int frameHeight;
         private bool looping;
 
-        public Animation(string assetName, float frameSpeed, int numOfFrames, bool looping, int initialX, int initialY)
+        public Animation(string assetName, float frameSpeed, int numOfFrames, bool looping, float initialX, float initialY)
         {
             this.frameTime = frameSpeed;
             this.numOfFrames = numOfFrames;
@@ -56,9 +56,10 @@ namespace RPG.Helpers
                 this.elapsed = 0;
             }
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Vector2 playerPosition)
         {
-            spriteBatch.Draw(this.animation, this.Position, this.sourceRectangle, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            Vector2 currentPosition = new Vector2(this.Position.X - playerPosition.X, this.Position.Y - playerPosition.Y);
+            spriteBatch.Draw(this.animation, this.Position, this.sourceRectangle, Color.White, 0f, currentPosition, 1f, SpriteEffects.None, 1f);
         }
     }
 }

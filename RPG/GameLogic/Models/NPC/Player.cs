@@ -28,7 +28,7 @@ namespace RPG.GameLogic.Models.NPC
             this.AttackPower = new Attack(attackPower);
             this.Inventory = new Inventory(inventorySize);
             this.OtherStats = otherStats;
-            this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
+            this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, this.Position.X, this.Position.Y);
             this.RightAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
             this.BackAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
             this.FrontAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
@@ -42,8 +42,6 @@ namespace RPG.GameLogic.Models.NPC
         }
 
         public Texture2D PlayerTexture { get; set; }
-
-        public Vector2 PlayerPosition { get; set; }
 
         public Animation LeftAnimation { get; set; }
         public Animation RightAnimation { get; set; }
@@ -99,23 +97,16 @@ namespace RPG.GameLogic.Models.NPC
             }
         }
 
-        public void Initialize(Texture2D texture, Vector2 position)
-        {
-            this.PlayerTexture = texture;
-            this.PlayerPosition = position;
-            this.Active = true;
-        }
 
         public void Update(GameTime gameTime)
         {
             this.KeyListener();
-            this.Position = new Vector2(200,200);
             this.LeftAnimation.PlayAnimation(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            this.LeftAnimation.Draw(spriteBatch);
+            this.LeftAnimation.Draw(spriteBatch, this.Position);
         }
 
         public void KeyListener()

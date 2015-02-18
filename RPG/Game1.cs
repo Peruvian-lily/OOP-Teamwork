@@ -104,7 +104,6 @@ namespace RPG
                     this.mainMenu.Draw(this.spriteBatch);
                     break;
                 case GameState.InGame:
-                    Console.WriteLine(player.Position.X);
                     this.player.Draw(this.spriteBatch);
                     this.enemy.Draw(this.spriteBatch);
                     break;
