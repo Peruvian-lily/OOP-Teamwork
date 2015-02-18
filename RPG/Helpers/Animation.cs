@@ -26,7 +26,7 @@ namespace RPG.Helpers
         private int frameHeight;
         private bool looping;
 
-        public Animation(string assetName, float frameSpeed, int numOfFrames, int wantedFigure, bool looping, float initialX, float initialY)
+        public Animation(string assetName, float frameSpeed, int numOfFrames, byte wantedFigure, bool looping, float initialX, float initialY)
         {
             this.frameTime = frameSpeed;
             this.numOfFrames = numOfFrames;
@@ -40,7 +40,8 @@ namespace RPG.Helpers
         
         public Vector2 Position { get; set; }
 
-        public int WantedFigure { get; set; }          
+        public byte WantedFigure { get; set; }    
+      
         public void PlayAnimation(GameTime gameTime)
         {
             int row = 4 - this.WantedFigure;

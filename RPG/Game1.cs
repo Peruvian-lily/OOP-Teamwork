@@ -28,8 +28,6 @@ namespace RPG
         private SpriteBatch spriteBatch;
         private MainMenu mainMenu;
 
-
-
         private Engine engine;
         private Player player;
         private Enemy enemy;
