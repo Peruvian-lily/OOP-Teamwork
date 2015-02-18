@@ -19,6 +19,7 @@ namespace RPG.GameLogic.Models.NPC
     {
         private KeyboardState ks;
         private Vector2 position;
+        private byte lastFrame = 3;
 
         public Player(string id, string name, int health,
             int attackPower, int defense, int inventorySize,
@@ -122,24 +123,29 @@ namespace RPG.GameLogic.Models.NPC
             {
                 this.Position.X += 2f;
                 this.CurrentAnimation = this.RightAnimation;
+                lastFrame = 3;
             }
-
-            if (ks.IsKeyDown(Keys.Left))
+            else if (ks.IsKeyDown(Keys.Left))
             {
                 this.Position.X -= 2f;
                 this.CurrentAnimation = this.LeftAnimation;
+                lastFrame = 1;
             }
-
-            if (ks.IsKeyDown(Keys.Up))
+            else if (ks.IsKeyDown(Keys.Up))
             {
                 this.Position.Y -= 2f;
                 this.CurrentAnimation = this.FrontAnimation;
+                lastFrame = 4;
             }
-
-            if (ks.IsKeyDown(Keys.Down))
+            else if (ks.IsKeyDown(Keys.Down))
             {
                 this.Position.Y += 2f;
                 this.CurrentAnimation = this.BackAnimation;
+                lastFrame = 2;
+            }
+            else
+            {
+                this.CurrentAnimation = new Animation("Sprites\\Player\\character", 80f, 3, lastFrame, false, this.Position.X, this.Position.Y);
             }
         }
     }
