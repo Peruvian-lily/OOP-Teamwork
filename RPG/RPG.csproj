@@ -41,7 +41,6 @@
     <Compile Include="GameLogic\Core\Engine.cs" />
     <Compile Include="GameLogic\Core\Items\ItemFactory.cs" />
     <Compile Include="GameLogic\Core\Items\ItemType.cs" />
-    <Compile Include="GameLogic\Interface\IDrawable.cs" />
     <Compile Include="GameLogic\Interface\IEnemy.cs" />
     <Compile Include="GameLogic\Interface\IFight.cs" />
     <Compile Include="GameLogic\Interface\IItem.cs" />

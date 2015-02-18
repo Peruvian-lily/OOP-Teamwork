@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RPG.Helpers;
 
 namespace RPG.GameLogic.Models.NPC
 {
@@ -13,8 +14,10 @@ namespace RPG.GameLogic.Models.NPC
     using Stats;
     using Stats.Base;
 
-    class Player : Npc, IPlayer, IDrawable
+    class Player : Npc, IPlayer
     {
+        private Animation animation;
+
         public Player(string id, string name, int health,
             int attackPower, int defense, int inventorySize,
             List<Stat> otherStats)
@@ -23,6 +26,7 @@ namespace RPG.GameLogic.Models.NPC
             this.AttackPower = new Attack(attackPower);
             this.Inventory = new Inventory(inventorySize);
             this.OtherStats = otherStats;
+            animation = new Animation("Sprites\\Player\\character.png", 80f, 3, true);
         }
 
         public Player(string id, string name, int health,
@@ -91,14 +95,15 @@ namespace RPG.GameLogic.Models.NPC
             Active = true;
         }
 
-        public void Update()
+
+        public void Update(GameTime gameTime)
         {
-            
+            animation.PlayAnimation(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(PlayerTexture, PlayerPosition, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-        } 
+            animation.Draw(spriteBatch);
+        }
     }
 }

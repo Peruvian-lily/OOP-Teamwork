@@ -27,8 +27,7 @@ namespace RPG
         private SpriteBatch spriteBatch;
         private MainMenu mainMenu;
 
-        public static int ScreenWidth;
-        public static int ScreenHeight;
+
 
         private Engine engine;
         private Player player;
@@ -36,13 +35,16 @@ namespace RPG
         private TextDrawer textDrawer;
         public static GameState GameState;
         private Rectangle screen;
-        private Animation animation;
 
+        public static int ScreenWidth;
+        public static int ScreenHeight;
+        public new static ContentManager Content;
 
         public Game1(): base()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            base.Content.RootDirectory = "Content";
+            Content = base.Content;
         }
 
         protected override void Initialize()
@@ -53,6 +55,7 @@ namespace RPG
             GameState = GameState.MainMenu;
             mainMenu = new MainMenu();
             this.IsMouseVisible = true;
+            base.Content = Content;
 
             engine = Engine.GetInstance;
             player = new Player("placeholder", "placeholder", 100, 100, 100, 5);
@@ -64,9 +67,9 @@ namespace RPG
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            defaultFont = Content.Load<SpriteFont>("Fonts\\Arial");
-            mainMenu.LoadContent(Content);
-            animation = new Animation(Content, "Sprites\\Player\\character.png", 80f, 3, true);
+            defaultFont = base.Content.Load<SpriteFont>("Fonts\\Arial");
+            mainMenu.LoadContent(base.Content);
+            
 
 
 
@@ -80,12 +83,11 @@ namespace RPG
 
         protected override void Update(GameTime gameTime)
         {
-            animation.PlayAnimation(gameTime);
 /*
             textDrawer = new TextDrawer(defaultFont);
 */
             mainMenu.Update();
-
+            player.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -97,7 +99,7 @@ namespace RPG
             {
                 case GameState.MainMenu: mainMenu.Draw(spriteBatch);
                     break;
-                case GameState.InGame: animation.Draw(spriteBatch);
+                case GameState.InGame: player.Draw(spriteBatch);
                     break;
             }
             spriteBatch.End();

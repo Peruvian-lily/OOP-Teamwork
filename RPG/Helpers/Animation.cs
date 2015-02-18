@@ -23,12 +23,12 @@ namespace RPG.Helpers
         private int frameHeight;
         private bool looping;
 
-        public Animation(ContentManager content, string assetName, float frameSpeed, int numOfFrames, bool looping)
+        public Animation(string assetName, float frameSpeed, int numOfFrames, bool looping)
         {
             this.frameTime = frameSpeed;
             this.numOfFrames = numOfFrames;
             this.looping = looping;
-            this.animation = content.Load<Texture2D>(assetName);
+            this.animation = Game1.Content.Load<Texture2D>(assetName);
             this.frameWidth = (animation.Width / numOfFrames);
             this.frameHeight = (animation.Height/4+1);
             this.Position = new Vector2(100, 100);
