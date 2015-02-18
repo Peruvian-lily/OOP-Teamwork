@@ -90,6 +90,7 @@ namespace RPG
 */
             this.mainMenu.Update();
             this.player.Update(gameTime);
+            this.player.KeyListener();
             this.enemy.Update(gameTime);
             base.Update(gameTime);
         }
