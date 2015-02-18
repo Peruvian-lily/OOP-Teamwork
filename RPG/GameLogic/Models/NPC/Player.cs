@@ -16,10 +16,6 @@ namespace RPG.GameLogic.Models.NPC
 
     class Player : Npc, IPlayer
     {
-        private Animation leftAnimation;
-        private Animation rightAnimation;
-        private Animation backAnimation;
-        private Animation frontAnimation;
 
         public Player(string id, string name, int health,
             int attackPower, int defense, int inventorySize,
@@ -29,10 +25,10 @@ namespace RPG.GameLogic.Models.NPC
             this.AttackPower = new Attack(attackPower);
             this.Inventory = new Inventory(inventorySize);
             this.OtherStats = otherStats;
-            this.leftAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
-            this.rightAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
-            this.backAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
-            this.frontAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
+            this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
+            this.RightAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
+            this.BackAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
+            this.FrontAnimation = new Animation("Sprites\\Player\\character", 80f, 3, true, 100, 100);
 
         }
 
@@ -45,6 +41,11 @@ namespace RPG.GameLogic.Models.NPC
         public Texture2D PlayerTexture { get; set; }
 
         public Vector2 PlayerPosition { get; set; }
+
+        public Animation LeftAnimation { get; set; }
+        public Animation RightAnimation { get; set; }
+        public Animation BackAnimation { get; set; }
+        public Animation FrontAnimation { get; set; }
 
         public bool Active { get; set; }
 
