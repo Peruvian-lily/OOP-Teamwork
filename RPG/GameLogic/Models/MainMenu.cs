@@ -12,7 +12,7 @@ namespace RPG.GameLogic.Models
 
         public MainMenu()
         {
-            main.Add(new GUIElement("Overlays\\Menu\\main_menu_background_under_buttons"));
+            main.Add(new GUIElement("Overlays\\Menu\\background"));
             main.Add(new GUIElement("Overlays\\Menu\\new_game_plain"));
             main.Add(new GUIElement("Overlays\\Menu\\exit_plain"));
         }

@@ -66,7 +66,7 @@ namespace RPG
             spriteBatch = new SpriteBatch(GraphicsDevice);
             defaultFont = Content.Load<SpriteFont>("Fonts\\Arial");
             mainMenu.LoadContent(Content);
-            animation = new Animation(Content, "Sprites\\Player\\test.png", 200f, 3, true);
+            animation = new Animation(Content, "Sprites\\Player\\test.png", 50f, 3, true);
 
 
 

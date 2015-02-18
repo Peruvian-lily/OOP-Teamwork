@@ -42,18 +42,20 @@ namespace RPG.Helpers
             sourceRectangle = new Rectangle(currentFrame * frameWidth, 0, frameWidth, frameHeight);
             if (elapsed >= frameTime)
             {
-                currentFrame++;
                 if (currentFrame >= numOfFrames - 1)
                 {
                     if (looping)
                     {
                         currentFrame = 0;
                     }
-                    elapsed = 0;
                 }
+                else
+                {
+                    currentFrame++;
+                }
+                elapsed = 0;
             }
         }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(animation, this.Position, sourceRectangle, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
