@@ -30,7 +30,7 @@ namespace RPG.Helpers
             this.looping = looping;
             this.animation = content.Load<Texture2D>(assetName);
             this.frameWidth = (animation.Width / numOfFrames);
-            this.frameHeight = (animation.Height);
+            this.frameHeight = (animation.Height/4+1);
             this.Position = new Vector2(100, 100);
         }
 
@@ -39,7 +39,7 @@ namespace RPG.Helpers
         public void PlayAnimation(GameTime gameTime)
         {
             elapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            sourceRectangle = new Rectangle(currentFrame * frameWidth, 0, frameWidth, frameHeight);
+            sourceRectangle = new Rectangle(currentFrame * frameWidth, frameHeight, frameWidth, frameHeight);
             if (elapsed >= frameTime)
             {
                 if (currentFrame >= numOfFrames - 1)
