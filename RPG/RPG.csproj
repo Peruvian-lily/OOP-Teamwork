@@ -88,6 +88,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Overlays\Battle\background.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Overlays\Battle\button1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

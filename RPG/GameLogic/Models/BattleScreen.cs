@@ -13,9 +13,10 @@ namespace RPG.GameLogic.Models
         List<GUIElement> battleScreen = new List<GUIElement>();
         public BattleScreen()
         {
-            this.battleScreen.Add(new GUIElement("Overlays\\Menu\\background"));
-            this.battleScreen.Add(new GUIElement("Overlays\\Menu\\new_game_plain"));
-            this.battleScreen.Add(new GUIElement("Overlays\\Menu\\exit_plain"));
+            this.battleScreen.Add(new GUIElement("Overlays\\Battle\\background"));
+            this.battleScreen.Add(new GUIElement("Overlays\\Battle\\button1"));
+            this.battleScreen.Add(new GUIElement("Overlays\\Battle\\button2"));
+            this.battleScreen.Add(new GUIElement("Overlays\\Battle\\left"));
         }
 
         public void LoadContent(ContentManager content)
@@ -26,8 +27,9 @@ namespace RPG.GameLogic.Models
                 element.CenterElement(400, 800);
                 element.ClickEvent += this.OnClick;
             }
-            this.battleScreen.Find(x => x.AssetName == "Overlays\\Menu\\new_game_plain").MoveElement(0, -100);
-            this.battleScreen.Find(x => x.AssetName == "Overlays\\Menu\\exit_plain").MoveElement(0, 100);
+            this.battleScreen.Find(x => x.AssetName == "Overlays\\Battle\\button1").MoveElement(-300,0);
+            this.battleScreen.Find(x => x.AssetName == "Overlays\\Battle\\button2").MoveElement(300, 0);
+            this.battleScreen.Find(x => x.AssetName == "Overlays\\Battle\\left").MoveElement(-200, 200);
         }
 
         public void Update()
@@ -49,7 +51,7 @@ namespace RPG.GameLogic.Models
         {
             switch (Game1.GameState)
             {
-                case GameState.MainMenu:
+                case GameState.Battle:
                     foreach (GUIElement element in this.battleScreen)
                     {
                         element.Draw(spriteBatch);
@@ -62,7 +64,7 @@ namespace RPG.GameLogic.Models
 
         public void OnClick(string element)
         {
-            if (element == "Overlays\\Menu\\new_game_plain")
+            if (element == "Overlays\\Battle\\button1")
             {
                 //Play the Game
                 Game1.GameState = GameState.InGame;

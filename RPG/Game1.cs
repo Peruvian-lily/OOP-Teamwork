@@ -60,6 +60,7 @@ namespace RPG
             ScreenHeight = this.GraphicsDevice.Viewport.Height;
             GameState = GameState.MainMenu;
             this.mainMenu = new MainMenu();
+            this.battleScreen = new BattleScreen();
             this.IsMouseVisible = true;
             base.Content = Content;
 
@@ -78,6 +79,7 @@ namespace RPG
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
             this.defaultFont = base.Content.Load<SpriteFont>("Fonts\\Arial");
             this.mainMenu.LoadContent(base.Content);
+            this.battleScreen.LoadContent(base.Content);
 
 
             // This is the place to initialize all variables depending on external resources.
