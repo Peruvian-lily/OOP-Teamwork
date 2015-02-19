@@ -49,6 +49,7 @@
     <Compile Include="GameLogic\Interface\IMove.cs" />
     <Compile Include="GameLogic\Interface\ITimeout.cs" />
     <Compile Include="GameLogic\Models\Battle.cs" />
+    <Compile Include="GameLogic\Models\BattleScreen.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\Effects.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\EffectType.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\EffectTarget.cs" />
@@ -87,6 +88,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Overlays\Battle\button1.png" />
+    <Content Include="Content\Overlays\Battle\button2.png" />
+    <Content Include="Content\Overlays\Battle\left.png" />
     <Content Include="Content\Overlays\Menu\background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -27,6 +27,7 @@ namespace RPG
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private MainMenu mainMenu;
+        private BattleScreen battleScreen;
 
         private Engine engine;
         private Player player;
@@ -44,7 +45,8 @@ namespace RPG
         public static GameState GameState;
         public new static ContentManager Content;
 
-        public Game1(): base()
+        public Game1()
+            : base()
         {
             this.graphics = new GraphicsDeviceManager(this);
             base.Content.RootDirectory = "Content";
@@ -63,7 +65,7 @@ namespace RPG
 
             this.engine = Engine.GetInstance;
             this.player = new Player("placeholder", "placeholder", 100, 100, 100, 5);
-            this.enemy = new Enemy("placeholder", "placeholder", 100, 100, 100, new List<Stat>(){});
+            this.enemy = new Enemy("placeholder", "placeholder", 100, 100, 100, new List<Stat>() { });
 
             this.player.PickUp(ItemFactory.GenerateItem());
 
@@ -87,9 +89,9 @@ namespace RPG
 
         protected override void Update(GameTime gameTime)
         {
-/*
-            textDrawer = new TextDrawer(defaultFont);
-*/
+            /*
+                        textDrawer = new TextDrawer(defaultFont);
+            */
             this.mainMenu.Update();
             this.player.Update(gameTime);
             this.enemy.Update(gameTime);
@@ -108,6 +110,9 @@ namespace RPG
                 case GameState.InGame:
                     this.player.Draw(this.spriteBatch);
                     this.enemy.Draw(this.spriteBatch);
+                    break;
+                case GameState.Battle:
+                    this.battleScreen.Draw(this.spriteBatch);
                     break;
             }
             this.spriteBatch.End();
