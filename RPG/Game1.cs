@@ -135,7 +135,6 @@ namespace RPG
 
 
             CheckCollisons(player, enemy);
-
             this.mainMenu.Update();
             this.player.Update(gameTime);
             this.enemy.Update(gameTime);

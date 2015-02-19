@@ -88,9 +88,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Overlays\Battle\button1.png" />
-    <Content Include="Content\Overlays\Battle\button2.png" />
-    <Content Include="Content\Overlays\Battle\left.png" />
+    <Content Include="Content\Overlays\Battle\button1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Overlays\Battle\button2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Overlays\Battle\left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Overlays\Menu\background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -181,13 +187,15 @@
     <Content Include="Content\Sprites\Player\test.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Tiles\wood_tileset_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Backgrounds\" />
     <Folder Include="Content\Levels\" />
     <Folder Include="Content\Sounds\" />
-    <Folder Include="Content\Tiles\" />
     <Folder Include="GameLogic\Core\Battle\" />
   </ItemGroup>
   <ItemGroup>
