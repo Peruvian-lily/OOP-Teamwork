@@ -17,7 +17,7 @@ namespace RPG.GameLogic.Models.NPC
 
     class Player : Npc, IPlayer
     {
-        private const float SPEED = 2;
+        private const float Speed = 2;
         private KeyboardState ks;
         private byte lastFrame = 3;
 
@@ -159,13 +159,13 @@ namespace RPG.GameLogic.Models.NPC
         #region Movement
         public void Move(Vector2 direction)
         {
-            this.Position.X += SPEED * direction.X;
-            this.Position.Y += SPEED * direction.Y;
+            this.Position.X += Speed * direction.X;
+            this.Position.Y += Speed * direction.Y;
         }
 
         private void MoveLeft()
         {
-            if (0 >= this.Position.X + SPEED)
+            if (0 >= this.Position.X + Speed)
             {
                 return;
             }
@@ -177,7 +177,7 @@ namespace RPG.GameLogic.Models.NPC
 
         private void MoveUp()
         {
-            if (0 >= this.Position.Y + SPEED)
+            if (0 >= this.Position.Y + Speed)
             {
                 return;
             }
@@ -189,7 +189,7 @@ namespace RPG.GameLogic.Models.NPC
 
         private void MoveDown()
         {
-            if (Game1.ScreenHeight <= this.Position.Y + SPEED + this.Height)
+            if (Game1.ScreenHeight <= this.Position.Y + Speed + this.Height)
             {
                 return;
             }
@@ -201,7 +201,7 @@ namespace RPG.GameLogic.Models.NPC
 
         private void MoveRight()
         {
-            if (Game1.ScreenWidth <= this.Position.X + SPEED + this.Width)
+            if (Game1.ScreenWidth <= this.Position.X + Speed + this.Width)
             {
                 return;
             }

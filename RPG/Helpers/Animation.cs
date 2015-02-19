@@ -10,15 +10,13 @@ namespace RPG.Helpers
 {
     public class Animation
     {
-        private const int numOfRows = 4;
-
+        private const int NumOfRows = 4;
         private Texture2D animation;
         private Rectangle sourceRectangle;
 
         private float elapsed;
         private float frameTime;
         private int numOfFrames;
-        private int numOfRowssss;
         private int currentFrame;
         private int width;
         private int height;
@@ -33,7 +31,7 @@ namespace RPG.Helpers
             this.looping = looping;
             this.animation = Game1.Content.Load<Texture2D>(assetName);
             this.frameWidth = (this.animation.Width / numOfFrames);
-            this.frameHeight = (this.animation.Height/ numOfRows + 1);
+            this.frameHeight = (this.animation.Height/ NumOfRows + 1);
             this.Position = new Vector2(initialX, initialY);
             this.WantedFigure = wantedFigure;
         }

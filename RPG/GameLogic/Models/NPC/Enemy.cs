@@ -33,8 +33,6 @@ namespace RPG.GameLogic.Models.NPC
 
         public Texture2D EnemyTexture { get; set; }
 
-        public Vector2 EnemyPosition { get; set; }
-
         public List<Stat> Stats { get; private set; }
 
         public Attack AttackPower { get; private set; }
@@ -64,7 +62,7 @@ namespace RPG.GameLogic.Models.NPC
         public void Initialize(Texture2D texture, Vector2 position)
         {
             this.EnemyTexture = texture;
-            this.EnemyPosition = position;
+            this.Position = position;
         }
 
         public void Update(GameTime gameTime)
