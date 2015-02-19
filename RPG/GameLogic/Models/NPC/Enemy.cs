@@ -11,7 +11,8 @@ namespace RPG.GameLogic.Models.NPC
 
 
     using Base;
-    class Enemy : Npc, IRoam, IEnemy
+
+    public class Enemy : Npc, IRoam, IEnemy
     {
 
         public Enemy(string id, string name, int health,

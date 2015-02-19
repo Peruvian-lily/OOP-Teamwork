@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RPG.Helpers
 {
-    class Animation
+    public class Animation
     {
         private const int numOfRows = 4;
 
