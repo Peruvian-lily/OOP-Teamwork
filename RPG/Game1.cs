@@ -66,6 +66,7 @@ namespace RPG
             this.engine = Engine.GetInstance;
             this.player = new Player("placeholder", "placeholder", 100, 100, 100, 5);
             this.enemy = new Enemy("placeholder", "placeholder", 100, 100, 100, new List<Stat>() { });
+            enemy.Position = new Vector2(200, 200);
 
             this.player.PickUp(ItemFactory.GenerateItem());
 
@@ -87,11 +88,54 @@ namespace RPG
         {
         }
 
+        private void CheckCollisons(Player player, Enemy enemy)
+        {
+            Vector2 topLeftPlayer = new Vector2(player.Position.X, player.Position.Y);
+            Vector2 topRightPlayer = new Vector2(player.Position.X + player.Width, player.Position.Y);
+            Vector2 bottomLeftPlayer = new Vector2(player.Position.X, player.Position.Y + player.Height);
+            Vector2 bottomRightPlayer = new Vector2(player.Position.X + player.Width, player.Position.Y + player.Height);
+
+            int enemyWidth = enemy.Animation.frameWidth;
+            int enemyHeight = enemy.Animation.frameHeight;
+            int enemyX = (int)enemy.Position.X;
+            int enemyY = (int)enemy.Position.Y;
+            Rectangle enemyCollisonRect = new Rectangle(enemyX, enemyY, enemyWidth, enemyHeight);
+
+            if (IsPointInRect(topLeftPlayer, enemyCollisonRect))
+            {
+                Environment.Exit(0);
+            }
+            else if (IsPointInRect(topRightPlayer, enemyCollisonRect))
+            {
+                Environment.Exit(0);
+            }
+            else if (IsPointInRect(bottomLeftPlayer, enemyCollisonRect))
+            {
+                Environment.Exit(0);
+            }
+            else if (IsPointInRect(bottomRightPlayer, enemyCollisonRect))
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        public static bool IsPointInRect(Vector2 point, Rectangle rectangle)
+        {
+            bool isPointXIn = point.X >= rectangle.X && point.X <= rectangle.X + rectangle.Width;
+            bool isPointYIn = point.Y <= rectangle.Y && point.Y >= rectangle.Y - rectangle.Height;
+            return isPointXIn && isPointYIn;
+        }
+
+
         protected override void Update(GameTime gameTime)
         {
             /*
-                        textDrawer = new TextDrawer(defaultFont);
+                textDrawer = new TextDrawer(defaultFont);
             */
+
+
+            CheckCollisons(player, enemy);
+
             this.mainMenu.Update();
             this.player.Update(gameTime);
             this.enemy.Update(gameTime);

@@ -13,15 +13,13 @@ namespace RPG.GameLogic.Models.NPC
     using Base;
     public class Enemy : Npc, IRoam, IEnemy
     {
-        private Animation animation;
-
         public Enemy(string id, string name, int health,
             int attack, int defense, List<Stat> otherStats)
             : base(id, name, health, defense)
         {
             this.AttackPower = new Attack(attack);
             this.Stats = otherStats;
-            this.animation = new Animation("Sprites\\Monster\\enemies", 80f, 3, 3, false, 300, 100);
+            this.Animation = new Animation("Sprites\\Monster\\enemies", 80f, 2, 4, false, 0, 0);
         }
 
         public Enemy(string id, string name, int health,
@@ -29,6 +27,8 @@ namespace RPG.GameLogic.Models.NPC
             : this(id, name, health, attack, defense, null)
         {
         }
+
+        public Animation Animation { get; private set; }
 
         public Texture2D EnemyTexture { get; set; }
 
@@ -68,12 +68,12 @@ namespace RPG.GameLogic.Models.NPC
 
         public void Update(GameTime gameTime)
         {
-            this.animation.PlayAnimation(gameTime);
+            this.Animation.PlayAnimation(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            this.animation.Draw(spriteBatch, this.Position);
+            this.Animation.Draw(spriteBatch, this.Position);
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RPG.Helpers
 {
-    class Animation
+    public class Animation
     {
         private const int numOfRows = 4;
 
@@ -22,8 +22,8 @@ namespace RPG.Helpers
         private int currentFrame;
         private int width;
         private int height;
-        private int frameWidth;
-        private int frameHeight;
+        public int frameWidth;
+        public int frameHeight;
         private bool looping;
 
         public Animation(string assetName, float frameSpeed, int numOfFrames, byte wantedFigure, bool looping, float initialX, float initialY)
@@ -39,6 +39,8 @@ namespace RPG.Helpers
         }
         
         public Vector2 Position { get; set; }
+
+        public Texture2D animTexture { get { return this.animation; } }
 
         public byte WantedFigure { get; set; }    
       
