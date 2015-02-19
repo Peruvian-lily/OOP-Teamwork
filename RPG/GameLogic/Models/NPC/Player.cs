@@ -126,59 +126,28 @@ namespace RPG.GameLogic.Models.NPC
             this.CurrentAnimation.Draw(spriteBatch, this.Position);
         }
 
-        public void Move(Vector2 direction)
-        {
-            this.Position.X += SPEED * direction.X;
-            this.Position.Y += SPEED * direction.Y;
-        }
-
         public void KeyListener()
         {
             ks = Keyboard.GetState();
-
-            if (ks.IsKeyDown(Keys.Right))
+            if (ks.IsKeyDown(Keys.Right) || ks.IsKeyDown(Keys.Left) ||
+                ks.IsKeyDown(Keys.Up) || ks.IsKeyDown(Keys.Down))
             {
-                if (Game1.ScreenWidth <= this.Position.X + SPEED + this.Width)
+                if (ks.IsKeyDown(Keys.Right))
                 {
-                    return;
+                    this.MoveRight();
                 }
-
-                this.lastFrame = 3;
-                this.CurrentAnimation = this.RightAnimation;
-                Move(Game1.RIGHT_VECTOR);
-            }
-            else if (ks.IsKeyDown(Keys.Left))
-            {
-                if (0 >= this.Position.X + SPEED)
+                else if (ks.IsKeyDown(Keys.Left))
                 {
-                    return;
+                    this.MoveLeft(); ;
                 }
-
-                this.lastFrame = 1;
-                this.CurrentAnimation = this.LeftAnimation;
-                Move(Game1.LEFT_VECTOR);
-            }
-            else if (ks.IsKeyDown(Keys.Up))
-            {
-                if (0 >= this.Position.Y + SPEED)
+                if (ks.IsKeyDown(Keys.Up))
                 {
-                    return;
+                    this.MoveUp();
                 }
-
-                this.lastFrame = 4;
-                this.CurrentAnimation = this.FrontAnimation;
-                Move(Game1.UP_VECTOR);
-            }
-            else if (ks.IsKeyDown(Keys.Down))
-            {
-                if (Game1.ScreenHeight <= this.Position.Y + SPEED + this.Height)
+                else if (ks.IsKeyDown(Keys.Down))
                 {
-                    return;
+                    this.MoveDown();
                 }
-
-                this.lastFrame = 2;
-                this.CurrentAnimation = this.BackAnimation;
-                Move(Game1.DOWN_VECTOR);
             }
             else
             {
@@ -186,5 +155,61 @@ namespace RPG.GameLogic.Models.NPC
                     false, this.Position.X, this.Position.Y);
             }
         }
+
+        #region Movement
+        public void Move(Vector2 direction)
+        {
+            this.Position.X += SPEED * direction.X;
+            this.Position.Y += SPEED * direction.Y;
+        }
+
+        private void MoveLeft()
+        {
+            if (0 >= this.Position.X + SPEED)
+            {
+                return;
+            }
+
+            this.lastFrame = 1;
+            this.CurrentAnimation = this.LeftAnimation;
+            Move(Game1.LEFT_VECTOR);
+        }
+
+        private void MoveUp()
+        {
+            if (0 >= this.Position.Y + SPEED)
+            {
+                return;
+            }
+
+            this.lastFrame = 4;
+            this.CurrentAnimation = this.FrontAnimation;
+            Move(Game1.UP_VECTOR);
+        }
+
+        private void MoveDown()
+        {
+            if (Game1.ScreenHeight <= this.Position.Y + SPEED + this.Height)
+            {
+                return;
+            }
+
+            this.lastFrame = 2;
+            this.CurrentAnimation = this.BackAnimation;
+            Move(Game1.DOWN_VECTOR);
+        }
+
+        private void MoveRight()
+        {
+            if (Game1.ScreenWidth <= this.Position.X + SPEED + this.Width)
+            {
+                return;
+            }
+
+            this.lastFrame = 3;
+            this.CurrentAnimation = this.RightAnimation;
+            Move(Game1.RIGHT_VECTOR);
+        }
+        #endregion
     }
 }
