@@ -9,7 +9,6 @@ namespace RPG.GameLogic.Models.NPC.Base
 
     public abstract class Npc : GameObject
     {
-        private Vector2 position;
         private string name;
 
         protected Npc(string id, string name, int health, int defense)

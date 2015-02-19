@@ -17,8 +17,8 @@ namespace RPG.GameLogic.Models.NPC
 
     class Player : Npc, IPlayer
     {
+        private const float SPEED = 2;
         private KeyboardState ks;
-        private Vector2 position;
         private byte lastFrame = 3;
 
         public Player(string id, string name, int health,
@@ -29,10 +29,15 @@ namespace RPG.GameLogic.Models.NPC
             this.AttackPower = new Attack(attackPower);
             this.Inventory = new Inventory(inventorySize);
             this.OtherStats = otherStats;
-            this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3, 1, true, this.Position.X, this.Position.Y);
-            this.RightAnimation = new Animation("Sprites\\Player\\character", 80f, 3, 3, true, this.Position.X, this.Position.Y);
-            this.BackAnimation = new Animation("Sprites\\Player\\character", 80f, 3, 2, true, this.Position.X, this.Position.Y);
-            this.FrontAnimation = new Animation("Sprites\\Player\\character", 80f, 3, 4,true, this.Position.X, this.Position.Y);
+            this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
+                1, true, this.Position.X, this.Position.Y);
+            this.RightAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
+                3, true, this.Position.X, this.Position.Y);
+            this.BackAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
+                2, true, this.Position.X, this.Position.Y);
+            this.FrontAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
+                4, true, this.Position.X, this.Position.Y);
+            this.PlayerTexture = Game1.Content.Load<Texture2D>("Sprites\\Player\\character");
             this.CurrentAnimation = LeftAnimation;
         }
 
@@ -58,12 +63,24 @@ namespace RPG.GameLogic.Models.NPC
 
         public int Width
         {
-            get { return this.PlayerTexture.Width; }
+            get 
+            {
+                // In the sprite, we are using, the character is drawn 3 times 
+                // on the X axis so to get his width he divide by 3!
+                const int SPRITE_WIDTH_OFFSET = 3;
+                return this.PlayerTexture.Width / SPRITE_WIDTH_OFFSET; 
+            }
         }
 
         public int Height
         {
-            get { return this.PlayerTexture.Height; }
+            get 
+            {
+                // In the sprite, we are using, the character is drawn 4 times 
+                // on the Y axis so to get his height he divide by 4!
+                const int SPRITE_HEIGHT_OFFSET = 4;
+                return this.PlayerTexture.Height / SPRITE_HEIGHT_OFFSET; 
+            }
         }
 
         public Attack AttackPower { get; private set; }
@@ -83,11 +100,6 @@ namespace RPG.GameLogic.Models.NPC
             throw new System.NotImplementedException();
         }
 
-        public void Move()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void PickUp(PickUp item)
         {
             string itemType = item.GetType().Name.ToLower();
@@ -103,7 +115,6 @@ namespace RPG.GameLogic.Models.NPC
             }
         }
 
-
         public void Update(GameTime gameTime)
         {
             this.KeyListener();
@@ -115,37 +126,64 @@ namespace RPG.GameLogic.Models.NPC
             this.CurrentAnimation.Draw(spriteBatch, this.Position);
         }
 
+        public void Move(Vector2 direction)
+        {
+            this.Position.X += SPEED * direction.X;
+            this.Position.Y += SPEED * direction.Y;
+        }
+
         public void KeyListener()
         {
             ks = Keyboard.GetState();
 
             if (ks.IsKeyDown(Keys.Right))
             {
-                this.Position.X += 2f;
+                if (Game1.ScreenWidth <= this.Position.X + SPEED + this.Width)
+                {
+                    return;
+                }
+
+                this.lastFrame = 3;
                 this.CurrentAnimation = this.RightAnimation;
-                lastFrame = 3;
+                Move(Game1.RIGHT_VECTOR);
             }
             else if (ks.IsKeyDown(Keys.Left))
             {
-                this.Position.X -= 2f;
+                if (0 >= this.Position.X + SPEED)
+                {
+                    return;
+                }
+
+                this.lastFrame = 1;
                 this.CurrentAnimation = this.LeftAnimation;
-                lastFrame = 1;
+                Move(Game1.LEFT_VECTOR);
             }
             else if (ks.IsKeyDown(Keys.Up))
             {
-                this.Position.Y -= 2f;
+                if (0 >= this.Position.Y + SPEED)
+                {
+                    return;
+                }
+
+                this.lastFrame = 4;
                 this.CurrentAnimation = this.FrontAnimation;
-                lastFrame = 4;
+                Move(Game1.UP_VECTOR);
             }
             else if (ks.IsKeyDown(Keys.Down))
             {
-                this.Position.Y += 2f;
+                if (Game1.ScreenHeight <= this.Position.Y + SPEED + this.Height)
+                {
+                    return;
+                }
+
+                this.lastFrame = 2;
                 this.CurrentAnimation = this.BackAnimation;
-                lastFrame = 2;
+                Move(Game1.DOWN_VECTOR);
             }
             else
             {
-                this.CurrentAnimation = new Animation("Sprites\\Player\\character", 80f, 3, lastFrame, false, this.Position.X, this.Position.Y);
+                this.CurrentAnimation = new Animation("Sprites\\Player\\character", 80f, 3, lastFrame, 
+                    false, this.Position.X, this.Position.Y);
             }
         }
     }

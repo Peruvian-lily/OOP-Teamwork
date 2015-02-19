@@ -33,11 +33,15 @@ namespace RPG
         private Enemy enemy;
         private SpriteFont defaultFont;
         private TextDrawer textDrawer;
-        public static GameState GameState;
         private Rectangle screen;
 
+        public static readonly Vector2 UP_VECTOR = new Vector2(0, -1);
+        public static readonly Vector2 DOWN_VECTOR = new Vector2(0, 1);
+        public static readonly Vector2 RIGHT_VECTOR = new Vector2(1, 0);
+        public static readonly Vector2 LEFT_VECTOR = new Vector2(-1, 0);
         public static int ScreenWidth;
         public static int ScreenHeight;
+        public static GameState GameState;
         public new static ContentManager Content;
 
         public Game1(): base()
