@@ -175,6 +175,9 @@
     <Content Include="Content\Overlays\Menu\options_pressed.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sprites\Monster\enemy_new.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Sprites\Monster\enemies.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

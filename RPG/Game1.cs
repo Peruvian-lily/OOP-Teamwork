@@ -99,23 +99,23 @@ namespace RPG
             int enemyHeight = enemy.Animation.frameHeight;
             int enemyX = (int)enemy.Position.X;
             int enemyY = (int)enemy.Position.Y;
-            Rectangle enemyCollisonRect = new Rectangle(enemyX, enemyY, enemyWidth, enemyHeight);
+            Rectangle enemyCollisonRect = new Rectangle(enemyX, enemyY + enemyHeight, enemyWidth, enemyHeight);
 
             if (IsPointInRect(topLeftPlayer, enemyCollisonRect))
             {
-                Environment.Exit(0);
+               GameState = GameState.Battle;
             }
             else if (IsPointInRect(topRightPlayer, enemyCollisonRect))
             {
-                Environment.Exit(0);
+                GameState = GameState.Battle;
             }
             else if (IsPointInRect(bottomLeftPlayer, enemyCollisonRect))
             {
-                Environment.Exit(0);
+                GameState = GameState.Battle;
             }
             else if (IsPointInRect(bottomRightPlayer, enemyCollisonRect))
             {
-                Environment.Exit(0);
+               GameState = GameState.Battle;
             }
         }
 
