@@ -74,9 +74,11 @@
     <Compile Include="GameLogic\GameObject.cs" />
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\CustomShapes\Circle.cs" />
-    <Compile Include="Graphics\GamestateManager.cs" />
     <Compile Include="Graphics\GUIElement.cs" />
+    <Compile Include="Graphics\Map\MapCell.cs" />
+    <Compile Include="Graphics\Map\MapRow.cs" />
     <Compile Include="Graphics\Map\Tile.cs" />
+    <Compile Include="Graphics\Map\TileMap.cs" />
     <Compile Include="Graphics\TextDrawer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
