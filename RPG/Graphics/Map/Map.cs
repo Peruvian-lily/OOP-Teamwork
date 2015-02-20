@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RPG.GameLogic.Models.NPC;
-
-namespace RPG.GameLogic.Models
+﻿namespace RPG.Graphics.Map
 {
     class Map
     {

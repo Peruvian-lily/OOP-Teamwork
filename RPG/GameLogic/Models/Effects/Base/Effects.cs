@@ -1,7 +1,6 @@
 ﻿namespace RPG.GameLogic.Models.Effects.Base
 {
     using Interface;
-    using NPC.Base;
     using Stats.Base;
 
     public abstract class Effects

@@ -1,4 +1,4 @@
-﻿namespace RPG.GameLogic.Models.Effects
+﻿namespace RPG.GameLogic.Models.Effects.Base
 {
     public enum EffectTarget
     {

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using RPG.Helpers;
 
-namespace RPG.GameLogic.Models
+namespace RPG.Graphics
 {
     class BattleScreen
     {

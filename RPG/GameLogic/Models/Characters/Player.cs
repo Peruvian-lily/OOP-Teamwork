@@ -1,21 +1,18 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using RPG.Helpers;
+using RPG.GameLogic.Interface;
+using RPG.GameLogic.Models.Characters.Base;
+using RPG.GameLogic.Models.Items;
+using RPG.GameLogic.Models.Items.Base;
+using RPG.GameLogic.Models.Stats;
+using RPG.GameLogic.Models.Stats.Base;
+using RPG.Graphics;
 
-namespace RPG.GameLogic.Models.NPC
+namespace RPG.GameLogic.Models.Characters
 {
-    using System.Collections.Generic;
-    using Interface;
-    using Base;
-    using Inventory;
-    using Inventory.Base;
-    using Items;
-    using Items.Base;
-    using Stats;
-    using Stats.Base;
-
-    class Player : Npc, IPlayer
+    class Player : Character, IPlayer
     {
         private const float Speed = 2;
         private KeyboardState ks;
@@ -27,7 +24,7 @@ namespace RPG.GameLogic.Models.NPC
             : base(id, name, health, defense)
         {
             this.AttackPower = new Attack(attackPower);
-            this.Inventory = new Inventory(inventorySize);
+            this.Inventory = new Inventory.Base.Inventory(inventorySize);
             this.OtherStats = otherStats;
             this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
                 1, true, this.Position.X, this.Position.Y);
@@ -85,17 +82,17 @@ namespace RPG.GameLogic.Models.NPC
 
         public Attack AttackPower { get; private set; }
 
-        public Inventory Inventory { get; private set; }
+        public Inventory.Base.Inventory Inventory { get; private set; }
 
         public List<Stat> OtherStats { get; private set; }
 
-        public void Attack(Npc target)
+        public void Attack(Character target)
         {
             int damage = this.AttackPower.Value; //Add more values to formula as more stat types get implemented.
             target.TakeDamage(damage);
         }
 
-        public Npc GetTarget()
+        public Character GetTarget()
         {
             throw new System.NotImplementedException();
         }

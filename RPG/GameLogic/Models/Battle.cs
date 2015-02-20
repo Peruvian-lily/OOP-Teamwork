@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RPG.GameLogic.Interface;
-using RPG.GameLogic.Models.NPC.Base;
+using RPG.GameLogic.Models.Characters.Base;
 
 namespace RPG.GameLogic.Models
 {
@@ -24,15 +24,15 @@ namespace RPG.GameLogic.Models
         public IPlayer Player { get; private set; }
         public int CurrentTurn { get; private set; }
         public int TotalTurns { get; private set; }
-        public List<Npc> Participants { get; private set; }
+        public List<Character> Participants { get; private set; }
 
         private void AddParticipants()
         {
-            this.Participants = new List<Npc>();
-            this.Participants.Add(this.Player as Npc);
+            this.Participants = new List<Character>();
+            this.Participants.Add(this.Player as Character);
             this.Enemies.ForEach(enemy =>
             {
-                this.Participants.Add(enemy as Npc);
+                this.Participants.Add(enemy as Character);
             });
         }
 
@@ -51,7 +51,7 @@ namespace RPG.GameLogic.Models
             this.CurrentTurn = 1;
             this.Round += 1;
         }
-        private IFight OnTurn(ref List<Npc> participants)
+        private IFight OnTurn(ref List<Character> participants)
         {
             var onTurn = participants[rnd.Next(0, participants.Count)];
             participants.Remove(onTurn);
@@ -60,7 +60,7 @@ namespace RPG.GameLogic.Models
 
         private void Fight(IFight attacker, IFight defender)
         {
-            attacker.Attack(defender as Npc);
+            attacker.Attack(defender as Character);
         }
 
         private void ClearBattlefield()

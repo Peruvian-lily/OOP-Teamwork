@@ -10,13 +10,12 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using RPG.GameLogic.Core.Items;
-using RPG.GameLogic.Models.NPC;
 using RPG.GameLogic.Core;
 using RPG.GameLogic.Models;
-using RPG.Helpers;
-using RPG.Helpers.CustomShapes;
 using RPG.GameLogic.Core.Enemies;
+using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Stats.Base;
+using RPG.Graphics;
 
 #endregion
 
@@ -69,7 +68,7 @@ namespace RPG
             this.enemy = new Enemy("placeholder", "placeholder", 100, 100, 100, new List<Stat>() { });
             enemy.Position = new Vector2(200, 200);
 
-            this.player.PickUp(ItemFactory.GenerateItem());
+            this.player.PickUp(ItemFactory.GenerateItem(25,50));
 
             base.Initialize();
         }

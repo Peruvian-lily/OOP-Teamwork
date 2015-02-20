@@ -1,8 +1,9 @@
-﻿namespace RPG.GameLogic.Core.Enemies
+﻿using RPG.GameLogic.Models.Characters;
+
+namespace RPG.GameLogic.Core.Enemies
 {
     using System;
     using System.Collections.Generic;
-    using Models.NPC;
     using Models.Stats.Base;
     using Models.Stats;
 

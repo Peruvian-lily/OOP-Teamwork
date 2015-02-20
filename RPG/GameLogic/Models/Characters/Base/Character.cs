@@ -1,17 +1,13 @@
-﻿using Microsoft.Xna.Framework;
-using RPG.GameLogic.Interface;
+﻿using System;
+using RPG.GameLogic.Models.Stats;
 
-namespace RPG.GameLogic.Models.NPC.Base
+namespace RPG.GameLogic.Models.Characters.Base
 {
-    using System;
-    using Stats;
-    using Stats.Base;
-
-    public abstract class Npc : GameObject
+    public abstract class Character : GameObject
     {
         private string name;
 
-        protected Npc(string id, string name, int health, int defense)
+        protected Character(string id, string name, int health, int defense)
             : base(id)
         {
             this.Name = name;

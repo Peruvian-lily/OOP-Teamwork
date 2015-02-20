@@ -1,8 +1,8 @@
-﻿namespace RPG.GameLogic.Models.Inventory
-{
-    using Items.Base;
-    using NPC.Base;
+﻿using RPG.GameLogic.Models.Characters.Base;
+using RPG.GameLogic.Models.Items.Base;
 
+namespace RPG.GameLogic.Models.Items
+{
     class Bonus : PickUp
     {
 
@@ -10,7 +10,7 @@
         {
         }
 
-        public void Apply(Npc target)
+        public void Apply(Character target)
         {
             
         }

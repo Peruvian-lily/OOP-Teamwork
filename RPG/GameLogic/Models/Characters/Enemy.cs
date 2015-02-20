@@ -2,16 +2,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RPG.GameLogic.Interface;
+using RPG.GameLogic.Models.Characters.Base;
 using RPG.GameLogic.Models.Stats;
 using RPG.GameLogic.Models.Stats.Base;
-using RPG.Helpers;
+using RPG.Graphics;
 
-namespace RPG.GameLogic.Models.NPC
+namespace RPG.GameLogic.Models.Characters
 {
-
-
-    using Base;
-    public class Enemy : Npc, IRoam, IEnemy
+    public class Enemy : Character, IRoam, IEnemy
     {
 
         public Enemy(string id, string name, int health,
@@ -37,14 +35,14 @@ namespace RPG.GameLogic.Models.NPC
 
         public Attack AttackPower { get; private set; }
 
-        public void Attack(Npc target)
+        public void Attack(Character target)
         {
             //Add more values to formula as more stat types get implemented.
             int damage = this.AttackPower.Value; 
             target.TakeDamage(damage);
         }
 
-        public Npc GetTarget()
+        public Character GetTarget()
         {
             throw new System.NotImplementedException();
         }
