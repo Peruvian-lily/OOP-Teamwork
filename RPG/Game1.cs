@@ -134,13 +134,20 @@ namespace RPG
             /*
                 textDrawer = new TextDrawer(defaultFont);
             */
-
-
-            CheckCollisons(player, enemy);
-            this.mainMenu.Update();
-            this.battleScreen.Update();
-            this.player.Update(gameTime);
-            this.enemy.Update(gameTime);
+            switch (GameState)
+            {
+                    case GameState.InGame:
+                        this.player.Update(gameTime);
+                        this.enemy.Update(gameTime);
+                        CheckCollisons(player, enemy);
+                        break;
+                    case GameState.MainMenu:
+                        this.mainMenu.Update();
+                        break;
+                    case GameState.Battle:
+                        this.battleScreen.Update();
+                        break;
+            }
             base.Update(gameTime);
         }
 
