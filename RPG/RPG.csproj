@@ -69,7 +69,7 @@
     <Compile Include="GameLogic\Models\Stats\Base\Stat.cs" />
     <Compile Include="GameLogic\Models\Stats\Base\StatType.cs" />
     <Compile Include="GameLogic\Models\Stats\Defense.cs" />
-    <Compile Include="GameLogic\Models\Stats\FireAttack.cs" />
+    <Compile Include="GameLogic\Models\Stats\Elemental.cs" />
     <Compile Include="GameLogic\Models\Stats\Health.cs" />
     <Compile Include="GameLogic\GameObject.cs" />
     <Compile Include="Graphics\Animation.cs" />

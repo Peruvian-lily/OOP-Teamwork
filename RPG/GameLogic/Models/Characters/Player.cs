@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -17,6 +18,8 @@ namespace RPG.GameLogic.Models.Characters
         private const float Speed = 2;
         private KeyboardState ks;
         private byte lastFrame = 3;
+        private List<Stat> otherStats;
+
 
         public Player(string id, string name, int health,
             int attackPower, int defense, int inventorySize,
@@ -25,7 +28,7 @@ namespace RPG.GameLogic.Models.Characters
         {
             this.AttackPower = new Attack(attackPower);
             this.Inventory = new Inventory.Base.Inventory(inventorySize);
-            this.OtherStats = otherStats;
+            this.otherStats = otherStats;
             this.AddAnimation();
         }
 
@@ -35,6 +38,8 @@ namespace RPG.GameLogic.Models.Characters
         {
         }
 
+        public bool Active { get; set; }
+        #region Animation And Textures
         public Texture2D PlayerTexture { get; set; }
 
         public Animation LeftAnimation { get; set; }
@@ -46,9 +51,9 @@ namespace RPG.GameLogic.Models.Characters
         public Animation FrontAnimation { get; set; }
 
         public Animation CurrentAnimation { get; set; }
+        #endregion
 
-        public bool Active { get; set; }
-
+        #region Coordinates
         public int Width
         {
             get
@@ -70,23 +75,50 @@ namespace RPG.GameLogic.Models.Characters
                 return this.PlayerTexture.Height / SPRITE_HEIGHT_OFFSET;
             }
         }
+        #endregion
 
+        #region Stats and Damage
         public Attack AttackPower { get; private set; }
 
-        public Inventory.Base.Inventory Inventory { get; private set; }
+        public List<Stat> OffensiveStats
+        {
+            get { return this.otherStats.Where(stat => stat.Type == StatType.Offensive).ToList(); }
+        }
 
-        public List<Stat> OtherStats { get; private set; }
+        public List<Stat> DefensiveStats
+        {
+            get { return this.otherStats.Where(stat => stat.Type == StatType.Defensive).ToList(); }
+        }
 
         public void Attack(Character target)
         {
             int damage = this.AttackPower.Value; //Add more values to formula as more stat types get implemented.
-            target.TakeDamage(damage);
+            this.OffensiveStats.ForEach(stat =>
+            {
+                damage = +stat.Value;
+            });
+            target.TakeDamage(damage, this.OffensiveStats);
         }
 
-        public Character GetTarget()
+        public override void TakeDamage(int amount, List<Stat> types)
         {
-            throw new System.NotImplementedException();
+            int reduction = this.Defense.Value;
+            types.ForEach(type =>
+            {
+                if (this.DefensiveStats.Contains(type))
+                {
+                    reduction += this.DefensiveStats.Find(stat => stat.Equals(type)).Value;
+                }
+            });
+            if (amount > reduction)
+            {
+                this.Health.Reduce(amount - reduction);
+            }
         }
+        #endregion
+
+        #region Inventory
+        public Inventory.Base.Inventory Inventory { get; private set; }
 
         public void PickUp(PickUp item)
         {
@@ -104,6 +136,42 @@ namespace RPG.GameLogic.Models.Characters
             }
         }
 
+        private void ApplyItemStats(Item item)
+        {
+            foreach (var stat in item.Stats)
+            {
+                switch (stat.Name)
+                {
+                    case "Attack":
+                        this.AttackPower.Increase(stat.Value);
+                        break;
+                    case "Health":
+                        this.Health.Increase(stat.Value);
+                        break;
+                    case "Defense":
+                        this.Defense.Increase(stat.Value);
+                        break;
+                    default:
+                        if (this.otherStats.Contains(stat))
+                        {
+                            this.otherStats.Find(entry => entry == stat).Increase(stat.Value);
+                        }
+                        else
+                        {
+                            this.otherStats.Add(stat);
+                        }
+                        break;
+                }
+            }
+        }
+        #endregion
+
+        public Character GetTarget()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #region Engine Stuff
         public void Update(GameTime gameTime)
         {
             this.KeyListener();
@@ -201,35 +269,6 @@ namespace RPG.GameLogic.Models.Characters
         }
         #endregion
 
-        private void ApplyItemStats(Item item)
-        {
-            foreach (var stat in item.Stats)
-            {
-                switch (stat.Name)
-                {
-                    case "Attack":
-                        this.AttackPower.Increase(stat.Value);
-                        break;
-                    case "Health":
-                        this.Health.Increase(stat.Value);
-                        break;
-                    case "Defense":
-                        this.Defense.Increase(stat.Value);
-                        break;
-                    default:
-                        if (this.OtherStats.Contains(stat))
-                        {
-                            this.OtherStats.Find(entry => entry == stat).Increase(stat.Value);
-                        }
-                        else
-                        {
-                            this.OtherStats.Add(stat);
-                        }
-                        break;
-                }
-            }
-        }
-
         private void AddAnimation()
         {
             this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
@@ -243,5 +282,6 @@ namespace RPG.GameLogic.Models.Characters
             this.PlayerTexture = Game1.Content.Load<Texture2D>("Sprites\\Player\\character");
             this.CurrentAnimation = LeftAnimation;
         }
+        #endregion
     }
 }

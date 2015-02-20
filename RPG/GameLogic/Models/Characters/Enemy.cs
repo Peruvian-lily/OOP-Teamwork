@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RPG.GameLogic.Interface;
@@ -11,7 +12,6 @@ namespace RPG.GameLogic.Models.Characters
 {
     public class Enemy : Character, IRoam, IEnemy
     {
-
         public Enemy(string id, string name, int health,
             int attack, int defense, List<Stat> otherStats)
             : base(id, name, health, defense)
@@ -19,7 +19,7 @@ namespace RPG.GameLogic.Models.Characters
             this.AttackPower = new Attack(attack);
             this.Stats = otherStats;
             this.Animation = new Animation("Sprites\\Monster\\enemy_new", 80f, 2, 4, false, 0, 0);
-            CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.frameWidth, 
+            CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.frameWidth,
                 Animation.frameWidth, Animation.frameHeight);
         }
 
@@ -34,22 +34,52 @@ namespace RPG.GameLogic.Models.Characters
         public Animation Animation { get; private set; }
 
         public Texture2D EnemyTexture { get; set; }
-
-        public List<Stat> Stats { get; private set; }
-
+        #region Stats and Damage
         public Attack AttackPower { get; private set; }
+
+        public List<Stat> OffensiveStats
+        {
+            get { return this.Stats.Where(stat => stat.Type == StatType.Offensive).ToList(); }
+        }
+
+        public List<Stat> DefensiveStats
+        {
+            get { return this.Stats.Where(stat => stat.Type == StatType.Defensive).ToList(); }
+        }
 
         public void Attack(Character target)
         {
-            //Add more values to formula as more stat types get implemented.
-            int damage = this.AttackPower.Value; 
-            target.TakeDamage(damage);
+            int damage = this.AttackPower.Value; //Add more values to formula as more stat types get implemented.
+            this.OffensiveStats.ForEach(stat =>
+            {
+                damage = +stat.Value;
+            });
+            target.TakeDamage(damage, this.OffensiveStats);
         }
+
+        public override void TakeDamage(int amount, List<Stat> types)
+        {
+            int reduction = this.Defense.Value;
+            types.ForEach(type =>
+            {
+                if (this.DefensiveStats.Contains(type))
+                {
+                    reduction += this.DefensiveStats.Find(stat => stat.Equals(type)).Value;
+                }
+            });
+            if (amount > reduction)
+            {
+                this.Health.Reduce(amount - reduction);
+            }
+        }
+        #endregion
 
         public Character GetTarget()
         {
             throw new System.NotImplementedException();
         }
+
+        public List<Stat> Stats { get; private set; }
 
         public List<IFight> GetAllies()
         {
@@ -71,7 +101,7 @@ namespace RPG.GameLogic.Models.Characters
         {
             this.Animation.PlayAnimation(gameTime);
             this.Animation.PlayAnimation(gameTime);
-            CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.frameWidth, 
+            CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.frameWidth,
                 Animation.frameWidth, Animation.frameHeight);
         }
 

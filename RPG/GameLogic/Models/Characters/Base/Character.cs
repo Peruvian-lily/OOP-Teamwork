@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using RPG.GameLogic.Models.Stats;
+using RPG.GameLogic.Models.Stats.Base;
 
 namespace RPG.GameLogic.Models.Characters.Base
 {
@@ -35,13 +37,6 @@ namespace RPG.GameLogic.Models.Characters.Base
 
         public Defense Defense { get; private set; }
 
-        public void TakeDamage(int amount)
-        {
-            int damage = amount - this.Defense.Value;
-            if (damage > 0)
-            {
-                this.Health.Reduce(damage);
-            }
-        }
+        public abstract void TakeDamage(int amount, List<Stat> types);
     }
 }

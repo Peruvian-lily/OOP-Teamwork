@@ -39,13 +39,14 @@
                 stats = new List<Stat>
                 {
                     new Attack(_rnd.Next(power)+1),
-                    new FireAttack(_rnd.Next(power)+1)
+                    new Elemental(_rnd.Next(power)+1, StatType.Offensive)
                 };
             }
             else
             {
                 stats = new List<Stat>
                 {
+                    new Elemental(_rnd.Next(power)+1, StatType.Defensive),
                     new Health(_rnd.Next(power)+1),
                     new Defense(_rnd.Next(power)+1),
                 };

@@ -15,11 +15,11 @@ namespace RPG.GameLogic.Core.Enemies
         public static Enemy GenerateEnemy(int minValue, int maxValue)
         {
             string enemyName = GenerateEnemyName();
-            int power = rnd.Next(minValue, maxValue - minValue);
+            int power = rnd.Next(maxValue-minValue);
             List<Stat> stats = GenerateStats(power);
-            int health = rnd.Next(minValue, maxValue - minValue);
-            int attack = rnd.Next(minValue, maxValue - minValue);
-            int defense = rnd.Next(minValue, maxValue - minValue);
+            int health = rnd.Next(power);
+            int attack = rnd.Next(power);
+            int defense = rnd.Next(power);
 
             Enemy enemy = new Enemy(id, enemyName, health, attack, defense, stats);
             
@@ -30,10 +30,8 @@ namespace RPG.GameLogic.Core.Enemies
         {
             List<Stat> allStats = new List<Stat>
             {
-                new Attack(rnd.Next(power) + 1),
-                new FireAttack(rnd.Next(power) + 1),
-                new Health(rnd.Next(power) + 1),
-                new Defense(rnd.Next(power) + 1),
+                new Elemental(rnd.Next(power) + 1, StatType.Defensive),
+                new Elemental(rnd.Next(power) + 1, StatType.Offensive),
             };
 
             List<Stat> returnStats = new List<Stat>();

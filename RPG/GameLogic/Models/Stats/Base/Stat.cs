@@ -11,7 +11,7 @@ namespace RPG.GameLogic.Models.Stats.Base
         {
             this.Name = name;
             this.Value = value;
-            this.StatType = type;
+            this.Type = type;
         }
 
         public string Name
@@ -39,7 +39,7 @@ namespace RPG.GameLogic.Models.Stats.Base
             }
         }
 
-        public StatType StatType { get; set; }
+        public StatType Type { get; set; }
 
         public void Reduce(int amount)
         {
@@ -48,6 +48,16 @@ namespace RPG.GameLogic.Models.Stats.Base
         public void Increase(int amount)
         {
             this.Value += amount;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var stat = obj as Stat;
+            if (stat != null)
+            {
+                return this.Name == stat.Name;
+            }
+            return false;
         }
     }
 }
