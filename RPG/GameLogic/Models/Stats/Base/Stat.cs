@@ -23,6 +23,7 @@ namespace RPG.GameLogic.Models.Stats.Base
                 {
                     throw new ArgumentNullException("Stats name cannot be empty");
                 }
+                this.name = value;
             }
         }
         public int Value

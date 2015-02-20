@@ -43,43 +43,43 @@ namespace RPG.GameLogic.Models.NPC
 
         public Player(string id, string name, int health,
              int attackPower, int defense, int inventorySize)
-            : this(id, name, health, attackPower, defense, inventorySize, null)
+            : this(id, name, health, attackPower, defense, inventorySize, new List<Stat>())
         {
         }
 
         public Texture2D PlayerTexture { get; set; }
-        
+
         public Animation LeftAnimation { get; set; }
-        
+
         public Animation RightAnimation { get; set; }
-        
+
         public Animation BackAnimation { get; set; }
-        
+
         public Animation FrontAnimation { get; set; }
 
-        public Animation CurrentAnimation { get; set; }  
+        public Animation CurrentAnimation { get; set; }
 
         public bool Active { get; set; }
 
         public int Width
         {
-            get 
+            get
             {
                 // In the sprite, we are using, the character is drawn 3 times 
                 // on the X axis so to get his width he divide by 3!
                 const int SPRITE_WIDTH_OFFSET = 3;
-                return this.PlayerTexture.Width / SPRITE_WIDTH_OFFSET; 
+                return this.PlayerTexture.Width / SPRITE_WIDTH_OFFSET;
             }
         }
 
         public int Height
         {
-            get 
+            get
             {
                 // In the sprite, we are using, the character is drawn 4 times 
                 // on the Y axis so to get his height he divide by 4!
                 const int SPRITE_HEIGHT_OFFSET = 4;
-                return this.PlayerTexture.Height / SPRITE_HEIGHT_OFFSET; 
+                return this.PlayerTexture.Height / SPRITE_HEIGHT_OFFSET;
             }
         }
 
@@ -102,12 +102,13 @@ namespace RPG.GameLogic.Models.NPC
 
         public void PickUp(PickUp item)
         {
-            string itemType = item.GetType().Name.ToLower();
+            string itemType = item.GetType().Name;
 
             switch (itemType)
             {
-                case "item":
+                case "Item":
                     this.Inventory.Add((Item)item);
+                    this.ApplyItemStats((Item)item);
                     break;
                 case "bonus":
                     ((Bonus)item).Apply(this);
@@ -151,7 +152,7 @@ namespace RPG.GameLogic.Models.NPC
             }
             else
             {
-                this.CurrentAnimation = new Animation("Sprites\\Player\\character", 80f, 3, lastFrame, 
+                this.CurrentAnimation = new Animation("Sprites\\Player\\character", 80f, 3, lastFrame,
                     false, this.Position.X, this.Position.Y);
             }
         }
@@ -211,5 +212,34 @@ namespace RPG.GameLogic.Models.NPC
             Move(Game1.RIGHT_VECTOR);
         }
         #endregion
+
+        private void ApplyItemStats(Item item)
+        {
+            foreach (var stat in item.Stats)
+            {
+                switch (stat.Name)
+                {
+                    case "Attack":
+                        this.AttackPower.Increase(stat.Value);
+                        break;
+                    case "Health":
+                        this.Health.Increase(stat.Value);
+                        break;
+                    case "Defense":
+                        this.Defense.Increase(stat.Value);
+                        break;
+                    default:
+                        if (this.OtherStats.Contains(stat))
+                        {
+                            this.OtherStats.Find(entry => entry == stat).Increase(stat.Value);
+                        }
+                        else
+                        {
+                            this.OtherStats.Add(stat);
+                        }
+                        break;
+                }
+            }
+        }
     }
 }

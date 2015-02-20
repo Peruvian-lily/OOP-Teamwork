@@ -15,7 +15,7 @@
         private static string _id = "111";
         private static Random _rnd = new Random();
 
-        public static Item GenerateItem(IFight owner = null)
+        public static Item GenerateItem(int minStat, int maxStat, IFight owner = null)
         {
             var itemType = (ItemType)_rnd.Next(1);
             int power = _rnd.Next(50);
