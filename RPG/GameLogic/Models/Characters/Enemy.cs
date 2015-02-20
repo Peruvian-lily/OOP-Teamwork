@@ -19,6 +19,8 @@ namespace RPG.GameLogic.Models.Characters
             this.AttackPower = new Attack(attack);
             this.Stats = otherStats;
             this.Animation = new Animation("Sprites\\Monster\\enemy_new", 80f, 2, 4, false, 0, 0);
+            CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.frameWidth, 
+                Animation.frameWidth, Animation.frameHeight);
         }
 
         public Enemy(string id, string name, int health,
@@ -26,6 +28,8 @@ namespace RPG.GameLogic.Models.Characters
             : this(id, name, health, attack, defense, null)
         {
         }
+
+        public Rectangle CollisionRect { get; set; }
 
         public Animation Animation { get; private set; }
 
@@ -67,6 +71,8 @@ namespace RPG.GameLogic.Models.Characters
         {
             this.Animation.PlayAnimation(gameTime);
             this.Animation.PlayAnimation(gameTime);
+            CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.frameWidth, 
+                Animation.frameWidth, Animation.frameHeight);
         }
 
         public void Draw(SpriteBatch spriteBatch)

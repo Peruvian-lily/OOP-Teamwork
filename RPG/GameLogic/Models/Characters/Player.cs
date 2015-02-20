@@ -12,7 +12,7 @@ using RPG.Graphics;
 
 namespace RPG.GameLogic.Models.Characters
 {
-    class Player : Character, IPlayer
+    public class Player : Character, IPlayer
     {
         private const float Speed = 2;
         private KeyboardState ks;

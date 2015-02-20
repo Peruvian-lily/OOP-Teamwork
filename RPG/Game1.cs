@@ -31,6 +31,7 @@ namespace RPG
         private Engine engine;
         private Player player;
         private Enemy enemy;
+        private List<Enemy> enemyList;
         private SpriteFont defaultFont;
         private TextDrawer textDrawer;
         private Rectangle screen;
@@ -68,6 +69,9 @@ namespace RPG
             this.enemy = new Enemy("placeholder", "placeholder", 100, 100, 100, new List<Stat>() { });
             enemy.Position = new Vector2(200, 200);
 
+            this.enemyList = new List<Enemy>();
+            this.enemyList.Add(enemy);
+
             this.player.PickUp(ItemFactory.GenerateItem(25,50));
 
             base.Initialize();
@@ -89,45 +93,6 @@ namespace RPG
         {
         }
 
-        private void CheckCollisons(Player player, Enemy enemy)
-        {
-            Vector2 topLeftPlayer = new Vector2(player.Position.X, player.Position.Y);
-            Vector2 topRightPlayer = new Vector2(player.Position.X + player.Width, player.Position.Y);
-            Vector2 bottomLeftPlayer = new Vector2(player.Position.X, player.Position.Y + player.Height);
-            Vector2 bottomRightPlayer = new Vector2(player.Position.X + player.Width, player.Position.Y + player.Height);
-
-            int enemyWidth = enemy.Animation.frameWidth;
-            int enemyHeight = enemy.Animation.frameHeight;
-            int enemyX = (int)enemy.Position.X;
-            int enemyY = (int)enemy.Position.Y;
-            Rectangle enemyCollisonRect = new Rectangle(enemyX, enemyY + enemyHeight, enemyWidth, enemyHeight);
-
-            if (IsPointInRect(topLeftPlayer, enemyCollisonRect))
-            {
-               GameState = GameState.Battle;
-            }
-            else if (IsPointInRect(topRightPlayer, enemyCollisonRect))
-            {
-                GameState = GameState.Battle;
-            }
-            else if (IsPointInRect(bottomLeftPlayer, enemyCollisonRect))
-            {
-                GameState = GameState.Battle;
-            }
-            else if (IsPointInRect(bottomRightPlayer, enemyCollisonRect))
-            {
-               GameState = GameState.Battle;
-            }
-        }
-
-        public static bool IsPointInRect(Vector2 point, Rectangle rectangle)
-        {
-            bool isPointXIn = point.X >= rectangle.X && point.X <= rectangle.X + rectangle.Width;
-            bool isPointYIn = point.Y <= rectangle.Y && point.Y >= rectangle.Y - rectangle.Height;
-            return isPointXIn && isPointYIn;
-        }
-
-
         protected override void Update(GameTime gameTime)
         {
             /*
@@ -137,8 +102,12 @@ namespace RPG
             {
                     case GameState.InGame:
                         this.player.Update(gameTime);
-                        this.enemy.Update(gameTime);
-                        CheckCollisons(player, enemy);
+                        foreach (var item in enemyList)
+                        {
+                            item.Update(gameTime);
+                        }
+                        
+                        engine.EnemyCollisionCheck(player, enemyList);
                         break;
                     case GameState.MainMenu:
                         this.mainMenu.Update();
@@ -153,6 +122,8 @@ namespace RPG
         protected override void Draw(GameTime gameTime)
         {
             this.GraphicsDevice.Clear(Color.White);
+            textDrawer.DrawString(spriteBatch, this.player.Position.ToString(), new Vector2(), Color.Black);
+
             this.spriteBatch.Begin();
             switch (GameState)
             {
