@@ -26,16 +26,7 @@ namespace RPG.GameLogic.Models.Characters
             this.AttackPower = new Attack(attackPower);
             this.Inventory = new Inventory.Base.Inventory(inventorySize);
             this.OtherStats = otherStats;
-            this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
-                1, true, this.Position.X, this.Position.Y);
-            this.RightAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
-                3, true, this.Position.X, this.Position.Y);
-            this.BackAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
-                2, true, this.Position.X, this.Position.Y);
-            this.FrontAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
-                4, true, this.Position.X, this.Position.Y);
-            this.PlayerTexture = Game1.Content.Load<Texture2D>("Sprites\\Player\\character");
-            this.CurrentAnimation = LeftAnimation;
+            this.AddAnimation();
         }
 
         public Player(string id, string name, int health,
@@ -237,6 +228,20 @@ namespace RPG.GameLogic.Models.Characters
                         break;
                 }
             }
+        }
+
+        private void AddAnimation()
+        {
+            this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
+                1, true, this.Position.X, this.Position.Y);
+            this.RightAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
+                3, true, this.Position.X, this.Position.Y);
+            this.BackAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
+                2, true, this.Position.X, this.Position.Y);
+            this.FrontAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
+                4, true, this.Position.X, this.Position.Y);
+            this.PlayerTexture = Game1.Content.Load<Texture2D>("Sprites\\Player\\character");
+            this.CurrentAnimation = LeftAnimation;
         }
     }
 }
