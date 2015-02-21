@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using RPG.GameLogic.Core.Items;
 using RPG.GameLogic.Core;
 using RPG.GameLogic.Core.Enemies;
@@ -45,8 +46,8 @@ namespace RPG
 
         Map map = new Map();
         TileMap tileMap = new TileMap();
-        int squaresAcross = 25;
-        int squaresDown = 15;
+        int squaresAcross = 15;
+        int squaresDown = 10;
 
         public Game1()
             : base()
@@ -110,6 +111,7 @@ namespace RPG
             switch (GameState)
             {
                 case GameState.InGame:
+                    Camera.Update(tileMap, squaresAcross, squaresDown);
                     this.player.Update(gameTime);
                     foreach (var entry in worldObjects)
                     {
