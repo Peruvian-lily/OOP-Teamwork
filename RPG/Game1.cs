@@ -94,7 +94,7 @@ namespace RPG
             this.mainMenu.LoadContent(base.Content);
             this.battleScreen.LoadContent(base.Content);
             this.textDrawer = new TextDrawer(this.defaultFont);
-            Tile.TileSetTexture = Content.Load<Texture2D>(@"Tiles\wood_tileset_3");
+            Tile.TileSetTexture = Content.Load<Texture2D>(@"Content\Tiles\tileset");
         }
 
         protected override void UnloadContent()
