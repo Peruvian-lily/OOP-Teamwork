@@ -6,7 +6,8 @@ namespace RPG.GameLogic.Models.Items
     class Bonus : PickUp
     {
 
-        public Bonus(string id, string name) : base(id, name)
+        public Bonus(string name) 
+            : base(name)
         {
         }
 

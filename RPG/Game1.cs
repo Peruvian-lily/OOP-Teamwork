@@ -2,19 +2,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Storage;
-using Microsoft.Xna.Framework.GamerServices;
 using RPG.GameLogic.Core.Items;
 using RPG.GameLogic.Core;
-using RPG.GameLogic.Models;
 using RPG.GameLogic.Core.Enemies;
 using RPG.GameLogic.Models.Characters;
-using RPG.GameLogic.Models.Stats.Base;
 using RPG.Graphics;
 
 #endregion
@@ -27,11 +21,9 @@ namespace RPG
         private SpriteBatch spriteBatch;
         private MainMenu mainMenu;
         private BattleScreen battleScreen;
-
         private Engine engine;
         private Player player;
-        private Enemy enemy;
-        private List<Enemy> enemyList;
+        private List<Enemy> worldObjects;
         private SpriteFont defaultFont;
         private TextDrawer textDrawer;
         private Rectangle screen;
@@ -40,10 +32,12 @@ namespace RPG
         public static readonly Vector2 DOWN_VECTOR = new Vector2(0, 1);
         public static readonly Vector2 RIGHT_VECTOR = new Vector2(1, 0);
         public static readonly Vector2 LEFT_VECTOR = new Vector2(-1, 0);
+        public new static ContentManager Content;
+        public static Random Rnd = new Random();
         public static int ScreenWidth;
         public static int ScreenHeight;
         public static GameState GameState;
-        public new static ContentManager Content;
+        private const int ENEMY_COUNT = 5;
 
         public Game1()
             : base()
@@ -65,14 +59,23 @@ namespace RPG
             base.Content = Content;
 
             this.engine = Engine.GetInstance;
-            this.player = new Player("placeholder", "placeholder", 100, 100, 100, 5);
-            this.enemy = new Enemy("placeholder", "placeholder", 100, 100, 100, new List<Stat>() { });
-            enemy.Position = new Vector2(200, 200);
+            this.player = new Player("QueBabche", 100, 100, 100, 5);
+            this.player.PickUp(ItemFactory.GenerateItem(25, 50));
 
-            this.enemyList = new List<Enemy>();
-            this.enemyList.Add(enemy);
+            this.worldObjects = new List<Enemy>();
+            for (int i = 0; i < ENEMY_COUNT; i++)
+            {
+                int minPower = Rnd.Next(75);
+                int maxPower = Rnd.Next(minPower, 101);
+                bool hasBonus = Rnd.Next(1, 101) < 5;  // Currently has 5% chance to spawn enemy with bonus stuff.
+                var enemy = EnemyFactory.SpawnEnemy(minPower, maxPower, hasBonus);
 
-            this.player.PickUp(ItemFactory.GenerateItem(25,50));
+                int positionX = Rnd.Next(ScreenWidth/3, ScreenWidth - enemy.Animation.frameWidth);
+                int positionY = Rnd.Next(ScreenHeight/3, ScreenHeight - enemy.Animation.frameHeight);
+                enemy.Position = new Vector2(positionX, positionY);
+                //engine.EnemyCollisionCheck(enemy, worldObjects);
+                worldObjects.Add(enemy);
+            }
 
             base.Initialize();
         }
@@ -83,7 +86,6 @@ namespace RPG
             this.defaultFont = base.Content.Load<SpriteFont>("Fonts\\Arial");
             this.mainMenu.LoadContent(base.Content);
             this.battleScreen.LoadContent(base.Content);
-
 
             // This is the place to initialize all variables depending on external resources.
             this.textDrawer = new TextDrawer(this.defaultFont);
@@ -102,12 +104,12 @@ namespace RPG
             {
                     case GameState.InGame:
                         this.player.Update(gameTime);
-                        foreach (var item in enemyList)
+                        foreach (var entry in worldObjects)
                         {
-                            item.Update(gameTime);
+                            entry.Update(gameTime);
                         }
                         
-                        engine.EnemyCollisionCheck(player, enemyList);
+                        engine.EnemyCollisionCheck(player, worldObjects);
                         break;
                     case GameState.MainMenu:
                         this.mainMenu.Update();
@@ -132,7 +134,10 @@ namespace RPG
                     break;
                 case GameState.InGame:
                     this.player.Draw(this.spriteBatch);
-                    this.enemy.Draw(this.spriteBatch);
+                    worldObjects.ForEach(enemy =>
+                    {
+                        enemy.Draw(this.spriteBatch);
+                    });
                     break;
                 case GameState.Battle:
                     this.battleScreen.Draw(this.spriteBatch);

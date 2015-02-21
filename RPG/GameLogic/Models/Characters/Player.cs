@@ -21,10 +21,10 @@ namespace RPG.GameLogic.Models.Characters
         private List<Stat> otherStats;
 
 
-        public Player(string id, string name, int health,
+        public Player(string name, int health,
             int attackPower, int defense, int inventorySize,
             List<Stat> otherStats)
-            : base(id, name, health, defense)
+            : base(name, health, defense)
         {
             this.AttackPower = new Attack(attackPower);
             this.Inventory = new Inventory.Base.Inventory(inventorySize);
@@ -32,16 +32,13 @@ namespace RPG.GameLogic.Models.Characters
             this.AddAnimation();
         }
 
-        public Player(string id, string name, int health,
+        public Player(string name, int health,
              int attackPower, int defense, int inventorySize)
-            : this(id, name, health, attackPower, defense, inventorySize, new List<Stat>())
+            : this(name, health, attackPower, defense, inventorySize, new List<Stat>())
         {
         }
 
-        public bool Active { get; set; }
-        #region Animation And Textures
-        public Texture2D PlayerTexture { get; set; }
-
+        #region Animation
         public Animation LeftAnimation { get; set; }
 
         public Animation RightAnimation { get; set; }
@@ -51,30 +48,6 @@ namespace RPG.GameLogic.Models.Characters
         public Animation FrontAnimation { get; set; }
 
         public Animation CurrentAnimation { get; set; }
-        #endregion
-
-        #region Coordinates
-        public int Width
-        {
-            get
-            {
-                // In the sprite, we are using, the character is drawn 3 times 
-                // on the X axis so to get his width he divide by 3!
-                const int SPRITE_WIDTH_OFFSET = 3;
-                return this.PlayerTexture.Width / SPRITE_WIDTH_OFFSET;
-            }
-        }
-
-        public int Height
-        {
-            get
-            {
-                // In the sprite, we are using, the character is drawn 4 times 
-                // on the Y axis so to get his height he divide by 4!
-                const int SPRITE_HEIGHT_OFFSET = 4;
-                return this.PlayerTexture.Height / SPRITE_HEIGHT_OFFSET;
-            }
-        }
         #endregion
 
         #region Stats and Damage
@@ -92,7 +65,7 @@ namespace RPG.GameLogic.Models.Characters
 
         public void Attack(Character target)
         {
-            int damage = this.AttackPower.Value; //Add more values to formula as more stat types get implemented.
+            int damage = this.AttackPower.Value;
             this.OffensiveStats.ForEach(stat =>
             {
                 damage = +stat.Value;
@@ -279,7 +252,7 @@ namespace RPG.GameLogic.Models.Characters
                 2, true, this.Position.X, this.Position.Y);
             this.FrontAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
                 4, true, this.Position.X, this.Position.Y);
-            this.PlayerTexture = Game1.Content.Load<Texture2D>("Sprites\\Player\\character");
+            this.Texture = Game1.Content.Load<Texture2D>("Sprites\\Player\\character");
             this.CurrentAnimation = LeftAnimation;
         }
         #endregion

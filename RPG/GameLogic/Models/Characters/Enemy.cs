@@ -12,20 +12,20 @@ namespace RPG.GameLogic.Models.Characters
 {
     public class Enemy : Character, IRoam, IEnemy
     {
-        public Enemy(string id, string name, int health,
+        public Enemy(string name, int health,
             int attack, int defense, List<Stat> otherStats)
-            : base(id, name, health, defense)
+            : base(name, health, defense)
         {
             this.AttackPower = new Attack(attack);
             this.Stats = otherStats;
             this.Animation = new Animation("Sprites\\Monster\\enemy_new", 80f, 2, 4, false, 0, 0);
-            CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.frameWidth,
+            this.CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.frameWidth,
                 Animation.frameWidth, Animation.frameHeight);
         }
 
-        public Enemy(string id, string name, int health,
+        public Enemy(string name, int health,
             int attack, int defense)
-            : this(id, name, health, attack, defense, null)
+            : this(name, health, attack, defense, new List<Stat>())
         {
         }
 
@@ -35,7 +35,10 @@ namespace RPG.GameLogic.Models.Characters
 
         public Texture2D EnemyTexture { get; set; }
         #region Stats and Damage
+
         public Attack AttackPower { get; private set; }
+
+        public List<Stat> Stats { get; private set; }
 
         public List<Stat> OffensiveStats
         {
@@ -49,7 +52,7 @@ namespace RPG.GameLogic.Models.Characters
 
         public void Attack(Character target)
         {
-            int damage = this.AttackPower.Value; //Add more values to formula as more stat types get implemented.
+            int damage = this.AttackPower.Value;
             this.OffensiveStats.ForEach(stat =>
             {
                 damage = +stat.Value;
@@ -78,8 +81,6 @@ namespace RPG.GameLogic.Models.Characters
         {
             throw new System.NotImplementedException();
         }
-
-        public List<Stat> Stats { get; private set; }
 
         public List<IFight> GetAllies()
         {

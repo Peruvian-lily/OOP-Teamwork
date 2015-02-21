@@ -9,8 +9,7 @@ namespace RPG.GameLogic.Models.Characters.Base
     {
         private string name;
 
-        protected Character(string id, string name, int health, int defense)
-            : base(id)
+        protected Character(string name, int health, int defense)
         {
             this.Name = name;
             this.Health = new Health(health);
@@ -36,6 +35,28 @@ namespace RPG.GameLogic.Models.Characters.Base
         public Health Health { get; private set; }
 
         public Defense Defense { get; private set; }
+
+        public int Width
+        {
+            get
+            {
+                // In the sprite, we are using, the character is drawn 3 times 
+                // on the X axis so to get his width he divide by 3!
+                const int SPRITE_WIDTH_OFFSET = 3;
+                return this.Texture.Width / SPRITE_WIDTH_OFFSET;
+            }
+        }
+
+        public int Height
+        {
+            get
+            {
+                // In the sprite, we are using, the character is drawn 4 times 
+                // on the Y axis so to get his height he divide by 4!
+                const int SPRITE_HEIGHT_OFFSET = 4;
+                return this.Texture.Height / SPRITE_HEIGHT_OFFSET;
+            }
+        }
 
         public abstract void TakeDamage(int amount, List<Stat> types);
     }

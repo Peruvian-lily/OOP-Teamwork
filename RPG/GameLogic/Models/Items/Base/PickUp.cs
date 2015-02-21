@@ -6,8 +6,7 @@ namespace RPG.GameLogic.Models.Items.Base
     {
         private string _name;
 
-        protected PickUp(string id, string name) 
-            : base(id)
+        protected PickUp(string name) 
         {
             this.Name = name;
         }

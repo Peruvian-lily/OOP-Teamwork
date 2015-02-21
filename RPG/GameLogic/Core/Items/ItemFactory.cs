@@ -24,7 +24,7 @@
             List<Stat> stats = GenerateStats(power, itemType);
             Effects effect = GenerateEffect(power,hasEffect, owner);
             string name = hasEffect ? GenerateName(itemType, effect) : GenerateName(itemType);
-            Item item = new Item(_id,name,stats,effect);
+            Item item = new Item(name,stats,effect);
 
             return item;
         }

@@ -11,15 +11,15 @@
     {
         private List<Stat> _stats;
 
-        public Item(string id, string name, List<Stat> stats, Effects effect)
-            : base(id, name)
+        public Item(string name, List<Stat> stats, Effects effect)
+            : base(name)
         {
             this.Stats = stats;
             this.Effect = effect;
         }
 
         public Item(string id, string name, List<Stat> stats)
-            : this(id, name, stats, null)
+            : this(name, stats, null)
         {
 
         }

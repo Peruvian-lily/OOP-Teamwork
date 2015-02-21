@@ -1,4 +1,5 @@
-﻿using RPG.GameLogic.Models.Characters;
+﻿using Microsoft.Xna.Framework;
+using RPG.GameLogic.Models.Characters;
 
 namespace RPG.GameLogic.Core.Enemies
 {
@@ -9,29 +10,30 @@ namespace RPG.GameLogic.Core.Enemies
 
     public static class EnemyFactory
     {
-        private static string id = "1111";
         private static Random rnd = new Random();
 
-        public static Enemy GenerateEnemy(int minValue, int maxValue)
+        public static Enemy SpawnEnemy(int minValue, int maxValue, bool hasStats)
         {
             string enemyName = GenerateEnemyName();
-            int power = rnd.Next(maxValue-minValue);
-            List<Stat> stats = GenerateStats(power);
-            int health = rnd.Next(power);
-            int attack = rnd.Next(power);
-            int defense = rnd.Next(power);
-
-            Enemy enemy = new Enemy(id, enemyName, health, attack, defense, stats);
-            
+            //int power = rnd.Next(minValue, maxValue + 1);
+            int health = rnd.Next(minValue, maxValue + 1);
+            int attack = rnd.Next(minValue, maxValue + 1);
+            int defense = rnd.Next(minValue, maxValue + 1);
+            var stats = new List<Stat>();
+            if (hasStats)
+            {
+                stats = GenerateStats(minValue, maxValue);
+            }
+            Enemy enemy = new Enemy(enemyName, health, attack, defense, stats);
             return enemy;
         }
 
-        private static List<Stat> GenerateStats(int power)
+        private static List<Stat> GenerateStats(int minValue, int maxValue)
         {
             List<Stat> allStats = new List<Stat>
             {
-                new Elemental(rnd.Next(power) + 1, StatType.Defensive),
-                new Elemental(rnd.Next(power) + 1, StatType.Offensive),
+                new Elemental(rnd.Next(minValue, maxValue + 1), StatType.Defensive),
+                new Elemental(rnd.Next(minValue, maxValue + 1) + 1, StatType.Offensive),
             };
 
             List<Stat> returnStats = new List<Stat>();
