@@ -62,7 +62,7 @@ namespace RPG
             base.Content = Content;
 
             this.engine = Engine.GetInstance;
-            this.player = new Player("QueBabche", 100, 100, 25, 5);
+            this.player = new Player("QueBabche", 100, 100, 100, 5);
             this.player.PickUp(ItemFactory.GenerateItem(25, 50));
 
             for (int i = 0; i < ENEMY_COUNT; i++)
@@ -78,9 +78,6 @@ namespace RPG
                 //engine.EnemyCollisionCheck(enemy, worldObjects);
                 worldObjects.Add(enemy);
             }
-
-            Battle fite = new Battle(player, worldObjects);
-            fite.StartFight();
 
             base.Initialize();
         }
