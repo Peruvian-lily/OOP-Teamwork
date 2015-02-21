@@ -196,6 +196,9 @@
     <Content Include="Content\Sprites\Player\test.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Tiles\tileset.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Tiles\wood_tileset_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

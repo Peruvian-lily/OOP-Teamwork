@@ -34,6 +34,7 @@ namespace RPG.GameLogic.Models.Characters
         public Animation Animation { get; private set; }
 
         public Texture2D EnemyTexture { get; set; }
+
         #region Stats and Damage
 
         public Attack AttackPower { get; private set; }
