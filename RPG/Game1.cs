@@ -46,8 +46,8 @@ namespace RPG
 
         Map map = new Map();
         TileMap tileMap = new TileMap();
-        int squaresAcross = 15;
-        int squaresDown = 10;
+        int squaresAcross = 18;
+        int squaresDown = 11;
 
         public Game1()
             : base()

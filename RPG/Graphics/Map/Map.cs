@@ -24,11 +24,16 @@ namespace RPG.Graphics.Map
             {
                 for (int x = 0; x < squaresAcross; x++)
                 {
-                    spriteBatch.Draw(
-                        Tile.TileSetTexture,
-                        new Rectangle((x * 32) - offsetX, (y * 32) - offsetY, 32, 32),
-                        Tile.GetSourceRectangle(tileMap.Rows[y + firstY].Columns[x + firstX].TileID),
-                        Color.White);
+                    foreach (int tileID in tileMap.Rows[y + firstY].Columns[x + firstX].BaseTiles)
+                    {
+                        spriteBatch.Draw(
+                            Tile.TileSetTexture,
+                            new Rectangle(
+                                (x * Tile.TileWidth) - offsetX, (y * Tile.TileHeight) - offsetY,
+                                Tile.TileWidth, Tile.TileHeight),
+                            Tile.GetSourceRectangle(tileID),
+                            Color.White);
+                    }
                 }
             }
         }
@@ -38,3 +43,10 @@ namespace RPG.Graphics.Map
         public int squaresAcross { get; set; }
     }
 }
+
+
+ //                       spriteBatch.Draw(
+ //                       Tile.TileSetTexture,
+ //                       new Rectangle((x * 32) - offsetX, (y * 32) - offsetY, 32, 32),
+ //                       Tile.GetSourceRectangle(tileMap.Rows[y + firstY].Columns[x + firstX].TileID),
+ //                       Color.White);
