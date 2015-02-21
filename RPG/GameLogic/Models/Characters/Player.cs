@@ -147,7 +147,7 @@ namespace RPG.GameLogic.Models.Characters
         #region Engine Stuff
         public override void Update(GameTime gameTime)
         {
-            this.KeyListener();
+            //this.KeyListener();
             this.CurrentAnimation.PlayAnimation(gameTime);
         }
 
