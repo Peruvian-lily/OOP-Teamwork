@@ -1,4 +1,7 @@
-﻿namespace RPG.Graphics.Map
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace RPG.Graphics.Map
 {
     class Map
     {
@@ -6,5 +9,32 @@
         public LinkedList<Enemy> enemies;
 
         public */
+
+        public void Draw(SpriteBatch spriteBatch, TileMap myMap, int squaresAcross, int squaresDown)
+        {
+            Vector2 firstSquare = new Vector2(Camera.Location.X / 32, Camera.Location.Y / 32);
+            int firstX = (int)firstSquare.X;
+            int firstY = (int)firstSquare.Y;
+
+            Vector2 squareOffset = new Vector2(Camera.Location.X % 32, Camera.Location.Y % 32);
+            int offsetX = (int)squareOffset.X;
+            int offsetY = (int)squareOffset.Y;
+
+            for (int y = 0; y < squaresDown; y++)
+            {
+                for (int x = 0; x < squaresAcross; x++)
+                {
+                    spriteBatch.Draw(
+                        Tile.TileSetTexture,
+                        new Rectangle((x * 32) - offsetX, (y * 32) - offsetY, 32, 32),
+                        Tile.GetSourceRectangle(myMap.Rows[y + firstY].Columns[x + firstX].TileID),
+                        Color.White);
+                }
+            }
+        }
+
+        public int squaresDown { get; set; }
+
+        public int squaresAcross { get; set; }
     }
 }

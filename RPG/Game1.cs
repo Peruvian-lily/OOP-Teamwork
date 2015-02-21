@@ -43,9 +43,10 @@ namespace RPG
         public static GameState GameState;
         private const int ENEMY_COUNT = 5;
 
-        TileMap myMap = new TileMap();
-        int squaresAcross = 5;
-        int squaresDown = 5;
+        Map map = new Map();
+        TileMap tileMap = new TileMap();
+        int squaresAcross = 25;
+        int squaresDown = 15;
 
         public Game1()
             : base()
@@ -94,7 +95,7 @@ namespace RPG
             this.mainMenu.LoadContent(base.Content);
             this.battleScreen.LoadContent(base.Content);
             this.textDrawer = new TextDrawer(this.defaultFont);
-            Tile.TileSetTexture = Content.Load<Texture2D>(@"Content\Tiles\tileset");
+            Tile.TileSetTexture = Content.Load<Texture2D>(@"Tiles\tileset");
         }
 
         protected override void UnloadContent()
@@ -131,29 +132,11 @@ namespace RPG
         {
             this.GraphicsDevice.Clear(Color.White);
 
-            Vector2 firstSquare = new Vector2(Camera.Location.X / 32, Camera.Location.Y / 32);
-            int firstX = (int)firstSquare.X;
-            int firstY = (int)firstSquare.Y;
-
-            Vector2 squareOffset = new Vector2(Camera.Location.X % 32, Camera.Location.Y % 32);
-            int offsetX = (int)squareOffset.X;
-            int offsetY = (int)squareOffset.Y;
-
-            for (int y = 0; y < squaresDown; y++)
-            {
-                for (int x = 0; x < squaresAcross; x++)
-                {
-                    spriteBatch.Draw(
-                        Tile.TileSetTexture,
-                        new Rectangle((x * 32) - offsetX, (y * 32) - offsetY, 32, 32),
-                        Tile.GetSourceRectangle(myMap.Rows[y + firstY].Columns[x + firstX].TileID),
-                        Color.White);
-                }
-            }
-
             textDrawer.DrawString(spriteBatch, this.player.Position.ToString(), new Vector2(), Color.Black);
 
             this.spriteBatch.Begin();
+            map.Draw(spriteBatch, tileMap, squaresAcross, squaresDown);
+
             switch (GameState)
             {
                 case GameState.MainMenu:
