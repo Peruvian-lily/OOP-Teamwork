@@ -10,13 +10,13 @@ namespace RPG.Graphics.Map
 
         public */
 
-        public void Draw(SpriteBatch spriteBatch, TileMap myMap, int squaresAcross, int squaresDown)
+        public void Draw(SpriteBatch spriteBatch, TileMap tileMap, int squaresAcross, int squaresDown)
         {
-            Vector2 firstSquare = new Vector2(Camera.Location.X / 32, Camera.Location.Y / 32);
+            Vector2 firstSquare = new Vector2(Camera.Location.X / Tile.TileWidth, Camera.Location.Y / Tile.TileHeight);
             int firstX = (int)firstSquare.X;
             int firstY = (int)firstSquare.Y;
 
-            Vector2 squareOffset = new Vector2(Camera.Location.X % 32, Camera.Location.Y % 32);
+            Vector2 squareOffset = new Vector2(Camera.Location.X % Tile.TileWidth, Camera.Location.Y % Tile.TileHeight);
             int offsetX = (int)squareOffset.X;
             int offsetY = (int)squareOffset.Y;
 
@@ -27,7 +27,7 @@ namespace RPG.Graphics.Map
                     spriteBatch.Draw(
                         Tile.TileSetTexture,
                         new Rectangle((x * 32) - offsetX, (y * 32) - offsetY, 32, 32),
-                        Tile.GetSourceRectangle(myMap.Rows[y + firstY].Columns[x + firstX].TileID),
+                        Tile.GetSourceRectangle(tileMap.Rows[y + firstY].Columns[x + firstX].TileID),
                         Color.White);
                 }
             }
