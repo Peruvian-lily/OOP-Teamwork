@@ -29,17 +29,16 @@ namespace RPG.GameLogic.Core
         {
         }
 
-        public void EnemyCollisionCheck(Player player, List<Enemy> collidableObjects)
+        public void EnemyCollisionCheck(Player player, List<Character> collidableObjects)
         {
-            foreach (var obj in collidableObjects)
+            collidableObjects.ForEach(obj =>
             {
-                Rectangle collisionRect = obj.CollisionRect;
-
                 if (obj is Enemy)
                 {
+                    Rectangle collisionRect = ((Enemy) obj).CollisionRect;
                     EnemyCollisions(player, collisionRect);
                 }
-            }
+            });
         }
 
         private void EnemyCollisions(Player player, Rectangle collisionRect)

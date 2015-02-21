@@ -8,7 +8,10 @@ using Microsoft.Xna.Framework.Graphics;
 using RPG.GameLogic.Core.Items;
 using RPG.GameLogic.Core;
 using RPG.GameLogic.Core.Enemies;
+using RPG.GameLogic.Interface;
+using RPG.GameLogic.Models;
 using RPG.GameLogic.Models.Characters;
+using RPG.GameLogic.Models.Characters.Base;
 using RPG.Graphics;
 
 #endregion
@@ -23,7 +26,7 @@ namespace RPG
         private BattleScreen battleScreen;
         private Engine engine;
         private Player player;
-        private List<Enemy> worldObjects;
+        private List<Character> worldObjects = new List<Character>();
         private SpriteFont defaultFont;
         private TextDrawer textDrawer;
         private Rectangle screen;
@@ -59,10 +62,9 @@ namespace RPG
             base.Content = Content;
 
             this.engine = Engine.GetInstance;
-            this.player = new Player("QueBabche", 100, 100, 100, 5);
+            this.player = new Player("QueBabche", 100, 100, 25, 5);
             this.player.PickUp(ItemFactory.GenerateItem(25, 50));
 
-            this.worldObjects = new List<Enemy>();
             for (int i = 0; i < ENEMY_COUNT; i++)
             {
                 int minPower = Rnd.Next(75);
@@ -70,12 +72,15 @@ namespace RPG
                 bool hasBonus = Rnd.Next(1, 101) < 5;  // Currently has 5% chance to spawn enemy with bonus stuff.
                 var enemy = EnemyFactory.SpawnEnemy(minPower, maxPower, hasBonus);
 
-                int positionX = Rnd.Next(ScreenWidth/3, ScreenWidth - enemy.Animation.frameWidth);
-                int positionY = Rnd.Next(ScreenHeight/3, ScreenHeight - enemy.Animation.frameHeight);
+                int positionX = Rnd.Next(ScreenWidth / 3, ScreenWidth - enemy.Animation.frameWidth);
+                int positionY = Rnd.Next(ScreenHeight / 3, ScreenHeight - enemy.Animation.frameHeight);
                 enemy.Position = new Vector2(positionX, positionY);
                 //engine.EnemyCollisionCheck(enemy, worldObjects);
                 worldObjects.Add(enemy);
             }
+
+            Battle fite = new Battle(player, worldObjects);
+            fite.StartFight();
 
             base.Initialize();
         }
@@ -102,21 +107,21 @@ namespace RPG
             */
             switch (GameState)
             {
-                    case GameState.InGame:
-                        this.player.Update(gameTime);
-                        foreach (var entry in worldObjects)
-                        {
-                            entry.Update(gameTime);
-                        }
-                        
-                        engine.EnemyCollisionCheck(player, worldObjects);
-                        break;
-                    case GameState.MainMenu:
-                        this.mainMenu.Update();
-                        break;
-                    case GameState.Battle:
-                        this.battleScreen.Update();
-                        break;
+                case GameState.InGame:
+                    this.player.Update(gameTime);
+                    foreach (var entry in worldObjects)
+                    {
+                        entry.Update(gameTime);
+                    }
+
+                    engine.EnemyCollisionCheck(player, worldObjects);
+                    break;
+                case GameState.MainMenu:
+                    this.mainMenu.Update();
+                    break;
+                case GameState.Battle:
+                    this.battleScreen.Update();
+                    break;
             }
             base.Update(gameTime);
         }

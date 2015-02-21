@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using RPG.GameLogic.Models.Stats;
 using RPG.GameLogic.Models.Stats.Base;
 
@@ -58,6 +60,8 @@ namespace RPG.GameLogic.Models.Characters.Base
             }
         }
 
+        public abstract void Update(GameTime gameTime);
+        public abstract void Draw(SpriteBatch spriteBatch);
         public abstract void TakeDamage(int amount, List<Stat> types);
     }
 }

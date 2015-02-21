@@ -145,13 +145,13 @@ namespace RPG.GameLogic.Models.Characters
         }
 
         #region Engine Stuff
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             this.KeyListener();
             this.CurrentAnimation.PlayAnimation(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             this.CurrentAnimation.Draw(spriteBatch, this.Position);
         }

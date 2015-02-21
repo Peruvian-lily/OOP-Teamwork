@@ -98,7 +98,7 @@ namespace RPG.GameLogic.Models.Characters
             this.Position = position;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             this.Animation.PlayAnimation(gameTime);
             this.Animation.PlayAnimation(gameTime);
@@ -106,7 +106,7 @@ namespace RPG.GameLogic.Models.Characters
                 Animation.frameWidth, Animation.frameHeight);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             this.Animation.Draw(spriteBatch, this.Position);
             this.Animation.Draw(spriteBatch, this.Position);

@@ -10,17 +10,18 @@ namespace RPG.GameLogic.Models
     {
         private static Random rnd = new Random();
 
-        public Battle(IPlayer player, IEnemy trigger)
+        public Battle(IPlayer player, List<Character> trigger)
         {
-            this.Enemies = trigger.GetAllies();
+            //this.Enemies = trigger.GetAllies();
+            this.Enemies = trigger;
             this.Player = player;
-            this.TotalTurns = trigger.GetAllies().Count + 1;
+            this.TotalTurns = Enemies.Count + 1;
             this.CurrentTurn = 1;
             this.AddParticipants();
         }
 
         public int Round { get; private set; }
-        public List<IFight> Enemies { get; private set; }
+        public List<Character> Enemies { get; private set; }
         public IPlayer Player { get; private set; }
         public int CurrentTurn { get; private set; }
         public int TotalTurns { get; private set; }
@@ -36,7 +37,7 @@ namespace RPG.GameLogic.Models
             });
         }
 
-        private void StartFight()
+        public void StartFight()
         {
             var participants = this.Participants.ToList();
             while (this.CurrentTurn <= this.TotalTurns)
@@ -47,6 +48,10 @@ namespace RPG.GameLogic.Models
                 this.Fight(fighter, target);
                 this.ClearBattlefield();
                 this.CurrentTurn += 1;
+            }
+            if (!this.Participants.Contains(this.Player as Character))
+            {
+                throw new NotImplementedException("Game over o.O player is kill gg easy");
             }
             this.CurrentTurn = 1;
             this.Round += 1;
@@ -74,7 +79,7 @@ namespace RPG.GameLogic.Models
         /// <returns>Returns the target the player has selected.</returns>
         private IFight SelectTarget()
         {
-            throw new NotImplementedException();
+            return this.Enemies[rnd.Next(Participants.Count - 1)] as IFight;
         }
     }
 }
