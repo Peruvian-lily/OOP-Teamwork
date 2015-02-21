@@ -13,6 +13,7 @@ using RPG.GameLogic.Models;
 using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
 using RPG.Graphics;
+using RPG.Graphics.Map;
 
 #endregion
 
@@ -41,6 +42,10 @@ namespace RPG
         public static int ScreenHeight;
         public static GameState GameState;
         private const int ENEMY_COUNT = 5;
+
+        TileMap myMap = new TileMap();
+        int squaresAcross = 5;
+        int squaresDown = 5;
 
         public Game1()
             : base()
@@ -88,9 +93,8 @@ namespace RPG
             this.defaultFont = base.Content.Load<SpriteFont>("Fonts\\Arial");
             this.mainMenu.LoadContent(base.Content);
             this.battleScreen.LoadContent(base.Content);
-
-            // This is the place to initialize all variables depending on external resources.
             this.textDrawer = new TextDrawer(this.defaultFont);
+            Tile.TileSetTexture = Content.Load<Texture2D>(@"Tiles\wood_tileset_3");
         }
 
         protected override void UnloadContent()
@@ -126,6 +130,27 @@ namespace RPG
         protected override void Draw(GameTime gameTime)
         {
             this.GraphicsDevice.Clear(Color.White);
+
+            Vector2 firstSquare = new Vector2(Camera.Location.X / 32, Camera.Location.Y / 32);
+            int firstX = (int)firstSquare.X;
+            int firstY = (int)firstSquare.Y;
+
+            Vector2 squareOffset = new Vector2(Camera.Location.X % 32, Camera.Location.Y % 32);
+            int offsetX = (int)squareOffset.X;
+            int offsetY = (int)squareOffset.Y;
+
+            for (int y = 0; y < squaresDown; y++)
+            {
+                for (int x = 0; x < squaresAcross; x++)
+                {
+                    spriteBatch.Draw(
+                        Tile.TileSetTexture,
+                        new Rectangle((x * 32) - offsetX, (y * 32) - offsetY, 32, 32),
+                        Tile.GetSourceRectangle(myMap.Rows[y + firstY].Columns[x + firstX].TileID),
+                        Color.White);
+                }
+            }
+
             textDrawer.DrawString(spriteBatch, this.player.Position.ToString(), new Vector2(), Color.Black);
 
             this.spriteBatch.Begin();

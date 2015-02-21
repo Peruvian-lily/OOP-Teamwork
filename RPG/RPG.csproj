@@ -61,6 +61,7 @@
     <Compile Include="GameLogic\Models\Items\Bonus.cs" />
     <Compile Include="GameLogic\Models\Items\Item.cs" />
     <Compile Include="Graphics\MainMenu.cs" />
+    <Compile Include="Graphics\Map\Camera.cs" />
     <Compile Include="Graphics\Map\Map.cs" />
     <Compile Include="GameLogic\Models\Characters\Base\Character.cs" />
     <Compile Include="GameLogic\Models\Characters\Enemy.cs" />
