@@ -25,19 +25,29 @@ namespace RPG.Graphics.Map
 
             while (line != null)
             {
-                MapHeight++;
+                this.MapHeight++;
                 MapRow thisRow = new MapRow();
                 for (int x = 0; x < MapWidth; x++)
                 {
-                    thisRow.Columns.Add(new MapCell(0));
+                    if (line[x] == 'A')
+                    {
+                        thisRow.Columns.Add(new MapCell(0));
+                    }
+                    if (line[x] == 'B')
+                    {
+                        thisRow.Columns.Add(new MapCell(1));
+                    }
+                    if (line[x] == 'C')
+                    {
+                        thisRow.Columns.Add(new MapCell(2));
+                    }
                 }
                 Rows.Add(thisRow);
                 line = reader.ReadLine();
-
             }
 
             // Create Sample Map Data
-            Rows[0].Columns[3].TileID = 3;
+           /* Rows[0].Columns[3].TileID = 3;
             Rows[0].Columns[4].TileID = 3;
             Rows[0].Columns[5].TileID = 1;
             Rows[0].Columns[6].TileID = 1;
@@ -88,7 +98,7 @@ namespace RPG.Graphics.Map
             Rows[4].Columns[7].AddBaseTile(26);
             Rows[5].Columns[7].AddBaseTile(29);
 
-            Rows[4].Columns[6].AddBaseTile(104);
+            Rows[4].Columns[6].AddBaseTile(104);*/
 
             // End Create Sample Map Data
         }
