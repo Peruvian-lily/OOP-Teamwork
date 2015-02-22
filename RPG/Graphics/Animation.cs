@@ -13,8 +13,6 @@ namespace RPG.Graphics
         private float frameTime;
         private int numOfFrames;
         private int currentFrame;
-        private int width;
-        private int height;
         public int frameWidth;
         public int frameHeight;
         private bool looping;

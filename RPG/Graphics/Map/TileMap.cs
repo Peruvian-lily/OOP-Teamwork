@@ -1,27 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace RPG.Graphics.Map
 {
     class TileMap
     {
+        private string filename = "Content\\map.txt";
         public List<MapRow> Rows = new List<MapRow>();
-        public int MapWidth = 50;
-        public int MapHeight = 50;
-
+        public int MapWidth;
+        public int MapHeight;
 
         public TileMap()
         {
-            for (int y = 0; y < MapHeight; y++)
+
+            var reader = new StreamReader(TitleContainer.OpenStream(this.filename));
+            List<string> linesFromFile = new List<string>();
+
+            string line = reader.ReadLine();
+            MapWidth = line.Length;
+
+            while (line != null)
             {
+                MapHeight++;
                 MapRow thisRow = new MapRow();
                 for (int x = 0; x < MapWidth; x++)
                 {
                     thisRow.Columns.Add(new MapCell(0));
                 }
                 Rows.Add(thisRow);
+                line = reader.ReadLine();
+
             }
 
             // Create Sample Map Data
