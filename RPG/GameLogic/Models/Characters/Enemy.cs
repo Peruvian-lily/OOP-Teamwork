@@ -51,7 +51,7 @@ namespace RPG.GameLogic.Models.Characters
             get { return this.Stats.Where(stat => stat.Type == StatType.Defensive).ToList(); }
         }
 
-        public void Attack(Character target)
+        public void Attack(IFight target)
         {
             int damage = this.AttackPower.Value;
             this.OffensiveStats.ForEach(stat =>

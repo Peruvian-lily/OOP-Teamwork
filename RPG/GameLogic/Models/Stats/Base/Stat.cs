@@ -43,7 +43,14 @@ namespace RPG.GameLogic.Models.Stats.Base
 
         public void Reduce(int amount)
         {
-            this.Value -= amount;
+            if (this.Value - amount < 0)
+            {
+                this.Value = 0;
+            }
+            else
+            {
+                this.Value -= amount;
+            }
         }
         public void Increase(int amount)
         {

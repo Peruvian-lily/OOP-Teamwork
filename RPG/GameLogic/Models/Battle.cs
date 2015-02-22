@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using Microsoft.Xna.Framework.Input;
 using RPG.GameLogic.Interface;
+using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
 
 namespace RPG.GameLogic.Models
 {
     class Battle
     {
-        private static Random rnd = new Random();
+        private Random rnd = new Random();
+        private bool tookTurn = true;
+        private int targetIndex;
+        private bool leftPressed;
+        private bool rightPressed;
 
         public Battle(IPlayer player, List<Character> trigger)
         {
-            //this.Enemies = trigger.GetAllies();
-            this.Enemies = trigger;
+            this.Attacker = player;
             this.Player = player;
-            this.TotalTurns = Enemies.Count + 1;
             this.CurrentTurn = 1;
+            this.Enemies = trigger;
+            this.Target = player;
             this.AddParticipants();
         }
 
@@ -24,62 +31,133 @@ namespace RPG.GameLogic.Models
         public List<Character> Enemies { get; private set; }
         public IPlayer Player { get; private set; }
         public int CurrentTurn { get; private set; }
-        public int TotalTurns { get; private set; }
-        public List<Character> Participants { get; private set; }
-
-        private void AddParticipants()
+        public bool InProgress { get; private set; }
+        public int TotalTurns
         {
-            this.Participants = new List<Character>();
-            this.Participants.Add(this.Player as Character);
-            this.Enemies.ForEach(enemy =>
-            {
-                this.Participants.Add(enemy as Character);
-            });
+            get { return this.Participants.Count; }
         }
+        public IFight Target { get; private set; }
+        public IFight Attacker { get; private set; }
+        public List<Character> Participants { get; private set; }
 
         public void StartFight()
         {
-            var participants = this.Participants.ToList();
-            while (this.CurrentTurn <= this.TotalTurns)
+            this.InProgress = true;
+        }
+        public void NextTurn()
+        {
+            if (!this.Participants.Contains(this.Player as Character) || this.Participants.Count == 1)
             {
-                // Fighter represents the current character on turn.
-                var fighter = this.OnTurn(ref participants);
-                var target = fighter is IPlayer ? this.SelectTarget() : this.Player;
-                this.Fight(fighter, target);
-                this.ClearBattlefield();
+                this.InProgress = false;
+            }
+
+            if (!this.InProgress) return;
+            var participants = this.Participants.ToList();
+
+            if (tookTurn)
+            {
+                this.Attacker = this.SelectFighter(participants);
+                participants.Remove(this.Attacker as Character);
+                this.tookTurn = false;
+            }
+            if (this.Attacker is IPlayer)
+            {
+                bool selected = false;
+                ProcessTargetting(participants, ref selected);
+                if (selected)
+                {
+                    this.tookTurn = true;
+                    this.Attacker.Attack(this.Target);
+                    this.CurrentTurn += 1;
+                }
+            }
+            else
+            {
+                this.tookTurn = true;
+                this.Target = this.Player;
+                this.Attacker.Attack(this.Target);
                 this.CurrentTurn += 1;
             }
-            if (!this.Participants.Contains(this.Player as Character))
+            this.ClearBattlefield();
+
+            if (CurrentTurn >= this.TotalTurns)
             {
-                throw new NotImplementedException("Game over o.O player is kill gg easy");
+                this.CurrentTurn = 1;
+                this.Round += 1;
             }
-            this.CurrentTurn = 1;
-            this.Round += 1;
         }
-        private IFight OnTurn(ref List<Character> participants)
+        private void AddParticipants()
         {
-            var onTurn = participants[rnd.Next(0, participants.Count)];
-            participants.Remove(onTurn);
-            return onTurn as IFight;
+            this.Participants = new List<Character>
+            {
+                this.Player as Character
+            };
+            this.Participants.AddRange(this.Enemies);
         }
 
-        private void Fight(IFight attacker, IFight defender)
+        private IFight SelectFighter(List<Character> participants)
         {
-            attacker.Attack(defender as Character);
+            var onTurn = participants[rnd.Next(0, participants.Count)];
+            return onTurn as IFight;
         }
 
         private void ClearBattlefield()
         {
-            this.Participants.RemoveAll(participant => participant.Health.Value <= 0);
+            this.Participants.RemoveAll(participant => participant.Health.Value == 0);
         }
-
-        /// <summary>
-        /// Player selects target.
-        /// </summary>
-        /// <returns>Returns the target the player has selected.</returns>
-        private IFight SelectTarget()
+        public void ProcessTargetting(List<Character> participants, ref bool selected)
         {
-            return this.Enemies[rnd.Next(Participants.Count - 1)] as IFight;
+            var ks = Keyboard.GetState();
+            if (ks.IsKeyDown(Keys.Left))
+            {
+                if (!leftPressed)
+                {
+                    ChangeIndex("reduce", participants);
+                }
+                leftPressed = true;
+            }
+            else if (ks.IsKeyDown(Keys.Right))
+            {
+                if (!rightPressed)
+                {
+                    ChangeIndex("increase", participants);
+                }
+                rightPressed = true;
+            }
+            else if (ks.IsKeyDown(Keys.Space))
+            {
+                selected = true;
+            }
+            if (ks.IsKeyUp(Keys.Left))
+            {
+                leftPressed = false;
+            }
+            if (ks.IsKeyUp(Keys.Right))
+            {
+                rightPressed = false;
+            }
+
+            this.Target = participants[targetIndex] as IFight;
+        }
+        private void ChangeIndex(string action, List<Character> targets)
+        {
+            switch (action.ToLower())
+            {
+                case "reduce":
+                    targetIndex -= 1;
+                    break;
+                case "increase":
+                    targetIndex += 1;
+                    break;
+            }
+            if (targetIndex < 0)
+            {
+                targetIndex = targets.Count() - 1;
+            }
+            else if (targetIndex > targets.Count - 1)
+            {
+                targetIndex = 0;
+            }
         }
     }
 }

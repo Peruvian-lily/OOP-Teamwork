@@ -32,6 +32,7 @@ namespace RPG
         private SpriteFont defaultFont;
         private TextDrawer textDrawer;
         private Rectangle screen;
+        private Battle battle;
 
         public static readonly Vector2 UP_VECTOR = new Vector2(0, -1);
         public static readonly Vector2 DOWN_VECTOR = new Vector2(0, 1);
@@ -86,7 +87,8 @@ namespace RPG
                 //engine.EnemyCollisionCheck(enemy, worldObjects);
                 worldObjects.Add(enemy);
             }
-
+            this.battle = new Battle(player, worldObjects);
+            battle.StartFight();
             base.Initialize();
         }
 
@@ -124,6 +126,7 @@ namespace RPG
                     this.mainMenu.Update();
                     break;
                 case GameState.Battle:
+                    battle.NextTurn();
                     this.battleScreen.Update();
                     break;
             }
@@ -152,6 +155,10 @@ namespace RPG
                     break;
                 case GameState.Battle:
                     this.battleScreen.Draw(this.spriteBatch);
+                    string statusText = String.Format("Attacker: {0}/{1}hp; Target: {2}/{3}hp",
+                        (this.battle.Attacker as Character).Name, this.battle.Attacker.Health.Value,
+                        (this.battle.Target as Character).Name, this.battle.Target.Health.Value);
+                    textDrawer.DrawString(spriteBatch, statusText);                    
                     break;
             }
             this.spriteBatch.End();
