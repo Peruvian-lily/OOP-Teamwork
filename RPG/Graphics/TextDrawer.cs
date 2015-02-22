@@ -51,17 +51,19 @@ namespace RPG.Graphics
             }
         }
 
-        public void DrawString(SpriteBatch spriteBatch, string text, Vector2 position, Color color)
+
+        public void DrawString(SpriteBatch spriteBatch, string text, Vector2 position = new Vector2(), Color? color = null)
         {
-            spriteBatch.Begin();
-            spriteBatch.DrawString(this.Font, text, position, color);
-            spriteBatch.End();
+            if (color == null)
+            {
+                color = Color.Black;
+            }
+
+            spriteBatch.DrawString(this.Font, text, position, (Color)color);
         }
         public void DrawString(SpriteBatch spriteBatch, string text, Vector2 position, Color color, Vector2 scale)
         {
-            spriteBatch.Begin();
             spriteBatch.DrawString(this.Font, text, position, color, this.Rotation, this.OriginOfRotation, scale, SpriteEffects.None, 0);
-            spriteBatch.End();
         }
     }
 }

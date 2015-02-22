@@ -134,10 +134,9 @@ namespace RPG
         {
             this.GraphicsDevice.Clear(Color.White);
 
-            textDrawer.DrawString(spriteBatch, this.player.Position.ToString(), new Vector2(), Color.Black);
-
             this.spriteBatch.Begin();
             map.Draw(spriteBatch, tileMap, squaresAcross, squaresDown);
+            //textDrawer.DrawString(spriteBatch, this.player.Position.ToString());
 
             switch (GameState)
             {
