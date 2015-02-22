@@ -70,6 +70,7 @@ namespace RPG
 
             this.engine = Engine.GetInstance;
             this.player = new Player("QueBabche", 100, 100, 100, 5);
+            player.Position = new Vector2((float) screen.Width/2, (float) ScreenHeight/2);
             this.player.PickUp(ItemFactory.GenerateItem(25, 50));
 
             for (int i = 0; i < ENEMY_COUNT; i++)
@@ -79,8 +80,8 @@ namespace RPG
                 bool hasBonus = Rnd.Next(1, 101) < 5;  // Currently has 5% chance to spawn enemy with bonus stuff.
                 var enemy = EnemyFactory.SpawnEnemy(minPower, maxPower, hasBonus);
 
-                int positionX = Rnd.Next(ScreenWidth / 3, ScreenWidth - enemy.Animation.frameWidth);
-                int positionY = Rnd.Next(ScreenHeight / 3, ScreenHeight - enemy.Animation.frameHeight);
+                int positionX = Rnd.Next(0, ScreenWidth - enemy.Animation.frameWidth);
+                int positionY = Rnd.Next(0, ScreenHeight - enemy.Animation.frameHeight);
                 enemy.Position = new Vector2(positionX, positionY);
                 //engine.EnemyCollisionCheck(enemy, worldObjects);
                 worldObjects.Add(enemy);
@@ -117,7 +118,6 @@ namespace RPG
                     {
                         entry.Update(gameTime);
                     }
-
                     engine.EnemyCollisionCheck(player, worldObjects);
                     break;
                 case GameState.MainMenu:
