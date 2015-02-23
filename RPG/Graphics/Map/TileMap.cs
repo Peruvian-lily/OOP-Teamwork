@@ -23,7 +23,6 @@ namespace RPG.Graphics.Map
 
             while (line != null)
             {
-                MapHeight++;
                 MapRow thisRow = new MapRow();
                 for (int x = 0; x < MapWidth; x++)
                 {
@@ -99,6 +98,7 @@ namespace RPG.Graphics.Map
             Rows[4].Columns[6].AddBaseTile(104);*/
 
             // End Create Sample Map Data
+            MapHeight = Rows.Count;
         }
     }
 }

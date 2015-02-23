@@ -29,7 +29,7 @@ namespace RPG.Graphics.Map
                 }
             }
 
-            if (player.Position.Y == Game1.ScreenHeight / 2)
+            if (player.Position.Y == Game1.ScreenHeight / 2f)
             {
                 if (ks.IsKeyDown(Keys.Up))
                 {
