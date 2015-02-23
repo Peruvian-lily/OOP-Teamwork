@@ -31,7 +31,7 @@ namespace RPG.GameLogic.Models.Stats.Base
             get { return this.value; }
             set
             {
-                if (value <= 0)
+                if (value < 0)
                 {
                     throw new ArgumentOutOfRangeException("Stats value cannot be negative or zero");
                 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Threading;
 using Microsoft.Xna.Framework.Input;
@@ -14,31 +15,45 @@ namespace RPG.GameLogic.Models
         private Random rnd = new Random();
         private bool tookTurn = true;
         private int targetIndex;
+        private List<int> targetIndexes;
         private bool leftPressed;
         private bool rightPressed;
+        private List<Character> enemies;
+        private IFight attacker;
 
-        public Battle(IPlayer player, List<Character> trigger)
+        public Battle(Player player, List<Character> trigger)
         {
-            this.Attacker = player;
+            this.attacker = player;
             this.Player = player;
             this.CurrentTurn = 1;
-            this.Enemies = trigger;
+            this.enemies = trigger;
             this.Target = player;
-            this.AddParticipants();
         }
 
         public int Round { get; private set; }
-        public List<Character> Enemies { get; private set; }
+
+        public List<Character> Enemies
+        {
+            get
+            {
+                return this.enemies;
+            }
+        }
+
         public IPlayer Player { get; private set; }
         public int CurrentTurn { get; private set; }
         public bool InProgress { get; private set; }
         public int TotalTurns
         {
-            get { return this.Participants.Count; }
+            get { return this.enemies.Count + 1; }
         }
         public IFight Target { get; private set; }
-        public IFight Attacker { get; private set; }
-        public List<Character> Participants { get; private set; }
+        public IFight Attacker
+        {
+            get { return this.attacker; }
+        }
+
+        public string Status { get; private set; }
 
         public void StartFight()
         {
@@ -46,28 +61,35 @@ namespace RPG.GameLogic.Models
         }
         public void NextTurn()
         {
-            if (!this.Participants.Contains(this.Player as Character) || this.Participants.Count == 1)
+            if (this.Player.Health.Value == 0)
             {
+                this.Status = string.Format("{0} is kill. :(", (this.Player as Character).Name);
                 this.InProgress = false;
+            }
+            else if (this.enemies.Count == 0)
+            {
+                this.Status = string.Format("{0} killed all the enemies!", ((Character)Player).Name);
             }
 
             if (!this.InProgress) return;
-            var participants = this.Participants.ToList();
-
             if (tookTurn)
             {
-                this.Attacker = this.SelectFighter(participants);
-                participants.Remove(this.Attacker as Character);
+                this.attacker = rnd.Next(5) > 2 ? this.SelectFighter(this.enemies) : this.Player;
+                this.Status = string.Format("{0} is on turn.", ((Character)this.attacker).Name);
                 this.tookTurn = false;
             }
-            if (this.Attacker is IPlayer)
+            if (this.attacker is IPlayer)
             {
                 bool selected = false;
-                ProcessTargetting(participants, ref selected);
+                ProcessTargetting(this.enemies, ref selected);
+                this.Status = string.Format("Current target: {0}", ((Character)this.Target).Name);
                 if (selected)
                 {
                     this.tookTurn = true;
-                    this.Attacker.Attack(this.Target);
+                    this.Status = string.Format("{0}({1}) is attacking {2}({3}).", 
+                        ((Character)this.Player).Name, this.Player.AttackPower.Value,
+                        ((Character)this.Target).Name);
+                    this.attacker.Attack(this.Target);
                     this.CurrentTurn += 1;
                 }
             }
@@ -75,7 +97,7 @@ namespace RPG.GameLogic.Models
             {
                 this.tookTurn = true;
                 this.Target = this.Player;
-                this.Attacker.Attack(this.Target);
+                this.attacker.Attack(this.Target);
                 this.CurrentTurn += 1;
             }
             this.ClearBattlefield();
@@ -86,14 +108,6 @@ namespace RPG.GameLogic.Models
                 this.Round += 1;
             }
         }
-        private void AddParticipants()
-        {
-            this.Participants = new List<Character>
-            {
-                this.Player as Character
-            };
-            this.Participants.AddRange(this.Enemies);
-        }
 
         private IFight SelectFighter(List<Character> participants)
         {
@@ -103,7 +117,7 @@ namespace RPG.GameLogic.Models
 
         private void ClearBattlefield()
         {
-            this.Participants.RemoveAll(participant => participant.Health.Value == 0);
+            this.Enemies.RemoveAll(enemy => enemy.Health.Value == 0);
         }
         public void ProcessTargetting(List<Character> participants, ref bool selected)
         {
@@ -136,7 +150,7 @@ namespace RPG.GameLogic.Models
             {
                 rightPressed = false;
             }
-
+            AdjustIndex(participants);
             this.Target = participants[targetIndex] as IFight;
         }
         private void ChangeIndex(string action, List<Character> targets)
@@ -150,6 +164,10 @@ namespace RPG.GameLogic.Models
                     targetIndex += 1;
                     break;
             }
+        }
+
+        private void AdjustIndex(List<Character> targets)
+        {
             if (targetIndex < 0)
             {
                 targetIndex = targets.Count() - 1;

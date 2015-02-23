@@ -68,7 +68,7 @@ namespace RPG.GameLogic.Models.Characters
             int damage = this.AttackPower.Value;
             this.OffensiveStats.ForEach(stat =>
             {
-                damage = +stat.Value;
+                damage += stat.Value;
             });
             target.TakeDamage(damage, this.OffensiveStats);
         }
@@ -202,7 +202,7 @@ namespace RPG.GameLogic.Models.Characters
 
             this.lastFrame = 1;
             this.CurrentAnimation = this.LeftAnimation;
-            //Move(Game1.LEFT_VECTOR);
+            Move(Game1.LEFT_VECTOR);
         }
 
         private void MoveUp()
@@ -214,7 +214,7 @@ namespace RPG.GameLogic.Models.Characters
 
             this.lastFrame = 4;
             this.CurrentAnimation = this.FrontAnimation;
-            //Move(Game1.UP_VECTOR);
+            Move(Game1.UP_VECTOR);
         }
 
         private void MoveDown()
@@ -226,7 +226,7 @@ namespace RPG.GameLogic.Models.Characters
 
             this.lastFrame = 2;
             this.CurrentAnimation = this.BackAnimation;
-            //Move(Game1.DOWN_VECTOR);
+            Move(Game1.DOWN_VECTOR);
         }
 
         private void MoveRight()
@@ -238,7 +238,7 @@ namespace RPG.GameLogic.Models.Characters
 
             this.lastFrame = 3;
             this.CurrentAnimation = this.RightAnimation;
-            //Move(Game1.RIGHT_VECTOR);
+            Move(Game1.RIGHT_VECTOR);
         }
         #endregion
 

@@ -18,7 +18,7 @@ namespace RPG.GameLogic.Core.Enemies
             //int power = rnd.Next(minValue, maxValue + 1);
             int health = rnd.Next(minValue, maxValue + 1);
             int attack = rnd.Next(minValue, maxValue + 1);
-            int defense = rnd.Next(minValue, maxValue + 1);
+            int defense = rnd.Next(minValue, maxValue + 1)/2;
             var stats = new List<Stat>();
             if (hasStats)
             {

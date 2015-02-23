@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -70,10 +71,14 @@ namespace RPG
             base.Content = Content;
 
             this.engine = Engine.GetInstance;
+
+            #region Player Initialization
             this.player = new Player("QueBabche", 100, 100, 100, 5);
             player.Position = new Vector2((float) screen.Width/2, (float) ScreenHeight/2);
             this.player.PickUp(ItemFactory.GenerateItem(25, 50));
+            #endregion
 
+            #region Enemy Spawner
             for (int i = 0; i < ENEMY_COUNT; i++)
             {
                 int minPower = Rnd.Next(75);
@@ -84,12 +89,18 @@ namespace RPG
                 int positionX = Rnd.Next(0, ScreenWidth - enemy.Animation.frameWidth);
                 int positionY = Rnd.Next(0, ScreenHeight - enemy.Animation.frameHeight);
                 enemy.Position = new Vector2(positionX, positionY);
-                //engine.EnemyCollisionCheck(enemy, worldObjects);
                 worldObjects.Add(enemy);
             }
+            #endregion
+
+            // Move this to engine and trigger on collision
+            #region Battle Test
             this.battle = new Battle(player, worldObjects);
             battle.StartFight();
+            #endregion
+
             base.Initialize();
+
         }
 
         protected override void LoadContent()
@@ -126,7 +137,14 @@ namespace RPG
                     this.mainMenu.Update();
                     break;
                 case GameState.Battle:
-                    battle.NextTurn();
+                    if (battle.InProgress)
+                    {
+                        battle.NextTurn();
+                    }
+                    else
+                    {
+                        GameState = GameState.InGame;
+                    }
                     this.battleScreen.Update();
                     break;
             }
