@@ -21,6 +21,7 @@ namespace RPG.GameLogic.Models.Characters
         private byte lastFrame = 3;
         private List<Stat> otherStats;
 
+
         public Player(string name, int health,
             int attackPower, int defense, int inventorySize,
             List<Stat> otherStats)
@@ -189,11 +190,11 @@ namespace RPG.GameLogic.Models.Characters
         #region Movement
         public void Move(Vector2 direction)
         {
-            if (Camera.Location.X == 0 || Camera.Location.X == 1488)
+            if (Camera.Location.X == 0 || Camera.Location.X == TileMap.MapWidth)
             {
                 this.Position.X += Speed * direction.X;
             }
-            if (Camera.Location.Y == 0 || Camera.Location.Y == 1872)
+            if (Camera.Location.Y == 0 || Camera.Location.Y == TileMap.MapHeight)
             {
                 this.Position.Y += Speed * direction.Y;   
             }

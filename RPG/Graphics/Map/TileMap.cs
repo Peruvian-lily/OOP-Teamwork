@@ -11,8 +11,8 @@ namespace RPG.Graphics.Map
     {
         private string filename = "Content\\map.txt";
         public List<MapRow> Rows = new List<MapRow>();
-        public int MapWidth;
-        public int MapHeight;
+        public static int MapWidth;
+        public static int MapHeight;
 
         public TileMap()
         {
@@ -25,7 +25,7 @@ namespace RPG.Graphics.Map
 
             while (line != null)
             {
-                this.MapHeight++;
+                MapHeight++;
                 MapRow thisRow = new MapRow();
                 for (int x = 0; x < MapWidth; x++)
                 {
