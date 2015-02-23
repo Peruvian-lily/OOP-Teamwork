@@ -10,6 +10,7 @@ using RPG.GameLogic.Models.Items.Base;
 using RPG.GameLogic.Models.Stats;
 using RPG.GameLogic.Models.Stats.Base;
 using RPG.Graphics;
+using RPG.Graphics.Map;
 
 namespace RPG.GameLogic.Models.Characters
 {
@@ -19,7 +20,6 @@ namespace RPG.GameLogic.Models.Characters
         private KeyboardState ks;
         private byte lastFrame = 3;
         private List<Stat> otherStats;
-
 
         public Player(string name, int health,
             int attackPower, int defense, int inventorySize,
@@ -147,7 +147,7 @@ namespace RPG.GameLogic.Models.Characters
         #region Engine Stuff
         public override void Update(GameTime gameTime)
         {
-           this.KeyListener();
+            this.KeyListener();
             this.CurrentAnimation.PlayAnimation(gameTime);
         }
 
@@ -189,14 +189,13 @@ namespace RPG.GameLogic.Models.Characters
         #region Movement
         public void Move(Vector2 direction)
         {
-            if (this.Position.X<= Game1.ScreenWidth / 2f)
+            if (Camera.Location.X == 0 || Camera.Location.X == 1488)
             {
                 this.Position.X += Speed * direction.X;
-
             }
-            if (this.Position.Y <= Game1.ScreenWidth / 2f)
+            if (Camera.Location.Y == 0 || Camera.Location.Y == 1872)
             {
-                this.Position.Y += Speed * direction.Y;
+                this.Position.Y += Speed * direction.Y;   
             }
         }
 

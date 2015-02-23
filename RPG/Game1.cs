@@ -125,7 +125,7 @@ namespace RPG
             switch (GameState)
             {
                 case GameState.InGame:
-                    Camera.Update(tileMap, squaresAcross, squaresDown);
+                    Camera.Update(tileMap, squaresAcross, squaresDown, player);
                     this.player.Update(gameTime);
                     foreach (var entry in worldObjects)
                     {
@@ -171,7 +171,7 @@ namespace RPG
                     {
                         enemy.Draw(this.spriteBatch);
                     });
-                    string cameraLocation = string.Format("Camera x: {0}. Camera y: {1}", Camera.Location.X,
+                    string cameraLocation = string.Format("         Camera x: {0}. Camera y: {1}", Camera.Location.X,
                         Camera.Location.Y);
                     textDrawer.DrawString(spriteBatch, cameraLocation);
                     break;
