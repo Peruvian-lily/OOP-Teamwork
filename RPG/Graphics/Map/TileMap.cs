@@ -16,7 +16,6 @@ namespace RPG.Graphics.Map
 
         static TileMap()
         {
-
             var reader = new StreamReader(TitleContainer.OpenStream(filename));
             string line = reader.ReadLine();
             MapWidth = line.Length;
@@ -44,7 +43,8 @@ namespace RPG.Graphics.Map
             }
 
             MapWidth *= 30;
-            Console.WriteLine(  );
+            MapHeight = Rows.Count * 36;
+
             // Create Sample Map Data
             /* Rows[0].Columns[3].TileID = 3;
             Rows[0].Columns[4].TileID = 3;
@@ -100,7 +100,6 @@ namespace RPG.Graphics.Map
             Rows[4].Columns[6].AddBaseTile(104);*/
 
             // End Create Sample Map Data
-            MapHeight = Rows.Count;
         }
     }
 }
