@@ -157,7 +157,8 @@ namespace RPG
 
             this.spriteBatch.Begin();
             map.Draw(spriteBatch, tileMap, squaresAcross, squaresDown);
-            textDrawer.DrawString(spriteBatch, this.tileMap.Rows.Capacity.ToString());
+            textDrawer.DrawString(spriteBatch, player.Position.X.ToString() + "/" + player.Position.Y.ToString());
+
 
             switch (GameState)
             {

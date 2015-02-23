@@ -41,6 +41,7 @@ namespace RPG.Graphics.Map
         public int squaresDown { get; set; }
 
         public int squaresAcross { get; set; }
+
     }
 }
 

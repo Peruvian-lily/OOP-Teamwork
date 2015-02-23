@@ -189,8 +189,15 @@ namespace RPG.GameLogic.Models.Characters
         #region Movement
         public void Move(Vector2 direction)
         {
-            //this.Position.X += Speed * direction.X;
-            //this.Position.Y += Speed * direction.Y;
+            if (this.Position.X<= Game1.ScreenWidth / 2f)
+            {
+                this.Position.X += Speed * direction.X;
+
+            }
+            if (this.Position.Y <= Game1.ScreenWidth / 2f)
+            {
+                this.Position.Y += Speed * direction.Y;
+            }
         }
 
         private void MoveLeft()
