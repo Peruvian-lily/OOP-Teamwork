@@ -43,8 +43,10 @@ namespace RPG.Graphics.Map
                 line = reader.ReadLine();
             }
 
+            MapWidth *= 30;
+            Console.WriteLine(  );
             // Create Sample Map Data
-           /* Rows[0].Columns[3].TileID = 3;
+            /* Rows[0].Columns[3].TileID = 3;
             Rows[0].Columns[4].TileID = 3;
             Rows[0].Columns[5].TileID = 1;
             Rows[0].Columns[6].TileID = 1;
