@@ -32,7 +32,6 @@ namespace RPG
         private List<Character> worldObjects = new List<Character>();
         private SpriteFont defaultFont;
         private TextDrawer textDrawer;
-        private Rectangle screen;
         private Battle battle;
 
         public static readonly Vector2 UP_VECTOR = new Vector2(0, -1);
@@ -44,10 +43,9 @@ namespace RPG
         public static int ScreenWidth;
         public static int ScreenHeight;
         public static GameState GameState;
-        private const int ENEMY_COUNT = 5;
+        private const int ENEMY_COUNT = 3;
 
         Map map = new Map();
-        TileMap tileMap = new TileMap();
         int squaresAcross = 18;
         int squaresDown = 11;
 
@@ -127,7 +125,7 @@ namespace RPG
             switch (GameState)
             {
                 case GameState.InGame:
-                    Camera.Update(tileMap, squaresAcross, squaresDown, player);
+                    Camera.Update(squaresAcross, squaresDown, player);
                     this.player.Update(gameTime);
                     foreach (var entry in worldObjects)
                     {
@@ -158,8 +156,8 @@ namespace RPG
             this.GraphicsDevice.Clear(Color.White);
 
             this.spriteBatch.Begin();
-            map.Draw(spriteBatch, tileMap, squaresAcross, squaresDown);
-            textDrawer.DrawString(spriteBatch, player.Position.X.ToString() + "/" + player.Position.Y.ToString());
+            map.Draw(spriteBatch, squaresAcross, squaresDown);
+            textDrawer.DrawString(spriteBatch, player.Position.X + "/" + player.Position.Y);
 
 
             switch (GameState)

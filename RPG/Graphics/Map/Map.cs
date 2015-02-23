@@ -10,7 +10,7 @@ namespace RPG.Graphics.Map
 
         public */
 
-        public void Draw(SpriteBatch spriteBatch, TileMap tileMap, int squaresAcross, int squaresDown)
+        public void Draw(SpriteBatch spriteBatch, int squaresAcross, int squaresDown)
         {
             Vector2 firstSquare = new Vector2(Camera.Location.X / Tile.TileWidth, Camera.Location.Y / Tile.TileHeight);
             int firstX = (int)firstSquare.X;
@@ -24,7 +24,7 @@ namespace RPG.Graphics.Map
             {
                 for (int x = 0; x < squaresAcross; x++)
                 {
-                    foreach (int tileID in tileMap.Rows[y + firstY].Columns[x + firstX].BaseTiles)
+                    foreach (int tileID in TileMap.Rows[y + firstY].Columns[x + firstX].BaseTiles)
                     {
                         spriteBatch.Draw(
                             Tile.TileSetTexture,

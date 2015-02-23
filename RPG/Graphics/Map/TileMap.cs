@@ -7,19 +7,17 @@ using Microsoft.Xna.Framework;
 
 namespace RPG.Graphics.Map
 {
-    class TileMap
+    static class TileMap
     {
-        private string filename = "Content\\map.txt";
-        public List<MapRow> Rows = new List<MapRow>();
+        private static string filename = "Content\\map.txt";
+        public static List<MapRow> Rows = new List<MapRow>();
         public static int MapWidth;
         public static int MapHeight;
 
-        public TileMap()
+        static TileMap()
         {
 
-            var reader = new StreamReader(TitleContainer.OpenStream(this.filename));
-            List<string> linesFromFile = new List<string>();
-
+            var reader = new StreamReader(TitleContainer.OpenStream(filename));
             string line = reader.ReadLine();
             MapWidth = line.Length;
 

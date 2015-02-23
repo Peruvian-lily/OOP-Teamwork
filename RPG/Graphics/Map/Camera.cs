@@ -12,7 +12,7 @@ namespace RPG.Graphics.Map
     {
         public static Vector2 Location = Vector2.Zero;
 
-        public static void Update(TileMap tileMap, int squaresAcross, int squaresDown, Player player)
+        public static void Update(int squaresAcross, int squaresDown, Player player)
         {
             KeyboardState ks = Keyboard.GetState();
 
@@ -29,7 +29,7 @@ namespace RPG.Graphics.Map
                 }
             }
 
-            if (player.Position.Y == Game1.ScreenHeight / 2f)
+            if (player.Position.Y == Game1.ScreenHeight / 2)
             {
                 if (ks.IsKeyDown(Keys.Up))
                 {
