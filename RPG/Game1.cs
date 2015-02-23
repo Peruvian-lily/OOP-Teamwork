@@ -170,6 +170,9 @@ namespace RPG
                     {
                         enemy.Draw(this.spriteBatch);
                     });
+                    string cameraLocation = string.Format("Camera x: {0}. Camera y: {1}", Camera.Location.X,
+                        Camera.Location.Y);
+                    textDrawer.DrawString(spriteBatch, cameraLocation);
                     break;
                 case GameState.Battle:
                     this.battleScreen.Draw(this.spriteBatch);
