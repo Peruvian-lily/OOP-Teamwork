@@ -61,7 +61,9 @@ namespace RPG
 
         protected override void Initialize()
         {
-            this.screen = new Rectangle(50, 50, 800, 600);
+            this.graphics.PreferredBackBufferWidth = 800;
+            this.graphics.PreferredBackBufferHeight = 480; 
+            graphics.ApplyChanges();
             ScreenWidth = this.GraphicsDevice.Viewport.Width;
             ScreenHeight = this.GraphicsDevice.Viewport.Height;
             GameState = GameState.MainMenu;
@@ -74,7 +76,7 @@ namespace RPG
 
             #region Player Initialization
             this.player = new Player("QueBabche", 100, 100, 100, 5);
-            player.Position = new Vector2((float) screen.Width/2, (float) ScreenHeight/2);
+            player.Position = new Vector2((float)ScreenWidth / 2, (float)ScreenHeight/ 2);
             this.player.PickUp(ItemFactory.GenerateItem(25, 50));
             #endregion
 
