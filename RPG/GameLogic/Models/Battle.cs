@@ -18,42 +18,45 @@ namespace RPG.GameLogic.Models
         private List<int> targetIndexes;
         private bool leftPressed;
         private bool rightPressed;
-        private List<Character> enemies;
-        private IFight attacker;
+        private string status;
 
-        public Battle(Player player, List<Character> trigger)
+        public Battle(IPlayer player, List<Character> trigger)
         {
-            this.attacker = player;
+            this.Attacker = player;
             this.Player = player;
             this.CurrentTurn = 1;
-            this.enemies = trigger;
+            this.Enemies = trigger;
             this.Target = player;
+            this.Status = "Battle initiated";
         }
 
         public int Round { get; private set; }
-
-        public List<Character> Enemies
-        {
-            get
-            {
-                return this.enemies;
-            }
-        }
-
+        public List<Character> Enemies { get; private set; }
         public IPlayer Player { get; private set; }
         public int CurrentTurn { get; private set; }
         public bool InProgress { get; private set; }
         public int TotalTurns
         {
-            get { return this.enemies.Count + 1; }
+            get { return this.Enemies.Count + 1; }
         }
         public IFight Target { get; private set; }
-        public IFight Attacker
-        {
-            get { return this.attacker; }
-        }
+        public IFight Attacker { get; private set; }
 
-        public string Status { get; private set; }
+        public string Status
+        {
+            get
+            {
+                return this.status;
+            }
+            private set
+            {
+                if (!value.Contains("Select target"))
+                {
+                    Thread.Sleep(300);
+                }
+                this.status = value;
+            }
+        }
 
         public void StartFight()
         {
@@ -65,7 +68,8 @@ namespace RPG.GameLogic.Models
             {
                 this.Status = string.Format("{0} is kill. :(", (this.Player as Character).Name);
                 this.InProgress = false;
-            }else if (this.enemies.Count == 0)
+            }
+            else if (this.Enemies.Count == 0)
             {
                 this.Status = string.Format("{0} killed all the enemies!", ((Character)Player).Name);
                 this.InProgress = false;
@@ -74,22 +78,22 @@ namespace RPG.GameLogic.Models
             if (!this.InProgress) return;
             if (tookTurn)
             {
-                this.attacker = rnd.Next(5) > 2 ? this.SelectFighter(this.enemies) : this.Player;
-                this.Status = string.Format("{0} is on turn.", ((Character)this.attacker).Name);
+                this.Attacker = rnd.Next(5) > 2 ? this.SelectFighter(this.Enemies) : this.Player;
+                this.Status = string.Format("{0} is on turn.", ((Character)this.Attacker).Name);
                 this.tookTurn = false;
             }
-            if (this.attacker is IPlayer)
+            if (this.Attacker is IPlayer)
             {
                 bool selected = false;
-                ProcessTargetting(this.enemies, ref selected);
-                this.Status = string.Format("Current target: {0}", ((Character)this.Target).Name);
+                ProcessTargetting(this.Enemies, ref selected);
+                this.Status = string.Format("Select target({0}): {1}({2} hp)", 
+                    this.Enemies.Count, ((Character)this.Target).Name, this.Target.Health.Value);
                 if (selected)
                 {
                     this.tookTurn = true;
-                    this.Status = string.Format("{0} is attacking {1}({2}).", 
-                        ((Character)this.Player).Name, ((Character)this.Target).Name,
-                    this.Target.Health);
-                    this.attacker.Attack(this.Target);
+                    this.Status = string.Format("{0} is attacking {1}({2} hp).",
+                        ((Character)this.Attacker).Name, ((Character)this.Target).Name, this.Target.Health.Value);
+                    this.Attacker.Attack(this.Target);
                     this.CurrentTurn += 1;
                 }
             }
@@ -97,7 +101,10 @@ namespace RPG.GameLogic.Models
             {
                 this.tookTurn = true;
                 this.Target = this.Player;
-                this.attacker.Attack(this.Target);
+                this.Status = string.Format("{0} is attacking {1}({2} hp).",
+                     ((Character)this.Attacker).Name, ((Character)this.Target).Name, this.Target.Health.Value);
+                Thread.Sleep(50);
+                this.Attacker.Attack(this.Target);
                 this.CurrentTurn += 1;
             }
             this.ClearBattlefield();
