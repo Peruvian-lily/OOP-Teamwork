@@ -65,10 +65,10 @@ namespace RPG.GameLogic.Models
             {
                 this.Status = string.Format("{0} is kill. :(", (this.Player as Character).Name);
                 this.InProgress = false;
-            }
-            else if (this.enemies.Count == 0)
+            }else if (this.enemies.Count == 0)
             {
                 this.Status = string.Format("{0} killed all the enemies!", ((Character)Player).Name);
+                this.InProgress = false;
             }
 
             if (!this.InProgress) return;
@@ -86,9 +86,9 @@ namespace RPG.GameLogic.Models
                 if (selected)
                 {
                     this.tookTurn = true;
-                    this.Status = string.Format("{0}({1}) is attacking {2}({3}).", 
-                        ((Character)this.Player).Name, this.Player.AttackPower.Value,
-                        ((Character)this.Target).Name);
+                    this.Status = string.Format("{0} is attacking {1}({2}).", 
+                        ((Character)this.Player).Name, ((Character)this.Target).Name,
+                    this.Target.Health);
                     this.attacker.Attack(this.Target);
                     this.CurrentTurn += 1;
                 }
