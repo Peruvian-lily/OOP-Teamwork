@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RPG.GameLogic.Core;
-using RPG.GameLogic.Core.Enemies;
+using RPG.GameLogic.Core.Factory;
 using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
 using RPG.Graphics.Map;

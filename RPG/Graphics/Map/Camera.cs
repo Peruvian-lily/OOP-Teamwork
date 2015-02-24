@@ -26,6 +26,7 @@ namespace RPG.Graphics.Map
                 if (ks.IsKeyDown(Keys.Right))
                 {
                     Camera.Location.X = MathHelper.Clamp(Camera.Location.X + 2, 0, (TileMap.MapWidth - squaresAcross) * Tile.TileWidth);
+
                 }
             }
 

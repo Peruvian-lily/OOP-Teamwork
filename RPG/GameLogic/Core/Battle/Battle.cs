@@ -8,7 +8,7 @@ using RPG.GameLogic.Models.Characters.Base;
 
 namespace RPG.GameLogic.Core.Battle
 {
-    class Battle
+  class Battle
     {
         private Random rnd = new Random();
         private bool tookTurn = true;

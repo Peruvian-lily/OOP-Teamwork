@@ -9,7 +9,7 @@ namespace RPG.Graphics.Map
 {
     static class TileMap
     {
-        private static string filename = "Content\\map.txt";
+        private static string filename = "Content\\Levels\\map.txt";
         public static List<MapRow> Rows = new List<MapRow>();
         public static int MapWidth;
         public static int MapHeight;

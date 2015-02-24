@@ -1,13 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
 using RPG.GameLogic.Models.Characters;
+using RPG.GameLogic.Models.Stats;
+using RPG.GameLogic.Models.Stats.Base;
 
-namespace RPG.GameLogic.Core.Enemies
+namespace RPG.GameLogic.Core.Factory
 {
-    using System;
-    using System.Collections.Generic;
-    using Models.Stats.Base;
-    using Models.Stats;
-
     public static class EnemyFactory
     {
         private static Random rnd = new Random();
