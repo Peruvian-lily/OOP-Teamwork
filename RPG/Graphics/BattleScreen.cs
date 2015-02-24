@@ -23,37 +23,37 @@ namespace RPG.Graphics
                 element.CenterElement(400, 800);
                 element.ClickEvent += this.OnClick;
             }
-            this.battleScreen.Find(x => x.AssetName == "Overlays\\Battle\\button1").MoveElement(-300,0);
+            this.battleScreen.Find(x => x.AssetName == "Overlays\\Battle\\button1").MoveElement(-300, 0);
             this.battleScreen.Find(x => x.AssetName == "Overlays\\Battle\\button2").MoveElement(300, 0);
             this.battleScreen.Find(x => x.AssetName == "Overlays\\Battle\\left").MoveElement(-200, 200);
         }
 
         public void Update()
         {
-            switch (Game1.GameState)
+            switch (Game1.CurrentState)
             {
-                case GameState.Battle:
+                case GameState.BattleScreenState:
                     foreach (GUIElement element in this.battleScreen)
                     {
                         element.Update();
                     }
                     break;
-                case GameState.InGame:
+                case GameState.GamePlayState:
                     break;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            switch (Game1.GameState)
+            switch (Game1.CurrentState)
             {
-                case GameState.Battle:
+                case GameState.BattleScreenState:
                     foreach (GUIElement element in this.battleScreen)
                     {
                         element.Draw(spriteBatch);
                     }
                     break;
-                case GameState.InGame:
+                case GameState.GamePlayState:
                     break;
             }
         }
@@ -63,7 +63,7 @@ namespace RPG.Graphics
             if (element == "Overlays\\Battle\\button1")
             {
                 //Play the Game
-                Game1.GameState = GameState.InGame;
+                Game1.CurrentState = GameState.GamePlayState;
             }
         }
     }

@@ -50,19 +50,19 @@ namespace RPG.GameLogic.Core
 
             if (collisionRect.IsPointInRect(topLeftPlayer))
             {
-                Game1.GameState = GameState.Battle;
+                Game1.CurrentState = GameState.BattleScreenState;
             }
             else if (collisionRect.IsPointInRect(topRightPlayer))
             {
-                Game1.GameState = GameState.Battle;
+                Game1.CurrentState = GameState.BattleScreenState;
             }
             else if (collisionRect.IsPointInRect(bottomLeftPlayer))
             {
-                Game1.GameState = GameState.Battle;
+                Game1.CurrentState = GameState.BattleScreenState;
             }
             else if (collisionRect.IsPointInRect(bottomRightPlayer))
             {
-                Game1.GameState = GameState.Battle;
+                Game1.CurrentState = GameState.BattleScreenState;
             }
         }
     }

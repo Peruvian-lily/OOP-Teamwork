@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -15,6 +16,7 @@ using RPG.GameLogic.Models;
 using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
 using RPG.Graphics;
+using RPG.Graphics.GameStates;
 using RPG.Graphics.Map;
 
 #endregion
@@ -23,31 +25,16 @@ namespace RPG
 {
     public class Game1 : Game
     {
+        public static GameState CurrentState;
+        private AbstractGameState[] States;
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        private MainMenu mainMenu;
-        private BattleScreen battleScreen;
-        private Engine engine;
-        private Player player;
-        private List<Character> worldObjects = new List<Character>();
-        private SpriteFont defaultFont;
-        private TextDrawer textDrawer;
-        private Battle battle;
 
-        public static readonly Vector2 UP_VECTOR = new Vector2(0, -1);
-        public static readonly Vector2 DOWN_VECTOR = new Vector2(0, 1);
-        public static readonly Vector2 RIGHT_VECTOR = new Vector2(1, 0);
-        public static readonly Vector2 LEFT_VECTOR = new Vector2(-1, 0);
         public new static ContentManager Content;
-        public static Random Rnd = new Random();
         public static int ScreenWidth;
         public static int ScreenHeight;
-        public static GameState GameState;
-        private const int ENEMY_COUNT = 3;
-
-        Map map = new Map();
-        int squaresAcross = 18;
-        int squaresDown = 11;
+        private Player player;
+        private List<Character> worldObjects;
 
         public Game1()
             : base()
@@ -59,45 +46,34 @@ namespace RPG
 
         protected override void Initialize()
         {
+            this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
             this.graphics.PreferredBackBufferWidth = 800;
-            this.graphics.PreferredBackBufferHeight = 480; 
+            this.graphics.PreferredBackBufferHeight = 480;
             graphics.ApplyChanges();
             ScreenWidth = this.GraphicsDevice.Viewport.Width;
             ScreenHeight = this.GraphicsDevice.Viewport.Height;
-            GameState = GameState.MainMenu;
-            this.mainMenu = new MainMenu();
-            this.battleScreen = new BattleScreen();
-            this.IsMouseVisible = true;
+
             base.Content = Content;
-
-            this.engine = Engine.GetInstance;
-
-            #region Player Initialization
+            this.worldObjects = new List<Character>();
             this.player = new Player("QueBabche", 100, 100, 100, 5);
-            player.Position = new Vector2((float)ScreenWidth / 2, (float)ScreenHeight/ 2);
+            this.player.Position = new Vector2((float)ScreenWidth / 2, (float)ScreenHeight / 2);
             this.player.PickUp(ItemFactory.GenerateItem(25, 50));
-            #endregion
 
-            #region Enemy Spawner
-            for (int i = 0; i < ENEMY_COUNT; i++)
-            {
-                int minPower = Rnd.Next(75);
-                int maxPower = Rnd.Next(minPower, 101);
-                bool hasBonus = Rnd.Next(1, 101) < 5;  // Currently has 5% chance to spawn enemy with bonus stuff.
-                var enemy = EnemyFactory.SpawnEnemy(minPower, maxPower, hasBonus);
+            // Use reflection to determine how many states there are as  
+            // .NET Compact Framework does not support Enum.GetValues().  
+            Type type = typeof(GameState);
+            FieldInfo[] info = type.GetFields(BindingFlags.Static | BindingFlags.Public);
+            Int32 numberStates = info.Length;
 
-                int positionX = Rnd.Next(0, ScreenWidth - enemy.Animation.frameWidth);
-                int positionY = Rnd.Next(0, ScreenHeight - enemy.Animation.frameHeight);
-                enemy.Position = new Vector2(positionX, positionY);
-                worldObjects.Add(enemy);
-            }
-            #endregion
+            // Instantiate each game state.  
+            States = new AbstractGameState[numberStates];
+            States[(Int32)GameState.MainMenuState] = new MainMenuState(this);
+            States[(Int32)GameState.GamePlayState] = new GamePlayState(this, this.player, this.worldObjects);
+            States[(Int32)GameState.BattleScreenState] = new BattleScreenState(this, this.player, this.worldObjects);
 
-            // Move this to engine and trigger on collision
-            #region Battle Test
-            this.battle = new Battle(player, worldObjects);
-            battle.StartFight();
-            #endregion
+            // Initialize current game state.  
+            CurrentState = GameState.MainMenuState; 
+            
 
             base.Initialize();
 
@@ -105,12 +81,6 @@ namespace RPG
 
         protected override void LoadContent()
         {
-            this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
-            this.defaultFont = base.Content.Load<SpriteFont>("Fonts\\Arial");
-            this.mainMenu.LoadContent(base.Content);
-            this.battleScreen.LoadContent(base.Content);
-            this.textDrawer = new TextDrawer(this.defaultFont);
-            Tile.TileSetTexture = Content.Load<Texture2D>(@"Tiles\tileset");
         }
 
         protected override void UnloadContent()
@@ -122,69 +92,14 @@ namespace RPG
             /*
                 textDrawer = new TextDrawer(defaultFont);
             */
-            switch (GameState)
-            {
-                case GameState.InGame:
-                    Camera.Update(squaresAcross, squaresDown, player);
-                    this.player.Update(gameTime);
-                    foreach (var entry in worldObjects)
-                    {
-                        entry.Update(gameTime);
-                    }
-                    engine.EnemyCollisionCheck(player, worldObjects);
-                    break;
-                case GameState.MainMenu:
-                    this.mainMenu.Update();
-                    break;
-                case GameState.Battle:
-                    if (battle.InProgress)
-                    {
-                        battle.NextTurn();
-                    }
-                    else
-                    {
-                        GameState = GameState.InGame;
-                    }
-                    this.battleScreen.Update();
-                    break;
-            }
+
+            States[(Int32)CurrentState].Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            this.GraphicsDevice.Clear(Color.White);
-
-            this.spriteBatch.Begin();
-            map.Draw(spriteBatch, squaresAcross, squaresDown);
-            textDrawer.DrawString(spriteBatch, player.Position.X + "/" + player.Position.Y);
-
-
-            switch (GameState)
-            {
-                case GameState.MainMenu:
-                    this.mainMenu.Draw(this.spriteBatch);
-                    break;
-                case GameState.InGame:
-                    this.player.Draw(this.spriteBatch);
-                    worldObjects.ForEach(enemy =>
-                    {
-                        enemy.Draw(this.spriteBatch);
-                    });
-                    string cameraLocation = string.Format("         Camera x: {0}. Camera y: {1}", Camera.Location.X,
-                        Camera.Location.Y);
-                    textDrawer.DrawString(spriteBatch, cameraLocation);
-                    break;
-                case GameState.Battle:
-                    this.battleScreen.Draw(this.spriteBatch);
-                    string statusText = this.battle.Status;
-                        //String.Format("Attacker: {0}/{1}hp; Target: {2}/{3}hp",
-                        //(this.battle.Attacker as Character).Name, this.battle.Attacker.Health.Value,
-                        //(this.battle.Target as Character).Name, this.battle.Target.Health.Value);
-                    textDrawer.DrawString(spriteBatch, statusText);                    
-                    break;
-            }
-            this.spriteBatch.End();
+            States[(Int32)CurrentState].Draw(spriteBatch);
             base.Draw(gameTime);
         }
     }

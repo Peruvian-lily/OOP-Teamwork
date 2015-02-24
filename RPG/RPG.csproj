@@ -50,6 +50,7 @@
     <Compile Include="GameLogic\Interface\IMove.cs" />
     <Compile Include="GameLogic\Interface\ITimeout.cs" />
     <Compile Include="GameLogic\Models\Battle.cs" />
+    <Compile Include="Graphics\AbstractGameState.cs" />
     <Compile Include="Graphics\BattleScreen.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\Effects.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\EffectType.cs" />
@@ -62,6 +63,11 @@
     <Compile Include="GameLogic\Models\Items\Base\PickUp.cs" />
     <Compile Include="GameLogic\Models\Items\Bonus.cs" />
     <Compile Include="GameLogic\Models\Items\Item.cs" />
+    <Compile Include="Graphics\GameStates\BattleScreenState.cs" />
+    <Compile Include="Graphics\GameStates\GamePlayState.cs" />
+    <Compile Include="Graphics\GameStates\LoseGameState.cs" />
+    <Compile Include="Graphics\GameStates\MainMenuState.cs" />
+    <Compile Include="Graphics\GameStates\WinGameState.cs" />
     <Compile Include="Graphics\MainMenu.cs" />
     <Compile Include="Graphics\Map\Camera.cs" />
     <Compile Include="Graphics\Map\Map.cs" />

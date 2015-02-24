@@ -27,7 +27,7 @@ namespace RPG.GameLogic.Models
             this.CurrentTurn = 1;
             this.Enemies = trigger;
             this.Target = player;
-            this.Status = "Battle initiated";
+            this.Status = "BattleScreenState initiated";
         }
 
         public int Round { get; private set; }

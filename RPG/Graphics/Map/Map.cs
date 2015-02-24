@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RPG.Graphics.Map
 {
-    class Map
+   public class Map
     {
 /*        public LinkedList<Tile> tiles;
         public LinkedList<Enemy> enemies;

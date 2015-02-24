@@ -29,30 +29,30 @@ namespace RPG.Graphics
 
         public void Update()
         {
-            switch (Game1.GameState)
+            switch (Game1.CurrentState)
             {
-                case GameState.MainMenu:
+                case GameState.MainMenuState:
                     foreach (GUIElement element in this.main)
                     {
                         element.Update();
                     }
                     break;
-                case GameState.InGame:
+                case GameState.GamePlayState:
                     break;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            switch (Game1.GameState)
+            switch (Game1.CurrentState)
             {
-                case GameState.MainMenu:
+                case GameState.MainMenuState:
                     foreach (GUIElement element in this.main)
                     {
                         element.Draw(spriteBatch);
                     }
                     break;
-                case GameState.InGame:
+                case GameState.GamePlayState:
                     break;
             }
         }
@@ -62,7 +62,7 @@ namespace RPG.Graphics
             if (element == "Overlays\\Menu\\new_game_plain")
             {
                 //Play the Game
-                Game1.GameState = GameState.InGame;
+                Game1.CurrentState = GameState.GamePlayState;
             }
         }
     }

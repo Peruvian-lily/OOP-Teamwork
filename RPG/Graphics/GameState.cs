@@ -2,6 +2,6 @@
 {
     public enum GameState
     {
-        MainMenu, InGame, Battle, Win, Die
+        MainMenuState, GamePlayState, BattleScreenState, WinState, LoseState
     }
 }
