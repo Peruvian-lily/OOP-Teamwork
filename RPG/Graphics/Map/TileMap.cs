@@ -41,7 +41,7 @@ namespace RPG.Graphics.Map
                 Rows.Add(thisRow);
                 line = reader.ReadLine();
             }
-
+            reader.Close();
             MapWidth *= 30;
             MapHeight = Rows.Count * 36;
 
