@@ -56,6 +56,7 @@
     <Compile Include="GameLogic\Models\Effects\Base\EffectTarget.cs" />
     <Compile Include="GameLogic\Models\Effects\Burning.cs" />
     <Compile Include="GameLogic\Models\Effects\Healing.cs" />
+    <Compile Include="Graphics\CustomShapes\CircleDrawer.cs" />
     <Compile Include="Graphics\GameState.cs" />
     <Compile Include="GameLogic\Models\Inventory\Base\Inventory.cs" />
     <Compile Include="GameLogic\Models\Items\Base\PickUp.cs" />
