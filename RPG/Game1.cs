@@ -3,21 +3,14 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using RPG.GameLogic.Core.Items;
-using RPG.GameLogic.Core;
-using RPG.GameLogic.Core.Enemies;
-using RPG.GameLogic.Interface;
-using RPG.GameLogic.Models;
 using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
 using RPG.Graphics;
 using RPG.Graphics.GameStates;
-using RPG.Graphics.Map;
 
 #endregion
 
@@ -49,9 +42,10 @@ namespace RPG
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
             this.graphics.PreferredBackBufferWidth = 800;
             this.graphics.PreferredBackBufferHeight = 480;
-            graphics.ApplyChanges();
+            this.graphics.ApplyChanges();
             ScreenWidth = this.GraphicsDevice.Viewport.Width;
             ScreenHeight = this.GraphicsDevice.Viewport.Height;
+            this.IsMouseVisible = true;
 
             base.Content = Content;
             this.worldObjects = new List<Character>();
@@ -99,7 +93,7 @@ namespace RPG
 
         protected override void Draw(GameTime gameTime)
         {
-            States[(Int32)CurrentState].Draw(spriteBatch);
+            this.States[(Int32)CurrentState].Draw(this.spriteBatch);
             base.Draw(gameTime);
         }
     }
