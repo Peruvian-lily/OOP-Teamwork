@@ -39,6 +39,7 @@
     <Compile Include="GameLogic\Core\Enemies\EnemyFactory.cs" />
     <Compile Include="GameLogic\Core\Enemies\EnemyType.cs" />
     <Compile Include="GameLogic\Core\Engine.cs" />
+    <Compile Include="GameLogic\Core\XNARectangleExtention.cs" />
     <Compile Include="GameLogic\Core\Items\ItemFactory.cs" />
     <Compile Include="GameLogic\Core\Items\ItemType.cs" />
     <Compile Include="GameLogic\Interface\IEnemy.cs" />

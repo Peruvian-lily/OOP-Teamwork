@@ -48,29 +48,22 @@ namespace RPG.GameLogic.Core
             Vector2 bottomLeftPlayer = new Vector2(player.Position.X, player.Position.Y + player.Height);
             Vector2 bottomRightPlayer = new Vector2(player.Position.X + player.Width, player.Position.Y + player.Height);
 
-            if (IsPointInRect(topLeftPlayer, collisionRect))
+            if (collisionRect.IsPointInRect(topLeftPlayer))
             {
                 Game1.GameState = GameState.Battle;
             }
-            else if (IsPointInRect(topRightPlayer, collisionRect))
+            else if (collisionRect.IsPointInRect(topRightPlayer))
             {
                 Game1.GameState = GameState.Battle;
             }
-            else if (IsPointInRect(bottomLeftPlayer, collisionRect))
+            else if (collisionRect.IsPointInRect(bottomLeftPlayer))
             {
                 Game1.GameState = GameState.Battle;
             }
-            else if (IsPointInRect(bottomRightPlayer, collisionRect))
+            else if (collisionRect.IsPointInRect(bottomRightPlayer))
             {
                 Game1.GameState = GameState.Battle;
             }
-        }
-
-        private bool IsPointInRect(Vector2 point, Rectangle rectangle)
-        {
-            bool isPointXIn = point.X >= rectangle.X && point.X <= rectangle.X + rectangle.Width;
-            bool isPointYIn = point.Y <= rectangle.Y && point.Y >= rectangle.Y - rectangle.Height;
-            return isPointXIn && isPointYIn;
         }
     }
 }
