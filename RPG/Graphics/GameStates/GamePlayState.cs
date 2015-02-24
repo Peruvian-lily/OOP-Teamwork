@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RPG.GameLogic.Core;
 using RPG.GameLogic.Core.Enemies;
-using RPG.GameLogic.Core.Items;
 using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
 using RPG.Graphics.Map;

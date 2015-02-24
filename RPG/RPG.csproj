@@ -49,7 +49,7 @@
     <Compile Include="GameLogic\Interface\IRoam.cs" />
     <Compile Include="GameLogic\Interface\IMove.cs" />
     <Compile Include="GameLogic\Interface\ITimeout.cs" />
-    <Compile Include="GameLogic\Models\Battle.cs" />
+    <Compile Include="GameLogic\Core\Battle\Battle.cs" />
     <Compile Include="Graphics\AbstractGameState.cs" />
     <Compile Include="Graphics\BattleScreen.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\Effects.cs" />
@@ -220,7 +220,6 @@
     <Folder Include="Content\Backgrounds\" />
     <Folder Include="Content\Levels\" />
     <Folder Include="Content\Sounds\" />
-    <Folder Include="GameLogic\Core\Battle\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Fonts\Arial.xnb">

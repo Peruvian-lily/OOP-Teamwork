@@ -88,7 +88,6 @@ namespace RPG.GameLogic.Core.Enemies
             int suffixIndex = rnd.Next(suffix.Count);
             int nameIndex = rnd.Next(name.Count);
             string fullName = string.Format("{0} {1} {2}", prefix[prefixIndex], name[nameIndex], suffix[suffixIndex]);
-
             return fullName;
         }
     }
