@@ -36,7 +36,7 @@ namespace RPG.GameLogic.Core
                 if (obj is Enemy)
                 {
                     Rectangle collisionRect = ((Enemy) obj).CollisionRect;
-                    EnemyCollisions(player.CollisionRect, collisionRect);
+                    this.EnemyCollisions(player.CollisionRect, collisionRect);
                 }
             });
         }
@@ -44,18 +44,6 @@ namespace RPG.GameLogic.Core
         private void EnemyCollisions(Rectangle playerCollisionRect, Rectangle collisionRect)
         {
             if (playerCollisionRect.Intersects(collisionRect))
-            {
-                Game1.CurrentState = GameState.BattleScreenState;
-            }
-            else if (playerCollisionRect.Intersects(collisionRect))
-            {
-                Game1.CurrentState = GameState.BattleScreenState;
-            }
-            else if (playerCollisionRect.Intersects(collisionRect))
-            {
-                Game1.CurrentState = GameState.BattleScreenState;
-            }
-            else if (playerCollisionRect.Intersects(collisionRect))
             {
                 Game1.CurrentState = GameState.BattleScreenState;
             }
