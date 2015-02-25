@@ -24,7 +24,7 @@ namespace RPG.Graphics
             this.looping = looping;
             this.animation = Game1.Content.Load<Texture2D>(assetName);
             this.frameWidth = (this.animation.Width / numOfFrames);
-            this.frameHeight = (this.animation.Height/ NumOfRows + 1);
+            this.frameHeight = (this.animation.Height/ NumOfRows);
             this.Position = new Vector2(initialX, initialY);
             this.WantedFigure = wantedFigure;
         }

@@ -21,7 +21,7 @@ namespace RPG.GameLogic.Models.Characters
         {
             this.AttackPower = new Attack(attack);
             this.Stats = otherStats;
-            this.Animation = new Animation("Sprites\\Monster\\enemy_new", 80f, 2, 4, false, 0, 0);
+            this.Animation = new Animation("Sprites\\Monster\\enemy1", 80f, 3, 2, false, 0, 0);
             this.CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.frameWidth,
                 Animation.frameWidth, Animation.frameHeight);
         }

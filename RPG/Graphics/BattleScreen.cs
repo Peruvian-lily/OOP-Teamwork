@@ -17,12 +17,12 @@ namespace RPG.Graphics
         {
             this.battle = new Battle(player, worldObjects);
 
-            this.battleScreen.Add(new GUIElement("Overlays\\Battle\\background"));
-            this.battleScreen.Add(new GUIElement("Overlays\\Battle\\button1"));
-            this.battleScreen.Add(new GUIElement("Overlays\\Battle\\button2"));
-            this.battleScreen.Add(new GUIElement("Overlays\\Battle\\left"));
+            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\background"));
+            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\button1"));
+            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\button2"));
+            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\left"));
 
-            this.defaultFont = Game1.Content.Load<SpriteFont>("Fonts\\Arial");
+            this.defaultFont = Game1.Content.Load<SpriteFont>(@"Fonts\Arial");
             this.textDrawer = new TextDrawer(this.defaultFont);
 
             battle.StartFight();
@@ -36,9 +36,9 @@ namespace RPG.Graphics
                 element.CenterElement(400, 800);
                 element.ClickEvent += this.OnClick;
             }
-            this.battleScreen.Find(x => x.AssetName == "Overlays\\Battle\\button1").MoveElement(-300, 0);
-            this.battleScreen.Find(x => x.AssetName == "Overlays\\Battle\\button2").MoveElement(300, 0);
-            this.battleScreen.Find(x => x.AssetName == "Overlays\\Battle\\left").MoveElement(-200, 200);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\button1").MoveElement(-300, 0);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\button2").MoveElement(300, 0);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\left").MoveElement(-200, 200);
         }
 
         public void Update()
@@ -86,12 +86,12 @@ namespace RPG.Graphics
 
         public void OnClick(string element)
         {
-            if (element == "Overlays\\Battle\\button1")
+            if (element == @"Overlays\Battle\button1")
             {
                 //Play the Game
                 Game1.CurrentState = GameState.GamePlayState;
             }
-            if (element == "Overlays\\Battle\\button2")
+            if (element == @"Overlays\Battle\button2")
             {
                 
             }
