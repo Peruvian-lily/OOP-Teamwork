@@ -1,13 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
 using RPG.GameLogic.Models.Characters;
+using RPG.GameLogic.Models.Stats;
+using RPG.GameLogic.Models.Stats.Base;
 
-namespace RPG.GameLogic.Core.Enemies
+namespace RPG.GameLogic.Core.Factory
 {
-    using System;
-    using System.Collections.Generic;
-    using Models.Stats.Base;
-    using Models.Stats;
-
     public static class EnemyFactory
     {
         private static Random rnd = new Random();
@@ -88,7 +86,6 @@ namespace RPG.GameLogic.Core.Enemies
             int suffixIndex = rnd.Next(suffix.Count);
             int nameIndex = rnd.Next(name.Count);
             string fullName = string.Format("{0} {1} {2}", prefix[prefixIndex], name[nameIndex], suffix[suffixIndex]);
-
             return fullName;
         }
     }

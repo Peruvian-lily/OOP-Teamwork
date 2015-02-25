@@ -1,15 +1,15 @@
-﻿namespace RPG.GameLogic.Core.Items
-{
-    using Interface;
-    using System.Text;
-    using Models.Effects.Base;
-    using Models.Items;
-    using Models.Stats;
-    using System;
-    using System.Collections.Generic;
-    using Models.Effects;
-    using Models.Stats.Base;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using RPG.GameLogic.Interface;
+using RPG.GameLogic.Models.Effects;
+using RPG.GameLogic.Models.Effects.Base;
+using RPG.GameLogic.Models.Items;
+using RPG.GameLogic.Models.Stats;
+using RPG.GameLogic.Models.Stats.Base;
 
+namespace RPG.GameLogic.Core.Factory
+{
     public static class ItemFactory
     {
         private static string _id = "111";

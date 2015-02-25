@@ -1,7 +1,5 @@
-﻿namespace RPG.GameLogic.Core.Enemies
+﻿namespace RPG.GameLogic.Core.Factory
 {
-    using System;
-    
     public enum EnemyType
     {
         Magical,

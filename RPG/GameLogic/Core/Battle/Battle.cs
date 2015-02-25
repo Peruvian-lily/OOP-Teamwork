@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO.Ports;
 using System.Linq;
 using System.Threading;
 using Microsoft.Xna.Framework.Input;
 using RPG.GameLogic.Interface;
-using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
 
-namespace RPG.GameLogic.Models
+namespace RPG.GameLogic.Core.Battle
 {
-    class Battle
+  class Battle
     {
         private Random rnd = new Random();
         private bool tookTurn = true;
@@ -71,21 +69,21 @@ namespace RPG.GameLogic.Models
             }
             else if (this.Enemies.Count == 0)
             {
-                this.Status = string.Format("{0} killed all the enemies!", ((Character)Player).Name);
+                this.Status = string.Format("{0} killed all the enemies!", ((Character)this.Player).Name);
                 this.InProgress = false;
             }
 
             if (!this.InProgress) return;
-            if (tookTurn)
+            if (this.tookTurn)
             {
-                this.Attacker = rnd.Next(5) > 2 ? this.SelectFighter(this.Enemies) : this.Player;
+                this.Attacker = this.rnd.Next(5) > 2 ? this.SelectFighter(this.Enemies) : this.Player;
                 this.Status = string.Format("{0} is on turn.", ((Character)this.Attacker).Name);
                 this.tookTurn = false;
             }
             if (this.Attacker is IPlayer)
             {
                 bool selected = false;
-                ProcessTargetting(this.Enemies, ref selected);
+                this.ProcessTargetting(this.Enemies, ref selected);
                 this.Status = string.Format("Select target({0}): {1}({2} hp)", 
                     this.Enemies.Count, ((Character)this.Target).Name, this.Target.Health.Value);
                 if (selected)
@@ -109,7 +107,7 @@ namespace RPG.GameLogic.Models
             }
             this.ClearBattlefield();
 
-            if (CurrentTurn >= this.TotalTurns)
+            if (this.CurrentTurn >= this.TotalTurns)
             {
                 this.CurrentTurn = 1;
                 this.Round += 1;
@@ -118,7 +116,7 @@ namespace RPG.GameLogic.Models
 
         private IFight SelectFighter(List<Character> participants)
         {
-            var onTurn = participants[rnd.Next(0, participants.Count)];
+            var onTurn = participants[this.rnd.Next(0, participants.Count)];
             return onTurn as IFight;
         }
 
@@ -131,19 +129,19 @@ namespace RPG.GameLogic.Models
             var ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Left))
             {
-                if (!leftPressed)
+                if (!this.leftPressed)
                 {
-                    ChangeIndex("reduce", participants);
+                    this.ChangeIndex("reduce", participants);
                 }
-                leftPressed = true;
+                this.leftPressed = true;
             }
             else if (ks.IsKeyDown(Keys.Right))
             {
-                if (!rightPressed)
+                if (!this.rightPressed)
                 {
-                    ChangeIndex("increase", participants);
+                    this.ChangeIndex("increase", participants);
                 }
-                rightPressed = true;
+                this.rightPressed = true;
             }
             else if (ks.IsKeyDown(Keys.Space))
             {
@@ -151,37 +149,37 @@ namespace RPG.GameLogic.Models
             }
             if (ks.IsKeyUp(Keys.Left))
             {
-                leftPressed = false;
+                this.leftPressed = false;
             }
             if (ks.IsKeyUp(Keys.Right))
             {
-                rightPressed = false;
+                this.rightPressed = false;
             }
-            AdjustIndex(participants);
-            this.Target = participants[targetIndex] as IFight;
+            this.AdjustIndex(participants);
+            this.Target = participants[this.targetIndex] as IFight;
         }
         private void ChangeIndex(string action, List<Character> targets)
         {
             switch (action.ToLower())
             {
                 case "reduce":
-                    targetIndex -= 1;
+                    this.targetIndex -= 1;
                     break;
                 case "increase":
-                    targetIndex += 1;
+                    this.targetIndex += 1;
                     break;
             }
         }
 
         private void AdjustIndex(List<Character> targets)
         {
-            if (targetIndex < 0)
+            if (this.targetIndex < 0)
             {
-                targetIndex = targets.Count() - 1;
+                this.targetIndex = targets.Count() - 1;
             }
-            else if (targetIndex > targets.Count - 1)
+            else if (this.targetIndex > targets.Count - 1)
             {
-                targetIndex = 0;
+                this.targetIndex = 0;
             }
         }
     }

@@ -36,12 +36,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
-    <Compile Include="GameLogic\Core\Enemies\EnemyFactory.cs" />
-    <Compile Include="GameLogic\Core\Enemies\EnemyType.cs" />
+    <Compile Include="GameLogic\Core\Factory\EnemyFactory.cs" />
+    <Compile Include="GameLogic\Core\Factory\EnemyType.cs" />
     <Compile Include="GameLogic\Core\Engine.cs" />
     <Compile Include="GameLogic\Core\XNARectangleExtention.cs" />
-    <Compile Include="GameLogic\Core\Items\ItemFactory.cs" />
-    <Compile Include="GameLogic\Core\Items\ItemType.cs" />
+    <Compile Include="GameLogic\Core\Factory\ItemFactory.cs" />
+    <Compile Include="GameLogic\Core\Factory\ItemType.cs" />
     <Compile Include="GameLogic\Interface\IEnemy.cs" />
     <Compile Include="GameLogic\Interface\IFight.cs" />
     <Compile Include="GameLogic\Interface\IItem.cs" />
@@ -49,7 +49,7 @@
     <Compile Include="GameLogic\Interface\IRoam.cs" />
     <Compile Include="GameLogic\Interface\IMove.cs" />
     <Compile Include="GameLogic\Interface\ITimeout.cs" />
-    <Compile Include="GameLogic\Models\Battle.cs" />
+    <Compile Include="GameLogic\Core\Battle\Battle.cs" />
     <Compile Include="Graphics\AbstractGameState.cs" />
     <Compile Include="Graphics\BattleScreen.cs" />
     <Compile Include="GameLogic\Models\Effects\Base\Effects.cs" />
@@ -211,17 +211,12 @@
     <Content Include="Content\Tiles\wood_tileset_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\map.txt">
+    <Content Include="Content\Levels\map.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\Backgrounds\" />
-    <Folder Include="Content\Levels\" />
-    <Folder Include="Content\Sounds\" />
-    <Folder Include="GameLogic\Core\Battle\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Content\Fonts\Arial.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

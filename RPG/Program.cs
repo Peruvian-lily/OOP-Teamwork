@@ -1,7 +1,6 @@
 ﻿#region Using Statements
 using System;
 using Microsoft.Xna.Framework;
-using RPG.GameLogic.Core.Items;
 using RPG.GameLogic.Models.Items;
 
 #endregion
