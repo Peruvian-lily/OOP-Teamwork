@@ -1,7 +1,7 @@
 ﻿using RPG.GameLogic.Models.Characters.Base;
-using RPG.GameLogic.Models.Items.Base;
+using RPG.GameLogic.Models.PickUps.Base;
 
-namespace RPG.GameLogic.Models.Items
+namespace RPG.GameLogic.Models.PickUps
 {
     class Bonus : PickUp
     {

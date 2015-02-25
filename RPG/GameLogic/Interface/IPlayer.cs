@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using RPG.GameLogic.Models.Inventory.Base;
-using RPG.GameLogic.Models.Items.Base;
+using RPG.GameLogic.Models.PickUps.Base;
 using RPG.GameLogic.Models.Stats.Base;
 
 namespace RPG.GameLogic.Interface

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RPG.GameLogic.Models.Items.Base
+namespace RPG.GameLogic.Models.PickUps.Base
 {
     public abstract class PickUp : GameObject
     {

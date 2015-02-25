@@ -1,29 +1,26 @@
 ﻿namespace RPG.GameLogic.Models.Effects.Base
 {
-    using Interface;
     using Stats.Base;
+    using Characters.Base;
 
     public abstract class Effects
     {
-        /// <summary>
-        /// Create new status effect.
-        /// </summary>
-        /// <param name="stat">Stat it modifies</param>
-        /// <param name="target">Target it affects</param>
-        /// <param name="type">Is the effect helpfull or hafmul</param>
-        protected Effects(Stat stat, EffectTarget target, EffectType type, IFight owner)
+        protected Effects(Stat stat, int duration, EffectType type)
         {
             this.Stat = stat;
-            this.EffectTarget = target;
             this.EffectType = type;
-            this.Owner = owner;
+            this.Duration = duration;
         }
 
-        public IFight Owner { get; private set; }
         public Stat Stat { get; private set; }
         public EffectType EffectType { get; private set; }
-        public EffectTarget EffectTarget { get; private set; } 
+        public int Duration { get; set; }
 
-        public abstract void Apply();
+        public virtual void Apply(Character target)
+        {
+            target.Effects.Add(this);
+        }
+
+        public abstract void Tick(Character target);
     }
 }

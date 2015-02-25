@@ -7,7 +7,6 @@ namespace RPG.GameLogic.Models.Stats
         public Elemental(int value, StatType type) 
             : base("Elemental", value, type)
         {
-
         }
     }
 }

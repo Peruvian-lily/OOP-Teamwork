@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using RPG.GameLogic.Models.Items;
+using RPG.GameLogic.Models.PickUps;
 
 namespace RPG.GameLogic.Models.Inventory.Base
 {

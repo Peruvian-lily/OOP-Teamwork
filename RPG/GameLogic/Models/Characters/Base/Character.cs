@@ -7,6 +7,8 @@ using RPG.GameLogic.Models.Stats.Base;
 
 namespace RPG.GameLogic.Models.Characters.Base
 {
+    using Effects.Base;
+
     public abstract class Character : GameObject
     {
         private string name;
@@ -37,6 +39,8 @@ namespace RPG.GameLogic.Models.Characters.Base
         public Health Health { get; private set; }
 
         public Defense Defense { get; private set; }
+
+        public List<Effects> Effects { get; set; }
 
         public int Width
         {

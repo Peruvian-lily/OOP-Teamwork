@@ -5,8 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RPG.GameLogic.Interface;
 using RPG.GameLogic.Models.Characters.Base;
-using RPG.GameLogic.Models.Items;
-using RPG.GameLogic.Models.Items.Base;
+using RPG.GameLogic.Models.PickUps;
+using RPG.GameLogic.Models.PickUps.Base;
 using RPG.GameLogic.Models.Stats;
 using RPG.GameLogic.Models.Stats.Base;
 using RPG.Graphics;
@@ -57,7 +57,7 @@ namespace RPG.GameLogic.Models.Characters
 
         #region Stats and Damage
         public Attack AttackPower { get; private set; }
-
+        public List<Effect> Spells { get; private set; }
         public List<Stat> OffensiveStats
         {
             get { return this.otherStats.Where(stat => stat.Type == StatType.Offensive).ToList(); }

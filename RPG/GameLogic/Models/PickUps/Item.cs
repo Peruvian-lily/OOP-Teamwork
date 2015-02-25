@@ -1,17 +1,16 @@
-﻿namespace RPG.GameLogic.Models.Items
-{
-    using System;
-    using System.Collections.Generic;
-    using Interface;
-    using Base;
-    using Stats.Base;
-    using Effects.Base;
+﻿using System;
+using System.Collections.Generic;
+using RPG.GameLogic.Interface;
+using RPG.GameLogic.Models.PickUps.Base;
+using RPG.GameLogic.Models.Stats.Base;
 
+namespace RPG.GameLogic.Models.PickUps
+{
     public class Item : PickUp, IItem
     {
         private List<Stat> _stats;
 
-        public Item(string name, List<Stat> stats, Effects effect)
+        public Item(string name, List<Stat> stats, Effects.Base.Effects effect)
             : base(name)
         {
             this.Stats = stats;
@@ -37,6 +36,6 @@
             }
         }
 
-        public Effects Effect { get; private set; }
+        public Effects.Base.Effects Effect { get; private set; }
     }
 }

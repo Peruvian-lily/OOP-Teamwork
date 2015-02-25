@@ -1,30 +1,21 @@
-﻿namespace RPG.GameLogic.Models.Effects
-{
-    using Interface;
-    using Stats;
-    using Base;
+﻿using RPG.GameLogic.Models.Characters.Base;
+using RPG.GameLogic.Models.Effects.Base;
+using RPG.GameLogic.Models.Stats;
 
-    class Healing : Effects
+namespace RPG.GameLogic.Models.Effects
+{
+    class Healing : Base.Effects
     {
-        public Healing(int amount, EffectTarget target, IFight owner) 
-            : base(new Health(amount), target, EffectType.Helpful, owner)
+        public Healing(int amount,int duration) 
+            : base(new Health(amount), duration, EffectType.Helpful)
         {
         }
 
-        public override void Apply()
+        public override void Tick(Character target)
         {
-            if (this.Owner != null)
-            {
-                switch (this.EffectTarget)
-                {
-                    case EffectTarget.Self:
-                        this.Owner.Health.Increase(this.Stat.Value);
-                        break;
-                    case EffectTarget.Others:
-                        this.Owner.GetTarget().Health.Increase(this.Stat.Value);
-                        break;
-                }
-            }
+            if (this.Duration <= 0) return;
+            this.Duration -= 1;
+            target.Health.Increase(this.Stat.Value);
         }
     }
 }
