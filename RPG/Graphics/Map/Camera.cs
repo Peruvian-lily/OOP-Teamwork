@@ -10,9 +10,9 @@ namespace RPG.Graphics.Map
 {
     static class Camera
     {
-        private const int remainderScreenSize = 1;
-        public static readonly int cameraMaxWidth = (TileMap.mapWidth - remainderScreenSize) * Tile.TileWidth - Game1.bufferWidth;
-        public static int cameraMaxHeight = (TileMap.mapHeight - remainderScreenSize) * Tile.TileHeight -
+        private const int RemainderScreenSize = 1;
+        public static readonly int CameraMaxWidth = (TileMap.mapWidth - RemainderScreenSize) * Tile.TileWidth - Game1.bufferWidth;
+        public static int CameraMaxHeight = (TileMap.mapHeight - RemainderScreenSize) * Tile.TileHeight -
                                               Game1.bufferHeight;
 
         public static Vector2 Location = Vector2.Zero;
@@ -25,12 +25,12 @@ namespace RPG.Graphics.Map
             {
                 if (ks.IsKeyDown(Keys.Left))
                 {
-                    Camera.Location.X = MathHelper.Clamp(Camera.Location.X - Player.speed, 0, (TileMap.mapWidth - squaresAcross) * Tile.TileWidth);
+                    Camera.Location.X = MathHelper.Clamp(Camera.Location.X - Player.Speed, 0, (TileMap.mapWidth - squaresAcross) * Tile.TileWidth);
                 }
 
                 if (ks.IsKeyDown(Keys.Right))
                 {
-                    Camera.Location.X = MathHelper.Clamp(Camera.Location.X + Player.speed, 0, TileMap.mapWidth * Tile.TileWidth);
+                    Camera.Location.X = MathHelper.Clamp(Camera.Location.X + Player.Speed, 0, TileMap.mapWidth * Tile.TileWidth);
 
                 }
             }
@@ -39,15 +39,14 @@ namespace RPG.Graphics.Map
             {
                 if (ks.IsKeyDown(Keys.Up))
                 {
-                    Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y - Player.speed, 0, (TileMap.mapHeight - squaresDown) * Tile.TileHeight);
+                    Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y - Player.Speed, 0, (TileMap.mapHeight - squaresDown) * Tile.TileHeight);
                 }
 
                 if (ks.IsKeyDown(Keys.Down))
                 {
-                    Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y + Player.speed, 0, (TileMap.mapHeight - squaresDown) * Tile.TileHeight);
+                    Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y + Player.Speed, 0, (TileMap.mapHeight - squaresDown) * Tile.TileHeight);
                 }
             }
-            
         }
     }
 }

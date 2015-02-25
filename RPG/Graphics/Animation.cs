@@ -6,16 +6,17 @@ namespace RPG.Graphics
     public class Animation
     {
         private const int NumOfRows = 4;
-        private Texture2D animation;
-        private Rectangle sourceRectangle;
+
+        public readonly int FrameWidth;
+        public readonly int FrameHeight;
 
         private float elapsed;
         private float frameTime;
         private int numOfFrames;
         private int currentFrame;
-        public int frameWidth;
-        public int frameHeight;
         private bool looping;
+        private Texture2D animation;
+        private Rectangle sourceRectangle;
 
         public Animation(string assetName, float frameSpeed, int numOfFrames, byte wantedFigure, bool looping, float initialX, float initialY)
         {
@@ -23,8 +24,8 @@ namespace RPG.Graphics
             this.numOfFrames = numOfFrames;
             this.looping = looping;
             this.animation = Game1.Content.Load<Texture2D>(assetName);
-            this.frameWidth = (this.animation.Width / numOfFrames);
-            this.frameHeight = (this.animation.Height/ NumOfRows);
+            this.FrameWidth = (this.animation.Width / numOfFrames);
+            this.FrameHeight = (this.animation.Height/ NumOfRows);
             this.Position = new Vector2(initialX, initialY);
             this.WantedFigure = wantedFigure;
         }
@@ -39,7 +40,7 @@ namespace RPG.Graphics
         {
             int row = 4 - this.WantedFigure;
             this.elapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            this.sourceRectangle = new Rectangle(this.currentFrame * this.frameWidth, this.frameHeight * row, this.frameWidth, this.frameHeight);
+            this.sourceRectangle = new Rectangle(this.currentFrame * this.FrameWidth, this.FrameHeight * row, this.FrameWidth, this.FrameHeight);
             if (this.elapsed >= this.frameTime)
             {
                 if (this.currentFrame >= this.numOfFrames - 1)

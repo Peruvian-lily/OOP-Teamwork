@@ -13,7 +13,7 @@ namespace RPG.GameLogic.Models.Characters
 {
     public class Enemy : Character, IRoam, IEnemy
     {
-        private static readonly int collisonCirlceRadius = 10;
+        private static readonly int CollisonCirlceRadius = 10;
 
         public Enemy(string name, int health,
             int attack, int defense, List<Stat> otherStats)
@@ -22,8 +22,8 @@ namespace RPG.GameLogic.Models.Characters
             this.AttackPower = new Attack(attack);
             this.Stats = otherStats;
             this.Animation = new Animation("Sprites\\Monster\\enemy1", 80f, 3, 2, false, 0, 0);
-            this.CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.frameWidth,
-                Animation.frameWidth, Animation.frameHeight);
+            this.CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.FrameWidth,
+                Animation.FrameWidth, Animation.FrameHeight);
         }
 
         public Enemy(string name, int health,
@@ -84,7 +84,7 @@ namespace RPG.GameLogic.Models.Characters
 
         public Circle CollisonCircle
         {
-            get { return new Circle(this.Position, collisonCirlceRadius); }
+            get { return new Circle(this.Position, CollisonCirlceRadius); }
         }
 
         public Character GetTarget()
@@ -127,8 +127,8 @@ namespace RPG.GameLogic.Models.Characters
         {
             this.Animation.PlayAnimation(gameTime);
             this.Animation.PlayAnimation(gameTime);
-            CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.frameWidth,
-                Animation.frameWidth, Animation.frameHeight);
+            CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.FrameWidth,
+                Animation.FrameWidth, Animation.FrameHeight);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

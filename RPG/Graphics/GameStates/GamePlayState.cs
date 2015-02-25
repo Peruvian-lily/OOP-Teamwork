@@ -24,7 +24,6 @@ namespace RPG.Graphics.GameStates
         private TextDrawer textDrawer;
         private Engine engine;
 
-
         public GamePlayState(Game game, Player player, List<Character> worldObjects )
             : base(game)
         {
@@ -44,12 +43,12 @@ namespace RPG.Graphics.GameStates
             {
                 int minPower = Rnd.Next(75);
                 int maxPower = Rnd.Next(minPower, 101);
+
                 // Currently has 5% chance to spawn enemy with bonus stuff.
                 bool hasBonus = Rnd.Next(1, 101) < 5;  
                 var enemy = EnemyFactory.SpawnEnemy(minPower, maxPower, hasBonus);
-
-                int positionX = Rnd.Next(0, Camera.cameraMaxWidth - enemy.Animation.frameWidth);
-                int positionY = Rnd.Next(0, Camera.cameraMaxHeight - enemy.Animation.frameHeight);
+                int positionX = Rnd.Next(0, Camera.CameraMaxWidth - enemy.Animation.FrameWidth);
+                int positionY = Rnd.Next(0, Camera.CameraMaxHeight - enemy.Animation.FrameHeight);
                 enemy.Position = new Vector2(positionX, positionY);
                 this.worldObjects.Add(enemy);
                 engine = Engine.GetInstance;

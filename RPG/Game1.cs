@@ -60,13 +60,13 @@ namespace RPG
             FieldInfo[] info = type.GetFields(BindingFlags.Static | BindingFlags.Public);
             Int32 numberStates = info.Length;
 
-            // Instantiate each game state.  
+            // Instantiate each Game state.  
             States = new AbstractGameState[numberStates];
             States[(Int32)GameState.MainMenuState] = new MainMenuState(this);
             States[(Int32)GameState.GamePlayState] = new GamePlayState(this, this.player, this.worldObjects);
             States[(Int32)GameState.BattleScreenState] = new BattleScreenState(this, this.player, this.worldObjects);
 
-            // Initialize current game state.  
+            // Initialize current Game state.  
             CurrentState = GameState.MainMenuState; 
             
 

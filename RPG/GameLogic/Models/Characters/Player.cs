@@ -18,20 +18,18 @@ namespace RPG.GameLogic.Models.Characters
 {
     public class Player : Character, IPlayer
     {
-        public const int speed = 2;
+        public const int Speed = 2;
 
-        public static readonly Vector2 UP_VECTOR = new Vector2(0, -1);
-        public static readonly Vector2 DOWN_VECTOR = new Vector2(0, 1);
-        public static readonly Vector2 RIGHT_VECTOR = new Vector2(1, 0);
-        public static readonly Vector2 LEFT_VECTOR = new Vector2(-1, 0);
+        public static readonly Vector2 UpVector = new Vector2(0, -1);
+        public static readonly Vector2 DownVector = new Vector2(0, 1);
+        public static readonly Vector2 RightVector = new Vector2(1, 0);
+        public static readonly Vector2 LeftVector = new Vector2(-1, 0);
 
+        private List<Stat> otherStats;
         private KeyboardState ks;
         private byte lastFrame = 3;
-        private List<Stat> otherStats;
 
-        public Player(string name, int health,
-            int attackPower, int defense, int inventorySize,
-            List<Stat> otherStats)
+        public Player(string name, int health, int attackPower, int defense, int inventorySize, List<Stat> otherStats)
             : base(name, health, defense)
         {
             this.AttackPower = new Attack(attackPower);
@@ -40,8 +38,7 @@ namespace RPG.GameLogic.Models.Characters
             this.AddAnimation();
         }
 
-        public Player(string name, int health,
-             int attackPower, int defense, int inventorySize)
+        public Player(string name, int health, int attackPower, int defense, int inventorySize)
             : this(name, health, attackPower, defense, inventorySize, new List<Stat>())
         {
         }
@@ -205,62 +202,62 @@ namespace RPG.GameLogic.Models.Characters
         #region Movement
         public void Move(Vector2 direction)
         {
-            if (Camera.Location.X == 0 || Camera.Location.X == Camera.cameraMaxWidth)
+            if (Camera.Location.X == 0 || Camera.Location.X == Camera.CameraMaxWidth)
             {
-                this.Position.X += speed * direction.X;
+                this.Position.X += Speed * direction.X;
             }
-            if (Camera.Location.Y == 0 || Camera.Location.Y == Camera.cameraMaxHeight)
+            if (Camera.Location.Y == 0 || Camera.Location.Y == Camera.CameraMaxHeight)
             {
-                this.Position.Y += speed * direction.Y;   
+                this.Position.Y += Speed * direction.Y;   
             }
         }
 
         private void MoveLeft()
         {
-            if (0 >= this.Position.X + speed)
+            if (0 >= this.Position.X + Speed)
             {
                 return;
             }
 
             this.lastFrame = 1;
             this.CurrentAnimation = this.LeftAnimation;
-            Move(LEFT_VECTOR);
+            Move(LeftVector);
         }
 
         private void MoveUp()
         {
-            if (0 >= this.Position.Y + speed)
+            if (0 >= this.Position.Y + Speed)
             {
                 return;
             }
 
             this.lastFrame = 4;
             this.CurrentAnimation = this.FrontAnimation;
-            Move(UP_VECTOR);
+            Move(UpVector);
         }
 
         private void MoveDown()
         {
-            if (Game1.ScreenHeight <= this.Position.Y + speed + this.Height)
+            if (Game1.ScreenHeight <= this.Position.Y + Speed + this.Height)
             {
                 return;
             }
 
             this.lastFrame = 2;
             this.CurrentAnimation = this.BackAnimation;
-            Move(DOWN_VECTOR);
+            Move(DownVector);
         }
 
         private void MoveRight()
         {
-            if (Game1.ScreenWidth <= this.Position.X + speed + this.Width)
+            if (Game1.ScreenWidth <= this.Position.X + Speed + this.Width)
             {
                 return;
             }
 
             this.lastFrame = 3;
             this.CurrentAnimation = this.RightAnimation;
-            Move(RIGHT_VECTOR);
+            Move(RightVector);
         }
         #endregion
 

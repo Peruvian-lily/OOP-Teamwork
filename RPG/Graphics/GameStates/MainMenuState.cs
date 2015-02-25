@@ -9,7 +9,6 @@ namespace RPG.Graphics.GameStates
 {
     class MainMenuState : AbstractGameState
     {
-
         public MainMenuState(Game game)
             : base(game)
         {

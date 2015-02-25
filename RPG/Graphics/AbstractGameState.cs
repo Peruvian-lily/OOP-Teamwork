@@ -9,12 +9,11 @@ namespace RPG.Graphics
 {
     public abstract class AbstractGameState
     {
-        protected readonly Game game;
-
+        protected readonly Game Game;
 
         protected AbstractGameState(Game game)
         {
-            this.game = game;
+            this.Game = game;
 
         }
         public virtual void Update(GameTime gameTime)
