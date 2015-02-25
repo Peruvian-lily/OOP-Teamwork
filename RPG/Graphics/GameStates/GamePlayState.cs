@@ -12,12 +12,11 @@ namespace RPG.Graphics.GameStates
 {
     class GamePlayState : AbstractGameState
     {
-        private static Random Rnd;
-
-        private const int EnemyCount = 3;
+        private const int EnemyCount = 100;
         private const int MapSquaresAcross = 18;
         private const int MapSquaresDown = 11;
 
+        private static Random Rnd;
         private Player player;
         private List<Character> worldObjects;
         private Map.Map map;
@@ -45,11 +44,12 @@ namespace RPG.Graphics.GameStates
             {
                 int minPower = Rnd.Next(75);
                 int maxPower = Rnd.Next(minPower, 101);
-                bool hasBonus = Rnd.Next(1, 101) < 5;  // Currently has 5% chance to spawn enemy with bonus stuff.
+                // Currently has 5% chance to spawn enemy with bonus stuff.
+                bool hasBonus = Rnd.Next(1, 101) < 5;  
                 var enemy = EnemyFactory.SpawnEnemy(minPower, maxPower, hasBonus);
 
-                int positionX = Rnd.Next(0, Game1.ScreenWidth - enemy.Animation.frameWidth);
-                int positionY = Rnd.Next(0, Game1.ScreenHeight - enemy.Animation.frameHeight);
+                int positionX = Rnd.Next(0, Camera.cameraMaxWidth - enemy.Animation.frameWidth);
+                int positionY = Rnd.Next(0, Camera.cameraMaxHeight - enemy.Animation.frameHeight);
                 enemy.Position = new Vector2(positionX, positionY);
                 this.worldObjects.Add(enemy);
                 engine = Engine.GetInstance;

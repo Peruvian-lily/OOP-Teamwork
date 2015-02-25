@@ -19,11 +19,7 @@ namespace RPG.GameLogic.Models.Characters
     public class Player : Character, IPlayer
     {
         public const int speed = 2;
-        private const int remainderScreenSize = 1;
-        
-        public readonly int cameraMaxWidth = (TileMap.mapWidth - remainderScreenSize) * Tile.TileWidth - Game1.bufferWidth;
-        public readonly int cameraMaxHeight = (TileMap.mapHeight - remainderScreenSize)*Tile.TileHeight -
-                                              Game1.bufferHeight;
+
         public static readonly Vector2 UP_VECTOR = new Vector2(0, -1);
         public static readonly Vector2 DOWN_VECTOR = new Vector2(0, 1);
         public static readonly Vector2 RIGHT_VECTOR = new Vector2(1, 0);
@@ -209,11 +205,11 @@ namespace RPG.GameLogic.Models.Characters
         #region Movement
         public void Move(Vector2 direction)
         {
-            if (Camera.Location.X == 0 || Camera.Location.X == cameraMaxWidth)
+            if (Camera.Location.X == 0 || Camera.Location.X == Camera.cameraMaxWidth)
             {
                 this.Position.X += speed * direction.X;
             }
-            if (Camera.Location.Y == 0 || Camera.Location.Y == cameraMaxHeight)
+            if (Camera.Location.Y == 0 || Camera.Location.Y == Camera.cameraMaxHeight)
             {
                 this.Position.Y += speed * direction.Y;   
             }

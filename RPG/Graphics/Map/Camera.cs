@@ -10,6 +10,11 @@ namespace RPG.Graphics.Map
 {
     static class Camera
     {
+        private const int remainderScreenSize = 1;
+        public static readonly int cameraMaxWidth = (TileMap.mapWidth - remainderScreenSize) * Tile.TileWidth - Game1.bufferWidth;
+        public static int cameraMaxHeight = (TileMap.mapHeight - remainderScreenSize) * Tile.TileHeight -
+                                              Game1.bufferHeight;
+
         public static Vector2 Location = Vector2.Zero;
 
         public static void Update(int squaresAcross, int squaresDown, Player player)
