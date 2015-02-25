@@ -43,6 +43,14 @@ namespace RPG.GameLogic.Models.Characters
         {
         }
 
+        public Rectangle CollisionRect
+        {
+            get 
+            { 
+                return new Rectangle((int)Position.X, (int)Position.Y, this.Height, this.Width); 
+            }
+        }
+
         #region Animation
         public Animation LeftAnimation { get; set; }
 

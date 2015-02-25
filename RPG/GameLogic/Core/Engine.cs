@@ -36,31 +36,26 @@ namespace RPG.GameLogic.Core
                 if (obj is Enemy)
                 {
                     Rectangle collisionRect = ((Enemy) obj).CollisionRect;
-                    EnemyCollisions(player, collisionRect);
+                    EnemyCollisions(player.CollisionRect, collisionRect);
                 }
             });
         }
 
-        private void EnemyCollisions(Player player, Rectangle collisionRect)
+        private void EnemyCollisions(Rectangle playerCollisionRect, Rectangle collisionRect)
         {
-            Vector2 topLeftPlayer = new Vector2(player.Position.X, player.Position.Y);
-            Vector2 topRightPlayer = new Vector2(player.Position.X + player.Width, player.Position.Y);
-            Vector2 bottomLeftPlayer = new Vector2(player.Position.X, player.Position.Y + player.Height);
-            Vector2 bottomRightPlayer = new Vector2(player.Position.X + player.Width, player.Position.Y + player.Height);
-
-            if (collisionRect.IsPointInRect(topLeftPlayer))
+            if (playerCollisionRect.Intersects(collisionRect))
             {
                 Game1.CurrentState = GameState.BattleScreenState;
             }
-            else if (collisionRect.IsPointInRect(topRightPlayer))
+            else if (playerCollisionRect.Intersects(collisionRect))
             {
                 Game1.CurrentState = GameState.BattleScreenState;
             }
-            else if (collisionRect.IsPointInRect(bottomLeftPlayer))
+            else if (playerCollisionRect.Intersects(collisionRect))
             {
                 Game1.CurrentState = GameState.BattleScreenState;
             }
-            else if (collisionRect.IsPointInRect(bottomRightPlayer))
+            else if (playerCollisionRect.Intersects(collisionRect))
             {
                 Game1.CurrentState = GameState.BattleScreenState;
             }
