@@ -7,11 +7,14 @@ using RPG.GameLogic.Models.Characters.Base;
 using RPG.GameLogic.Models.Stats;
 using RPG.GameLogic.Models.Stats.Base;
 using RPG.Graphics;
+using RPG.Graphics.CustomShapes;
 
 namespace RPG.GameLogic.Models.Characters
 {
     public class Enemy : Character, IRoam, IEnemy
     {
+        private static readonly int collisonCirlceRadius = 10;
+
         public Enemy(string name, int health,
             int attack, int defense, List<Stat> otherStats)
             : base(name, health, defense)
@@ -28,6 +31,7 @@ namespace RPG.GameLogic.Models.Characters
             : this(name, health, attack, defense, new List<Stat>())
         {
         }
+
 
         public Rectangle CollisionRect { get; set; }
 
@@ -78,15 +82,35 @@ namespace RPG.GameLogic.Models.Characters
         }
         #endregion
 
+        public Circle CollisonCircle
+        {
+            get { return new Circle(this.Position, collisonCirlceRadius); }
+        }
+
         public Character GetTarget()
         {
             throw new System.NotImplementedException();
         }
 
-        public List<IFight> GetAllies()
+        public List<IFight> GetAllies(List<Character> allGameCharacters)
         {
-            //Return all allies the unit coldies with.
-            throw new System.NotImplementedException();
+            List<IFight> allaysThatCanHelp = new List<IFight>();
+
+            foreach (var character in allGameCharacters)
+            {
+                if (character is IFight && character is Enemy)
+                {
+                    Enemy currEnemy = character as Enemy;
+                    Vector2 enemyCenter = new Vector2(currEnemy.CollisionRect.Center.X, currEnemy.CollisionRect.Center.Y);
+
+                    if (this.CollisonCircle.IsPointInCirlce(enemyCenter))
+                    {
+                        allaysThatCanHelp.Add(currEnemy);
+                    }
+                }
+            }
+
+            return allaysThatCanHelp;
         }
 
         public void Roam()
