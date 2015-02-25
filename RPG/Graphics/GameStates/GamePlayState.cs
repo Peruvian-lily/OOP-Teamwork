@@ -78,7 +78,7 @@ namespace RPG.Graphics.GameStates
                 enemy.Draw(spriteBatch);
             });
             this.textDrawer.DrawString(spriteBatch, player.Position.X + "/" + this.player.Position.Y);
-            string cameraLocation = string.Format("         Camera x: {0}. Camera y: {1}. TileMap.mapWidth: {2}. Tile.TileWidt: {3}", Camera.Location.X, Camera.Location.Y, TileMap.mapWidth, player.cameraMaxHeight);
+            string cameraLocation = string.Format("         Camera x: {0}. Camera y: {1}.", Camera.Location.X, Camera.Location.Y);
             this.textDrawer.DrawString(spriteBatch, cameraLocation);
             spriteBatch.End();
         }

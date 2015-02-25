@@ -5,11 +5,6 @@ namespace RPG.Graphics.Map
 {
    public class Map
     {
-/*        public LinkedList<Tile> tiles;
-        public LinkedList<Enemy> enemies;
-
-        public */
-
         public void Draw(SpriteBatch spriteBatch, int squaresAcross, int squaresDown)
         {
             Vector2 firstSquare = new Vector2(Camera.Location.X / Tile.TileWidth, Camera.Location.Y / Tile.TileHeight);
