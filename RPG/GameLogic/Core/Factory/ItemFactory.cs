@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using RPG.GameLogic.Interface;
+using RPG.GameLogic.Models.Effects;
 using RPG.GameLogic.Models.Effects.Base;
 using RPG.GameLogic.Models.PickUps;
 using RPG.GameLogic.Models.Stats;
@@ -13,18 +14,18 @@ namespace RPG.GameLogic.Core.Factory
     {
         private static Random _rnd = new Random();
 
-        public static Item GenerateItem(int minStat, int maxStat, IFight owner = null)
+        public static Item GenerateItem(int minStat, int maxStat)
         {
             var itemType = (ItemType)_rnd.Next(1);
             int power = _rnd.Next(50);
             bool hasEffect = _rnd.Next(5) == 1;
 
             List<Stat> stats = GenerateStats(power, itemType);
-            //Effects effect = GenerateEffect(power,hasEffect);
-            //string name = hasEffect ? GenerateName(itemType, effect) : GenerateName(itemType);
-            //Item item = new Item(name,stats,effect);
-            string name = GenerateName(itemType);
-            Item item = new Item(name,stats, null);
+            Effects effect = GenerateEffect(power,hasEffect);
+            string name = hasEffect ? GenerateName(itemType, effect) : GenerateName(itemType);
+            Item item = new Item(name,stats,effect);
+            //string name = GenerateName(itemType);
+            //Item item = new Item(name,stats, null);
 
             return item;
         }
@@ -65,44 +66,45 @@ namespace RPG.GameLogic.Core.Factory
         }
         #endregion Stats Generator
 
-        //#region Effect Generator
-        //private static Effects GenerateEffect(int power, bool hasEffect)
-        //{
-        //    if (!hasEffect)
-        //    {
-        //        return null;
-        //    }
-        //    int effectPower = _rnd.Next(power);
-        //    EffectTarget target = _rnd.Next(1) == 0 ? EffectTarget.Self : EffectTarget.Others;
-        //    if (_rnd.Next(1) == 0)
-        //    {
-        //        return NewDefensiveEffect(effectPower, target);
-        //    }
-        //    else
-        //    {
-        //        return NewOffensiveEffect(effectPower, target);
-        //    }
-        //}
-        //private static Effects NewDefensiveEffect(int power, EffectTarget target)
-        //{
-        //    //Filthy little effectses. THEY STOLE THE PRECIOUS
-        //    var effectses = new List<Effects>
-        //    {
-        //        new Healing(power+1,target)
-        //    };
-        //    int randomIndex = _rnd.Next(effectses.Count - 1);
-        //    return effectses[randomIndex];
-        //}
-        //private static Effects NewOffensiveEffect(int power, EffectTarget target)
-        //{
-        //    var effectses = new List<Effects>
-        //    {
-        //        new Burning(power+1,target)
-        //    };
-        //    int randomIndex = _rnd.Next(effectses.Count - 1);
-        //    return effectses[randomIndex];
-        //}
-        //#endregion Effect Generator
+        #region Effect Generator
+        private static Effects GenerateEffect(int power, bool hasEffect)
+        {
+            if (!hasEffect)
+            {
+                return null;
+            }
+            int effectPower = _rnd.Next(power);
+            int effectDuration = _rnd.Next(5);
+            if (_rnd.Next(1) == 0)
+            {
+                return NewDefensiveEffect(effectPower, effectDuration);
+            }
+            else
+            {
+                return NewOffensiveEffect(effectPower, effectDuration);
+            }
+        }
+        private static Effects NewDefensiveEffect(int power, int duration)
+        {
+            //Filthy little effectses. THEY STOLE THE PRECIOUS
+            var effectses = new List<Effects>
+            {
+                new Healing(power+1, duration)
+            };
+            int randomIndex = _rnd.Next(effectses.Count - 1);
+            return effectses[randomIndex];
+        }
+        private static Effects NewOffensiveEffect(int power, int duration)
+        {
+            //Resharper has best plural nameses suggestionses ever
+            var effectses = new List<Effects>
+            {
+                new Burning(power+1, duration)
+            };
+            int randomIndex = _rnd.Next(effectses.Count - 1);
+            return effectses[randomIndex];
+        }
+        #endregion Effect Generator
 
         #region Name Generator
         private static string GenerateName(ItemType itemType)
