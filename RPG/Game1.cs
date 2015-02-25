@@ -18,17 +18,18 @@ namespace RPG
 {
     public class Game1 : Game
     {
+        public const int bufferWidth = 800;
+        public const int bufferHeight = 480;
         public static GameState CurrentState;
         private AbstractGameState[] States;
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-
         public new static ContentManager Content;
         public static int ScreenWidth;
         public static int ScreenHeight;
         private Player player;
         private List<Character> worldObjects;
-
+        
         public Game1()
             : base()
         {

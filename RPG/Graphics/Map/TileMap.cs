@@ -11,19 +11,19 @@ namespace RPG.Graphics.Map
     {
         private static string filename = "Content\\Levels\\map.txt";
         public static List<MapRow> Rows = new List<MapRow>();
-        public static int MapWidth;
-        public static int MapHeight;
+        public static int mapWidth;
+        public static int mapHeight;
 
         static TileMap()
         {
             var reader = new StreamReader(TitleContainer.OpenStream(filename));
             string line = reader.ReadLine();
-            MapWidth = line.Length;
+            mapWidth = line.Length;
 
             while (line != null)
             {
                 MapRow thisRow = new MapRow();
-                for (int x = 0; x < MapWidth; x++)
+                for (int x = 0; x < mapWidth; x++)
                 {
                     if (line[x] == 'A')
                     {
@@ -41,65 +41,9 @@ namespace RPG.Graphics.Map
                 Rows.Add(thisRow);
                 line = reader.ReadLine();
             }
+
+            mapHeight = Rows.Count;
             reader.Close();
-            MapWidth *= 30;
-            MapHeight = Rows.Count * 36;
-
-            // Create Sample Map Data
-            /* Rows[0].Columns[3].TileID = 3;
-            Rows[0].Columns[4].TileID = 3;
-            Rows[0].Columns[5].TileID = 1;
-            Rows[0].Columns[6].TileID = 1;
-            Rows[0].Columns[7].TileID = 1;
-
-            Rows[1].Columns[3].TileID = 3;
-            Rows[1].Columns[4].TileID = 1;
-            Rows[1].Columns[5].TileID = 1;
-            Rows[1].Columns[6].TileID = 1;
-            Rows[1].Columns[7].TileID = 1;
-
-            Rows[2].Columns[2].TileID = 3;
-            Rows[2].Columns[3].TileID = 1;
-            Rows[2].Columns[4].TileID = 1;
-            Rows[2].Columns[5].TileID = 1;
-            Rows[2].Columns[6].TileID = 1;
-            Rows[2].Columns[7].TileID = 1;
-
-            Rows[3].Columns[2].TileID = 3;
-            Rows[3].Columns[3].TileID = 1;
-            Rows[3].Columns[4].TileID = 1;
-            Rows[3].Columns[5].TileID = 2;
-            Rows[3].Columns[6].TileID = 2;
-            Rows[3].Columns[7].TileID = 2;
-
-            Rows[4].Columns[2].TileID = 3;
-            Rows[4].Columns[3].TileID = 1;
-            Rows[4].Columns[4].TileID = 1;
-            Rows[4].Columns[5].TileID = 2;
-            Rows[4].Columns[6].TileID = 2;
-            Rows[4].Columns[7].TileID = 2;
-
-            Rows[5].Columns[2].TileID = 3;
-            Rows[5].Columns[3].TileID = 1;
-            Rows[5].Columns[4].TileID = 1;
-            Rows[5].Columns[5].TileID = 2;
-            Rows[5].Columns[6].TileID = 2;
-            Rows[5].Columns[7].TileID = 2;
-
-            Rows[3].Columns[5].AddBaseTile(30);
-            Rows[4].Columns[5].AddBaseTile(27);
-            Rows[5].Columns[5].AddBaseTile(28);
-
-            Rows[3].Columns[6].AddBaseTile(25);
-            Rows[5].Columns[6].AddBaseTile(24);
-
-            Rows[3].Columns[7].AddBaseTile(31);
-            Rows[4].Columns[7].AddBaseTile(26);
-            Rows[5].Columns[7].AddBaseTile(29);
-
-            Rows[4].Columns[6].AddBaseTile(104);*/
-
-            // End Create Sample Map Data
         }
     }
 }

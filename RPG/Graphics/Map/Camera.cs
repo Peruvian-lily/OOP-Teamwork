@@ -20,12 +20,12 @@ namespace RPG.Graphics.Map
             {
                 if (ks.IsKeyDown(Keys.Left))
                 {
-                    Camera.Location.X = MathHelper.Clamp(Camera.Location.X - 2, 0, (TileMap.MapWidth - squaresAcross) * Tile.TileWidth);
+                    Camera.Location.X = MathHelper.Clamp(Camera.Location.X - Player.speed, 0, (TileMap.mapWidth - squaresAcross) * Tile.TileWidth);
                 }
 
                 if (ks.IsKeyDown(Keys.Right))
                 {
-                    Camera.Location.X = MathHelper.Clamp(Camera.Location.X + 2, 0, (TileMap.MapWidth - squaresAcross) * Tile.TileWidth);
+                    Camera.Location.X = MathHelper.Clamp(Camera.Location.X + Player.speed, 0, TileMap.mapWidth * Tile.TileWidth);
 
                 }
             }
@@ -34,12 +34,12 @@ namespace RPG.Graphics.Map
             {
                 if (ks.IsKeyDown(Keys.Up))
                 {
-                    Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y - 2, 0, (TileMap.MapHeight - squaresDown) * Tile.TileHeight);
+                    Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y - Player.speed, 0, (TileMap.mapHeight - squaresDown) * Tile.TileHeight);
                 }
 
                 if (ks.IsKeyDown(Keys.Down))
                 {
-                    Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y + 2, 0, (TileMap.MapHeight - squaresDown) * Tile.TileHeight);
+                    Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y + Player.speed, 0, (TileMap.mapHeight - squaresDown) * Tile.TileHeight);
                 }
             }
             

@@ -44,10 +44,3 @@ namespace RPG.Graphics.Map
 
     }
 }
-
-
- //                       spriteBatch.Draw(
- //                       Tile.TileSetTexture,
- //                       new Rectangle((x * 32) - offsetX, (y * 32) - offsetY, 32, 32),
- //                       Tile.GetSourceRectangle(tileMap.Rows[y + firstY].Columns[x + firstX].TileID),
- //                       Color.White);

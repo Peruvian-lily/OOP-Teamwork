@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.Remoting;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,15 +18,20 @@ namespace RPG.GameLogic.Models.Characters
 {
     public class Player : Character, IPlayer
     {
-        private const float Speed = 2;
-        private KeyboardState ks;
-        private byte lastFrame = 3;
-        private List<Stat> otherStats;
+        public const int speed = 2;
+        private const int remainderScreenSize = 1;
+        
+        public readonly int cameraMaxWidth = (TileMap.mapWidth - remainderScreenSize) * Tile.TileWidth - Game1.bufferWidth;
+        public readonly int cameraMaxHeight = (TileMap.mapHeight - remainderScreenSize)*Tile.TileHeight -
+                                              Game1.bufferHeight;
         public static readonly Vector2 UP_VECTOR = new Vector2(0, -1);
         public static readonly Vector2 DOWN_VECTOR = new Vector2(0, 1);
         public static readonly Vector2 RIGHT_VECTOR = new Vector2(1, 0);
         public static readonly Vector2 LEFT_VECTOR = new Vector2(-1, 0);
 
+        private KeyboardState ks;
+        private byte lastFrame = 3;
+        private List<Stat> otherStats;
 
         public Player(string name, int health,
             int attackPower, int defense, int inventorySize,
@@ -202,19 +209,19 @@ namespace RPG.GameLogic.Models.Characters
         #region Movement
         public void Move(Vector2 direction)
         {
-            if (Camera.Location.X == 0 || Camera.Location.X == TileMap.MapWidth)
+            if (Camera.Location.X == 0 || Camera.Location.X == cameraMaxWidth)
             {
-                this.Position.X += Speed * direction.X;
+                this.Position.X += speed * direction.X;
             }
-            if (Camera.Location.Y == 0 || Camera.Location.Y == TileMap.MapHeight)
+            if (Camera.Location.Y == 0 || Camera.Location.Y == cameraMaxHeight)
             {
-                this.Position.Y += Speed * direction.Y;   
+                this.Position.Y += speed * direction.Y;   
             }
         }
 
         private void MoveLeft()
         {
-            if (0 >= this.Position.X + Speed)
+            if (0 >= this.Position.X + speed)
             {
                 return;
             }
@@ -226,7 +233,7 @@ namespace RPG.GameLogic.Models.Characters
 
         private void MoveUp()
         {
-            if (0 >= this.Position.Y + Speed)
+            if (0 >= this.Position.Y + speed)
             {
                 return;
             }
@@ -238,7 +245,7 @@ namespace RPG.GameLogic.Models.Characters
 
         private void MoveDown()
         {
-            if (Game1.ScreenHeight <= this.Position.Y + Speed + this.Height)
+            if (Game1.ScreenHeight <= this.Position.Y + speed + this.Height)
             {
                 return;
             }
@@ -250,7 +257,7 @@ namespace RPG.GameLogic.Models.Characters
 
         private void MoveRight()
         {
-            if (Game1.ScreenWidth <= this.Position.X + Speed + this.Width)
+            if (Game1.ScreenWidth <= this.Position.X + speed + this.Width)
             {
                 return;
             }
