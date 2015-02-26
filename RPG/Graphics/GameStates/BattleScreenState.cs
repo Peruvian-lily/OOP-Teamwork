@@ -18,8 +18,7 @@ namespace RPG.Graphics.GameStates
 
         public BattleScreenState(Game game, Player player, List<Character> worldObjects) : base(game)
         {
-            List<Character> enemies = ((Enemy)CollisionResult.enemy).GetAllies(worldObjects);
-            this.battleScreen = new BattleScreen(player, enemies);
+            this.battleScreen = new BattleScreen(player, worldObjects);
             this.battleScreen.LoadContent(Game1.Content);
         }
 
