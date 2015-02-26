@@ -57,7 +57,7 @@ namespace RPG.Graphics.GameStates
 
         public override void Update(GameTime gameTime)
         {
-            Camera.Update(MapSquaresAcross, MapSquaresDown, player);
+            Camera.Update(MapSquaresAcross, MapSquaresDown, player, worldObjects);
             this.player.Update(gameTime);
             foreach (var entry in this.worldObjects)
             {
