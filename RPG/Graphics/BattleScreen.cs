@@ -20,7 +20,9 @@ namespace RPG.Graphics
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\background"));
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\button1"));
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\button2"));
-            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\left"));
+            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\player_start"));
+            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\enemy_start"));
+            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\message"));
 
             this.defaultFont = Game1.Content.Load<SpriteFont>(@"Fonts\Arial");
             this.textDrawer = new TextDrawer(this.defaultFont);
@@ -36,9 +38,11 @@ namespace RPG.Graphics
                 element.CenterElement(400, 800);
                 element.ClickEvent += this.OnClick;
             }
-            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\button1").MoveElement(-300, 0);
-            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\button2").MoveElement(300, 0);
-            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\left").MoveElement(-200, 200);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\button1").MoveElement(-100, -50);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\button2").MoveElement(100, 50);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\player_start").MoveElement(-300, 0);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\enemy_start").MoveElement(300, 0);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\message").MoveElement(0, 200);
         }
 
         public void Update()
