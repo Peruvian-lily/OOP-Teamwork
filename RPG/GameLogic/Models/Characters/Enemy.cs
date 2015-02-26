@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RPG.GameLogic.Core.Factory;
 using RPG.GameLogic.Interface;
 using RPG.GameLogic.Models.Characters.Base;
 using RPG.GameLogic.Models.Stats;
@@ -13,25 +14,25 @@ namespace RPG.GameLogic.Models.Characters
 {
     public class Enemy : Character, IRoam, IEnemy
     {
-        private static readonly int CollisonCirlceRadius = 10;
+        private const int CollisonCirlceRadius = 10;
 
-        public Enemy(string name, int health,
-            int attack, int defense, List<Stat> otherStats)
+        public Enemy(string name, int health, int attack, int defense, List<Stat> otherStats, EnemyType enemyType)
             : base(name, health, defense)
         {
             this.AttackPower = new Attack(attack);
             this.Stats = otherStats;
+            this.EnemyType = enemyType;
             this.Animation = new Animation("Sprites\\Monster\\enemy1", 80f, 3, 2, false, 0, 0);
             this.CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.FrameWidth,
                 Animation.FrameWidth, Animation.FrameHeight);
         }
 
-        public Enemy(string name, int health,
-            int attack, int defense)
-            : this(name, health, attack, defense, new List<Stat>())
+        public Enemy(string name, int health,int attack, int defense, EnemyType enemyType)
+            : this(name, health, attack, defense, new List<Stat>(), enemyType)
         {
         }
 
+        public EnemyType EnemyType { get; set; }
 
         public Rectangle CollisionRect { get; set; }
 

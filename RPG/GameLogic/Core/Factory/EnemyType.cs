@@ -2,7 +2,8 @@
 {
     public enum EnemyType
     {
-        Magical,
-        Physical
+        Snail,
+        Freak,
+        Ghost
     }
 }
