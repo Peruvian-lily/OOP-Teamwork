@@ -8,6 +8,6 @@ namespace RPG.GameLogic.Interface
     public interface IEnemy : IFight
     {
         List<Stat> Stats { get; }
-        List<IFight> GetAllies(List<Character> allGameCharacters);
+        List<Character> GetAllies(List<Character> allGameCharacters);
     }
 }

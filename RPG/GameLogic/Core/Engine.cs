@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using RPG.GameLogic.Models.Characters;
 using RPG;
+using RPG.GameLogic.Interface;
 using RPG.GameLogic.Models;
 using RPG.Graphics;
 
@@ -36,33 +37,25 @@ namespace RPG.GameLogic.Core
                 if (obj is Enemy)
                 {
                     Rectangle collisionRect = ((Enemy) obj).CollisionRect;
-                    this.EnemyCollisions(player, collisionRect);
+                    this.EnemyCollisions(player, collisionRect, (Enemy) obj, collidableObjects);
                 }
             });
         }
 
-        private void EnemyCollisions(Player player, Rectangle collisionRect)
+        private void EnemyCollisions(Player player, Rectangle collisionRect, Enemy enemy, List<Character> worldObjects)
         {
             Vector2 topLeftPlayer = new Vector2(player.Position.X, player.Position.Y);
             Vector2 topRightPlayer = new Vector2(player.Position.X + player.Width, player.Position.Y);
             Vector2 bottomLeftPlayer = new Vector2(player.Position.X, player.Position.Y + player.Height);
             Vector2 bottomRightPlayer = new Vector2(player.Position.X + player.Width, player.Position.Y + player.Height);
 
-            if (collisionRect.IsPointInRect(topLeftPlayer))
+            if (collisionRect.IsPointInRect(topLeftPlayer) ||
+                collisionRect.IsPointInRect(topRightPlayer) ||
+                collisionRect.IsPointInRect(bottomLeftPlayer) || 
+                collisionRect.IsPointInRect(bottomRightPlayer))
             {
                 Game1.CurrentState = GameState.BattleScreenState;
-            }
-            else if (collisionRect.IsPointInRect(topRightPlayer))
-            {
-                Game1.CurrentState = GameState.BattleScreenState;
-            }
-            else if (collisionRect.IsPointInRect(bottomLeftPlayer))
-            {
-                Game1.CurrentState = GameState.BattleScreenState;
-            }
-            else if (collisionRect.IsPointInRect(bottomRightPlayer))
-            {
-                Game1.CurrentState = GameState.BattleScreenState;
+                enemy.GetAllies(worldObjects);
             }
         }
     }
