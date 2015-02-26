@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,6 +7,7 @@ using RPG.GameLogic.Interface;
 using RPG.GameLogic.Models.Characters.Base;
 using RPG.GameLogic.Models.PickUps;
 using RPG.GameLogic.Models.PickUps.Base;
+using RPG.GameLogic.Models.Spells.Base;
 using RPG.GameLogic.Models.Stats;
 using RPG.GameLogic.Models.Stats.Base;
 using RPG.Graphics;
@@ -36,6 +35,7 @@ namespace RPG.GameLogic.Models.Characters
             this.Inventory = new Inventory.Base.Inventory(inventorySize);
             this.otherStats = otherStats;
             this.AddAnimation();
+            this.Spells = new List<Spell>();
         }
 
         public Player(string name, int health, int attackPower, int defense, int inventorySize)
@@ -65,7 +65,7 @@ namespace RPG.GameLogic.Models.Characters
 
         #region Stats and Damage
         public Attack AttackPower { get; private set; }
-        public List<Effect> Spells { get; private set; }
+        public List<Spell> Spells { get; private set; }
         public List<Stat> OffensiveStats
         {
             get { return this.otherStats.Where(stat => stat.Type == StatType.Offensive).ToList(); }
@@ -103,8 +103,13 @@ namespace RPG.GameLogic.Models.Characters
         }
         #endregion
 
-        #region Inventory
+        #region Inventory and Spell Book
         public Inventory.Base.Inventory Inventory { get; private set; }
+
+        public void LearnSpell(Spell spell)
+        {
+            this.Spells.Add(spell);
+        }
 
         public void PickUp(PickUp item)
         {

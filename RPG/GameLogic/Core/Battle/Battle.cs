@@ -4,19 +4,26 @@ using System.Linq;
 using System.Threading;
 using Microsoft.Xna.Framework.Input;
 using RPG.GameLogic.Interface;
+using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
+using RPG.GameLogic.Models.Spells.Base;
 
 namespace RPG.GameLogic.Core.Battle
 {
-  class Battle
+    class Battle
     {
         private Random rnd = new Random();
         private bool tookTurn = true;
-        private int targetIndex;
+        private int targetIndex = 0;
+        private int spellIndex = 0;
         private List<int> targetIndexes;
         private bool leftPressed;
         private bool rightPressed;
+        private bool spacePressed;
+        private bool targetSelected;
+        private bool spellSelected;
         private string status;
+        private Spell spell;
 
         public Battle(IPlayer player, List<Character> trigger)
         {
@@ -24,8 +31,8 @@ namespace RPG.GameLogic.Core.Battle
             this.Player = player;
             this.CurrentTurn = 1;
             this.Enemies = trigger;
-            this.Target = player;
-            this.Status = "BattleScreenState initiated";
+            this.Target = player as Character;
+            this.Status = "Battle initiated";
         }
 
         public int Round { get; private set; }
@@ -37,7 +44,7 @@ namespace RPG.GameLogic.Core.Battle
         {
             get { return this.Enemies.Count + 1; }
         }
-        public IFight Target { get; private set; }
+        public Character Target { get; private set; }
         public IFight Attacker { get; private set; }
 
         public string Status
@@ -48,9 +55,9 @@ namespace RPG.GameLogic.Core.Battle
             }
             private set
             {
-                if (!value.Contains("Select target"))
+                if (!value.Contains("Select"))
                 {
-                    Thread.Sleep(300);
+                    Thread.Sleep(100);
                 }
                 this.status = value;
             }
@@ -64,7 +71,7 @@ namespace RPG.GameLogic.Core.Battle
         {
             if (this.Player.Health.Value == 0)
             {
-                this.Status = string.Format("{0} is kill. :(", (this.Player as Character).Name);
+                this.Status = string.Format("{0} is kill. :(", ((Character)this.Player).Name);
                 this.InProgress = false;
             }
             else if (this.Enemies.Count == 0)
@@ -76,39 +83,52 @@ namespace RPG.GameLogic.Core.Battle
             if (!this.InProgress) return;
             if (this.tookTurn)
             {
-                this.Attacker = this.rnd.Next(5) > 2 ? this.SelectFighter(this.Enemies) : this.Player;
+                this.Attacker = this.rnd.Next(5) > 4 ? this.SelectFighter(this.Enemies) : this.Player;
                 this.Status = string.Format("{0} is on turn.", ((Character)this.Attacker).Name);
                 this.tookTurn = false;
             }
             if (this.Attacker is IPlayer)
             {
-                bool selected = false;
-                this.ProcessTargetting(this.Enemies, ref selected);
-                this.Status = string.Format("Select target({0}): {1}({2} hp)", 
-                    this.Enemies.Count, ((Character)this.Target).Name, this.Target.Health.Value);
-                if (selected)
+                if (!targetSelected)
                 {
+                    this.Target = ProcessSelection(this.Enemies, ref this.targetIndex, ref this.targetSelected);
+                    this.Status = string.Format("Select target({0}/{1}): {2}({3}hp)",
+                        this.Enemies.Count, this.targetIndex+1, this.Target.Name, this.Target.Health.Value);
+                }
+                else if (targetSelected && !spellSelected)
+                {
+                    this.spell = ProcessSelection(this.Player.Spells, ref this.spellIndex, ref this.spellSelected);
+                    this.Status = string.Format("Target{0}({1}hp):\nSelect attack: {2} (Power:{3})", this.Target.Name, this.Target.Health.Value, this.spell.Name, this.spell.Stat.Value);
+                }
+                else if (this.targetSelected && spellSelected)
+                {
+                    this.status = string.Format("{0} is attacking {1} with {2}", ((Character)this.Attacker).Name, this.Target.Name, this.spell.Name);
+                    this.spell.Cast(this.Target);
                     this.tookTurn = true;
-                    this.Status = string.Format("{0} is attacking {1}({2} hp).",
-                        ((Character)this.Attacker).Name, ((Character)this.Target).Name, this.Target.Health.Value);
-                    this.Attacker.Attack(this.Target);
+                    this.spellSelected = false;
+                    this.targetSelected = false;
                     this.CurrentTurn += 1;
                 }
             }
             else
             {
                 this.tookTurn = true;
-                this.Target = this.Player;
+                this.Target = (Character) this.Player;
                 this.Status = string.Format("{0} is attacking {1}({2} hp).",
-                     ((Character)this.Attacker).Name, ((Character)this.Target).Name, this.Target.Health.Value);
-                Thread.Sleep(50);
-                this.Attacker.Attack(this.Target);
+                     ((Character)this.Attacker).Name, this.Target.Name, this.Target.Health.Value);
+                this.Attacker.Attack(this.Target as IFight);
                 this.CurrentTurn += 1;
             }
             this.ClearBattlefield();
 
             if (this.CurrentTurn >= this.TotalTurns)
             {
+                this.status = string.Format("Beginning round #{0}", this.Round);
+                  this.Enemies.Where(enemy => enemy.Effects.Count > 0).ToList().ForEach(enemy =>
+                  {
+                      enemy.Effects.ForEach(effect => effect.Tick(enemy));
+                  });
+                this.Player.Effects.ForEach(effect => effect.Tick(this.Player as Character));
                 this.CurrentTurn = 1;
                 this.Round += 1;
             }
@@ -124,14 +144,15 @@ namespace RPG.GameLogic.Core.Battle
         {
             this.Enemies.RemoveAll(enemy => enemy.Health.Value == 0);
         }
-        public void ProcessTargetting(List<Character> participants, ref bool selected)
+
+        public T ProcessSelection<T>(List<T> selections, ref int index, ref bool selected)
         {
             var ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Left))
             {
                 if (!this.leftPressed)
                 {
-                    this.ChangeIndex("reduce", participants);
+                    index -= 1;
                 }
                 this.leftPressed = true;
             }
@@ -139,13 +160,17 @@ namespace RPG.GameLogic.Core.Battle
             {
                 if (!this.rightPressed)
                 {
-                    this.ChangeIndex("increase", participants);
+                    index += 1;
                 }
                 this.rightPressed = true;
             }
             else if (ks.IsKeyDown(Keys.Space))
             {
-                selected = true;
+                //if (!this.spacePressed)
+                //{
+                    selected = true;
+                //}
+                //this.spacePressed = true;
             }
             if (ks.IsKeyUp(Keys.Left))
             {
@@ -155,31 +180,23 @@ namespace RPG.GameLogic.Core.Battle
             {
                 this.rightPressed = false;
             }
-            this.AdjustIndex(participants);
-            this.Target = participants[this.targetIndex] as IFight;
-        }
-        private void ChangeIndex(string action, List<Character> targets)
-        {
-            switch (action.ToLower())
-            {
-                case "reduce":
-                    this.targetIndex -= 1;
-                    break;
-                case "increase":
-                    this.targetIndex += 1;
-                    break;
-            }
+            //if (ks.IsKeyUp(Keys.Space))
+            //{
+            //    this.spacePressed = false;
+            //}
+            this.AdjustIndex(ref index, selections);
+            return selections[index];
         }
 
-        private void AdjustIndex(List<Character> targets)
+        private void AdjustIndex<T>(ref int index, List<T> targets)
         {
-            if (this.targetIndex < 0)
+            if (index < 0)
             {
-                this.targetIndex = targets.Count() - 1;
+                index = targets.Count() - 1;
             }
-            else if (this.targetIndex > targets.Count - 1)
+            else if (index > targets.Count - 1)
             {
-                this.targetIndex = 0;
+                index = 0;
             }
         }
     }

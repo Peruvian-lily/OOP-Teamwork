@@ -1,8 +1,9 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
+using RPG.GameLogic.Models.Effects.Base;
 using RPG.GameLogic.Models.Inventory.Base;
 using RPG.GameLogic.Models.PickUps.Base;
-using RPG.GameLogic.Models.Stats.Base;
+using RPG.GameLogic.Models.Spells.Base;
 
 namespace RPG.GameLogic.Interface
 {
@@ -10,5 +11,7 @@ namespace RPG.GameLogic.Interface
     {
         Inventory Inventory { get; }
         void PickUp(PickUp item);
+        List<Spell> Spells { get; }
+        List<Effects> Effects { get; } 
     }
 }

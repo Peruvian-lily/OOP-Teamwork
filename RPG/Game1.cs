@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using RPG.GameLogic.Core.Factory;
 using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
+using RPG.GameLogic.Models.Spells;
 using RPG.Graphics;
 using RPG.Graphics.GameStates;
 
@@ -53,6 +54,9 @@ namespace RPG
             this.player = new Player("QueBabche", 100, 100, 100, 5);
             this.player.Position = new Vector2((float)ScreenWidth / 2, (float)ScreenHeight / 2);
             this.player.PickUp(ItemFactory.GenerateItem(25, 50));
+            this.player.LearnSpell(new Fireball(50,4,5));
+            this.player.LearnSpell(new Fireball(500, 2, 5));
+            this.player.LearnSpell(new Heal(100, 5, 10));
 
             // Use reflection to determine how many states there are as  
             // .NET Compact Framework does not support Enum.GetValues().  

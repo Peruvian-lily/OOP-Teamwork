@@ -4,11 +4,10 @@
     using Stats.Base;
     using Characters.Base;
     using Effects;
-    using Effects.Base;
     using Base;
     using Stats;
 
-    class Fireball : Spell
+    public class Fireball : Spell
     {
         /// <summary>
         /// Create a fireball that deals damage and a third of that damage over the duration.

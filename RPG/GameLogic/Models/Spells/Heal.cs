@@ -1,22 +1,20 @@
 ﻿namespace RPG.GameLogic.Models.Spells
 {
-    using System;
     using Base;
     using Effects;
     using Stats;
     using Characters.Base;
-    using Effects.Base;
     using Stats.Base;
 
-    class Heal : Spell
+    public class Heal : Spell
     {
         /// <summary>
         /// Heal for full amount
         /// </summary>
-        /// <param name="stat"></param>
-        /// <param name="cost"></param>
-        public Heal(Stat stat, int cost) : 
-            base("Heal", stat, cost)
+        /// <param name="power">Strenght of heal</param>
+        /// <param name="cost">Cost of spell</param>
+        public Heal(int power, int cost) : 
+            base("Heal", new Health(power), cost)
         {
         }
 
@@ -25,7 +23,7 @@
         /// </summary>
         /// <param name="power">Amount of health increased</param>
         /// <param name="duration">Duration of heal effect</param>
-        /// <param name="cost">Mana cost</param>
+        /// <param name="cost">Cost of spell</param>
         public Heal(int power, int duration, int cost) 
             : base("Heal Over Time", new Health(power/5), 
             new Healing(power, duration), cost)

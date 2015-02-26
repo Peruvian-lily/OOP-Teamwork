@@ -18,6 +18,7 @@ namespace RPG.GameLogic.Models.Characters.Base
             this.Name = name;
             this.Health = new Health(health);
             this.Defense = new Defense(defense);
+            this.Effects = new List<Effects>();
         }
 
         public string Name

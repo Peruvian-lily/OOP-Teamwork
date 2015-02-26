@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using RPG.GameLogic.Models.Characters.Base;
 using RPG.GameLogic.Models.Stats.Base;
 
 namespace RPG.GameLogic.Models.Spells.Base
 {
     using Effects.Base;
-    abstract class Spell
+    public abstract class Spell
     {
         protected Spell(String name, Stat stat, int cost)
             :this(name, stat, null, cost)
