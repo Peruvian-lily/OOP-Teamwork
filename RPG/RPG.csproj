@@ -122,6 +122,15 @@
     <Content Include="Content\Overlays\Battle\left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Overlays\Battle\futureui1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Overlays\Battle\right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Overlays\Battle\select.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Overlays\Menu\background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -19,11 +19,12 @@ namespace RPG.Graphics
             this.battle = new Battle(player, worldObjects);
 
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\background"));
-            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\button1"));
-            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\button2"));
+            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\left"));
+            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\right"));
+            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\select"));
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\player_start"));
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\enemy_start"));
-            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\message"));
+            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\futureui1"));
 
             this.defaultFont = Game1.Content.Load<SpriteFont>(@"Fonts\Arial");
             this.textDrawer = new TextDrawer(this.defaultFont);
@@ -39,11 +40,12 @@ namespace RPG.Graphics
                 element.CenterElement(400, 800);
                 element.ClickEvent += this.OnClick;
             }
-            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\button1").MoveElement(-100, -50);
-            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\button2").MoveElement(100, 50);
-            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\player_start").MoveElement(-300, 0);
-            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\enemy_start").MoveElement(300, 0);
-            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\message").MoveElement(0, 200);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\left").MoveElement(-200, 50);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\right").MoveElement(200, 50);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\select").MoveElement(0, 50);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\player_start").MoveElement(-330, -100);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\enemy_start").MoveElement(330, -100);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\futureui1").MoveElement(0, 200);
         }
 
         public void Update()
@@ -91,7 +93,7 @@ namespace RPG.Graphics
 
         public void OnClick(string element)
         {
-            if (element == @"Overlays\Battle\button1")
+            if (element == @"Overlays\Battle\select")
             {
                 //Play the Game
                 Game1.CurrentState = GameState.GamePlayState;
