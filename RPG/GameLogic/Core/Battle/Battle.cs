@@ -30,6 +30,7 @@ namespace RPG.GameLogic.Core.Battle
             this.Attacker = player;
             this.Player = player;
             this.CurrentTurn = 1;
+            this.Round += 1;
             this.Enemies = trigger;
             this.Target = player as Character;
             this.Status = "Battle initiated";
@@ -83,7 +84,7 @@ namespace RPG.GameLogic.Core.Battle
             if (!this.InProgress) return;
             if (this.tookTurn)
             {
-                this.Attacker = this.rnd.Next(5) > 4 ? this.SelectFighter(this.Enemies) : this.Player;
+                this.Attacker = this.rnd.Next(5) > 1 ? this.SelectFighter(this.Enemies) : this.Player;
                 this.Status = string.Format("{0} is on turn.", ((Character)this.Attacker).Name);
                 this.tookTurn = false;
             }
@@ -98,7 +99,7 @@ namespace RPG.GameLogic.Core.Battle
                 else if (targetSelected && !spellSelected)
                 {
                     this.spell = ProcessSelection(this.Player.Spells, ref this.spellIndex, ref this.spellSelected);
-                    this.Status = string.Format("Target{0}({1}hp):\nSelect attack: {2} (Power:{3})", this.Target.Name, this.Target.Health.Value, this.spell.Name, this.spell.Stat.Value);
+                    this.Status = string.Format("Target {0}({1}hp):\nSelect attack: {2} (Power:{3})", this.Target.Name, this.Target.Health.Value, this.spell.Name, this.spell.Stat.Value);
                 }
                 else if (this.targetSelected && spellSelected)
                 {
@@ -166,11 +167,11 @@ namespace RPG.GameLogic.Core.Battle
             }
             else if (ks.IsKeyDown(Keys.Space))
             {
-                //if (!this.spacePressed)
-                //{
-                    selected = true;
-                //}
-                //this.spacePressed = true;
+                if (!this.spacePressed)
+                {
+                  selected = true;
+                }
+                this.spacePressed = true;
             }
             if (ks.IsKeyUp(Keys.Left))
             {
@@ -180,10 +181,10 @@ namespace RPG.GameLogic.Core.Battle
             {
                 this.rightPressed = false;
             }
-            //if (ks.IsKeyUp(Keys.Space))
-            //{
-            //    this.spacePressed = false;
-            //}
+            if (ks.IsKeyUp(Keys.Space))
+            {
+                this.spacePressed = false;
+            }
             this.AdjustIndex(ref index, selections);
             return selections[index];
         }
