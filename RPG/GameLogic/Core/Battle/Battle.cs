@@ -180,7 +180,7 @@ namespace RPG.GameLogic.Core.Battle
             {
                 if (!this.leftPressed)
                 {
-                    index -= 1;
+                    this.SelectLeft(ref index, selections);
                 }
                 this.leftPressed = true;
             }
@@ -188,7 +188,7 @@ namespace RPG.GameLogic.Core.Battle
             {
                 if (!this.rightPressed)
                 {
-                    index += 1;
+                    this.SelectRight(ref index, selections);
                 }
                 this.rightPressed = true;
             }
@@ -212,8 +212,7 @@ namespace RPG.GameLogic.Core.Battle
             {
                 this.spacePressed = false;
             }
-            this.AdjustIndex(ref index, selections);
-            return selections[index];
+            return this.Select(index, selections);
         }
 
         private void AdjustIndex<T>(ref int index, List<T> targets)
@@ -228,6 +227,21 @@ namespace RPG.GameLogic.Core.Battle
             }
         }
 
+        private void SelectLeft<T>(ref int index, List<T> targets)
+        {
+            index -= 1;
+            AdjustIndex(ref index, targets);
+        }
+        private void SelectRight<T>(ref int index, List<T> targets)
+        {
+            index += 1;
+            AdjustIndex(ref index, targets);
+        }
+
+        private T Select<T>(int index, List<T> targets)
+        {
+            return targets[index];
+        }
         private List<int> GetFighterIndexes(List<Character> participants)
         {
             var fighterIndexes = new List<int>();
