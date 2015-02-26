@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using RPG.GameLogic.Core;
 using RPG.GameLogic.Core.Battle;
 using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
@@ -15,6 +16,7 @@ namespace RPG.Graphics
         List<GUIElement> battleScreen = new List<GUIElement>();
         public BattleScreen(Player player, List<Character> worldObjects)
         {
+            //List<Character> enemies = ((Enemy)CollisionResult.enemy).GetAllies(worldObjects);
             this.battle = new Battle(player, worldObjects);
 
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\background"));
