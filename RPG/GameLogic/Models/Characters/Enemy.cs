@@ -27,7 +27,7 @@ namespace RPG.GameLogic.Models.Characters
                 Animation.FrameWidth, Animation.FrameHeight);
         }
 
-        public Enemy(string name, int health,int attack, int defense, EnemyType enemyType)
+        public Enemy(string name, int health, int attack, int defense, EnemyType enemyType)
             : this(name, health, attack, defense, new List<Stat>(), enemyType)
         {
         }

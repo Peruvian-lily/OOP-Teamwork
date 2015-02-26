@@ -22,7 +22,7 @@ namespace RPG.GameLogic.Core.Factory
             {
                 stats = GenerateStats(minValue, maxValue);
             }
-            Enemy enemy = new Enemy(enemyName, health, attack, defense, stats);
+            Enemy enemy = new Enemy(enemyName, health, attack, defense, stats, EnemyType.Freak);
             return enemy;
         }
 
