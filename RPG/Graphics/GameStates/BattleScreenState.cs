@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using RPG.GameLogic.Core.Battle;
 using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
+using RPG.GameLogic.Core;
 
 namespace RPG.Graphics.GameStates
 {
@@ -17,7 +18,8 @@ namespace RPG.Graphics.GameStates
 
         public BattleScreenState(Game game, Player player, List<Character> worldObjects) : base(game)
         {
-            this.battleScreen = new BattleScreen(player, worldObjects);
+            List<Character> enemies = ((Enemy)CollisionResult.enemy).GetAllies(worldObjects);
+            this.battleScreen = new BattleScreen(player, enemies);
             this.battleScreen.LoadContent(Game1.Content);
         }
 

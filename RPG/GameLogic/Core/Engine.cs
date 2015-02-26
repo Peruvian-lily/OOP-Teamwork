@@ -55,6 +55,8 @@ namespace RPG.GameLogic.Core
                 collisionRect.IsPointInRect(bottomRightPlayer))
             {
                 Game1.CurrentState = GameState.BattleScreenState;
+                CollisionResult.enemy = enemy;
+                CollisionResult.player = player;
                 enemy.GetAllies(worldObjects);
             }
         }
