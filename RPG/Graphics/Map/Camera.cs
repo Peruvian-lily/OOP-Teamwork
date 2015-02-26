@@ -29,7 +29,7 @@ namespace RPG.Graphics.Map
                     Camera.Location.X = MathHelper.Clamp(Camera.Location.X - Player.Speed, 0, (TileMap.mapWidth - squaresAcross) * Tile.TileWidth);
                     foreach (var enemy in enemies)
                     {
-                        enemy.Position.X = MathHelper.Clamp(enemy.Position.X + Player.Speed, 0, (TileMap.mapWidth - squaresAcross) * Tile.TileWidth);
+                        enemy.Position.X = MathHelper.Clamp(enemy.Position.X + Player.Speed, enemy.Position.X, (TileMap.mapWidth - squaresAcross) * Tile.TileWidth);
                     }
                 }
 
@@ -38,7 +38,7 @@ namespace RPG.Graphics.Map
                     Camera.Location.X = MathHelper.Clamp(Camera.Location.X + Player.Speed, 0, TileMap.mapWidth * Tile.TileWidth);
                     foreach (var enemy in enemies)
                     {
-                        enemy.Position.X = MathHelper.Clamp(enemy.Position.X - Player.Speed, 0, TileMap.mapWidth * Tile.TileWidth);
+                        enemy.Position.X = MathHelper.Clamp(enemy.Position.X - Player.Speed, CameraMaxWidth * -1, TileMap.mapWidth * Tile.TileWidth);
                     }
                 }
             }
@@ -50,7 +50,7 @@ namespace RPG.Graphics.Map
                     Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y - Player.Speed, 0, (TileMap.mapHeight - squaresDown) * Tile.TileHeight);
                     foreach (var enemy in enemies)
                     {
-                        enemy.Position.Y = MathHelper.Clamp(enemy.Position.Y + Player.Speed, 0, TileMap.mapWidth * Tile.TileWidth);
+                        enemy.Position.Y = MathHelper.Clamp(enemy.Position.Y + Player.Speed, enemy.Position.Y, TileMap.mapWidth * Tile.TileWidth);
                     }
                 }
 
@@ -59,7 +59,7 @@ namespace RPG.Graphics.Map
                     Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y + Player.Speed, 0, (TileMap.mapHeight - squaresDown) * Tile.TileHeight);
                     foreach (var enemy in enemies)
                     {
-                        enemy.Position.Y = MathHelper.Clamp(enemy.Position.Y - Player.Speed, 0, TileMap.mapWidth * Tile.TileWidth);
+                        enemy.Position.Y = MathHelper.Clamp(enemy.Position.Y - Player.Speed, CameraMaxHeight * -1, TileMap.mapWidth * Tile.TileWidth);
                     }
                 }
             }
