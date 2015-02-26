@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using RPG.GameLogic.Core.Battle;
@@ -88,7 +89,7 @@ namespace RPG.Graphics
             //String.Format("Attacker: {0}/{1}hp; Target: {2}/{3}hp",
             //(this.battle.Attacker as Character).Name, this.battle.Attacker.Health.Value,
             //(this.battle.Target as Character).Name, this.battle.Target.Health.Value);
-            textDrawer.DrawString(spriteBatch, statusText);
+            textDrawer.DrawString(spriteBatch, statusText,new Vector2(50,350), Color.WhiteSmoke);
         }
 
         public void OnClick(string element)
