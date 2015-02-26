@@ -12,6 +12,5 @@ namespace RPG.GameLogic.Interface
         Defense Defense { get; }
         void Attack(IFight target);
         void TakeDamage(int amount, List<Stat> types);
-        Character GetTarget();
     }
 }

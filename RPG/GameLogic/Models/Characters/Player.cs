@@ -152,11 +152,6 @@ namespace RPG.GameLogic.Models.Characters
         }
         #endregion
 
-        public Character GetTarget()
-        {
-            throw new System.NotImplementedException();
-        }
-
         #region Engine Stuff
         public override void Update(GameTime gameTime)
         {

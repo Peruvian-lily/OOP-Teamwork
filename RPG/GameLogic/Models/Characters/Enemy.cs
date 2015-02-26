@@ -87,11 +87,6 @@ namespace RPG.GameLogic.Models.Characters
             get { return new Circle(this.Position, CollisonCirlceRadius); }
         }
 
-        public Character GetTarget()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public List<IFight> GetAllies(List<Character> allGameCharacters)
         {
             List<IFight> allaysThatCanHelp = new List<IFight>();
