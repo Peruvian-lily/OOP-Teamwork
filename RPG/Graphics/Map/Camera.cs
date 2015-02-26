@@ -12,8 +12,10 @@ namespace RPG.Graphics.Map
     static class Camera
     {
         private const int RemainderScreenSize = 1;
+        public static readonly int enemyMaxWidth = TileMap.mapWidth * Tile.TileWidth;
+        public static readonly int enemyMaxHeight = TileMap.mapHeight * Tile.TileHeight;
         public static readonly int CameraMaxWidth = (TileMap.mapWidth - RemainderScreenSize) * Tile.TileWidth - Game1.bufferWidth;
-        public static int CameraMaxHeight = (TileMap.mapHeight - RemainderScreenSize) * Tile.TileHeight -
+        public static readonly int CameraMaxHeight = (TileMap.mapHeight - RemainderScreenSize) * Tile.TileHeight -
                                               Game1.bufferHeight;
 
         public static Vector2 Location = Vector2.Zero;
@@ -29,7 +31,7 @@ namespace RPG.Graphics.Map
                     Camera.Location.X = MathHelper.Clamp(Camera.Location.X - Player.Speed, 0, (TileMap.mapWidth - squaresAcross) * Tile.TileWidth);
                     foreach (var enemy in enemies)
                     {
-                        enemy.Position.X = MathHelper.Clamp(enemy.Position.X + Player.Speed, enemy.Position.X, (TileMap.mapWidth - squaresAcross) * Tile.TileWidth);
+                        enemy.Position.X = MathHelper.Clamp(enemy.Position.X + Player.Speed, enemy.Position.X, enemyMaxWidth);
                     }
                 }
 
@@ -50,7 +52,7 @@ namespace RPG.Graphics.Map
                     Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y - Player.Speed, 0, (TileMap.mapHeight - squaresDown) * Tile.TileHeight);
                     foreach (var enemy in enemies)
                     {
-                        enemy.Position.Y = MathHelper.Clamp(enemy.Position.Y + Player.Speed, enemy.Position.Y, TileMap.mapWidth * Tile.TileWidth);
+                        enemy.Position.Y = MathHelper.Clamp(enemy.Position.Y + Player.Speed, enemy.Position.Y, enemyMaxHeight);
                     }
                 }
 

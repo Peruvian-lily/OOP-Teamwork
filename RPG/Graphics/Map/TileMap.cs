@@ -9,7 +9,7 @@ namespace RPG.Graphics.Map
 {
     static class TileMap
     {
-        private static string filename = "Content\\Levels\\map.txt";
+        private static string filename = "Content\\Levels\\level2.txt";
         public static List<MapRow> Rows = new List<MapRow>();
         public static int mapWidth;
         public static int mapHeight;
@@ -25,17 +25,35 @@ namespace RPG.Graphics.Map
                 MapRow thisRow = new MapRow();
                 for (int x = 0; x < mapWidth; x++)
                 {
-                    if (line[x] == 'A')
+                    char currentSymbol = line[x];
+                    switch (currentSymbol)
                     {
-                        thisRow.Columns.Add(new MapCell(0));
-                    }
-                    if (line[x] == 'B')
-                    {
-                        thisRow.Columns.Add(new MapCell(1));
-                    }
-                    if (line[x] == 'C')
-                    {
-                        thisRow.Columns.Add(new MapCell(2));
+                        case 'A':
+                            thisRow.Columns.Add(new MapCell(0));
+                            break;
+                        case 'B':
+                            thisRow.Columns.Add(new MapCell(1));
+                            break;
+                        case 'C':
+                            thisRow.Columns.Add(new MapCell(2));
+                            break;
+                        case 'D':
+                            thisRow.Columns.Add(new MapCell(3));
+                            break;
+                        case 'E':
+                            thisRow.Columns.Add(new MapCell(4));
+                            break;
+                        case 'F':
+                            thisRow.Columns.Add(new MapCell(5));
+                            break;
+                        case 'G':
+                            thisRow.Columns.Add(new MapCell(6));
+                            break;
+                        case 'H':
+                            thisRow.Columns.Add(new MapCell(7));
+                            break;
+                        default:
+                            throw new ArgumentException("Invalid symbol!");
                     }
                 }
                 Rows.Add(thisRow);

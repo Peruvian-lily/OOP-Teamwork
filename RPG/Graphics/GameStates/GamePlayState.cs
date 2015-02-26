@@ -12,7 +12,7 @@ namespace RPG.Graphics.GameStates
 {
     class GamePlayState : AbstractGameState
     {
-        private const int EnemyCount = 100;
+        private const int EnemyCount = 10;
         private const int MapSquaresAcross = 18;
         private const int MapSquaresDown = 11;
 
@@ -77,7 +77,7 @@ namespace RPG.Graphics.GameStates
                 enemy.Draw(spriteBatch);
             });
             this.textDrawer.DrawString(spriteBatch, player.Position.X + "/" + this.player.Position.Y);
-            string cameraLocation = string.Format("         Camera x: {0}. Camera y: {1}.", Camera.Location.X, Camera.Location.Y);
+            string cameraLocation = string.Format("         Camera x: {0}", TileMap.mapWidth * Tile.TileWidth);
             this.textDrawer.DrawString(spriteBatch, cameraLocation);
             spriteBatch.End();
         }
