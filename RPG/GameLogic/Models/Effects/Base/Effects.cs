@@ -22,5 +22,9 @@
         }
 
         public abstract void Tick(Character target);
+        public override string ToString()
+        {
+            return this.GetType().Name;
+        }
     }
 }
