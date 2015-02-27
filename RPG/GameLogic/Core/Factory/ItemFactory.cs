@@ -42,7 +42,8 @@ namespace RPG.GameLogic.Core.Factory
                 stats = new List<Stat>
                 {
                     new Attack(rnd.Next(power) + 1),
-                    new Elemental(rnd.Next(power) + 1, StatType.Offensive)
+                    new Elemental(rnd.Next(power) + 1, StatType.Offensive),
+                    new Fire(rnd.Next(power) + 1)
                 };
             }
             else
