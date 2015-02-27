@@ -14,7 +14,7 @@
         public static List<MapRow> Rows = new List<MapRow>();
         public static int mapWidth;
         public static int mapHeight;
-        private static string filename = "Content\\Levels\\level1.txt";
+        private static string filename = "Content\\Levels\\level2.txt";
 
         static TileMap()
         {

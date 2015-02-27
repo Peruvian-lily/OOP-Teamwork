@@ -152,6 +152,37 @@ namespace RPG.GameLogic.Core.Battle
                 return;
             }
 
+            // Check if it's time to start a new round.
+            if (this.CurrentTurn >= this.TotalTurns)
+            {
+                this.ClearBattlefield();
+                this.CurrentTurn = 1;
+                this.Round += 1;
+                this.status = string.Format("Preparing round {0:###}.", this.Round);
+                // If it passes the available fighters are reset and shuffled.
+                this.availableFighterIndexes = this.GetFighterIndexes(this.Participants);
+                // When castins some skills the player will put an effect on his enemies.
+                // When the round ends the effects will take effect and be applied once to each enemy.
+
+                this.Enemies.Where(enemy => enemy.Effects.Count > 0).ToList()
+                    .ForEach(enemy =>
+                    {
+                        enemy.Effects
+                            .ForEach(effect =>
+                            {
+                                effect.Tick(enemy);
+                                //this.status = string.Format("{0} takes {1} damage from {2}", enemy.Name, effect.Stat.Value, effect);
+                            });
+                    });
+                this.Player.Effects.ForEach(effect =>
+                {
+                    effect.Tick(this.Player);
+                    //this.status = string.Format("{0} takes {1} damage from {2}", this.Player.Name, effect.Stat.Value, effect);
+                });
+
+
+            }
+
             // Check if the current fighter has taken it's turn if he will proceed with target selection and attack when one is selected.
             if (this.tookTurn)
             {
@@ -218,36 +249,7 @@ namespace RPG.GameLogic.Core.Battle
 
                 this.CurrentTurn += 1;
             }
-            // Check if it's time to start a new round.
-            if (this.CurrentTurn >= this.TotalTurns)
-            {
-                this.ClearBattlefield();
-                this.CurrentTurn = 1;
-                this.Round += 1;
-                this.status = string.Format("Preparing round {0:###}.", this.Round);
-                // If it passes the available fighters are reset and shuffled.
-                this.availableFighterIndexes = this.GetFighterIndexes(this.Participants);
-                // When castins some skills the player will put an effect on his enemies.
-                // When the round ends the effects will take effect and be applied once to each enemy.
-                
-                this.Enemies.Where(enemy => enemy.Effects.Count > 0).ToList()
-                    .ForEach(enemy =>
-                    {
-                        enemy.Effects
-                            .ForEach(effect =>
-                            {
-                                effect.Tick(enemy);
-                                //this.status = string.Format("{0} takes {1} damage from {2}", enemy.Name, effect.Stat.Value, effect);
-                            });
-                    });
-                this.Player.Effects.ForEach(effect =>
-                {
-                    effect.Tick(this.Player);
-                    //this.status = string.Format("{0} takes {1} damage from {2}", this.Player.Name, effect.Stat.Value, effect);
-                });
-                
-
-            }
+           
         }
 
         /// <summary>
