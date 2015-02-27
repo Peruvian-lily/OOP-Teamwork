@@ -51,7 +51,10 @@
     <Compile Include="GameLogic\Interface\IMove.cs" />
     <Compile Include="GameLogic\Interface\ITimeout.cs" />
     <Compile Include="GameLogic\Core\Battle\Battle.cs" />
-    <Compile Include="GameLogic\Models\Spells\Base\Spell.cs" />
+    <Compile Include="GameLogic\Models\Spells\Base\SelftCastSkill.cs" />
+    <Compile Include="GameLogic\Models\Spells\Base\Skill.cs" />
+    <Compile Include="GameLogic\Models\Spells\Base\TargetedSkill.cs" />
+    <Compile Include="GameLogic\Models\Spells\BasicAttack.cs" />
     <Compile Include="GameLogic\Models\Spells\Fireball.cs" />
     <Compile Include="GameLogic\Models\Spells\Heal.cs" />
     <Compile Include="GameLogic\Models\Stats\Fire.cs" />

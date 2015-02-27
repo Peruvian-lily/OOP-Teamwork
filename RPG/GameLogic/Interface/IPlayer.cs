@@ -11,7 +11,7 @@ namespace RPG.GameLogic.Interface
     {
         Inventory Inventory { get; }
         void PickUp(PickUp item);
-        List<Spell> Spells { get; }
+        List<Skill> Skills { get; }
         List<Effects> Effects { get; } 
     }
 }

@@ -30,7 +30,7 @@ namespace RPG
         public static int ScreenHeight;
         private Player player;
         private List<Character> worldObjects;
-        
+
         public Game1()
             : base()
         {
@@ -54,9 +54,10 @@ namespace RPG
             this.player = new Player("QueBabche", 100, 100, 100, 5);
             this.player.Position = new Vector2((float)ScreenWidth / 2, (float)ScreenHeight / 2);
             this.player.PickUp(ItemFactory.GenerateItem(25, 50));
-            this.player.LearnSpell(new Fireball(50,4,5));
-            this.player.LearnSpell(new Fireball(500, 2, 5));
-            this.player.LearnSpell(new Heal(100, 5, 10));
+            this.player.LearnSkill(new Fireball(50, 4, this.player));
+            this.player.LearnSkill(new Fireball(500, 2, this.player));
+            this.player.LearnSkill(new Heal(10, 5, this.player));
+            this.player.LearnSkill(new BasicAttack(this.player));
 
             // Use reflection to determine how many states there are as  
             // .NET Compact Framework does not support Enum.GetValues().  
@@ -71,8 +72,8 @@ namespace RPG
             States[(Int32)GameState.BattleScreenState] = new BattleScreenState(this, this.player, this.worldObjects);
 
             // Initialize current Game state.  
-            CurrentState = GameState.MainMenuState; 
-            
+            CurrentState = GameState.MainMenuState;
+
 
             base.Initialize();
 

@@ -35,7 +35,7 @@ namespace RPG.GameLogic.Models.Characters
             this.Inventory = new Inventory.Base.Inventory(inventorySize);
             this.otherStats = otherStats;
             this.AddAnimation();
-            this.Spells = new List<Spell>();
+            this.Skills = new List<Skill>();
         }
 
         public Player(string name, int health, int attackPower, int defense, int inventorySize)
@@ -64,8 +64,11 @@ namespace RPG.GameLogic.Models.Characters
         #endregion
 
         #region Stats and Damage
+
         public Attack AttackPower { get; private set; }
-        public List<Spell> Spells { get; private set; }
+
+        public List<Skill> Skills { get; private set; }
+
         public List<Stat> OffensiveStats
         {
             get { return this.otherStats.Where(stat => stat.Type == StatType.Offensive).ToList(); }
@@ -96,6 +99,7 @@ namespace RPG.GameLogic.Models.Characters
                     reduction += this.DefensiveStats.Find(stat => stat.Equals(type)).Value;
                 }
             });
+
             if (amount > reduction)
             {
                 this.Health.Reduce(amount - reduction);
@@ -103,12 +107,12 @@ namespace RPG.GameLogic.Models.Characters
         }
         #endregion
 
-        #region Inventory and Spell Book
+        #region Inventory and Skill Book
         public Inventory.Base.Inventory Inventory { get; private set; }
 
-        public void LearnSpell(Spell spell)
+        public void LearnSkill(Skill skill)
         {
-            this.Spells.Add(spell);
+            this.Skills.Add(skill);
         }
 
         public void PickUp(PickUp item)

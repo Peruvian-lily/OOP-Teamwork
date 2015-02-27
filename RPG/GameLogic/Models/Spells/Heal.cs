@@ -1,42 +1,38 @@
-﻿namespace RPG.GameLogic.Models.Spells
+﻿using RPG.GameLogic.Models.Characters;
+
+namespace RPG.GameLogic.Models.Spells
 {
     using Base;
     using Effects;
     using Stats;
-    using Characters.Base;
-    using Stats.Base;
 
-    public class Heal : Spell
+    public class Heal : SelftCastSkill
     {
         /// <summary>
         /// Heal for full amount
         /// </summary>
         /// <param name="power">Strenght of heal</param>
-        /// <param name="cost">Cost of spell</param>
-        public Heal(int power, int cost) : 
-            base("Heal", new Health(power), cost)
+        /// <param name="owner">Target of the Skill</param>
+        public Heal(int power, Player owner) :
+            base("Heal", new Health(power), owner)
         {
         }
 
         /// <summary>
-        /// Heal for a small amount at cast and then for full amount every tick.
+        /// Heal for the amount and double that over the duration.
         /// </summary>
-        /// <param name="power">Amount of health increased</param>
-        /// <param name="duration">Duration of heal effect</param>
-        /// <param name="cost">Cost of spell</param>
-        public Heal(int power, int duration, int cost) 
-            : base("Heal Over Time", new Health(power/5), 
-            new Healing(power, duration), cost)
+        /// <param name="power">Amount of health increased.</param>
+        /// <param name="duration">Duration of heal effect.</param>
+        /// <param name="owner">Target of the Skill.</param>
+        public Heal(int power, int duration, Player owner)
+            : base("Heal Over Time", new Health(power),
+            new Healing((power * 2) / duration, duration), owner)
         {
         }
 
-        public override void Cast(Character target)
+        public override void Cast()
         {
-            if (!this.Effect.Equals(null))
-            {
-                this.Effect.Apply(target);
-            }
-            target.Health.Increase(this.Stat.Value);
+            Owner.Health.Increase(this.Stat.Value);
         }
     }
 }

@@ -15,14 +15,14 @@ namespace RPG.GameLogic.Core.Battle
         private Random rnd = new Random();
         private bool tookTurn = true; //Used for preventing the turn system from selectin a new fighter this turn if the previous one has not finished his turn.
         private int targetIndex = 0; //Index of current target the player is aiming at.
-        private int spellIndex = 0; //Index of current spell that the player has selected.
+        private int skillIndex = 0; //Index of current Skill that the player has selected.
         private bool leftPressed; //Emulating key pressed functionality in keylistener
         private bool rightPressed; //Emulating key pressed functionality in keylistener
         private bool spacePressed; //Emulating key pressed functionality in keylistener
         private bool targetSelected; //If player has selected a target he may proceed to select a way to attack his target.
-        private bool spellSelected; //If player has selected a spell he casts it and "Enemy go boom sir"
+        private bool skillSelected; //If player has selected a Skill he casts it and "Enemy go boom sir"
         private string status; //A status text for the battle.
-        private Spell spell; //Currently selected spell.
+        private Skill skill; //Currently selected Skill.
         private List<int> availableFighterIndexes;//Indexes of all available fighters for the current round.
 
         /// <summary>
@@ -162,21 +162,30 @@ namespace RPG.GameLogic.Core.Battle
                     this.Status = string.Format("{4}|Select target({0}/{1}): {2}({3}hp)",
                         this.targetIndex + 1, this.Enemies.Count, this.Target.Name, this.Target.Health.Value, this.Round);
                 }
-                // When the player selects a target he may then select a spell or a basic attack to fight his target with.
-                else if (targetSelected && !spellSelected)
+                // When the player selects a target he may then select a Skill or a basic attack to fight his target with.
+                else if (targetSelected && !skillSelected)
                 {
-                    this.spell = ProcessSelection(((IPlayer)this.Player).Spells, ref this.spellIndex, ref this.spellSelected);
+                    this.skill = ProcessSelection(((IPlayer)this.Player).Skills, ref this.skillIndex, ref this.skillSelected);
                     this.Status = string.Format("{4}|Target {0}({1}hp):\nSelect attack: {2} (Power:{3})",
-                        this.Target.Name, this.Target.Health.Value, this.spell.Name, this.spell.Stat.Value, this.Round);
+                        this.Target.Name, this.Target.Health.Value, this.skill.Name, this.skill.Stat.Value, this.Round);
                 }
-                // When the player has selected a spell and a target he will take action and the next round will be called.
-                else if (this.targetSelected && spellSelected)
+                // When the player has selected a Skill and a target he will take action and the next round will be called.
+                else if (this.targetSelected && skillSelected)
                 {
-                    this.spell.Cast(this.Target);
-                    this.status = string.Format("{4}| {0} is attacking {1} with {2}\n{1} has {3}hp left",
-                        ((Character)this.Attacker).Name, this.Target.Name, this.spell.Name, this.Target.Health.Value, this.Round);
+                    if (this.skill is SelftCastSkill)
+                    {
+                       ((SelftCastSkill)this.skill).Cast();
+                        this.status = string.Format("{0} | {1} used {2}", this.Round, this.Player.Name, this.skill.Name);
+                    }
+                    else
+                    {
+                        ((TargetedSkill)this.skill).Cast(this.Target);
+                        this.status = string.Format("{4} | {0} is attacking {1} with {2}\n{1} has {3}hp left",
+                            ((Character)this.Attacker).Name, this.Target.Name, this.skill.Name,
+                            this.Target.Health.Value, this.Round);
+                    }
                     this.tookTurn = true;
-                    this.spellSelected = false;
+                    this.skillSelected = false;
                     this.targetSelected = false;
                     this.CurrentTurn += 1;
                 }
@@ -200,18 +209,18 @@ namespace RPG.GameLogic.Core.Battle
                 // If it passes the available fighters are reset and shuffled.
                 this.availableFighterIndexes = GetFighterIndexes(this.Participants);
                 this.status = string.Format("Beginning of round #{0}", this.Round);
-                // When castins some spells the player will put an effect on his enemies.
+                // When castins some skills the player will put an effect on his enemies.
                 // When the round ends the effects will take effect and be applied once to each enemy.
                 #region Apply Effects
                 this.Enemies.Where(enemy => enemy.Effects.Count > 0).ToList()
                     .ForEach(enemy =>
                     {
-                    enemy.Effects
-                        .ForEach(effect =>
-                        {
-                            effect.Tick(enemy);
-                            //this.status = string.Format("{0} takes {1} damage from {2}", enemy.Name, effect.Stat.Value, effect);
-                        });
+                        enemy.Effects
+                            .ForEach(effect =>
+                            {
+                                effect.Tick(enemy);
+                                //this.status = string.Format("{0} takes {1} damage from {2}", enemy.Name, effect.Stat.Value, effect);
+                            });
                     });
                 this.Player.Effects.ForEach(effect =>
                 {
@@ -290,7 +299,7 @@ namespace RPG.GameLogic.Core.Battle
                 this.rightPressed = false;
             }
             if (ks.IsKeyUp(Keys.Space))
-            { 
+            {
                 this.spacePressed = false;
             }
             this.AdjustIndex(ref index, selections);
@@ -345,7 +354,7 @@ namespace RPG.GameLogic.Core.Battle
         /// <returns>Returns selected target from the list</returns>
         private T Select<T>(int index, List<T> targets)
         {
-            AdjustIndex(ref index,targets);
+            AdjustIndex(ref index, targets);
             return targets[index];
         }
 

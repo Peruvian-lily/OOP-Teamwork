@@ -1,29 +1,29 @@
 ﻿using System;
+using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
 using RPG.GameLogic.Models.Stats.Base;
 
 namespace RPG.GameLogic.Models.Spells.Base
 {
     using Effects.Base;
-    public abstract class Spell
+    public abstract class Skill
     {
-        protected Spell(String name, Stat stat, int cost)
-            :this(name, stat, null, cost)
+        protected Skill(String name, Stat stat, Player owner)
+            :this(name, stat, null, owner)
         {
         }
-        protected Spell(String name, Stat stat, Effects effect, int cost)
+        protected Skill(String name, Stat stat, Effects effect, Player owner)
         {
             this.Name = name;
             this.Stat = stat;
-            this.Cost = cost;
             this.Effect = effect;
+            this.Owner = owner;
         }
 
+        public Player Owner { get; set; }
         public String Name { get; set; }
         public Stat Stat { get; set; }
         public Effects Effect { get; set; }
         public int Cost { get; set; }
-
-        public abstract void Cast(Character target);
     }
 }
