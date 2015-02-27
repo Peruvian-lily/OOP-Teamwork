@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using RPG.GameLogic.Core.Battle;
+using RPG.GameLogic.Interface;
 using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
 
@@ -82,6 +84,8 @@ namespace RPG.Graphics
                         element.Draw(spriteBatch);
                     }
                     textDrawer.DrawString(spriteBatch, "Health: " + this.battle.Player.Health.Value, new Vector2(650, 420), Color.White);
+                    textDrawer.DrawString(spriteBatch, this.battle.Player.Name, new Vector2(10, 5), Color.Indigo);
+                    textDrawer.DrawString(spriteBatch, this.battle.PlayerState, new Vector2(335, 280), Color.Indigo);
                     break;
                 case GameState.GamePlayState:
                     break;

@@ -149,7 +149,7 @@ namespace RPG.GameLogic.Models.Characters
                     default:
                         if (this.otherStats.Contains(stat))
                         {
-                            this.otherStats.Find(entry => entry == stat).Increase(stat.Value);
+                            this.otherStats.Find(entry => entry.Equals(stat)).Increase(stat.Value);
                         }
                         else
                         {
