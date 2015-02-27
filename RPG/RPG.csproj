@@ -44,6 +44,7 @@
     <Compile Include="GameLogic\Core\XNARectangleExtention.cs" />
     <Compile Include="GameLogic\Core\Factory\ItemFactory.cs" />
     <Compile Include="GameLogic\Enums\ItemType.cs" />
+    <Compile Include="GameLogic\Exceptions\NegativeStatsException.cs" />
     <Compile Include="GameLogic\Interface\IEnemy.cs" />
     <Compile Include="GameLogic\Interface\IFight.cs" />
     <Compile Include="GameLogic\Interface\IItem.cs" />
