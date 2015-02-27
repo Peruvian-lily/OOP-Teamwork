@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using RPG.GameLogic.Core.Battle;
+using RPG.GameLogic.Interface;
 using RPG.GameLogic.Models.Characters;
 using RPG.GameLogic.Models.Characters.Base;
 
@@ -82,15 +84,13 @@ namespace RPG.Graphics
                         element.Draw(spriteBatch);
                     }
                     textDrawer.DrawString(spriteBatch, "Health: " + this.battle.Player.Health.Value, new Vector2(650, 420), Color.White);
+                    textDrawer.DrawString(spriteBatch, this.battle.Player.Name, new Vector2(10, 5), Color.Indigo);
+                    textDrawer.DrawString(spriteBatch, this.battle.PlayerState, new Vector2(335, 280), Color.Indigo);
                     break;
                 case GameState.GamePlayState:
                     break;
             }
-            string statusText = this.battle.Status;
-            //String.Format("Attacker: {0}/{1}hp; Target: {2}/{3}hp",
-            //(this.battle.Attacker as Character).Name, this.battle.Attacker.Health.Value,
-            //(this.battle.Target as Character).Name, this.battle.Target.Health.Value);
-            textDrawer.DrawString(spriteBatch, statusText,new Vector2(50,350), Color.WhiteSmoke);
+            textDrawer.DrawString(spriteBatch, this.battle.Status, new Vector2(50, 350), Color.WhiteSmoke);
         }
 
         public void OnClick(string element)
@@ -102,9 +102,9 @@ namespace RPG.Graphics
             }
             if (element == @"Overlays\Battle\button2")
             {
-                
+
             }
-             if (element == @"Overlays\Battle\enemy_start")
+            if (element == @"Overlays\Battle\enemy_start")
             {
             }
 

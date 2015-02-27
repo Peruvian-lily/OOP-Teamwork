@@ -51,12 +51,21 @@ namespace RPG
 
             base.Content = Content;
             this.worldObjects = new List<Character>();
-            this.player = new Player("QueBabche", 100, 100, 100, 5);
+
+            string name = "QueBabche";
+            int attack = 100;
+            int defense = 100;
+            int health = 100;
+            int inventorySize = 5;
+            this.player = new Player(name, health, attack, defense, inventorySize);
             this.player.Position = new Vector2((float)ScreenWidth / 2, (float)ScreenHeight / 2);
+
             this.player.PickUp(ItemFactory.GenerateItem(25, 50));
-            this.player.LearnSkill(new Fireball(50, 4, this.player));
-            this.player.LearnSkill(new Fireball(500, 2, this.player));
-            this.player.LearnSkill(new Heal(10, 5, this.player));
+            this.player.PickUp(ItemFactory.GenerateItem(25, 50));
+            this.player.PickUp(ItemFactory.GenerateItem(25, 50));
+
+            this.player.LearnSkill(new Fireball(30, 2, this.player));
+            this.player.LearnSkill(new Heal(50, 5, this.player));
             this.player.LearnSkill(new BasicAttack(this.player));
 
             // Use reflection to determine how many states there are as  

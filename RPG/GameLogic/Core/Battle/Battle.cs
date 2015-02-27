@@ -38,6 +38,7 @@ namespace RPG.GameLogic.Core.Battle
             this.Round += 1;
             this.Enemies = trigger;
             this.Target = player as Character;
+            this.PlayerState = "   Waiting.";
             this.Status = "Battle initiated";
         }
 
@@ -80,6 +81,7 @@ namespace RPG.GameLogic.Core.Battle
             }
         }
 
+        public string PlayerState { get; private set; }
         /// <summary>
         /// Amount of turns each round has.
         /// </summary>
@@ -109,7 +111,7 @@ namespace RPG.GameLogic.Core.Battle
             }
             private set
             {
-                if (!value.Contains("Select"))
+                if (!this.PlayerState.Contains("Select"))
                 {
                     Thread.Sleep(300);
                 }
@@ -150,7 +152,7 @@ namespace RPG.GameLogic.Core.Battle
             {
                 // Every fighter in the battle with take one turn each round.
                 this.Attacker = this.SelectFighter(this.Participants, this.availableFighterIndexes);
-                this.Status = string.Format("{1}|{0} is on turn.", ((Character)this.Attacker).Name, this.Round);
+                this.Status = string.Format("Round: {1:###}.\n{0} is on turn.", ((Character)this.Attacker).Name, this.Round);
                 this.tookTurn = false;
             }
             // If the selected attacked is a player he may then pick a target to attack.
@@ -158,16 +160,20 @@ namespace RPG.GameLogic.Core.Battle
             {
                 if (!targetSelected)
                 {
+                    this.PlayerState = "Select Target!";
                     this.Target = ProcessSelection(this.Enemies, ref this.targetIndex, ref this.targetSelected);
-                    this.Status = string.Format("{4}|Select target({0}/{1}): {2}({3}hp)",
-                        this.targetIndex + 1, this.Enemies.Count, this.Target.Name, this.Target.Health.Value, this.Round);
+                    this.Status = string.Format(
+                        "Round: {4:###}.\nCurrent target: {2}\nTarget Health: {3:###} | Target Defense: {5:###} | Target Attack: {6:###}\n Total Targets: {1:###}\n Current Target: {0:###}",
+                        this.targetIndex + 1, this.Enemies.Count, this.Target.Name, this.Target.Health.Value, 
+                        this.Round, this.Target.Defense.Value,((IFight)this.Target).AttackPower.Value);
                 }
                 // When the player selects a target he may then select a Skill or a basic attack to fight his target with.
                 else if (targetSelected && !skillSelected)
                 {
+                    this.PlayerState = "Select Action!";
                     this.skill = ProcessSelection(((IPlayer)this.Player).Skills, ref this.skillIndex, ref this.skillSelected);
-                    this.Status = string.Format("{4}|Target {0}({1}hp):\nSelect attack: {2} (Power:{3})",
-                        this.Target.Name, this.Target.Health.Value, this.skill.Name, this.skill.Stat.Value, this.Round);
+                    this.Status = string.Format("Round: {4:###}.\nTarget: {0}({1:###}hp/{5:###}def)\nCurrent action: {2}\n Action power: {3:###}",
+                        this.Target.Name, this.Target.Health.Value, this.skill.Name, this.skill.Stat.Value, this.Round, this.Target.Defense.Value);
                 }
                 // When the player has selected a Skill and a target he will take action and the next round will be called.
                 else if (this.targetSelected && skillSelected)
@@ -175,14 +181,18 @@ namespace RPG.GameLogic.Core.Battle
                     if (this.skill is SelftCastSkill)
                     {
                        ((SelftCastSkill)this.skill).Cast();
-                        this.status = string.Format("{0} | {1} used {2}", this.Round, this.Player.Name, this.skill.Name);
+                       this.status = string.Format("Round: {0:###}.\n {1} used {2}", this.Round, this.Player.Name, this.skill.Name);
                     }
                     else
                     {
                         ((TargetedSkill)this.skill).Cast(this.Target);
-                        this.status = string.Format("{4} | {0} is attacking {1} with {2}\n{1} has {3}hp left",
-                            ((Character)this.Attacker).Name, this.Target.Name, this.skill.Name,
-                            this.Target.Health.Value, this.Round);
+                        this.PlayerState = "Attacking!";
+                        string statusString = string.Format("Round: {0:###}.\n{1} is attacking {2} with {3}."
+                            , this.Round, ((Character)this.Attacker).Name, this.Target.Name, this.skill.Name);
+                        statusString += this.Target.Health.Value == 0 ? 
+                            string.Format("\n{0} is kill!", this.Target.Name) :
+                            string.Format("\n{0} has {1:###}hp left!", this.Target.Name, this.Target.Health.Value);
+                        this.status = statusString;
                     }
                     this.tookTurn = true;
                     this.skillSelected = false;
@@ -193,11 +203,18 @@ namespace RPG.GameLogic.Core.Battle
             //If en enemy is on turn he will just target the player and hit him with a basic attack.
             else
             {
+                this.PlayerState = "   Waiting.";
                 this.tookTurn = true;
                 this.Target = this.Player;
                 this.Attacker.Attack(this.Target as IFight);
-                this.Status = string.Format("{3}| {0} is attacking {1}.\n{1} has ({2} hp) left",
-                    ((Character)this.Attacker).Name, this.Target.Name, this.Target.Health.Value, this.Round);
+
+                string statusString = string.Format("Round: {0:###}.\n{1} is attacking {2}."
+                            , this.Round, ((Character)this.Attacker).Name, this.Target.Name);
+                statusString += this.Target.Health.Value == 0 ?
+                    string.Format("\n{0} is kill!", this.Target.Name) :
+                    string.Format("\n{0} has {1:###}hp left!", this.Target.Name, this.Target.Health.Value);
+                this.status = statusString;
+
                 this.CurrentTurn += 1;
             }
             // After every turn we clear the bodies and pay our respects to the dead.
@@ -206,9 +223,11 @@ namespace RPG.GameLogic.Core.Battle
             // Check if it's time to start a new round.
             if (this.CurrentTurn >= this.TotalTurns)
             {
+                this.CurrentTurn = 1;
+                this.Round += 1;
+                this.status = string.Format("Preparing round {0:###}.", this.Round);
                 // If it passes the available fighters are reset and shuffled.
                 this.availableFighterIndexes = GetFighterIndexes(this.Participants);
-                this.status = string.Format("Beginning of round #{0}", this.Round);
                 // When castins some skills the player will put an effect on his enemies.
                 // When the round ends the effects will take effect and be applied once to each enemy.
                 #region Apply Effects
@@ -228,8 +247,7 @@ namespace RPG.GameLogic.Core.Battle
                     //this.status = string.Format("{0} takes {1} damage from {2}", this.Player.Name, effect.Stat.Value, effect);
                 });
                 #endregion
-                this.CurrentTurn = 1;
-                this.Round += 1;
+
             }
         }
 
