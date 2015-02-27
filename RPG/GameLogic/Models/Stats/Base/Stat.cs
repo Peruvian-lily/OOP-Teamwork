@@ -1,4 +1,6 @@
-﻿namespace RPG.GameLogic.Models.Stats.Base
+﻿using RPG.GameLogic.Exceptions;
+
+namespace RPG.GameLogic.Models.Stats.Base
 {
     using System;
 
@@ -42,7 +44,7 @@
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("Stats value cannot be negative or zero");
+                    throw new NegativeStatsException();
                 }
 
                 this.value = value;

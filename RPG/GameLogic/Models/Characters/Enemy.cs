@@ -1,4 +1,6 @@
-﻿namespace RPG.GameLogic.Models.Characters
+﻿using System;
+
+namespace RPG.GameLogic.Models.Characters
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -139,12 +141,34 @@
         }
         public void Roam()
         {
-            throw new System.NotImplementedException();
+            Random rnd = new Random();
+            int vectorX = rnd.Next(1) == 1 ? rnd.Next(3) : 0 - rnd.Next(3);
+            int vectorY = rnd.Next(1) == 1 ? rnd.Next(3) : 0 - rnd.Next(3);
+
+            if (rnd.Next(100) < 2)
+            {
+                int chance = rnd.Next(2);
+                if (chance == 2)
+                {
+                    this.Position.X += vectorX;
+                    this.Position.Y += vectorY;
+                }
+                else if (chance == 1)
+                {
+                    this.Position.X += vectorX;
+                }
+                else
+                {
+                    this.Position.Y += vectorY;
+                }
+
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
             this.Animation.PlayAnimation(gameTime);
+            this.Roam();
             this.CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.FrameWidth, Animation.FrameWidth, Animation.FrameHeight);
         }
 
