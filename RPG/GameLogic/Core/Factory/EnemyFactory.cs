@@ -22,7 +22,7 @@ namespace RPG.GameLogic.Core.Factory
             {
                 stats = GenerateStats(minValue, maxValue);
             }
-            Enemy enemy = new Enemy(enemyName, health, attack, defense, stats, EnemyType.Freak);
+            Enemy enemy = new Enemy(enemyName, health, attack, defense, stats, GenerateEnemyType());
             return enemy;
         }
 
@@ -87,6 +87,13 @@ namespace RPG.GameLogic.Core.Factory
             int nameIndex = rnd.Next(name.Count);
             string fullName = string.Format("{0} {1} {2}", prefix[prefixIndex], name[nameIndex], suffix[suffixIndex]);
             return fullName;
+        }
+
+        static EnemyType GenerateEnemyType()
+        {
+            Array values = Enum.GetValues(typeof(EnemyType));
+            EnemyType randomEnemyType = (EnemyType)values.GetValue(rnd.Next(values.Length));
+            return randomEnemyType;
         }
     }
 }

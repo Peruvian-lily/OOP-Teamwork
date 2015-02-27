@@ -135,6 +135,9 @@
     <Content Include="Content\Overlays\Battle\select.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Overlays\Battle\flee.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Overlays\Menu\background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

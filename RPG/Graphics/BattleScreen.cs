@@ -28,6 +28,7 @@ namespace RPG.Graphics
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\player_start"));
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\enemy_start"));
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\futureui1"));
+            this.battleScreen.Add(new GUIElement(@"Overlays\Battle\flee"));
 
             this.defaultFont = Game1.Content.Load<SpriteFont>(@"Fonts\Arial");
             this.textDrawer = new TextDrawer(this.defaultFont);
@@ -49,6 +50,7 @@ namespace RPG.Graphics
             this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\player_start").MoveElement(-330, -100);
             this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\enemy_start").MoveElement(330, -100);
             this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\futureui1").MoveElement(0, 200);
+            this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\flee").MoveElement(360, 120);
         }
 
         public void Update()
@@ -95,19 +97,11 @@ namespace RPG.Graphics
 
         public void OnClick(string element)
         {
-            if (element == @"Overlays\Battle\select")
+            if (element == @"Overlays\Battle\flee")
             {
-                //Play the Game
+                //Return to Map
                 Game1.CurrentState = GameState.GamePlayState;
             }
-            if (element == @"Overlays\Battle\button2")
-            {
-
-            }
-            if (element == @"Overlays\Battle\enemy_start")
-            {
-            }
-
         }
     }
 }

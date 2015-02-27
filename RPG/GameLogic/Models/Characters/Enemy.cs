@@ -14,6 +14,7 @@ namespace RPG.GameLogic.Models.Characters
 {
     public class Enemy : Character, IRoam, IEnemy
     {
+        private string enemySkin;
         private const int CollisonCirlceRadius = 10;
 
         public Enemy(string name, int health, int attack, int defense, List<Stat> otherStats, EnemyType enemyType)
@@ -22,7 +23,8 @@ namespace RPG.GameLogic.Models.Characters
             this.AttackPower = new Attack(attack);
             this.Stats = otherStats;
             this.EnemyType = enemyType;
-            this.Animation = new Animation("Sprites\\Monster\\enemy1", 80f, 3, 2, false, 0, 0);
+            this.ChooseAnimation(EnemyType);
+            this.Animation = new Animation(enemySkin, 80f, 3, 2, false, 0, 0);
             this.CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.FrameWidth,
                 Animation.FrameWidth, Animation.FrameHeight);
         }
@@ -109,19 +111,30 @@ namespace RPG.GameLogic.Models.Characters
             return allaysThatCanHelp;
         }
 
+        public void ChooseAnimation(EnemyType enemyType)
+        {
+            switch (enemyType)
+            {
+                case EnemyType.Freak:
+                    this.enemySkin = @"Sprites\Monster\enemy1";
+                    break;
+                case EnemyType.Snail:
+                    this.enemySkin = @"Sprites\Monster\enemy2";
+                    break;
+                case EnemyType.Ghost:
+                    this.enemySkin = @"Sprites\Monster\enemy3";
+                    break;
+                default: this.enemySkin = @"Sprites\Monster\enemy1";
+                    break;
+            }
+        }
         public void Roam()
         {
             throw new System.NotImplementedException();
         }
-        public void Initialize(Texture2D texture, Vector2 position)
-        {
-            this.EnemyTexture = texture;
-            this.Position = position;
-        }
 
         public override void Update(GameTime gameTime)
         {
-            this.Animation.PlayAnimation(gameTime);
             this.Animation.PlayAnimation(gameTime);
             CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.FrameWidth,
                 Animation.FrameWidth, Animation.FrameHeight);
@@ -129,7 +142,6 @@ namespace RPG.GameLogic.Models.Characters
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            this.Animation.Draw(spriteBatch, this.Position);
             this.Animation.Draw(spriteBatch, this.Position);
         }
     }

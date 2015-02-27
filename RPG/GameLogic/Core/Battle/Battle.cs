@@ -347,7 +347,7 @@ namespace RPG.GameLogic.Core.Battle
         /// </summary>
         /// <param name="index">Current index.</param>
         /// <param name="targets">List of available targets</param>
-        private void SelectLeft<T>(ref int index, List<T> targets)
+        public void SelectLeft<T>(ref int index, List<T> targets)
         {
             index -= 1;
             AdjustIndex(ref index, targets);
