@@ -1,4 +1,6 @@
-﻿namespace RPG.Graphics
+﻿using RPG.GameLogic.Enums;
+
+namespace RPG.Graphics
 {
     using System.Collections.Generic;
     using Microsoft.Xna.Framework.Content;

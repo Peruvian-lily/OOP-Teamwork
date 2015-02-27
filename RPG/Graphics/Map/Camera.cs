@@ -9,7 +9,7 @@
 
     public static class Camera
     {
-        private const int ScreenSizeRemainder = 1;
+        public const int ScreenSizeRemainder = 1;
         public static readonly int EnemyMaxWidth = TileMap.mapWidth * Tile.TileWidth;
         public static readonly int EnemyMaxHeight = TileMap.mapHeight * Tile.TileHeight;
         public static readonly int CameraMaxWidth = (TileMap.mapWidth - ScreenSizeRemainder) * Tile.TileWidth - Game1.BufferWidth;

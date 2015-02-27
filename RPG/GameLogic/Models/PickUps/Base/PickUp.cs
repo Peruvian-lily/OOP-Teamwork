@@ -4,7 +4,7 @@
 
     public abstract class PickUp : GameObject
     {
-        private string _name;
+        private string name;
 
         protected PickUp(string name) 
         {
@@ -13,14 +13,14 @@
 
         public string Name
         {
-            get { return this._name; }
+            get { return this.name; }
             private set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentNullException("Name cannot be empty");
                 }
-                this._name = value;
+                this.name = value;
             }
         }
 

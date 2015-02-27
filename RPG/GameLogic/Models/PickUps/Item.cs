@@ -8,7 +8,7 @@
 
     public class Item : PickUp, IItem
     {
-        private List<Stat> _stats;
+        private List<Stat> stats;
 
         public Item(string name, List<Stat> stats, Effects.Base.Effects effect)
             : base(name)
@@ -26,7 +26,7 @@
         {
             get
             {
-                return this._stats;
+                return this.stats;
             }
 
             private set
@@ -36,7 +36,7 @@
                     throw new ArgumentOutOfRangeException("Item requires atleast 2 stats");
                 }
 
-                this._stats = value;
+                this.stats = value;
             }
         }
 
