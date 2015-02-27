@@ -9,8 +9,8 @@ namespace RPG.GameLogic.Core.Battle
     using System.Threading;
     using Microsoft.Xna.Framework.Input;
     using RPG.GameLogic.Interface;
-    using RPG.GameLogic.Models.Characters.Base;
-    using RPG.GameLogic.Models.Spells.Base;
+    using Models.Characters.Base;
+    using Models.Spells.Base;
 
     class Battle
     {
@@ -218,12 +218,10 @@ namespace RPG.GameLogic.Core.Battle
 
                 this.CurrentTurn += 1;
             }
-            // After every turn we clear the bodies and pay our respects to the dead.
-            this.ClearBattlefield();
-
             // Check if it's time to start a new round.
             if (this.CurrentTurn >= this.TotalTurns)
             {
+                this.ClearBattlefield();
                 this.CurrentTurn = 1;
                 this.Round += 1;
                 this.status = string.Format("Preparing round {0:###}.", this.Round);
