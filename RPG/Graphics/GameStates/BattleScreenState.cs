@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using RPG.GameLogic.Core.Battle;
-using RPG.GameLogic.Models.Characters;
-using RPG.GameLogic.Models.Characters.Base;
-using RPG.GameLogic.Core;
-
-namespace RPG.Graphics.GameStates
+﻿namespace RPG.Graphics.GameStates
 {
-    class BattleScreenState:AbstractGameState
+    using System.Collections.Generic;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using RPG.GameLogic.Core.Battle;
+    using RPG.GameLogic.Models.Characters;
+    using RPG.GameLogic.Models.Characters.Base;
+
+    class BattleScreenState : AbstractGameState
     {
         private BattleScreen battleScreen;
         private Battle battle;

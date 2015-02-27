@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace RPG.GameLogic.Models.PickUps.Base
+﻿namespace RPG.GameLogic.Models.PickUps.Base
 {
+    using System;
+
     public abstract class PickUp : GameObject
     {
         private string _name;

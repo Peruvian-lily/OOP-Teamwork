@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RPG.GameLogic.Interface;
-using RPG.GameLogic.Models.Effects;
-using RPG.GameLogic.Models.Effects.Base;
-using RPG.GameLogic.Models.PickUps;
-using RPG.GameLogic.Models.Stats;
-using RPG.GameLogic.Models.Stats.Base;
-
-namespace RPG.GameLogic.Core.Factory
+﻿namespace RPG.GameLogic.Core.Factory
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using RPG.GameLogic.Interface;
+    using RPG.GameLogic.Models.Effects;
+    using RPG.GameLogic.Models.Effects.Base;
+    using RPG.GameLogic.Models.PickUps;
+    using RPG.GameLogic.Models.Stats;
+    using RPG.GameLogic.Models.Stats.Base;
+
     public static class ItemFactory
     {
         private static Random _rnd = new Random();
@@ -21,9 +21,9 @@ namespace RPG.GameLogic.Core.Factory
             bool hasEffect = _rnd.Next(5) == 1;
 
             List<Stat> stats = GenerateStats(power, itemType);
-            Effects effect = GenerateEffect(power,hasEffect);
+            Effects effect = GenerateEffect(power, hasEffect);
             string name = hasEffect ? GenerateName(itemType, effect) : GenerateName(itemType);
-            Item item = new Item(name,stats,effect);
+            Item item = new Item(name, stats, effect);
             //string name = GenerateName(itemType);
             //Item item = new Item(name,stats, null);
 
@@ -39,17 +39,17 @@ namespace RPG.GameLogic.Core.Factory
             {
                 stats = new List<Stat>
                 {
-                    new Attack(_rnd.Next(power)+1),
-                    new Elemental(_rnd.Next(power)+1, StatType.Offensive)
+                    new Attack(_rnd.Next(power) + 1),
+                    new Elemental(_rnd.Next(power) + 1, StatType.Offensive)
                 };
             }
             else
             {
                 stats = new List<Stat>
                 {
-                    new Elemental(_rnd.Next(power)+1, StatType.Defensive),
-                    new Health(_rnd.Next(power)+1),
-                    new Defense(_rnd.Next(power)+1),
+                    new Elemental(_rnd.Next(power) + 1, StatType.Defensive),
+                    new Health(_rnd.Next(power) + 1 ),
+                    new Defense(_rnd.Next(power) + 1 ),
                 };
             }
 
@@ -89,7 +89,7 @@ namespace RPG.GameLogic.Core.Factory
             //Filthy little effectses. THEY STOLE THE PRECIOUS
             var effectses = new List<Effects>
             {
-                new Healing(power+1, duration)
+                new Healing(power + 1, duration)
             };
             int randomIndex = _rnd.Next(effectses.Count - 1);
             return effectses[randomIndex];
@@ -99,7 +99,7 @@ namespace RPG.GameLogic.Core.Factory
             //Resharper has best plural nameses suggestionses ever
             var effectses = new List<Effects>
             {
-                new Burning(power+1, duration)
+                new Burning(power + 1, duration)
             };
             int randomIndex = _rnd.Next(effectses.Count - 1);
             return effectses[randomIndex];
@@ -215,8 +215,7 @@ namespace RPG.GameLogic.Core.Factory
             int suffixIndex = _rnd.Next(suffix.Count);
             var sb = new StringBuilder();
 
-            sb.AppendFormat("{0} {1} {2}", prefix[prefixIndex],
-                name[nameIndex], suffix[suffixIndex]);
+            sb.AppendFormat("{0} {1} {2}", prefix[prefixIndex], name[nameIndex], suffix[suffixIndex]);
             return sb.ToString();
         }
         #endregion Name Generator

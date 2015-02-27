@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace RPG.GameLogic.Models.Stats.Base
+﻿namespace RPG.GameLogic.Models.Stats.Base
 {
+    using System;
+
     public abstract class Stat
     {
         private string name;
@@ -16,25 +16,35 @@ namespace RPG.GameLogic.Models.Stats.Base
 
         public string Name
         {
-            get { return this.name; }
+            get
+            {
+                return this.name;
+            }
+
             private set
             {
-                if (String.IsNullOrWhiteSpace(value))
+                if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentNullException("Stats name cannot be empty");
                 }
+
                 this.name = value;
             }
         }
         public int Value
         {
-            get { return this.value; }
+            get
+            {
+                return this.value;
+            }
+
             set
             {
                 if (value < 0)
                 {
                     throw new ArgumentOutOfRangeException("Stats value cannot be negative or zero");
                 }
+
                 this.value = value;
             }
         }
@@ -64,6 +74,7 @@ namespace RPG.GameLogic.Models.Stats.Base
             {
                 return this.Name == stat.Name;
             }
+
             return false;
         }
     }

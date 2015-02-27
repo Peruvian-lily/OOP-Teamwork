@@ -1,15 +1,11 @@
-﻿using RPG.GameLogic.Models.Characters.Base;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using RPG.GameLogic.Models.Characters;
-using RPG;
-using RPG.GameLogic.Interface;
-using RPG.GameLogic.Models;
-using RPG.Graphics;
-using RPG.Graphics.Map;
-
-namespace RPG.GameLogic.Core
+﻿namespace RPG.GameLogic.Core
 {
+    using System.Collections.Generic;
+    using RPG.GameLogic.Models.Characters.Base;
+    using Microsoft.Xna.Framework;
+    using RPG.GameLogic.Models.Characters;
+    using RPG.Graphics;
+
     public class Engine
     {
         private static Engine _instance;

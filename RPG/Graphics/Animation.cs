@@ -1,15 +1,15 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace RPG.Graphics
+﻿namespace RPG.Graphics
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+
     public class Animation
     {
-        private const int NumOfRows = 4;
-
         public readonly int FrameWidth;
         public readonly int FrameHeight;
 
+        private const int NumOfRows = 4;
+        
         private float elapsed;
         private float frameTime;
         private int numOfFrames;
@@ -24,8 +24,8 @@ namespace RPG.Graphics
             this.numOfFrames = numOfFrames;
             this.looping = looping;
             this.animation = Game1.Content.Load<Texture2D>(assetName);
-            this.FrameWidth = (this.animation.Width / numOfFrames);
-            this.FrameHeight = (this.animation.Height/ NumOfRows);
+            this.FrameWidth = this.animation.Width / numOfFrames;
+            this.FrameHeight = this.animation.Height / NumOfRows;
             this.Position = new Vector2(initialX, initialY);
             this.WantedFigure = wantedFigure;
         }
@@ -54,6 +54,7 @@ namespace RPG.Graphics
                 {
                     this.currentFrame++;
                 }
+
                 this.elapsed = 0;
             }
         }

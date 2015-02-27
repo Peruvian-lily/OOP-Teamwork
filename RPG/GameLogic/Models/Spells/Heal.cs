@@ -1,7 +1,6 @@
-﻿using RPG.GameLogic.Models.Characters;
-
-namespace RPG.GameLogic.Models.Spells
+﻿namespace RPG.GameLogic.Models.Spells
 {
+    using RPG.GameLogic.Models.Characters;
     using Base;
     using Effects;
     using Stats;
@@ -25,8 +24,7 @@ namespace RPG.GameLogic.Models.Spells
         /// <param name="duration">Duration of heal effect.</param>
         /// <param name="owner">Target of the Skill.</param>
         public Heal(int power, int duration, Player owner)
-            : base("Heal Over Time", new Health(power),
-            new Healing((power * 2) / duration, duration), owner)
+            : base("Heal Over Time", new Health(power), new Healing((power * 2) / duration, duration), owner)
         {
         }
 

@@ -1,8 +1,8 @@
-﻿using RPG.GameLogic.Models.Characters.Base;
-using RPG.GameLogic.Models.PickUps.Base;
-
-namespace RPG.GameLogic.Models.PickUps
+﻿namespace RPG.GameLogic.Models.PickUps
 {
+    using RPG.GameLogic.Models.Characters.Base;
+    using RPG.GameLogic.Models.PickUps.Base;
+
     class Bonus : PickUp
     {
 
@@ -13,7 +13,6 @@ namespace RPG.GameLogic.Models.PickUps
 
         public void Apply(Character target)
         {
-            
         }
     }
 }

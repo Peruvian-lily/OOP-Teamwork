@@ -2,6 +2,10 @@
 {
     public enum GameState
     {
-        MainMenuState, GamePlayState, BattleScreenState, WinState, LoseState
+        MainMenuState, 
+        GamePlayState,
+        BattleScreenState,
+        WinState,
+        LoseState
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace RPG.GameLogic.Models.Effects.Base
 {
-    using Stats.Base;
     using Characters.Base;
+    using Stats.Base;
 
     public abstract class Effects
     {
@@ -13,7 +13,9 @@
         }
 
         public Stat Stat { get; private set; }
+
         public EffectType EffectType { get; private set; }
+
         public int Duration { get; set; }
 
         public virtual void Apply(Character target)
@@ -22,6 +24,7 @@
         }
 
         public abstract void Tick(Character target);
+
         public override string ToString()
         {
             return this.GetType().Name;

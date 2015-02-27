@@ -1,8 +1,8 @@
-﻿using RPG.GameLogic.Models.Stats.Base;
-
-namespace RPG.GameLogic.Models.Stats
+﻿namespace RPG.GameLogic.Models.Stats
 {
-    class Fire : Stat
+    using RPG.GameLogic.Models.Stats.Base;
+
+    public class Fire : Stat
     {
         public Fire(int value) 
             : base("Fire", value, StatType.Offensive)

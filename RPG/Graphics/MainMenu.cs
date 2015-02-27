@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace RPG.Graphics
+﻿namespace RPG.Graphics
 {
+    using System.Collections.Generic;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
+
     class MainMenu
     {
         List<GUIElement> main = new List<GUIElement>();
@@ -23,6 +23,7 @@ namespace RPG.Graphics
                 element.CenterElement(400, 800);
                 element.ClickEvent += this.OnClick;
             }
+
             this.main.Find(x => x.AssetName == "Overlays\\Menu\\new_game_plain").MoveElement(0, -100);
             this.main.Find(x => x.AssetName == "Overlays\\Menu\\exit_plain").MoveElement(0, 100);
         }

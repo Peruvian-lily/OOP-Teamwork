@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using RPG.GameLogic.Core.Factory;
-using RPG.GameLogic.Interface;
-using RPG.GameLogic.Models.Characters.Base;
-using RPG.GameLogic.Models.Stats;
-using RPG.GameLogic.Models.Stats.Base;
-using RPG.Graphics;
-using RPG.Graphics.CustomShapes;
-
-namespace RPG.GameLogic.Models.Characters
+﻿namespace RPG.GameLogic.Models.Characters
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using RPG.GameLogic.Core.Factory;
+    using RPG.GameLogic.Interface;
+    using RPG.GameLogic.Models.Characters.Base;
+    using RPG.GameLogic.Models.Stats;
+    using RPG.GameLogic.Models.Stats.Base;
+    using RPG.Graphics;
+    using RPG.Graphics.CustomShapes;
+
     public class Enemy : Character, IRoam, IEnemy
     {
         private const int CollisonCirlceRadius = 10;
@@ -23,8 +23,7 @@ namespace RPG.GameLogic.Models.Characters
             this.Stats = otherStats;
             this.EnemyType = enemyType;
             this.Animation = new Animation("Sprites\\Monster\\enemy1", 80f, 3, 2, false, 0, 0);
-            this.CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.FrameWidth,
-                Animation.FrameWidth, Animation.FrameHeight);
+            this.CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.FrameWidth, Animation.FrameWidth, Animation.FrameHeight);
         }
 
         public Enemy(string name, int health, int attack, int defense, EnemyType enemyType)
@@ -48,12 +47,26 @@ namespace RPG.GameLogic.Models.Characters
 
         public List<Stat> OffensiveStats
         {
-            get { return this.Stats.Where(stat => stat.Type == StatType.Offensive).ToList(); }
+            get
+            {
+                return this.Stats.Where(stat => stat.Type == StatType.Offensive).ToList();
+            }
         }
 
         public List<Stat> DefensiveStats
         {
-            get { return this.Stats.Where(stat => stat.Type == StatType.Defensive).ToList(); }
+            get
+            {
+                return this.Stats.Where(stat => stat.Type == StatType.Defensive).ToList();
+            }
+        }
+
+        public Circle CollisonCircle
+        {
+            get
+            {
+                return new Circle(this.Position, CollisonCirlceRadius);
+            }
         }
 
         public void Attack(IFight target)
@@ -63,6 +76,7 @@ namespace RPG.GameLogic.Models.Characters
             {
                 damage = +stat.Value;
             });
+
             target.TakeDamage(damage, this.OffensiveStats);
         }
 
@@ -76,17 +90,13 @@ namespace RPG.GameLogic.Models.Characters
                     reduction += this.DefensiveStats.Find(stat => stat.Equals(type)).Value;
                 }
             });
+
             if (amount > reduction)
             {
                 this.Health.Reduce(amount - reduction);
             }
         }
         #endregion
-
-        public Circle CollisonCircle
-        {
-            get { return new Circle(this.Position, CollisonCirlceRadius); }
-        }
 
         public List<Character> GetAllies(List<Character> allGameCharacters)
         {
@@ -98,7 +108,6 @@ namespace RPG.GameLogic.Models.Characters
                 {
                     Enemy currEnemy = character as Enemy;
                     Vector2 enemyCenter = new Vector2(currEnemy.CollisionRect.Center.X, currEnemy.CollisionRect.Center.Y);
-
                     if (this.CollisonCircle.IsPointInCirlce(enemyCenter))
                     {
                         allaysThatCanHelp.Add(currEnemy);
@@ -123,8 +132,7 @@ namespace RPG.GameLogic.Models.Characters
         {
             this.Animation.PlayAnimation(gameTime);
             this.Animation.PlayAnimation(gameTime);
-            CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.FrameWidth,
-                Animation.FrameWidth, Animation.FrameHeight);
+            this.CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.FrameWidth, Animation.FrameWidth, Animation.FrameHeight);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
