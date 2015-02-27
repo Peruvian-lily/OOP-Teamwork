@@ -111,7 +111,7 @@ namespace RPG.GameLogic.Core.Battle
             {
                 if (!value.Contains("Select"))
                 {
-                    Thread.Sleep(50);
+                    Thread.Sleep(300);
                 }
                 this.status = value;
             }
@@ -160,7 +160,7 @@ namespace RPG.GameLogic.Core.Battle
                 {
                     this.Target = ProcessSelection(this.Enemies, ref this.targetIndex, ref this.targetSelected);
                     this.Status = string.Format("{4}|Select target({0}/{1}): {2}({3}hp)",
-                        this.Enemies.Count, this.targetIndex + 1, this.Target.Name, this.Target.Health.Value, this.Round);
+                        this.targetIndex + 1, this.Enemies.Count, this.Target.Name, this.Target.Health.Value, this.Round);
                 }
                 // When the player selects a target he may then select a spell or a basic attack to fight his target with.
                 else if (targetSelected && !spellSelected)
