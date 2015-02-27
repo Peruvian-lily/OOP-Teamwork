@@ -1,43 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace RPG.Graphics.Map
+﻿namespace RPG.Graphics.Map
 {
+    using System.Collections.Generic;
+
     class MapCell
     {
         public List<int> BaseTiles = new List<int>();
+
+        public MapCell(int tileID)
+        {
+            this.TileID = tileID;
+        }
 
         public int TileID
         {
             get
             {
-                return BaseTiles.Count > 0 ? BaseTiles[0] : 0;
+                return this.BaseTiles.Count > 0 ? this.BaseTiles[0] : 0;
             }
 
             set
             {
-                if (BaseTiles.Count > 0)
+                if (this.BaseTiles.Count > 0)
                 {
-                    BaseTiles[0] = value;
-
+                    this.BaseTiles[0] = value;
                 }
                 else
                 {
-                    AddBaseTile(value);
+                    this.AddBaseTile(value);
                 }
             }
         }
 
-        public MapCell(int tileID)
-        {
-            TileID = tileID;
-        }
-
         public void AddBaseTile(int tileID)
         {
-            BaseTiles.Add(tileID);
+            this.BaseTiles.Add(tileID);
         }
     }
 }

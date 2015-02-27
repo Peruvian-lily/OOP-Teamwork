@@ -1,11 +1,8 @@
-﻿#region Using Statements
-using System;
-using Microsoft.Xna.Framework;
-
-#endregion
-
-namespace RPG
+﻿namespace RPG
 {
+    using System;
+    using Microsoft.Xna.Framework;
+
 #if WINDOWS || LINUX
     /// <summary>
     /// The main class.

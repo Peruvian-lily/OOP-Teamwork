@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace RPG.Graphics.Map
+﻿namespace RPG.Graphics.Map
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+
     public static class Tile
     {
-        static public int TileWidth = 48;
-        static public int TileHeight = 48;
-        static public Texture2D TileSetTexture;
+        public static int TileWidth = 48;
+        public static int TileHeight = 48;
+        public static Texture2D TileSetTexture;
 
         public static Rectangle GetSourceRectangle(int tileIndex)
         {
             int tileY = tileIndex / (TileSetTexture.Width / TileWidth);
             int tileX = tileIndex % (TileSetTexture.Width / TileWidth);
-
             return new Rectangle(tileX * TileWidth, tileY * TileHeight, TileWidth, TileHeight);
         }
     }

@@ -1,21 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using RPG.GameLogic.Core;
-using RPG.GameLogic.Interface;
-using RPG.GameLogic.Models.Characters.Base;
-using RPG.GameLogic.Models.PickUps;
-using RPG.GameLogic.Models.PickUps.Base;
-using RPG.GameLogic.Models.Spells.Base;
-using RPG.GameLogic.Models.Stats;
-using RPG.GameLogic.Models.Stats.Base;
-using RPG.Graphics;
-using RPG.Graphics.Map;
-
-namespace RPG.GameLogic.Models.Characters
+﻿namespace RPG.GameLogic.Models.Characters
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+    using RPG.GameLogic.Core;
+    using RPG.GameLogic.Interface;
+    using RPG.GameLogic.Models.Characters.Base;
+    using RPG.GameLogic.Models.PickUps;
+    using RPG.GameLogic.Models.PickUps.Base;
+    using RPG.GameLogic.Models.Spells.Base;
+    using RPG.GameLogic.Models.Stats;
+    using RPG.GameLogic.Models.Stats.Base;
+    using RPG.Graphics;
+    using RPG.Graphics.Map;
+
     public class Player : Character, IPlayer
     {
         public const int Speed = 2;
@@ -109,7 +109,12 @@ namespace RPG.GameLogic.Models.Characters
         #endregion
 
         #region Inventory and Skill Book
-        public Inventory.Base.Inventory Inventory { get; private set; }
+
+        public Inventory.Base.Inventory Inventory
+        {
+            get; 
+            private set;
+        }
 
         public void LearnSkill(Skill skill)
         {
@@ -176,31 +181,29 @@ namespace RPG.GameLogic.Models.Characters
 
         public void KeyListener()
         {
-            ks = Keyboard.GetState();
-            if (ks.IsKeyDown(Keys.Right) || ks.IsKeyDown(Keys.Left) ||
-                ks.IsKeyDown(Keys.Up) || ks.IsKeyDown(Keys.Down))
+            this.ks = Keyboard.GetState();
+            if (this.ks.IsKeyDown(Keys.Right) || this.ks.IsKeyDown(Keys.Left) || this.ks.IsKeyDown(Keys.Up) || this.ks.IsKeyDown(Keys.Down))
             {
-                if (ks.IsKeyDown(Keys.Right))
+                if (this.ks.IsKeyDown(Keys.Right))
                 {
                     this.MoveRight();
                 }
-                else if (ks.IsKeyDown(Keys.Left))
+                else if (this.ks.IsKeyDown(Keys.Left))
                 {
-                    this.MoveLeft(); ;
+                    this.MoveLeft();
                 }
-                if (ks.IsKeyDown(Keys.Up))
+                if (this.ks.IsKeyDown(Keys.Up))
                 {
                     this.MoveUp();
                 }
-                else if (ks.IsKeyDown(Keys.Down))
+                else if (this.ks.IsKeyDown(Keys.Down))
                 {
                     this.MoveDown();
                 }
             }
             else
             {
-                this.CurrentAnimation = new Animation("Sprites\\Player\\character", 80f, 3, lastFrame,
-                    false, this.Position.X, this.Position.Y);
+                this.CurrentAnimation = new Animation("Sprites\\Player\\character", 80f, 3, this.lastFrame, false, this.Position.X, this.Position.Y);
             }
         }
 
@@ -209,12 +212,12 @@ namespace RPG.GameLogic.Models.Characters
         #region Movement
         public void Move(Vector2 direction)
         {
-            if ((Camera.Location.X == 0 || Camera.Location.X == Camera.CameraMaxWidth))
+            if (Camera.Location.X == 0 || Camera.Location.X == Camera.CameraMaxWidth)
             {
                 this.Position.X += Speed * direction.X;
             }
 
-            if ((Camera.Location.Y == 0 || Camera.Location.Y == Camera.CameraMaxHeight))
+            if (Camera.Location.Y == 0 || Camera.Location.Y == Camera.CameraMaxHeight)
             {
                 this.Position.Y += Speed * direction.Y;   
             }
@@ -229,7 +232,7 @@ namespace RPG.GameLogic.Models.Characters
 
             this.lastFrame = 1;
             this.CurrentAnimation = this.LeftAnimation;
-            Move(LeftVector);
+            this.Move(LeftVector);
         }
 
         private void MoveUp()
@@ -241,7 +244,7 @@ namespace RPG.GameLogic.Models.Characters
 
             this.lastFrame = 4;
             this.CurrentAnimation = this.FrontAnimation;
-            Move(UpVector);
+            this.Move(UpVector);
         }
 
         private void MoveDown()
@@ -253,7 +256,7 @@ namespace RPG.GameLogic.Models.Characters
 
             this.lastFrame = 2;
             this.CurrentAnimation = this.BackAnimation;
-            Move(DownVector);
+            this.Move(DownVector);
         }
 
         private void MoveRight()
@@ -265,22 +268,18 @@ namespace RPG.GameLogic.Models.Characters
 
             this.lastFrame = 3;
             this.CurrentAnimation = this.RightAnimation;
-            Move(RightVector);
+            this.Move(RightVector);
         }
         #endregion
 
         private void AddAnimation()
         {
-            this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
-                1, true, this.Position.X, this.Position.Y);
-            this.RightAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
-                3, true, this.Position.X, this.Position.Y);
-            this.BackAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
-                2, true, this.Position.X, this.Position.Y);
-            this.FrontAnimation = new Animation("Sprites\\Player\\character", 80f, 3,
-                4, true, this.Position.X, this.Position.Y);
+            this.LeftAnimation = new Animation("Sprites\\Player\\character", 80f, 3, 1, true, this.Position.X, this.Position.Y);
+            this.RightAnimation = new Animation("Sprites\\Player\\character", 80f, 3, 3, true, this.Position.X, this.Position.Y);
+            this.BackAnimation = new Animation("Sprites\\Player\\character", 80f, 3, 2, true, this.Position.X, this.Position.Y);
+            this.FrontAnimation = new Animation("Sprites\\Player\\character", 80f, 3, 4, true, this.Position.X, this.Position.Y);
             this.Texture = Game1.Content.Load<Texture2D>("Sprites\\Player\\character");
-            this.CurrentAnimation = LeftAnimation;
+            this.CurrentAnimation = this.LeftAnimation;
         }
         #endregion
     }

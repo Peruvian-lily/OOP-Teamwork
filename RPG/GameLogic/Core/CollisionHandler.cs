@@ -1,13 +1,13 @@
-﻿using RPG.Graphics.Map;
-
-namespace RPG.GameLogic.Core
+﻿namespace RPG.GameLogic.Core
 {
+    using RPG.Graphics.Map;
+
     public class CollisionHandler
     {
         public static bool CheckForObjectCollision(int additionalRow, int additionalCol, int positionX, int positionY)
         {
-            int tileY = TileMap.GetTileY(positionY, Camera.Location.Y);
-            int tileX = TileMap.GetTileX(positionX, Camera.Location.X);
+            int tileY = TileMap.GetPlayerTileY(positionY, Camera.Location.Y);
+            int tileX = TileMap.GetPlayerTileX(positionX, Camera.Location.X);
             if (tileY + additionalRow < 0)
             {
                 tileY = 1;
@@ -29,7 +29,6 @@ namespace RPG.GameLogic.Core
             }
 
             int tilePosition = TileMap.Rows[tileY + additionalRow].Columns[tileX + additionalCol].BaseTiles[0];
-
             if (tilePosition == 0 || tilePosition == 3)
             {
                 return false;

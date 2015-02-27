@@ -2,38 +2,45 @@
 {
     using System;
     using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
 
     public class Circle
-	{
-		private Vector2 position;
-		private float radius;
+    {
+        private Vector2 position;
+        private float radius;
 
-		public Circle(Vector2 position, int radius)
-		{
-			this.position = position;
-			this.radius = radius;
-		}
+        public Circle(Vector2 position, int radius)
+        {
+            this.position = position;
+            this.radius = radius;
+        }
 
-		#region Properties
-		 
-		public Vector2 Position
-		{
-			get { return this.position; }
-			set 
-			{
-				this.position = value;
-			}
-		}
-	   
-		public float Radius
-		{
-			get { return this.radius; }
-			set 
-			{
-				this.radius = (value < 1) ? 1 : value;
-			}
-		}
+        #region Properties
+
+        public Vector2 Position
+        {
+            get
+            {
+                return this.position;
+            }
+
+            set 
+            {
+                this.position = value;
+            }
+        }
+
+        public float Radius
+        {
+            get
+            {
+                return this.radius;
+            }
+
+            set 
+            {
+                this.radius = (value < 1) ? 1 : value;
+            }
+        }
 
         #endregion
 

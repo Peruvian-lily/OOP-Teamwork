@@ -1,35 +1,32 @@
-﻿#region Using Statements
-
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using RPG.GameLogic.Core.Factory;
-using RPG.GameLogic.Models.Characters;
-using RPG.GameLogic.Models.Characters.Base;
-using RPG.GameLogic.Models.Spells;
-using RPG.Graphics;
-using RPG.Graphics.GameStates;
-
-#endregion
-
-namespace RPG
+﻿namespace RPG
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
+    using RPG.GameLogic.Core.Factory;
+    using RPG.GameLogic.Models.Characters;
+    using RPG.GameLogic.Models.Characters.Base;
+    using RPG.GameLogic.Models.Spells;
+    using RPG.Graphics;
+    using RPG.Graphics.GameStates;
+
     public class Game1 : Game
     {
-        public const int bufferWidth = 800;
-        public const int bufferHeight = 480;
+        public const int BufferWidth = 800;
+        public const int BufferHeight = 480;
+
         public static GameState CurrentState;
-        private AbstractGameState[] States;
-        private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
         public new static ContentManager Content;
         public static int ScreenWidth;
         public static int ScreenHeight;
         private Player player;
+        private AbstractGameState[] States;
+        private GraphicsDeviceManager graphics;
         private List<Character> worldObjects;
+        private SpriteBatch spriteBatch;
 
         public Game1()
             : base()
@@ -48,10 +45,8 @@ namespace RPG
             ScreenWidth = this.GraphicsDevice.Viewport.Width;
             ScreenHeight = this.GraphicsDevice.Viewport.Height;
             this.IsMouseVisible = true;
-
             base.Content = Content;
             this.worldObjects = new List<Character>();
-
             string name = "QueBabche";
             int attack = 100;
             int defense = 100;
@@ -59,11 +54,9 @@ namespace RPG
             int inventorySize = 5;
             this.player = new Player(name, health, attack, defense, inventorySize);
             this.player.Position = new Vector2((float)ScreenWidth / 2, (float)ScreenHeight / 2);
-
             this.player.PickUp(ItemFactory.GenerateItem(25, 50));
             this.player.PickUp(ItemFactory.GenerateItem(25, 50));
             this.player.PickUp(ItemFactory.GenerateItem(25, 50));
-
             this.player.LearnSkill(new Fireball(30, 2, this.player));
             this.player.LearnSkill(new Heal(50, 5, this.player));
             this.player.LearnSkill(new BasicAttack(this.player));
@@ -75,15 +68,13 @@ namespace RPG
             Int32 numberStates = info.Length;
 
             // Instantiate each Game state.  
-            States = new AbstractGameState[numberStates];
-            States[(Int32)GameState.MainMenuState] = new MainMenuState(this);
-            States[(Int32)GameState.GamePlayState] = new GamePlayState(this, this.player, this.worldObjects);
-            States[(Int32)GameState.BattleScreenState] = new BattleScreenState(this, this.player, this.worldObjects);
+            this.States = new AbstractGameState[numberStates];
+            this.States[(Int32)GameState.MainMenuState] = new MainMenuState(this);
+            this.States[(Int32)GameState.GamePlayState] = new GamePlayState(this, this.player, this.worldObjects);
+            this.States[(Int32)GameState.BattleScreenState] = new BattleScreenState(this, this.player, this.worldObjects);
 
             // Initialize current Game state.  
             CurrentState = GameState.MainMenuState;
-
-
             base.Initialize();
 
         }
@@ -98,11 +89,7 @@ namespace RPG
 
         protected override void Update(GameTime gameTime)
         {
-            /*
-                textDrawer = new TextDrawer(defaultFont);
-            */
-
-            States[(Int32)CurrentState].Update(gameTime);
+            this.States[(Int32)CurrentState].Update(gameTime);
             base.Update(gameTime);
         }
 

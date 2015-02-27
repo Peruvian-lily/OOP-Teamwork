@@ -1,12 +1,11 @@
-﻿using RPG.GameLogic.Models.Characters;
-
-namespace RPG.GameLogic.Models.Spells
+﻿namespace RPG.GameLogic.Models.Spells
 {
     using System.Collections.Generic;
-    using Stats.Base;
+    using Base;
     using Characters.Base;
     using Effects;
-    using Base;
+    using RPG.GameLogic.Models.Characters;
+    using Stats.Base;
     using Stats;
 
     public class Fireball : TargetedSkill
@@ -17,9 +16,8 @@ namespace RPG.GameLogic.Models.Spells
         /// <param name="power">Strenght of Skill</param>
         /// <param name="cost">Mana cost</param>
         /// <param name="duration">Duration of burn effect in turns</param>
-        public Fireball(int power, int duration, Player owner) :
-            base("Fireball", new Fire(power), 
-            new Burning(power / 3, duration), owner)
+        public Fireball(int power, int duration, Player owner) 
+            : base("Fireball", new Fire(power), new Burning(power / 3, duration), owner)
         {
         }
 

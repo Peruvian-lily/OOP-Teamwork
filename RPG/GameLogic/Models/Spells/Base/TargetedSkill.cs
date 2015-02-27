@@ -1,9 +1,9 @@
-﻿using RPG.GameLogic.Models.Characters;
-using RPG.GameLogic.Models.Characters.Base;
-using RPG.GameLogic.Models.Stats.Base;
-
-namespace RPG.GameLogic.Models.Spells.Base
+﻿namespace RPG.GameLogic.Models.Spells.Base
 {
+    using RPG.GameLogic.Models.Characters;
+    using RPG.GameLogic.Models.Characters.Base;
+    using RPG.GameLogic.Models.Stats.Base;
+
     public abstract class TargetedSkill : Skill
     {
         protected TargetedSkill(string name, Stat stat, Player owner) 

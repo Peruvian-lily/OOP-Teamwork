@@ -1,33 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using RPG.GameLogic.Core;
-using RPG.GameLogic.Core.Factory;
-using RPG.GameLogic.Models.Characters;
-using RPG.GameLogic.Models.Characters.Base;
-using RPG.Graphics.Map;
-
-namespace RPG.Graphics.GameStates
+﻿namespace RPG.Graphics.GameStates
 {
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using RPG.GameLogic.Core;
+    using RPG.GameLogic.Core.Factory;
+    using RPG.GameLogic.Models.Characters;
+    using RPG.GameLogic.Models.Characters.Base;
+    using RPG.Graphics.Map;
+
     class GamePlayState : AbstractGameState
     {
-        private const int EnemyCount = 50;
+        private const int EnemyCount = 10;
         private const int MapSquaresAcross = 18;
         private const int MapSquaresDown = 11;
 
         private static Random Rnd;
         private Player player;
         private List<Character> worldObjects;
-        private Map.Map map;
+        private Map map;
         private SpriteFont defaultFont;
         private TextDrawer textDrawer;
         private Engine engine;
 
-        public GamePlayState(Game game, Player player, List<Character> worldObjects )
+        public GamePlayState(Game game, Player player, List<Character> worldObjects)
             : base(game)
         {
-            map = new Map.Map();
+            this.map = new Map();
             Tile.TileSetTexture = Game1.Content.Load<Texture2D>(@"Tiles\tileset");
             this.worldObjects = worldObjects;
             Rnd = new Random();
@@ -47,41 +47,41 @@ namespace RPG.Graphics.GameStates
                 // Currently has 5% chance to spawn enemy with bonus stuff.
                 bool hasBonus = Rnd.Next(1, 101) < 5;
                 var enemy = EnemyFactory.SpawnEnemy(minPower, maxPower, hasBonus);
-                int positionX = Rnd.Next(0, (Camera.CameraMaxWidth + Game1.bufferWidth) - enemy.Animation.FrameWidth);
-                int positionY = Rnd.Next(0, (Camera.CameraMaxHeight + Game1.bufferHeight) - enemy.Animation.FrameHeight);
+                int positionX = Rnd.Next(0, (Camera.CameraMaxWidth + Game1.BufferWidth) - enemy.Animation.FrameWidth);
+                int positionY = Rnd.Next(0, (Camera.CameraMaxHeight + Game1.BufferHeight) - enemy.Animation.FrameHeight);
                 if (!CollisionHandler.CheckForEnemySpawnCollision(positionX, positionY))
                 {
                     enemy.Position = new Vector2(positionX, positionY);
                     this.worldObjects.Add(enemy);
-                    engine = Engine.GetInstance;
+                    this.engine = Engine.GetInstance;
                 }
             }
         }
 
         public override void Update(GameTime gameTime)
         {
-            Camera.Update(MapSquaresAcross, MapSquaresDown, player, worldObjects);
+            Camera.Update(MapSquaresAcross, MapSquaresDown, this.player, this.worldObjects);
             this.player.Update(gameTime);
             foreach (var entry in this.worldObjects)
             {
                 entry.Update(gameTime);
             }
-            engine.EnemyCollisionCheck(player, worldObjects);
 
+            this.engine.EnemyCollisionCheck(this.player, this.worldObjects);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            int tileY = TileMap.GetTileY((int)this.player.Position.Y, (int)Camera.Location.Y);
-            int tileX = TileMap.GetTileX((int)this.player.Position.X, (int)Camera.Location.X);
+            int tileY = TileMap.GetPlayerTileY((int)this.player.Position.Y, (int)Camera.Location.Y);
+            int tileX = TileMap.GetPlayerTileX((int)this.player.Position.X, (int)Camera.Location.X);
             spriteBatch.Begin();
-            map.Draw(spriteBatch, MapSquaresAcross, MapSquaresDown);
+            this.map.Draw(spriteBatch, MapSquaresAcross, MapSquaresDown);
             this.player.Draw(spriteBatch);
             this.worldObjects.ForEach(enemy =>
             {
                 enemy.Draw(spriteBatch);
             });
-            this.textDrawer.DrawString(spriteBatch, player.Position.X + "/" + this.player.Position.Y);
+            this.textDrawer.DrawString(spriteBatch, this.player.Position.X + "/" + this.player.Position.Y);
             string cameraLocation = string.Format("CameraY: {0}. TileY: {1}. CameraX: {2}. TileX: {3}", Camera.Location.Y, tileY, Camera.Location.X, tileX);
             this.textDrawer.DrawString(spriteBatch, cameraLocation, new Vector2(90, 0));
             spriteBatch.End();

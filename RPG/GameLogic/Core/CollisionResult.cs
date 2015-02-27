@@ -1,12 +1,8 @@
-﻿using RPG.GameLogic.Models.Characters;
-using RPG.GameLogic.Models.Characters.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace RPG.GameLogic.Core
+﻿namespace RPG.GameLogic.Core
 {
+    using RPG.GameLogic.Models.Characters;
+    using RPG.GameLogic.Models.Characters.Base;
+
     public static class CollisionResult
     {
         public static Player player = null;

@@ -1,7 +1,7 @@
-﻿using RPG.GameLogic.Models.Stats.Base;
-
-namespace RPG.GameLogic.Models.Stats
+﻿namespace RPG.GameLogic.Models.Stats
 {
+    using RPG.GameLogic.Models.Stats.Base;
+
     public class Attack : Stat
     {
         public Attack(int value) 

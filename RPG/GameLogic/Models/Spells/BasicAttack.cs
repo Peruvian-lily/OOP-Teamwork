@@ -1,10 +1,9 @@
-﻿using RPG.GameLogic.Interface;
-
-namespace RPG.GameLogic.Models.Spells
+﻿namespace RPG.GameLogic.Models.Spells
 {
+    using Base;
     using Characters;
     using Characters.Base;
-    using Base;
+    using RPG.GameLogic.Interface;
     using Stats.Base;
 
     class BasicAttack : TargetedSkill

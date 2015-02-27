@@ -1,10 +1,10 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace RPG.Graphics
+﻿namespace RPG.Graphics
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+
     class GUIElement
     {
         private Rectangle guiRectangle;
@@ -17,7 +17,9 @@ namespace RPG.Graphics
         public delegate void ElementClicked(string element);
 
         public event ElementClicked ClickEvent;
+
         public Texture2D GUITextue { get; set; }
+
         public string AssetName { get; set; }
 
         public virtual void LoadContent(ContentManager content)
@@ -46,11 +48,7 @@ namespace RPG.Graphics
 
         public void MoveElement(int x, int y)
         {
-            this.guiRectangle = new Rectangle
-                (this.guiRectangle.X += x, this.guiRectangle.Y += y, this.guiRectangle.Width, this.guiRectangle.Height
-                );
+            this.guiRectangle = new Rectangle(this.guiRectangle.X += x, this.guiRectangle.Y += y, this.guiRectangle.Width, this.guiRectangle.Height);
         }
-
-
     }
 }

@@ -1,21 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using RPG.GameLogic.Core.Battle;
-using RPG.GameLogic.Interface;
-using RPG.GameLogic.Models.Characters;
-using RPG.GameLogic.Models.Characters.Base;
-
-namespace RPG.Graphics
+﻿namespace RPG.Graphics
 {
+    using System.Collections.Generic;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
+    using RPG.GameLogic.Core.Battle;
+    using RPG.GameLogic.Models.Characters;
+    using RPG.GameLogic.Models.Characters.Base;
+
     class BattleScreen
     {
         private Battle battle;
         private TextDrawer textDrawer;
         private SpriteFont defaultFont;
         List<GUIElement> battleScreen = new List<GUIElement>();
+
         public BattleScreen(Player player, List<Character> worldObjects)
         {
             //List<Character> enemies = ((Enemy)CollisionResult.enemy).GetAllies(worldObjects);
@@ -29,11 +28,9 @@ namespace RPG.Graphics
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\enemy_start"));
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\futureui1"));
             this.battleScreen.Add(new GUIElement(@"Overlays\Battle\flee"));
-
             this.defaultFont = Game1.Content.Load<SpriteFont>(@"Fonts\Arial");
             this.textDrawer = new TextDrawer(this.defaultFont);
-
-            battle.StartFight();
+            this.battle.StartFight();
         }
 
         public void LoadContent(ContentManager content)
@@ -44,6 +41,7 @@ namespace RPG.Graphics
                 element.CenterElement(400, 800);
                 element.ClickEvent += this.OnClick;
             }
+
             this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\left").MoveElement(-200, 50);
             this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\right").MoveElement(200, 50);
             this.battleScreen.Find(x => x.AssetName == @"Overlays\Battle\select").MoveElement(0, 50);
@@ -66,9 +64,10 @@ namespace RPG.Graphics
                 case GameState.GamePlayState:
                     break;
             }
-            if (battle.InProgress)
+
+            if (this.battle.InProgress)
             {
-                battle.NextTurn();
+                this.battle.NextTurn();
             }
             else
             {
@@ -85,14 +84,15 @@ namespace RPG.Graphics
                     {
                         element.Draw(spriteBatch);
                     }
-                    textDrawer.DrawString(spriteBatch, "Health: " + this.battle.Player.Health.Value, new Vector2(650, 420), Color.White);
-                    textDrawer.DrawString(spriteBatch, this.battle.Player.Name, new Vector2(10, 5), Color.Indigo);
-                    textDrawer.DrawString(spriteBatch, this.battle.PlayerState, new Vector2(335, 280), Color.Indigo);
+                    this.textDrawer.DrawString(spriteBatch, "Health: " + this.battle.Player.Health.Value, new Vector2(650, 420), Color.White);
+                    this.textDrawer.DrawString(spriteBatch, this.battle.Player.Name, new Vector2(10, 5), Color.Indigo);
+                    this.textDrawer.DrawString(spriteBatch, this.battle.PlayerState, new Vector2(335, 280), Color.Indigo);
                     break;
                 case GameState.GamePlayState:
                     break;
             }
-            textDrawer.DrawString(spriteBatch, this.battle.Status, new Vector2(50, 350), Color.WhiteSmoke);
+
+            this.textDrawer.DrawString(spriteBatch, this.battle.Status, new Vector2(50, 350), Color.WhiteSmoke);
         }
 
         public void OnClick(string element)

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using RPG.GameLogic.Models.Characters;
-using RPG.GameLogic.Models.Stats;
-using RPG.GameLogic.Models.Stats.Base;
-
-namespace RPG.GameLogic.Core.Factory
+﻿namespace RPG.GameLogic.Core.Factory
 {
+    using System;
+    using System.Collections.Generic;
+    using RPG.GameLogic.Models.Characters;
+    using RPG.GameLogic.Models.Stats;
+    using RPG.GameLogic.Models.Stats.Base;
+
     public static class EnemyFactory
     {
         private static Random rnd = new Random();
@@ -13,10 +13,11 @@ namespace RPG.GameLogic.Core.Factory
         public static Enemy SpawnEnemy(int minValue, int maxValue, bool hasStats)
         {
             string enemyName = GenerateEnemyName();
+
             //int power = rnd.Next(minValue, maxValue + 1);
             int health = rnd.Next(minValue, maxValue + 1);
             int attack = rnd.Next(minValue, maxValue + 1);
-            int defense = rnd.Next(minValue, maxValue + 1)/2;
+            int defense = rnd.Next(minValue, maxValue + 1) / 2;
             var stats = new List<Stat>();
             if (hasStats)
             {

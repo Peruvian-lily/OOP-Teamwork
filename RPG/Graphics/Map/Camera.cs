@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using RPG.GameLogic.Core;
-using RPG.GameLogic.Models.Characters;
-using RPG.GameLogic.Models.Characters.Base;
-
-namespace RPG.Graphics.Map
+﻿namespace RPG.Graphics.Map
 {
-    static class Camera
+    using System.Collections.Generic;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Input;
+    using RPG.GameLogic.Core;
+    using RPG.GameLogic.Models.Characters;
+    using RPG.GameLogic.Models.Characters.Base;
+
+    public static class Camera
     {
         private const int ScreenSizeRemainder = 1;
         public static readonly int EnemyMaxWidth = TileMap.mapWidth * Tile.TileWidth;
         public static readonly int EnemyMaxHeight = TileMap.mapHeight * Tile.TileHeight;
-        public static readonly int CameraMaxWidth = (TileMap.mapWidth - ScreenSizeRemainder) * Tile.TileWidth - Game1.bufferWidth;
+        public static readonly int CameraMaxWidth = (TileMap.mapWidth - ScreenSizeRemainder) * Tile.TileWidth - Game1.BufferWidth;
         public static readonly int CameraMaxHeight = (TileMap.mapHeight - ScreenSizeRemainder) * Tile.TileHeight -
-                                              Game1.bufferHeight;
+                                              Game1.BufferHeight;
 
         public static Vector2 Location = Vector2.Zero;
 

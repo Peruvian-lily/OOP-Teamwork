@@ -1,8 +1,8 @@
 ﻿namespace RPG.Graphics.CustomShapes
 {
+    using System;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using System;
 
     public class CircleDrawer
     {
@@ -24,7 +24,11 @@
 
         public Color Color
         {
-            get { return this.color; }
+            get
+            {
+                return this.color;
+            }
+
             private set
             {
                 this.color = value;
@@ -33,11 +37,15 @@
 
         public Circle Circle
         {
-            get { return this.cirlce; }
+            get
+            {
+                return this.cirlce;
+            }
+
             set
             {
                 this.cirlce = value;
-                InitializeCirlceGraphics();
+                this.InitializeCirlceGraphics();
             }
         }
 
@@ -53,8 +61,7 @@
         {
             this.effect = new BasicEffect(this.graphics.GraphicsDevice);
             this.effect.VertexColorEnabled = true;
-            this.effect.Projection = Matrix.CreateOrthographicOffCenter(0, this.graphics.GraphicsDevice.Viewport.Width,
-                 this.graphics.GraphicsDevice.Viewport.Height, 0, 0, 1);
+            this.effect.Projection = Matrix.CreateOrthographicOffCenter(0, this.graphics.GraphicsDevice.Viewport.Width, this.graphics.GraphicsDevice.Viewport.Height, 0, 0, 1);
         }
 
         private void InitializeVertices()
@@ -84,8 +91,7 @@
         {
             this.Circle = cirlce;
             this.effect.CurrentTechnique.Passes[0].Apply();
-            this.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.LineStrip,
-                this.vertices, 0, this.vertices.Length - 1);
+            this.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.LineStrip, this.vertices, 0, this.vertices.Length - 1);
         }
     }
 }
