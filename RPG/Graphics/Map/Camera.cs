@@ -11,11 +11,11 @@ namespace RPG.Graphics.Map
 {
     static class Camera
     {
-        private const int RemainderScreenSize = 1;
+        private const int ScreenSizeRemainder = 1;
         public static readonly int EnemyMaxWidth = TileMap.mapWidth * Tile.TileWidth;
         public static readonly int EnemyMaxHeight = TileMap.mapHeight * Tile.TileHeight;
-        public static readonly int CameraMaxWidth = (TileMap.mapWidth - RemainderScreenSize) * Tile.TileWidth - Game1.bufferWidth;
-        public static readonly int CameraMaxHeight = (TileMap.mapHeight - RemainderScreenSize) * Tile.TileHeight -
+        public static readonly int CameraMaxWidth = (TileMap.mapWidth - ScreenSizeRemainder) * Tile.TileWidth - Game1.bufferWidth;
+        public static readonly int CameraMaxHeight = (TileMap.mapHeight - ScreenSizeRemainder) * Tile.TileHeight -
                                               Game1.bufferHeight;
 
         public static Vector2 Location = Vector2.Zero;
@@ -26,7 +26,7 @@ namespace RPG.Graphics.Map
 
             if (player.Position.X == Game1.ScreenWidth / 2f)
             {
-                if (ks.IsKeyDown(Keys.Left))
+                if (ks.IsKeyDown(Keys.Left) && !player.CheckForObjectCollision(0, -1))
                 {
                     Camera.Location.X = MathHelper.Clamp(Camera.Location.X - Player.Speed, 0, (TileMap.mapWidth - squaresAcross) * Tile.TileWidth);
                     foreach (var enemy in enemies)
@@ -35,7 +35,7 @@ namespace RPG.Graphics.Map
                     }
                 }
 
-                if (ks.IsKeyDown(Keys.Right))
+                if (ks.IsKeyDown(Keys.Right) && !player.CheckForObjectCollision(0, 0))
                 {
                     Camera.Location.X = MathHelper.Clamp(Camera.Location.X + Player.Speed, 0, TileMap.mapWidth * Tile.TileWidth);
                     foreach (var enemy in enemies)
@@ -47,7 +47,7 @@ namespace RPG.Graphics.Map
 
             if (player.Position.Y == Game1.ScreenHeight / 2f)
             {
-                if (ks.IsKeyDown(Keys.Up))
+                if (ks.IsKeyDown(Keys.Up) && !player.CheckForObjectCollision(0, 0))
                 {
                     Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y - Player.Speed, 0, (TileMap.mapHeight - squaresDown) * Tile.TileHeight);
                     foreach (var enemy in enemies)
@@ -56,7 +56,7 @@ namespace RPG.Graphics.Map
                     }
                 }
 
-                if (ks.IsKeyDown(Keys.Down))
+                if (ks.IsKeyDown(Keys.Down) && !player.CheckForObjectCollision(1, 0))
                 {
                     Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y + Player.Speed, 0, (TileMap.mapHeight - squaresDown) * Tile.TileHeight);
                     foreach (var enemy in enemies)
