@@ -14,7 +14,7 @@ namespace RPG.Graphics.Map
         public const int CameraInitialY = 5;
         public const int CameraOffSetX = 864;
         public const int CameraInitialX = 9;
-        private static string filename = "Content\\Levels\\level2.txt";
+        private static string filename = "Content\\Levels\\level1.txt";
         public static List<MapRow> Rows = new List<MapRow>();
         public static int mapWidth;
         public static int mapHeight;
