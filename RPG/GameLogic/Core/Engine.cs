@@ -1,4 +1,6 @@
-﻿namespace RPG.GameLogic.Core
+﻿using RPG.GameLogic.Enums;
+
+namespace RPG.GameLogic.Core
 {
     using System.Collections.Generic;
     using RPG.GameLogic.Models.Characters.Base;
@@ -8,23 +10,23 @@
 
     public class Engine
     {
-        private static Engine _instance;
+        private static Engine instance;
+
+        private Engine()
+        {
+        }
 
         public static Engine GetInstance
         {
             get
             {
-                if (_instance == null)
+                if (instance == null)
                 {
-                    _instance = new Engine();
+                    instance = new Engine();
                 }
 
-                return _instance;
+                return instance;
             }
-        }
-
-        private Engine()
-        {
         }
 
         public void EnemyCollisionCheck(Player player, List<Character> collidableObjects)

@@ -6,7 +6,7 @@
 
     public class Inventory
     {
-        private int _capacity;
+        private int capacity;
 
         public Inventory(int capacity)
         {
@@ -24,7 +24,7 @@
         {
             get
             {
-                return this._capacity;
+                return this.capacity;
             }
 
             private set
@@ -33,13 +33,13 @@
                 {
                     throw new ArgumentOutOfRangeException("Inventory size must be higher than 5");
                 }
-                this._capacity = value;
+                this.capacity = value;
             }
         }
 
         public void Add(Item item)
         {
-            if (this.Content.Count < this._capacity)
+            if (this.Content.Count < this.capacity)
             {
                 this.Content.Add(item);
             }

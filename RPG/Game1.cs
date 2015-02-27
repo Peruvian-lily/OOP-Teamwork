@@ -1,4 +1,6 @@
-﻿namespace RPG
+﻿using RPG.GameLogic.Enums;
+
+namespace RPG
 {
     using System;
     using System.Collections.Generic;

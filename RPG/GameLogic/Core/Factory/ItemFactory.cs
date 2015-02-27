@@ -1,4 +1,6 @@
-﻿namespace RPG.GameLogic.Core.Factory
+﻿using RPG.GameLogic.Enums;
+
+namespace RPG.GameLogic.Core.Factory
 {
     using System;
     using System.Collections.Generic;
@@ -12,13 +14,13 @@
 
     public static class ItemFactory
     {
-        private static Random _rnd = new Random();
+        private static Random rnd = new Random();
 
         public static Item GenerateItem(int minStat, int maxStat)
         {
-            var itemType = (ItemType)_rnd.Next(1);
-            int power = _rnd.Next(50);
-            bool hasEffect = _rnd.Next(5) == 1;
+            var itemType = (ItemType)rnd.Next(1);
+            int power = rnd.Next(50);
+            bool hasEffect = rnd.Next(5) == 1;
 
             List<Stat> stats = GenerateStats(power, itemType);
             Effects effect = GenerateEffect(power, hasEffect);
@@ -39,26 +41,26 @@
             {
                 stats = new List<Stat>
                 {
-                    new Attack(_rnd.Next(power) + 1),
-                    new Elemental(_rnd.Next(power) + 1, StatType.Offensive)
+                    new Attack(rnd.Next(power) + 1),
+                    new Elemental(rnd.Next(power) + 1, StatType.Offensive)
                 };
             }
             else
             {
                 stats = new List<Stat>
                 {
-                    new Elemental(_rnd.Next(power) + 1, StatType.Defensive),
-                    new Health(_rnd.Next(power) + 1 ),
-                    new Defense(_rnd.Next(power) + 1 ),
+                    new Elemental(rnd.Next(power) + 1, StatType.Defensive),
+                    new Health(rnd.Next(power) + 1 ),
+                    new Defense(rnd.Next(power) + 1 ),
                 };
             }
 
-            int randomStatIndex1 = _rnd.Next(stats.Count);
-            int randomStatIndex2 = _rnd.Next(stats.Count);
+            int randomStatIndex1 = rnd.Next(stats.Count);
+            int randomStatIndex2 = rnd.Next(stats.Count);
             //Prevents adding same stat twice. Or at least the index it selects the items by.
             while (randomStatIndex2 == randomStatIndex1)
             {
-                randomStatIndex2 = _rnd.Next(stats.Count);
+                randomStatIndex2 = rnd.Next(stats.Count);
             }
             returnStats.Add(stats[randomStatIndex1]);
             returnStats.Add(stats[randomStatIndex2]);
@@ -73,9 +75,9 @@
             {
                 return null;
             }
-            int effectPower = _rnd.Next(power);
-            int effectDuration = _rnd.Next(5);
-            if (_rnd.Next(1) == 0)
+            int effectPower = rnd.Next(power);
+            int effectDuration = rnd.Next(5);
+            if (rnd.Next(1) == 0)
             {
                 return NewDefensiveEffect(effectPower, effectDuration);
             }
@@ -91,7 +93,7 @@
             {
                 new Healing(power + 1, duration)
             };
-            int randomIndex = _rnd.Next(effectses.Count - 1);
+            int randomIndex = rnd.Next(effectses.Count - 1);
             return effectses[randomIndex];
         }
         private static Effects NewOffensiveEffect(int power, int duration)
@@ -101,7 +103,7 @@
             {
                 new Burning(power + 1, duration)
             };
-            int randomIndex = _rnd.Next(effectses.Count - 1);
+            int randomIndex = rnd.Next(effectses.Count - 1);
             return effectses[randomIndex];
         }
         #endregion Effect Generator
@@ -142,8 +144,8 @@
                     };
                     break;
             }
-            int prefixIndex = _rnd.Next(prefix.Count);
-            int nameIndex = _rnd.Next(name.Count);
+            int prefixIndex = rnd.Next(prefix.Count);
+            int nameIndex = rnd.Next(name.Count);
 
             var sb = new StringBuilder();
             sb.AppendFormat("{0} {1}", prefix[prefixIndex], name[nameIndex]);
@@ -210,9 +212,9 @@
                     };
                     break;
             }
-            int prefixIndex = _rnd.Next(prefix.Count);
-            int nameIndex = _rnd.Next(name.Count);
-            int suffixIndex = _rnd.Next(suffix.Count);
+            int prefixIndex = rnd.Next(prefix.Count);
+            int nameIndex = rnd.Next(name.Count);
+            int suffixIndex = rnd.Next(suffix.Count);
             var sb = new StringBuilder();
 
             sb.AppendFormat("{0} {1} {2}", prefix[prefixIndex], name[nameIndex], suffix[suffixIndex]);

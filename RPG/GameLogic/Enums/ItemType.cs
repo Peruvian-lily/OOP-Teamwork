@@ -1,4 +1,4 @@
-﻿namespace RPG.GameLogic.Core.Factory
+﻿namespace RPG.GameLogic.Enums
 {
     public enum ItemType
     {

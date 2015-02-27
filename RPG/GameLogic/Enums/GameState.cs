@@ -1,4 +1,4 @@
-﻿namespace RPG.Graphics
+﻿namespace RPG.GameLogic.Enums
 {
     public enum GameState
     {

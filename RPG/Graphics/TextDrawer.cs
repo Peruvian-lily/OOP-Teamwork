@@ -8,9 +8,9 @@
     /// </summary>
     public class TextDrawer
     {
-        private SpriteFont _font;
-        private float _rotation;
-        private Vector2 _originOfRotation;
+        private SpriteFont font;
+        private float rotation;
+        private Vector2 originOfRotation;
 
         public TextDrawer(SpriteFont font, float rotationAngle, Vector2 originOfRotation) 
         {
@@ -27,12 +27,12 @@
         {
             get
             {
-                return this._font;
+                return this.font;
             }
 
             private set 
             {
-                this._font = value;
+                this.font = value;
             }
         }
 
@@ -40,12 +40,12 @@
         {
             get
             {
-                return this._rotation;
+                return this.rotation;
             }
 
             set 
             {
-                this._rotation = value;
+                this.rotation = value;
             }
         }
 
@@ -53,12 +53,12 @@
         {
             get
             {
-                return this._originOfRotation;
+                return this.originOfRotation;
             }
 
             set 
             {
-                this._originOfRotation = value;
+                this.originOfRotation = value;
             }
         }
 

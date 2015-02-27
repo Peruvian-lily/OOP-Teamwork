@@ -24,9 +24,8 @@
             this.Stats = otherStats;
             this.EnemyType = enemyType;
             this.ChooseAnimation(EnemyType);
-            this.Animation = new Animation(enemySkin, 80f, 3, 2, false, 0, 0);
-            this.CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.FrameWidth,
-                Animation.FrameWidth, Animation.FrameHeight);
+            this.Animation = new Animation(this.enemySkin, 80f, 3, 2, false, 0, 0);
+            this.CollisionRect = new Rectangle((int)Position.X, (int)Position.Y + Animation.FrameWidth, Animation.FrameWidth, Animation.FrameHeight);
         }
 
         public Enemy(string name, int health, int attack, int defense, EnemyType enemyType)

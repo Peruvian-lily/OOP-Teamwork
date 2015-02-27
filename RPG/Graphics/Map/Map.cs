@@ -5,9 +5,9 @@
 
     public class Map
     {
-        public int squaresDown { get; set; }
+        public int SquaresDown { get; set; }
 
-        public int squaresAcross { get; set; }
+        public int SquaresAcross { get; set; }
 
         public void Draw(SpriteBatch spriteBatch, int squaresAcross, int squaresDown)
         {
