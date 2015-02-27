@@ -69,6 +69,8 @@ namespace RPG.Graphics.GameStates
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            int tileY = TileMap.GetTileY(this.player, (int)Camera.Location.Y);
+            int tileX = TileMap.GetTileX(this.player, (int)Camera.Location.X);
             spriteBatch.Begin();
             map.Draw(spriteBatch, MapSquaresAcross, MapSquaresDown);
             this.player.Draw(spriteBatch);
@@ -77,8 +79,8 @@ namespace RPG.Graphics.GameStates
                 enemy.Draw(spriteBatch);
             });
             this.textDrawer.DrawString(spriteBatch, player.Position.X + "/" + this.player.Position.Y);
-            string cameraLocation = string.Format("         Camera x: {0}", TileMap.mapWidth * Tile.TileWidth);
-            this.textDrawer.DrawString(spriteBatch, cameraLocation);
+            string cameraLocation = string.Format("CameraY: {0}. TileY: {1}. CameraX: {2}. TileX: {3}", Camera.Location.Y, tileY, Camera.Location.X, tileX);
+            this.textDrawer.DrawString(spriteBatch, cameraLocation, new Vector2(90, 0));
             spriteBatch.End();
         }
     }

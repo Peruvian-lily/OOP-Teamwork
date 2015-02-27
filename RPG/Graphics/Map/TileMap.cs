@@ -4,15 +4,60 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using RPG.GameLogic.Models.Characters;
 
 namespace RPG.Graphics.Map
 {
     static class TileMap
     {
+        public const int CameraOffSetY = 576;
+        public const int CameraInitialY = 5;
+        public const int CameraOffSetX = 864;
+        public const int CameraInitialX = 9;
         private static string filename = "Content\\Levels\\level2.txt";
         public static List<MapRow> Rows = new List<MapRow>();
         public static int mapWidth;
         public static int mapHeight;
+
+        public static int GetTileY(Player player, int cameraPositionY)
+        {
+            int tileY = 0;
+
+            if (player.Position.Y <= Game1.ScreenHeight / 2f && cameraPositionY == 0)
+            {
+                tileY = (int)player.Position.Y / Tile.TileHeight;
+            }
+            else if (player.Position.Y == Game1.ScreenHeight/2f && cameraPositionY > 0)
+            {
+                tileY = (cameraPositionY / Tile.TileHeight) + CameraInitialY;
+            }
+            else if (player.Position.Y > Game1.ScreenHeight/2f && cameraPositionY > 0)
+            {
+                tileY = TileMap.mapHeight - (( CameraOffSetY - (int)player.Position.Y) / Tile.TileHeight);
+            }
+
+            return tileY;
+        }
+
+        public static int GetTileX(Player player, int cameraPositionX)
+        {
+            int tileX = 0;
+
+            if (player.Position.X <= Game1.ScreenWidth / 2f && cameraPositionX == 0)
+            {
+                tileX = (int)player.Position.X / Tile.TileWidth;
+            }
+            else if (player.Position.X == Game1.ScreenWidth / 2f && cameraPositionX > 0)
+            {
+                tileX = (cameraPositionX / Tile.TileWidth) + CameraInitialX;
+            }
+            else if (player.Position.X > Game1.ScreenWidth / 2f && cameraPositionX > 0)
+            {
+                tileX = TileMap.mapWidth - ((CameraOffSetX - (int)player.Position.X) / Tile.TileWidth);
+            }
+
+            return tileX;
+        }
 
         static TileMap()
         {

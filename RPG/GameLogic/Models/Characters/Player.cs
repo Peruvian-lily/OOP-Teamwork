@@ -199,9 +199,18 @@ namespace RPG.GameLogic.Models.Characters
             }
         }
 
+        private void ObjectsCollision()
+        {
+            if (Tile.GetSourceRectangle(5).Intersects(this.CollisionRect))
+            {
+                this.Health.Value = 40;
+            }
+        }
+
         #region Movement
         public void Move(Vector2 direction)
         {
+            ObjectsCollision();
             if (Camera.Location.X == 0 || Camera.Location.X == Camera.CameraMaxWidth)
             {
                 this.Position.X += Speed * direction.X;
