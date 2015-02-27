@@ -6,6 +6,7 @@ using RPG;
 using RPG.GameLogic.Interface;
 using RPG.GameLogic.Models;
 using RPG.Graphics;
+using RPG.Graphics.Map;
 
 namespace RPG.GameLogic.Core
 {
@@ -36,8 +37,8 @@ namespace RPG.GameLogic.Core
             {
                 if (obj is Enemy)
                 {
-                    Rectangle collisionRect = ((Enemy) obj).CollisionRect;
-                    this.EnemyCollisions(player, collisionRect, (Enemy) obj, collidableObjects);
+                    Rectangle collisionRect = ((Enemy)obj).CollisionRect;
+                    this.EnemyCollisions(player, collisionRect, (Enemy)obj, collidableObjects);
                 }
             });
         }
@@ -51,7 +52,7 @@ namespace RPG.GameLogic.Core
 
             if (collisionRect.IsPointInRect(topLeftPlayer) ||
                 collisionRect.IsPointInRect(topRightPlayer) ||
-                collisionRect.IsPointInRect(bottomLeftPlayer) || 
+                collisionRect.IsPointInRect(bottomLeftPlayer) ||
                 collisionRect.IsPointInRect(bottomRightPlayer))
             {
                 Game1.CurrentState = GameState.BattleScreenState;

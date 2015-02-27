@@ -12,7 +12,7 @@ namespace RPG.Graphics.GameStates
 {
     class GamePlayState : AbstractGameState
     {
-        private const int EnemyCount = 10;
+        private const int EnemyCount = 50;
         private const int MapSquaresAcross = 18;
         private const int MapSquaresDown = 11;
 
@@ -39,19 +39,22 @@ namespace RPG.Graphics.GameStates
 
         public void EnemySpawn(int enemyCount)
         {
-            for (int i = 0; i < enemyCount; i++)
+            while (this.worldObjects.Count < enemyCount)
             {
                 int minPower = Rnd.Next(75);
                 int maxPower = Rnd.Next(minPower, 101);
 
                 // Currently has 5% chance to spawn enemy with bonus stuff.
-                bool hasBonus = Rnd.Next(1, 101) < 5;  
+                bool hasBonus = Rnd.Next(1, 101) < 5;
                 var enemy = EnemyFactory.SpawnEnemy(minPower, maxPower, hasBonus);
                 int positionX = Rnd.Next(0, (Camera.CameraMaxWidth + Game1.bufferWidth) - enemy.Animation.FrameWidth);
                 int positionY = Rnd.Next(0, (Camera.CameraMaxHeight + Game1.bufferHeight) - enemy.Animation.FrameHeight);
-                enemy.Position = new Vector2(positionX, positionY);
-                this.worldObjects.Add(enemy);
-                engine = Engine.GetInstance;
+                if (!CollisionHandler.CheckForEnemySpawnCollision(positionX, positionY))
+                {
+                    enemy.Position = new Vector2(positionX, positionY);
+                    this.worldObjects.Add(enemy);
+                    engine = Engine.GetInstance;
+                }
             }
         }
 
@@ -69,8 +72,8 @@ namespace RPG.Graphics.GameStates
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            int tileY = TileMap.GetTileY(this.player, (int)Camera.Location.Y);
-            int tileX = TileMap.GetTileX(this.player, (int)Camera.Location.X);
+            int tileY = TileMap.GetTileY((int)this.player.Position.Y, (int)Camera.Location.Y);
+            int tileX = TileMap.GetTileX((int)this.player.Position.X, (int)Camera.Location.X);
             spriteBatch.Begin();
             map.Draw(spriteBatch, MapSquaresAcross, MapSquaresDown);
             this.player.Draw(spriteBatch);

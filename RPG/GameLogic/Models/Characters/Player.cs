@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using RPG.GameLogic.Core;
 using RPG.GameLogic.Interface;
 using RPG.GameLogic.Models.Characters.Base;
 using RPG.GameLogic.Models.PickUps;
@@ -203,39 +204,7 @@ namespace RPG.GameLogic.Models.Characters
             }
         }
 
-        public bool CheckForObjectCollision(int y, int x)
-        {
-            int tileY = TileMap.GetTileY(this, Camera.Location.Y);
-            int tileX = TileMap.GetTileX(this, Camera.Location.X);
-            if (tileY + y < 0)
-            {
-                tileY = 1;
-            }
-
-            if (tileY + y >= TileMap.Rows.Count)
-            {
-                y = -1;
-            }
-            
-            if (tileX + x < 0)
-            {
-                tileX = 1;
-            }
-
-            if (tileX + x >= TileMap.Rows[y].Columns.Count)
-            {
-                x = -1;
-            }
-
-            int tilePosition = TileMap.Rows[tileY + y].Columns[tileX + x].BaseTiles[0];
-
-            if (tilePosition == 0 || tilePosition == 3)
-            {
-                return false;
-            }
-
-            return true;
-        }
+        
 
         #region Movement
         public void Move(Vector2 direction)
@@ -253,7 +222,7 @@ namespace RPG.GameLogic.Models.Characters
 
         private void MoveLeft()
         {
-            if (0 >= this.Position.X + Speed || CheckForObjectCollision(0, -1))
+            if (0 >= this.Position.X + Speed || CollisionHandler.CheckForObjectCollision(0, -1, (int)this.Position.X, (int)this.Position.Y))
             {
                 return;
             }
@@ -265,7 +234,7 @@ namespace RPG.GameLogic.Models.Characters
 
         private void MoveUp()
         {
-            if (0 >= this.Position.Y + Speed || CheckForObjectCollision(0, 0))
+            if (0 >= this.Position.Y + Speed || CollisionHandler.CheckForObjectCollision(0, 0, (int)this.Position.X, (int)this.Position.Y))
             {
                 return;
             }
@@ -277,7 +246,7 @@ namespace RPG.GameLogic.Models.Characters
 
         private void MoveDown()
         {
-            if (Game1.ScreenHeight <= this.Position.Y + Speed + this.Height || CheckForObjectCollision(1, 0))
+            if (Game1.ScreenHeight <= this.Position.Y + Speed + this.Height || CollisionHandler.CheckForObjectCollision(1, 0, (int)this.Position.X, (int)this.Position.Y))
             {
                 return;
             }
@@ -289,7 +258,7 @@ namespace RPG.GameLogic.Models.Characters
 
         private void MoveRight()
         {
-            if (Game1.ScreenWidth <= this.Position.X + Speed + this.Width || CheckForObjectCollision(0, 0))
+            if (Game1.ScreenWidth <= this.Position.X + Speed + this.Width || CollisionHandler.CheckForObjectCollision(0, 0, (int)this.Position.X, (int)this.Position.Y))
             {
                 return;
             }

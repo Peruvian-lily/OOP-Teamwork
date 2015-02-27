@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
+    <Compile Include="GameLogic\Core\CollisionHandler.cs" />
     <Compile Include="GameLogic\Core\CollisionResult.cs" />
     <Compile Include="GameLogic\Core\Factory\EnemyFactory.cs" />
     <Compile Include="GameLogic\Core\Factory\EnemyType.cs" />

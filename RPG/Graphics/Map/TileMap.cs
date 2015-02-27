@@ -19,44 +19,54 @@ namespace RPG.Graphics.Map
         public static int mapWidth;
         public static int mapHeight;
 
-        public static int GetTileY(Player player, double cameraPositionY)
+        public static int GetTileY(int position, double cameraPositionY)
         {
             int tileY = 0;
             int cameraY = (int)Math.Round(cameraPositionY);
-            if (player.Position.Y <= Game1.ScreenHeight / 2f && cameraY == 0)
+            if (position <= Game1.ScreenHeight / 2f && cameraY == 0)
             {
-                tileY = (int)player.Position.Y / Tile.TileHeight;
+                tileY = (int)position / Tile.TileHeight;
             }
-            else if (player.Position.Y == Game1.ScreenHeight / 2f && cameraY > 0)
+            else if (position == Game1.ScreenHeight / 2f && cameraY > 0)
             {
                 tileY = (cameraY / Tile.TileHeight) + CameraInitialY;
             }
-            else if (player.Position.Y > Game1.ScreenHeight / 2f && cameraY > 0)
+            else if (position > Game1.ScreenHeight / 2f && cameraY > 0)
             {
-                tileY = TileMap.mapHeight - ((CameraOffSetY - (int)player.Position.Y) / Tile.TileHeight);
+                tileY = TileMap.mapHeight - ((CameraOffSetY - (int)position) / Tile.TileHeight);
             }
 
             return tileY;
         }
 
-        public static int GetTileX(Player player, double cameraPositionX)
+        public static int GetTileX(int position, double cameraPositionX)
         {
             int tileX = 0;
             int cameraX = (int)Math.Round(cameraPositionX);
-            if (player.Position.X <= Game1.ScreenWidth / 2f && cameraX == 0)
+            if (position <= Game1.ScreenWidth / 2f && cameraX == 0)
             {
-                tileX = (int)player.Position.X / Tile.TileWidth;
+                tileX = (int)position / Tile.TileWidth;
             }
-            else if (player.Position.X == Game1.ScreenWidth / 2f && cameraX > 0)
+            else if (position == Game1.ScreenWidth / 2f && cameraX > 0)
             {
                 tileX = (cameraX / Tile.TileWidth) + CameraInitialX;
             }
-            else if (player.Position.X > Game1.ScreenWidth / 2f && cameraX > 0)
+            else if (position > Game1.ScreenWidth / 2f && cameraX > 0)
             {
-                tileX = TileMap.mapWidth - ((CameraOffSetX - (int)player.Position.X) / Tile.TileWidth);
+                tileX = TileMap.mapWidth - ((CameraOffSetX - (int)position) / Tile.TileWidth);
             }
 
             return tileX;
+        }
+
+        public static int GetEnemyTileY(int position)
+        {
+            return position / Tile.TileWidth;
+        }
+
+        public static int GetEnemyTileX(int position)
+        {
+            return position / Tile.TileHeight;
         }
 
         static TileMap()
