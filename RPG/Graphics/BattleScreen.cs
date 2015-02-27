@@ -86,11 +86,7 @@ namespace RPG.Graphics
                 case GameState.GamePlayState:
                     break;
             }
-            string statusText = this.battle.Status;
-            //String.Format("Attacker: {0}/{1}hp; Target: {2}/{3}hp",
-            //(this.battle.Attacker as Character).Name, this.battle.Attacker.Health.Value,
-            //(this.battle.Target as Character).Name, this.battle.Target.Health.Value);
-            textDrawer.DrawString(spriteBatch, statusText,new Vector2(50,350), Color.WhiteSmoke);
+            textDrawer.DrawString(spriteBatch, this.battle.Status, new Vector2(50, 350), Color.WhiteSmoke);
         }
 
         public void OnClick(string element)
@@ -102,9 +98,9 @@ namespace RPG.Graphics
             }
             if (element == @"Overlays\Battle\button2")
             {
-                
+
             }
-             if (element == @"Overlays\Battle\enemy_start")
+            if (element == @"Overlays\Battle\enemy_start")
             {
             }
 
