@@ -6,19 +6,18 @@ namespace RPG.Graphics
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
-    class MainMenu
+   public class Lose
     {
-        List<GUIElement> main = new List<GUIElement>();
+        List<GUIElement> lose = new List<GUIElement>();
 
-        public MainMenu()
+        public Lose()
         {
-            this.main.Add(new GUIElement("Overlays\\Menu\\background"));
-            this.main.Add(new GUIElement("Overlays\\Menu\\new_game_plain"));
+            this.lose.Add(new GUIElement("Overlays\\Menu\\dead"));
         }
 
         public void LoadContent(ContentManager content)
         {
-            foreach (GUIElement element in this.main)
+            foreach (GUIElement element in this.lose)
             {
                 element.LoadContent(content);
                 element.CenterElement(400, 800);
@@ -30,8 +29,8 @@ namespace RPG.Graphics
         {
             switch (Game1.CurrentState)
             {
-                case GameState.MainMenuState:
-                    foreach (GUIElement element in this.main)
+                case GameState.LoseState:
+                    foreach (GUIElement element in this.lose)
                     {
                         element.Update();
                     }
@@ -45,8 +44,8 @@ namespace RPG.Graphics
         {
             switch (Game1.CurrentState)
             {
-                case GameState.MainMenuState:
-                    foreach (GUIElement element in this.main)
+                case GameState.LoseState:
+                    foreach (GUIElement element in this.lose)
                     {
                         element.Draw(spriteBatch);
                     }
@@ -58,10 +57,10 @@ namespace RPG.Graphics
 
         public void OnClick(string element)
         {
-            if (element == "Overlays\\Menu\\new_game_plain")
+            if (element == "Overlays\\Menu\\dead")
             {
-                //Play the Game
-                Game1.CurrentState = GameState.GamePlayState;
+                //Go to Main
+                Game1.CurrentState = GameState.MainMenuState;
             }
         }
     }

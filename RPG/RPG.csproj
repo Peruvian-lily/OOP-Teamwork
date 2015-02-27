@@ -76,6 +76,7 @@
     <Compile Include="Graphics\GameStates\LoseGameState.cs" />
     <Compile Include="Graphics\GameStates\MainMenuState.cs" />
     <Compile Include="Graphics\GameStates\WinGameState.cs" />
+    <Compile Include="Graphics\Lose.cs" />
     <Compile Include="Graphics\MainMenu.cs" />
     <Compile Include="Graphics\Map\Camera.cs" />
     <Compile Include="Graphics\Map\Map.cs" />
@@ -279,6 +280,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Content\Overlays\Battle\player_start.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Overlays\Menu\dead.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Content\Sprites\Monster\enemy1.xnb">

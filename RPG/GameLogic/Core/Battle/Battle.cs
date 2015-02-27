@@ -1,4 +1,6 @@
-﻿namespace RPG.GameLogic.Core.Battle
+﻿using RPG.Graphics;
+
+namespace RPG.GameLogic.Core.Battle
 {
     using System;
     using System.Collections.Generic;
@@ -136,6 +138,7 @@
             {
                 this.Status = string.Format("{0} is kill. :(", ((Character)this.Player).Name);
                 this.InProgress = false;
+                Game1.CurrentState = GameState.LoseState;
             }
             else if (this.Enemies.Count == 0)
             {

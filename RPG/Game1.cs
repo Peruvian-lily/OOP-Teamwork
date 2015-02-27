@@ -49,7 +49,7 @@
             this.worldObjects = new List<Character>();
             string name = "QueBabche";
             int attack = 100;
-            int defense = 100;
+            int defense = 70;
             int health = 100;
             int inventorySize = 5;
             this.player = new Player(name, health, attack, defense, inventorySize);
@@ -72,6 +72,7 @@
             this.States[(Int32)GameState.MainMenuState] = new MainMenuState(this);
             this.States[(Int32)GameState.GamePlayState] = new GamePlayState(this, this.player, this.worldObjects);
             this.States[(Int32)GameState.BattleScreenState] = new BattleScreenState(this, this.player, this.worldObjects);
+            this.States[(Int32)GameState.LoseState] = new LoseGameState(this);
 
             // Initialize current Game state.  
             CurrentState = GameState.MainMenuState;
