@@ -81,6 +81,7 @@ namespace RPG.Graphics
                     {
                         element.Draw(spriteBatch);
                     }
+                    textDrawer.DrawString(spriteBatch, "Health: ", new Vector2(650, 420), Color.White);
                     break;
                 case GameState.GamePlayState:
                     break;
