@@ -1,5 +1,4 @@
-﻿
-namespace RPG.GameLogic.Models.Stats
+﻿namespace RPG.GameLogic.Models.Stats
 {
     using Base;
 

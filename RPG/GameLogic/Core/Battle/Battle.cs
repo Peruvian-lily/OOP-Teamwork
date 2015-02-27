@@ -1,23 +1,21 @@
-﻿using RPG.GameLogic.Enums;
-using RPG.Graphics;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using Microsoft.Xna.Framework.Input;
+using RPG.GameLogic.Enums;
+using RPG.GameLogic.Interface;
+using RPG.GameLogic.Models.Characters.Base;
+using RPG.GameLogic.Models.Spells.Base;
 
 namespace RPG.GameLogic.Core.Battle
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-    using Microsoft.Xna.Framework.Input;
-    using RPG.GameLogic.Interface;
-    using Models.Characters.Base;
-    using Models.Spells.Base;
-
     class Battle
     {
         private Random rnd = new Random();
         private bool tookTurn = true; //Used for preventing the turn system from selectin a new fighter this turn if the previous one has not finished his turn.
-        private int targetIndex = 0; //Index of current target the player is aiming at.
-        private int skillIndex = 0; //Index of current Skill that the player has selected.
+        private int targetIndex; //Index of current target the player is aiming at.
+        private int skillIndex; //Index of current Skill that the player has selected.
         private bool leftPressed; //Emulating key pressed functionality in keylistener
         private bool rightPressed; //Emulating key pressed functionality in keylistener
         private bool spacePressed; //Emulating key pressed functionality in keylistener
@@ -84,6 +82,7 @@ namespace RPG.GameLogic.Core.Battle
         }
 
         public string PlayerState { get; private set; }
+
         /// <summary>
         /// Amount of turns each round has.
         /// </summary>
@@ -111,6 +110,7 @@ namespace RPG.GameLogic.Core.Battle
             {
                 return this.status;
             }
+
             private set
             {
                 if (!this.PlayerState.Contains("Select"))
@@ -137,13 +137,13 @@ namespace RPG.GameLogic.Core.Battle
             // Check if the battle is over. Current conditions are if the player is dead or the enemy count reaches 0;
             if (this.Player.Health.Value == 0)
             {
-                this.Status = string.Format("{0} is kill. :(", ((Character)this.Player).Name);
+                this.Status = string.Format("{0} is kill. :(", this.Player.Name);
                 this.InProgress = false;
                 Game1.CurrentState = GameState.LoseState;
             }
             else if (this.Enemies.Count == 0)
             {
-                this.Status = string.Format("{1}|{0} killed all the enemies!", ((Character)this.Player).Name, this.Round);
+                this.Status = string.Format("{1}|{0} killed all the enemies!", this.Player.Name, this.Round);
                 this.InProgress = false;
             }
 
@@ -356,6 +356,7 @@ namespace RPG.GameLogic.Core.Battle
         /// </summary>
         /// <param name="index">Current index.</param>
         /// <param name="targets">List of available targets</param>
+        
         private void SelectRight<T>(ref int index, List<T> targets)
         {
             index += 1;

@@ -86,6 +86,7 @@ namespace RPG.GameLogic.Core.Factory
                 return NewOffensiveEffect(effectPower, effectDuration);
             }
         }
+
         private static Effects NewDefensiveEffect(int power, int duration)
         {
             //Filthy little effectses. THEY STOLE THE PRECIOUS
@@ -96,6 +97,7 @@ namespace RPG.GameLogic.Core.Factory
             int randomIndex = rnd.Next(effectses.Count - 1);
             return effectses[randomIndex];
         }
+
         private static Effects NewOffensiveEffect(int power, int duration)
         {
             //Resharper has best plural nameses suggestionses ever

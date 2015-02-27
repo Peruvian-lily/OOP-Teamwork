@@ -81,9 +81,8 @@
             {
                 enemy.Draw(spriteBatch);
             });
-            this.textDrawer.DrawString(spriteBatch, this.player.Position.X + "/" + this.player.Position.Y);
-            string cameraLocation = string.Format("CameraY: {0}. TileY: {1}. CameraX: {2}. TileX: {3}", Camera.Location.Y, tileY, Camera.Location.X, tileX);
-            this.textDrawer.DrawString(spriteBatch, cameraLocation, new Vector2(90, 0));
+            string health = string.Format("QueBapche Health: {0}", player.Health.Value);
+            this.textDrawer.DrawString(spriteBatch, health, new Vector2(0, 0), Color.BlanchedAlmond);
             spriteBatch.End();
         }
     }

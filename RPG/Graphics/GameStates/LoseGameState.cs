@@ -27,4 +27,3 @@ namespace RPG.Graphics.GameStates
         }
     }
 }
-    
