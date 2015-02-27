@@ -1,4 +1,5 @@
-﻿using RPG.Graphics;
+﻿using RPG.GameLogic.Enums;
+using RPG.Graphics;
 
 namespace RPG.GameLogic.Core.Battle
 {

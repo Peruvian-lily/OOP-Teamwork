@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using RPG.GameLogic.Enums;
 
 namespace RPG.Graphics
 {
